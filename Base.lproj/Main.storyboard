@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--ChemCalc-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MolarMassViewController" customModule="ChemCalc" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="ChemCalc" id="Oot-7h-bJC"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2953" y="895"/>
+        </scene>
+        <!--ChemCalc-->
+        <scene sceneID="Oac-l1-3s4">
+            <objects>
+                <tableViewController id="RyM-VZ-xps" customClass="ElementsViewController" customModule="ChemCalc" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="yXd-Hc-529">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="l5X-ix-rjg">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="l5X-ix-rjg" id="e7k-8t-qKr">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="RyM-VZ-xps" id="bkE-ma-dTZ"/>
+                            <outlet property="delegate" destination="RyM-VZ-xps" id="4Uv-jJ-FoP"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="ChemCalc" id="bDb-14-jFj"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CML-Qq-aEa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2951" y="117"/>
+        </scene>
+        <!--ChemCalc-->
+        <scene sceneID="Qh1-ba-kew">
+            <objects>
+                <viewController id="8wO-yv-7Lk" customClass="EquationsViewController" customModule="ChemCalc" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZSA-T4-wez"/>
+                        <viewControllerLayoutGuide type="bottom" id="2cz-mW-Y5A"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lLa-dc-N8Z">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="ChemCalc" id="6Gk-7O-Jfw"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eiU-bs-fbL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2953" y="1656"/>
+        </scene>
+        <!--Molar Mass-->
+        <scene sceneID="qiP-vC-W49">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="muz-2R-sG0" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" tag="1" title="Molar Mass" id="nke-vm-16c"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="rhU-Tn-7VX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.85069003807106602" green="0.15854972783118987" blue="0.095002852011817782" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="xHy-pP-Kv0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xLU-62-dVi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2014" y="895"/>
+        </scene>
+        <!--Elements-->
+        <scene sceneID="qwW-ak-efD">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6Xg-XW-zkp" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Elements" id="3C8-bs-lkN"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="baW-qB-kBW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.85069003809999999" green="0.15854972780000001" blue="0.09500285201" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="RyM-VZ-xps" kind="relationship" relationship="rootViewController" id="PVx-A1-yIJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ofx-JN-p5W" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2012" y="117"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="eBl-l5-06a">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="COG-DA-vSq" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="Pey-Lo-xSg">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.85069003809999999" green="0.15854972780000001" blue="0.09500285201" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="6Xg-XW-zkp" kind="relationship" relationship="viewControllers" id="64A-XW-gxK"/>
+                        <segue destination="muz-2R-sG0" kind="relationship" relationship="viewControllers" id="A7m-7A-Ovm"/>
+                        <segue destination="cDj-sT-kXy" kind="relationship" relationship="viewControllers" id="N3g-ch-Y8Q"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7vf-pd-SGx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1034" y="895"/>
+        </scene>
+        <!--Balance Equations-->
+        <scene sceneID="Udo-wC-gbR">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cDj-sT-kXy" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Balance Equations" id="n1k-bN-qnG"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="cfW-lZ-bRN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.85069003809999999" green="0.15854972780000001" blue="0.09500285201" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8wO-yv-7Lk" kind="relationship" relationship="rootViewController" id="eR4-f1-8t4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YAo-iX-ZlC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2014" y="1656"/>
+        </scene>
+    </scenes>
+</document>
