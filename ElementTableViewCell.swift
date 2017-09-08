@@ -9,10 +9,15 @@
 import UIKit
 
 class ElementTableViewCell: UITableViewCell {
-
+    
+    @IBOutlet weak var atomicNumber: UILabel!
+    @IBOutlet weak var massNumber: UILabel!
+    @IBOutlet weak var symbolBackground: UIView!
+    @IBOutlet weak var symbol: UILabel!
+    @IBOutlet weak var elementName: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

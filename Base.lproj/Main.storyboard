@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="COG-DA-vSq">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -27,35 +28,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2953" y="895"/>
-        </scene>
-        <!--ChemCalc-->
-        <scene sceneID="Oac-l1-3s4">
-            <objects>
-                <tableViewController id="RyM-VZ-xps" customClass="ElementsViewController" customModule="ChemCalc" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="yXd-Hc-529">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="l5X-ix-rjg">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="l5X-ix-rjg" id="e7k-8t-qKr">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="RyM-VZ-xps" id="bkE-ma-dTZ"/>
-                            <outlet property="delegate" destination="RyM-VZ-xps" id="4Uv-jJ-FoP"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="ChemCalc" id="bDb-14-jFj"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CML-Qq-aEa" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2951" y="117"/>
         </scene>
         <!--ChemCalc-->
         <scene sceneID="Qh1-ba-kew">
@@ -80,9 +52,9 @@
         <scene sceneID="qiP-vC-W49">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="muz-2R-sG0" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="1" title="Molar Mass" id="nke-vm-16c"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="Molar Mass" image="beaker" id="nke-vm-16c"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="rhU-Tn-7VX">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="rhU-Tn-7VX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.85069003807106602" green="0.15854972783118987" blue="0.095002852011817782" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -100,21 +72,138 @@
         <scene sceneID="qwW-ak-efD">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6Xg-XW-zkp" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Elements" id="3C8-bs-lkN"/>
+                    <tabBarItem key="tabBarItem" title="Elements" image="beaker" id="3C8-bs-lkN"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="baW-qB-kBW">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="baW-qB-kBW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.85069003809999999" green="0.15854972780000001" blue="0.09500285201" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="RyM-VZ-xps" kind="relationship" relationship="rootViewController" id="PVx-A1-yIJ"/>
+                        <segue destination="3hX-TH-bed" kind="relationship" relationship="rootViewController" id="9CJ-Dg-jHa"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ofx-JN-p5W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2012" y="117"/>
+        </scene>
+        <!--ChemCalc-->
+        <scene sceneID="3Ti-7s-8fo">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="3hX-TH-bed" customClass="ElementsViewController" customModule="ChemCalc" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Dr7-rj-hnM"/>
+                        <viewControllerLayoutGuide type="bottom" id="FUi-QY-HiD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ipt-gC-Fyg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="115" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="P7q-Lg-EBW">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="115" id="Gy2-b8-KId" customClass="ElementTableViewCell" customModule="ChemCalc" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="115"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gy2-b8-KId" id="zzW-GI-AHd">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="115"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UDW-Mx-Gfx">
+                                                    <rect key="frame" x="16" y="12" width="91" height="91"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Uuu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8a-1u-kVw">
+                                                            <rect key="frame" x="7" y="4" width="77" height="83"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="r8a-1u-kVw" firstAttribute="centerX" secondItem="UDW-Mx-Gfx" secondAttribute="centerX" id="0QD-jw-bCc"/>
+                                                        <constraint firstAttribute="height" constant="91" id="8sD-Zt-Jx5"/>
+                                                        <constraint firstAttribute="width" constant="91" id="Ykk-Zh-mlk"/>
+                                                        <constraint firstItem="r8a-1u-kVw" firstAttribute="leading" secondItem="UDW-Mx-Gfx" secondAttribute="leading" constant="7" id="pxB-R7-w58"/>
+                                                        <constraint firstItem="r8a-1u-kVw" firstAttribute="centerY" secondItem="UDW-Mx-Gfx" secondAttribute="centerY" id="t7m-vh-sUn"/>
+                                                        <constraint firstItem="r8a-1u-kVw" firstAttribute="top" secondItem="UDW-Mx-Gfx" secondAttribute="top" constant="4" id="vFB-g3-5O9"/>
+                                                    </constraints>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Atomic Number (Z):" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R3q-4I-dUD">
+                                                    <rect key="frame" x="127" y="53" width="207" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mass Number (A): " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Rm-4Q-t9b">
+                                                    <rect key="frame" x="127" y="77" width="207" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Element Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="df0-0K-a4b">
+                                                    <rect key="frame" x="127" y="16" width="240" height="36"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="R3q-4I-dUD" firstAttribute="trailing" secondItem="2Rm-4Q-t9b" secondAttribute="trailing" id="1Zr-ef-YKx"/>
+                                                <constraint firstItem="UDW-Mx-Gfx" firstAttribute="leading" secondItem="zzW-GI-AHd" secondAttribute="leadingMargin" constant="8" id="2nz-4a-0o7"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="UDW-Mx-Gfx" secondAttribute="bottom" constant="4" id="FS4-fz-T9y"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="UDW-Mx-Gfx" secondAttribute="bottom" constant="4" id="LW1-kK-5Br"/>
+                                                <constraint firstItem="2Rm-4Q-t9b" firstAttribute="top" secondItem="R3q-4I-dUD" secondAttribute="bottom" constant="3" id="Li8-cY-VYq"/>
+                                                <constraint firstItem="df0-0K-a4b" firstAttribute="leading" secondItem="R3q-4I-dUD" secondAttribute="leading" id="Oeq-s8-nld"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="UDW-Mx-Gfx" secondAttribute="bottom" constant="4" id="RXi-aj-23N"/>
+                                                <constraint firstAttribute="bottom" secondItem="2Rm-4Q-t9b" secondAttribute="bottom" constant="17" id="S8t-dN-ZiT"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="df0-0K-a4b" secondAttribute="trailing" constant="-33" id="WWY-CQ-YGK"/>
+                                                <constraint firstItem="df0-0K-a4b" firstAttribute="top" secondItem="zzW-GI-AHd" secondAttribute="top" constant="16" id="Xj2-8g-2oV"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="R3q-4I-dUD" secondAttribute="trailing" id="gzJ-dz-276"/>
+                                                <constraint firstItem="UDW-Mx-Gfx" firstAttribute="top" secondItem="zzW-GI-AHd" secondAttribute="topMargin" constant="4" id="hmd-si-r7b"/>
+                                                <constraint firstItem="UDW-Mx-Gfx" firstAttribute="leading" secondItem="zzW-GI-AHd" secondAttribute="leadingMargin" constant="8" id="jmc-ip-wwg"/>
+                                                <constraint firstItem="df0-0K-a4b" firstAttribute="leading" secondItem="UDW-Mx-Gfx" secondAttribute="trailing" constant="20" id="ph6-4G-TDh"/>
+                                                <constraint firstItem="UDW-Mx-Gfx" firstAttribute="top" secondItem="zzW-GI-AHd" secondAttribute="topMargin" constant="4" id="t6h-xp-FZQ"/>
+                                                <constraint firstItem="df0-0K-a4b" firstAttribute="top" secondItem="zzW-GI-AHd" secondAttribute="topMargin" constant="8" id="u1k-c9-mVY"/>
+                                                <constraint firstItem="R3q-4I-dUD" firstAttribute="leading" secondItem="2Rm-4Q-t9b" secondAttribute="leading" id="wdN-gp-9mj"/>
+                                                <constraint firstItem="UDW-Mx-Gfx" firstAttribute="leading" secondItem="zzW-GI-AHd" secondAttribute="leadingMargin" constant="8" id="xOp-lC-08d"/>
+                                                <constraint firstItem="2Rm-4Q-t9b" firstAttribute="top" secondItem="R3q-4I-dUD" secondAttribute="bottom" constant="3" id="yc9-Ff-ulK"/>
+                                                <constraint firstItem="UDW-Mx-Gfx" firstAttribute="top" secondItem="df0-0K-a4b" secondAttribute="top" constant="-4" id="yc9-cR-ED0"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="atomicNumber" destination="R3q-4I-dUD" id="PEX-Hn-hFA"/>
+                                            <outlet property="elementName" destination="df0-0K-a4b" id="adH-Kg-vhw"/>
+                                            <outlet property="massNumber" destination="2Rm-4Q-t9b" id="AmH-aO-i9x"/>
+                                            <outlet property="symbol" destination="r8a-1u-kVw" id="sl2-pM-x5U"/>
+                                            <outlet property="symbolBackground" destination="UDW-Mx-Gfx" id="h1c-Vv-Blr"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="3hX-TH-bed" id="UgT-iY-XDH"/>
+                                    <outlet property="delegate" destination="3hX-TH-bed" id="AGk-tJ-ggk"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="P7q-Lg-EBW" firstAttribute="top" secondItem="Dr7-rj-hnM" secondAttribute="bottom" id="K25-WD-BWj"/>
+                            <constraint firstAttribute="trailing" secondItem="P7q-Lg-EBW" secondAttribute="trailing" id="P1V-cD-6dI"/>
+                            <constraint firstItem="P7q-Lg-EBW" firstAttribute="leading" secondItem="Ipt-gC-Fyg" secondAttribute="leading" id="WBK-zO-QRJ"/>
+                            <constraint firstItem="P7q-Lg-EBW" firstAttribute="bottom" secondItem="FUi-QY-HiD" secondAttribute="top" id="nPG-Wi-H8P"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="ChemCalc" id="awQ-mc-oLy"/>
+                    <connections>
+                        <outlet property="table" destination="P7q-Lg-EBW" id="9OA-ns-Qsn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4nr-Tn-vnl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2941.5999999999999" y="115.59220389805098"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="eBl-l5-06a">
@@ -122,9 +211,15 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="COG-DA-vSq" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Pey-Lo-xSg">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.85069003809999999" green="0.15854972780000001" blue="0.09500285201" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="1" green="0.070024190914869555" blue="0.16389258080827573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <segue destination="6Xg-XW-zkp" kind="relationship" relationship="viewControllers" id="64A-XW-gxK"/>
@@ -140,9 +235,9 @@
         <scene sceneID="Udo-wC-gbR">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cDj-sT-kXy" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Balance Equations" id="n1k-bN-qnG"/>
+                    <tabBarItem key="tabBarItem" title="Balance Equations" image="beaker" id="n1k-bN-qnG"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="cfW-lZ-bRN">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="cfW-lZ-bRN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.85069003809999999" green="0.15854972780000001" blue="0.09500285201" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -157,4 +252,7 @@
             <point key="canvasLocation" x="2014" y="1656"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="beaker" width="25" height="25"/>
+    </resources>
 </document>
