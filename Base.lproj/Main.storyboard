@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--ChemCalc-->
+        <!--Molar Mass Calculator-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MolarMassViewController" customModule="ChemCalc" customModuleProvider="target" sceneMemberID="viewController">
@@ -21,15 +21,24 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Enter a chemical formula" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aIF-I8-nUr">
+                                <rect key="frame" x="16" y="313" width="343" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="ChemCalc" id="Oot-7h-bJC"/>
+                    <navigationItem key="navigationItem" title="Molar Mass Calculator" id="Oot-7h-bJC"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2953" y="895"/>
+            <point key="canvasLocation" x="2952.8000000000002" y="894.60269865067471"/>
         </scene>
-        <!--ChemCalc-->
+        <!--Chemical Equations-->
         <scene sceneID="Qh1-ba-kew">
             <objects>
                 <viewController id="8wO-yv-7Lk" customClass="EquationsViewController" customModule="ChemCalc" customModuleProvider="target" sceneMemberID="viewController">
@@ -42,7 +51,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="ChemCalc" id="6Gk-7O-Jfw"/>
+                    <navigationItem key="navigationItem" title="Chemical Equations" id="6Gk-7O-Jfw"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eiU-bs-fbL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -88,7 +97,7 @@
             </objects>
             <point key="canvasLocation" x="2012" y="117"/>
         </scene>
-        <!--ChemCalc-->
+        <!--Table of Elements-->
         <scene sceneID="3Ti-7s-8fo">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="3hX-TH-bed" customClass="ElementsViewController" customModule="ChemCalc" customModuleProvider="target" sceneMemberID="viewController">
@@ -104,7 +113,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="115" id="Gy2-b8-KId" customClass="ElementTableViewCell" customModule="ChemCalc" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="115" id="Gy2-b8-KId" customClass="ElementTableViewCell" customModule="ChemCalc" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="115"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gy2-b8-KId" id="zzW-GI-AHd">
@@ -116,7 +125,21 @@
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Uuu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8a-1u-kVw">
                                                             <rect key="frame" x="7" y="4" width="77" height="83"/>
-                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="123456" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gy4-DZ-M2f">
+                                                            <rect key="frame" x="7" y="69" width="76" height="18"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="123" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yal-Xz-hbp">
+                                                            <rect key="frame" x="7" y="8" width="76" height="18"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -132,20 +155,27 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Atomic Number (Z):" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R3q-4I-dUD">
-                                                    <rect key="frame" x="127" y="53" width="207" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="127" y="65" width="207" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mass Number (A): " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Rm-4Q-t9b">
-                                                    <rect key="frame" x="127" y="77" width="207" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Molar Mass (A): " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Rm-4Q-t9b">
+                                                    <rect key="frame" x="127" y="85" width="207" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Element Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="df0-0K-a4b">
-                                                    <rect key="frame" x="127" y="16" width="240" height="36"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                    <rect key="frame" x="127" y="16" width="240" height="26.5"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Group (column):" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Un-Qd-qXp">
+                                                    <rect key="frame" x="127" y="45" width="207" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -155,10 +185,10 @@
                                                 <constraint firstItem="UDW-Mx-Gfx" firstAttribute="leading" secondItem="zzW-GI-AHd" secondAttribute="leadingMargin" constant="8" id="2nz-4a-0o7"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="UDW-Mx-Gfx" secondAttribute="bottom" constant="4" id="FS4-fz-T9y"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="UDW-Mx-Gfx" secondAttribute="bottom" constant="4" id="LW1-kK-5Br"/>
-                                                <constraint firstItem="2Rm-4Q-t9b" firstAttribute="top" secondItem="R3q-4I-dUD" secondAttribute="bottom" constant="3" id="Li8-cY-VYq"/>
+                                                <constraint firstItem="2Rm-4Q-t9b" firstAttribute="top" secondItem="R3q-4I-dUD" secondAttribute="bottom" constant="2" id="Li8-cY-VYq"/>
                                                 <constraint firstItem="df0-0K-a4b" firstAttribute="leading" secondItem="R3q-4I-dUD" secondAttribute="leading" id="Oeq-s8-nld"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="UDW-Mx-Gfx" secondAttribute="bottom" constant="4" id="RXi-aj-23N"/>
-                                                <constraint firstAttribute="bottom" secondItem="2Rm-4Q-t9b" secondAttribute="bottom" constant="17" id="S8t-dN-ZiT"/>
+                                                <constraint firstAttribute="bottom" secondItem="2Rm-4Q-t9b" secondAttribute="bottom" constant="12" id="S8t-dN-ZiT"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="df0-0K-a4b" secondAttribute="trailing" constant="-33" id="WWY-CQ-YGK"/>
                                                 <constraint firstItem="df0-0K-a4b" firstAttribute="top" secondItem="zzW-GI-AHd" secondAttribute="top" constant="16" id="Xj2-8g-2oV"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="R3q-4I-dUD" secondAttribute="trailing" id="gzJ-dz-276"/>
@@ -169,14 +199,17 @@
                                                 <constraint firstItem="df0-0K-a4b" firstAttribute="top" secondItem="zzW-GI-AHd" secondAttribute="topMargin" constant="8" id="u1k-c9-mVY"/>
                                                 <constraint firstItem="R3q-4I-dUD" firstAttribute="leading" secondItem="2Rm-4Q-t9b" secondAttribute="leading" id="wdN-gp-9mj"/>
                                                 <constraint firstItem="UDW-Mx-Gfx" firstAttribute="leading" secondItem="zzW-GI-AHd" secondAttribute="leadingMargin" constant="8" id="xOp-lC-08d"/>
-                                                <constraint firstItem="2Rm-4Q-t9b" firstAttribute="top" secondItem="R3q-4I-dUD" secondAttribute="bottom" constant="3" id="yc9-Ff-ulK"/>
+                                                <constraint firstItem="2Rm-4Q-t9b" firstAttribute="top" secondItem="R3q-4I-dUD" secondAttribute="bottom" constant="2" id="yc9-Ff-ulK"/>
                                                 <constraint firstItem="UDW-Mx-Gfx" firstAttribute="top" secondItem="df0-0K-a4b" secondAttribute="top" constant="-4" id="yc9-cR-ED0"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="atomicNumber" destination="R3q-4I-dUD" id="PEX-Hn-hFA"/>
+                                            <outlet property="atomicNumber2" destination="yal-Xz-hbp" id="RXx-to-XY5"/>
                                             <outlet property="elementName" destination="df0-0K-a4b" id="adH-Kg-vhw"/>
+                                            <outlet property="groupName" destination="1Un-Qd-qXp" id="yzY-Zm-QjS"/>
                                             <outlet property="massNumber" destination="2Rm-4Q-t9b" id="AmH-aO-i9x"/>
+                                            <outlet property="massNumber2" destination="Gy4-DZ-M2f" id="IlG-eo-1us"/>
                                             <outlet property="symbol" destination="r8a-1u-kVw" id="sl2-pM-x5U"/>
                                             <outlet property="symbolBackground" destination="UDW-Mx-Gfx" id="h1c-Vv-Blr"/>
                                         </connections>
@@ -193,10 +226,12 @@
                             <constraint firstItem="P7q-Lg-EBW" firstAttribute="top" secondItem="Dr7-rj-hnM" secondAttribute="bottom" id="K25-WD-BWj"/>
                             <constraint firstAttribute="trailing" secondItem="P7q-Lg-EBW" secondAttribute="trailing" id="P1V-cD-6dI"/>
                             <constraint firstItem="P7q-Lg-EBW" firstAttribute="leading" secondItem="Ipt-gC-Fyg" secondAttribute="leading" id="WBK-zO-QRJ"/>
+                            <constraint firstItem="FUi-QY-HiD" firstAttribute="top" secondItem="P7q-Lg-EBW" secondAttribute="bottom" id="dsi-4H-jML"/>
+                            <constraint firstAttribute="trailing" secondItem="P7q-Lg-EBW" secondAttribute="trailing" id="ebW-4V-tOh"/>
                             <constraint firstItem="P7q-Lg-EBW" firstAttribute="bottom" secondItem="FUi-QY-HiD" secondAttribute="top" id="nPG-Wi-H8P"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="ChemCalc" id="awQ-mc-oLy"/>
+                    <navigationItem key="navigationItem" title="Table of Elements" id="awQ-mc-oLy"/>
                     <connections>
                         <outlet property="table" destination="P7q-Lg-EBW" id="9OA-ns-Qsn"/>
                     </connections>

@@ -15,6 +15,9 @@ class ElementTableViewCell: UITableViewCell {
     @IBOutlet weak var symbolBackground: UIView!
     @IBOutlet weak var symbol: UILabel!
     @IBOutlet weak var elementName: UILabel!
+    @IBOutlet weak var groupName: UILabel!
+    @IBOutlet weak var atomicNumber2: UILabel!
+    @IBOutlet weak var massNumber2: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
