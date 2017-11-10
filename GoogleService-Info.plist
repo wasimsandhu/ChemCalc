@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>600165535756-jjgnnu8bafsruh57sjotk5jluaqfg09j.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.600165535756-jjgnnu8bafsruh57sjotk5jluaqfg09j</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD6hTUx8g9oTrf8Bv0LFHKbKMNeboe_3gw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>600165535756</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.wsandhu.ChemCalc</string>
+	<key>PROJECT_ID</key>
+	<string>chemcalcapp</string>
+	<key>STORAGE_BUCKET</key>
+	<string>chemcalcapp.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:600165535756:ios:f6f16afe0656f9c2</string>
+	<key>DATABASE_URL</key>
+	<string>https://chemcalcapp.firebaseio.com</string>
+</dict>
+</plist>
