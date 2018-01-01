@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class MolarMassViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
+    @IBOutlet weak var compoundName: UILabel!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var molarMassTable: UITableView!
     var cell: MolarMassCell?
@@ -41,6 +43,15 @@ class MolarMassViewController: UIViewController, UITableViewDelegate, UITableVie
         molarMass = molarMassCalc.calculate(compound: input!)
         elements = molarMassCalc.getElementsInCompound()
         quantities = molarMassCalc.getNumberOfElements()
+        
+        // get compound name
+        // TODO: move this snippet to model class
+        var handle = FIRDatabase.database().reference().child("Compounds").observe(.value, with: { (snapshot) in
+            if let value = snapshot.value as? NSDictionary {
+                let compound_name = value[self.input] as? String ?? ""
+                self.compoundName.text = compound_name
+            }
+        })
         
         molarMassTable.reloadData()
     }

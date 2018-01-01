@@ -111,6 +111,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Molar Mass Calculator" id="tmw-Ym-5uR"/>
                     <connections>
+                        <outlet property="compoundName" destination="dxz-uU-AYz" id="2hA-S2-FGd"/>
                         <outlet property="molarMassTable" destination="g0z-XZ-gaX" id="ACW-8T-spb"/>
                         <outlet property="textField" destination="I8i-VO-PLj" id="gjf-WB-9cy"/>
                     </connections>
@@ -652,7 +653,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="517"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="UMA-zT-DcL">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mcell" id="UMA-zT-DcL">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UMA-zT-DcL" id="cY0-Qx-pg5">
@@ -688,6 +689,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="More" id="BNj-qU-vqx"/>
+                    <connections>
+                        <outlet property="moreTable" destination="5zh-eu-nw0" id="dPf-zQ-gMO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KuB-I0-w9t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
