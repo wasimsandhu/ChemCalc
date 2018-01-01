@@ -8,9 +8,7 @@
 
 import UIKit
 
-class ElementsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
-    var cell: ElementTableViewCell?
+class ElementsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
     var elementNames = ["Hydrogen", "Helium", "Lithium", "Beryllium", "Boron", "Carbon", "Nitrogen", "Oxygen", "Fluorine", "Neon", "Sodium", "Magnesium", "Aluminum", "Silicon", "Phosphorus", "Sulfur", "Chlorine", "Argon", "Potassium", "Calcium", "Scandium", "Titanium", "Vanadium", "Chromium", "Manganese", "Iron", "Cobalt", "Nickel", "Copper", "Zinc", "Gallium", "Germanium", "Arsenic", "Selenium", "Bromine", "Krypton", "Rubidium", "Strontium", "Yttrium", "Zirconium", "Niobium", "Molybdenum", "Technetium", "Ruthenium", "Rhodium", "Palladium", "Silver", "Cadmium", "Indium", "Tin", "Antimony", "Tellurium", "Iodine", "Xenon", "Cesium", "Barium", "Lanthanum", "Cerium", "Praseodymium", "Neodymium", "Promethium", "Samarium", "Europium", "Gadolinium", "Terbium", "Dysprosium", "Holmium", "Erbium", "Thulium", "Ytterbium", "Lutetium", "Hafnium", "Tantalum", "Tungsten", "Rhenium", "Osmium", "Iridium", "Platinum", "Gold", "Mercury", "Thallium", "Lead", "Bismuth", "Polonium", "Astatine", "Radon", "Francium", "Radium", "Actinium", "Thorium", "Protactinium", "Uranium", "Neptunium", "Plutonium", "Americium", "Curium", "Berkelium", "Californium", "Einsteinium", "Fermium", "Mendelevium", "Nobelium", "Lawrencium", "Rutherfordium", "Dubnium", "Seaborgium", "Bohrium", "Hassium", "Meitnerium", "Darmstadtium", "Roentgenium", "Ununbium", "Nihonium", "Ununquadium", "Moscovium", "Ununhexium", "Tennessine", "Oganesson"]
     
@@ -20,9 +18,21 @@ class ElementsViewController: UIViewController, UITableViewDataSource, UITableVi
     var elementGroupDict: [String:Int] = [:]
     
     @IBOutlet weak var table: UITableView!
+    var cell: ElementTableViewCell?
+    
+    // objects for search functions
+    @IBOutlet weak var searchBar: UISearchBar!
+    var filteredElements = [String]()
+    var isSearching = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+        } else {
+            // Fallback on earlier versions
+        }
         
         // merge arrays into dictionaries
         // https://stackoverflow.com/questions/32140969/how-can-i-merge-two-arrays-into-a-dictionary
@@ -42,7 +52,12 @@ class ElementsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return elementNames.count
+        
+        if isSearching {
+            return filteredElements.count
+        } else {
+            return elementNames.count
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -61,7 +76,7 @@ class ElementsViewController: UIViewController, UITableViewDataSource, UITableVi
         cell?.massNumber2.text = String(atomicMasses[indexPath.row])
         cell?.groupName.text = "Group: " + String(elementGroups[indexPath.row])
         
-        // http://uicolor.xyz/#/hex-to-ui
+        // color-coding for different groups: http://uicolor.xyz/#/hex-to-ui
         let group = cell!.groupName.text
         
         if (group == "Group: 1") {
@@ -89,5 +104,9 @@ class ElementsViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         
         return cell!
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
     }
 }
