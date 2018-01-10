@@ -49,7 +49,8 @@ class MolarMassViewController: UIViewController, UITableViewDelegate, UITableVie
         var handle = FIRDatabase.database().reference().child("Compounds").observe(.value, with: { (snapshot) in
             if let value = snapshot.value as? NSDictionary {
                 let compound_name = value[self.input] as? String ?? ""
-                self.compoundName.text = compound_name
+                let nameAndFormula = TextFormatter().fix(formula: compound_name + " (" + self.input! + ")")
+                self.compoundName.attributedText = nameAndFormula
             }
         })
         

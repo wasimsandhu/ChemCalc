@@ -541,7 +541,7 @@
             </objects>
             <point key="canvasLocation" x="2014" y="1656"/>
         </scene>
-        <!--ThermodynamicsVC-->
+        <!--Thermodynamics-->
         <scene sceneID="JyF-ls-iHZ">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="GCE-R0-KG2" customClass="ThermodynamicsVC" customModule="ChemCalc" customModuleProvider="target" sceneMemberID="viewController">
@@ -554,7 +554,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="n3C-Gf-uFX">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="510"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" placeholder="Search" id="Hc6-ou-g9b">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -603,30 +603,32 @@
                                     <outlet property="delegate" destination="GCE-R0-KG2" id="Mlh-lg-3W5"/>
                                 </connections>
                             </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="g1m-6p-rhS">
+                                <rect key="frame" x="16" y="72" width="343" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Enthalpy"/>
+                                    <segment title="Entropy"/>
+                                    <segment title="Spontaneity"/>
+                                </segments>
+                                <color key="tintColor" red="0.87642228600000005" green="0.094558097420000001" blue="0.1403238624" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="tabChanged:" destination="GCE-R0-KG2" eventType="touchUpInside" id="vCV-h6-Nsw"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="n3C-Gf-uFX" firstAttribute="bottom" secondItem="pKL-gG-bwv" secondAttribute="top" id="GXw-GA-zLZ"/>
                             <constraint firstItem="n3C-Gf-uFX" firstAttribute="leading" secondItem="XhA-pL-Y9v" secondAttribute="leading" id="TlI-MR-XoF"/>
-                            <constraint firstItem="n3C-Gf-uFX" firstAttribute="top" secondItem="wXj-L9-Vzi" secondAttribute="bottom" id="i9r-XR-UTY"/>
+                            <constraint firstItem="n3C-Gf-uFX" firstAttribute="top" secondItem="wXj-L9-Vzi" secondAttribute="bottom" constant="44" id="i9r-XR-UTY"/>
                             <constraint firstAttribute="trailing" secondItem="n3C-Gf-uFX" secondAttribute="trailing" id="t3v-Bu-5Ut"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="bm6-pN-sCt">
-                        <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="g1m-6p-rhS">
-                            <rect key="frame" x="16" y="7.5" width="343" height="29"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <segments>
-                                <segment title="Enthalpy"/>
-                                <segment title="Entropy"/>
-                                <segment title="Spontaneity"/>
-                            </segments>
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="tabChanged:" destination="GCE-R0-KG2" eventType="touchUpInside" id="vCV-h6-Nsw"/>
-                            </connections>
-                        </segmentedControl>
+                    <navigationItem key="navigationItem" title="Thermodynamics" id="bm6-pN-sCt">
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="R94-wQ-ohf">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tabs" destination="g1m-6p-rhS" id="oVa-EU-jRV"/>

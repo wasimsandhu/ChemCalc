@@ -31,6 +31,7 @@ class ThermodynamicsVC: UIViewController, UITableViewDataSource, UITableViewDele
             })
         })
         
+        // tab selection listener
         tabs.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
     }
     
@@ -53,18 +54,19 @@ class ThermodynamicsVC: UIViewController, UITableViewDataSource, UITableViewDele
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = thermoTableView.dequeueReusableCell(withIdentifier: "tcell", for: indexPath) as? ThermoCell
+
+        let compound = compoundData[indexPath.row]
+        let formatter = TextFormatter()
+        let formattedCompoundName = formatter.fix(formula: compound.name!)
         
         if (tag == 0) {
-            let compound = compoundData[indexPath.row]
-            cell?.compoundLabel.text = compound.name
+            cell?.compoundLabel.attributedText = formattedCompoundName
             cell?.deltaValueLabel.text = compound.enthalpy! + " kJ/mol"
         } else if (tag == 1) {
-            let compound = compoundData[indexPath.row]
-            cell?.compoundLabel.text = compound.name
+            cell?.compoundLabel.attributedText = formattedCompoundName
             cell?.deltaValueLabel.text = compound.entropy! + " kJ/mol"
         } else if (tag == 2) {
-            let compound = compoundData[indexPath.row]
-            cell?.compoundLabel.text = compound.name
+            cell?.compoundLabel.attributedText = formattedCompoundName
             cell?.deltaValueLabel.text = compound.spontaneity! + " J/mol•K"
         }
         
