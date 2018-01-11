@@ -24,7 +24,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter a chemical formula (e.g. H2O)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I8i-VO-PLj">
-                                <rect key="frame" x="16" y="170" width="343" height="40"/>
+                                <rect key="frame" x="16" y="127" width="343" height="40"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="iiJ-3I-J22"/>
@@ -34,7 +34,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="g0z-XZ-gaX">
-                                <rect key="frame" x="16" y="218" width="343" height="292"/>
+                                <rect key="frame" x="16" y="175" width="343" height="287"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
@@ -76,14 +76,14 @@
                                     <outlet property="delegate" destination="qig-qR-LrC" id="LGQ-BW-xUV"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Molar mass is defined as g/mol" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h54-D5-dKb">
-                                <rect key="frame" x="16" y="518" width="343" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Molar mass is defined as grams per mole" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h54-D5-dKb">
+                                <rect key="frame" x="16" y="470" width="343" height="22"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Molar Mass Calculator" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxz-uU-AYz">
-                                <rect key="frame" x="16" y="127" width="343" height="35"/>
+                                <rect key="frame" x="16" y="84" width="343" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="VFu-BA-uLz"/>
                                 </constraints>
@@ -97,19 +97,23 @@
                             <constraint firstItem="g0z-XZ-gaX" firstAttribute="top" secondItem="I8i-VO-PLj" secondAttribute="bottom" constant="8" symbolic="YES" id="2qQ-ll-wj3"/>
                             <constraint firstItem="dxz-uU-AYz" firstAttribute="leading" secondItem="I8i-VO-PLj" secondAttribute="leading" id="7In-kM-1yB"/>
                             <constraint firstItem="dxz-uU-AYz" firstAttribute="leading" secondItem="iuq-gh-tPr" secondAttribute="leadingMargin" id="8j6-FS-Ds5"/>
-                            <constraint firstItem="752-3F-FKo" firstAttribute="top" secondItem="h54-D5-dKb" secondAttribute="bottom" constant="79" id="A2b-MJ-xCg"/>
+                            <constraint firstItem="752-3F-FKo" firstAttribute="top" secondItem="h54-D5-dKb" secondAttribute="bottom" constant="126" id="A2b-MJ-xCg"/>
                             <constraint firstItem="I8i-VO-PLj" firstAttribute="leading" secondItem="g0z-XZ-gaX" secondAttribute="leading" id="A7K-kh-egc"/>
                             <constraint firstItem="g0z-XZ-gaX" firstAttribute="trailing" secondItem="h54-D5-dKb" secondAttribute="trailing" id="Cai-Hs-e2g"/>
                             <constraint firstItem="I8i-VO-PLj" firstAttribute="trailing" secondItem="g0z-XZ-gaX" secondAttribute="trailing" id="EfG-Or-1yz"/>
                             <constraint firstItem="dxz-uU-AYz" firstAttribute="trailing" secondItem="I8i-VO-PLj" secondAttribute="trailing" id="Vud-3f-Snk"/>
                             <constraint firstItem="g0z-XZ-gaX" firstAttribute="leading" secondItem="h54-D5-dKb" secondAttribute="leading" id="cuU-6T-cS6"/>
                             <constraint firstItem="h54-D5-dKb" firstAttribute="top" secondItem="g0z-XZ-gaX" secondAttribute="bottom" constant="8" id="ekX-gW-KbH"/>
-                            <constraint firstItem="dxz-uU-AYz" firstAttribute="top" secondItem="UUb-65-xYm" secondAttribute="bottom" constant="63" id="h0z-4W-Hv1"/>
+                            <constraint firstItem="dxz-uU-AYz" firstAttribute="top" secondItem="UUb-65-xYm" secondAttribute="bottom" constant="20" id="h0z-4W-Hv1"/>
                             <constraint firstItem="I8i-VO-PLj" firstAttribute="top" secondItem="dxz-uU-AYz" secondAttribute="bottom" constant="8" symbolic="YES" id="w7o-Cd-gAQ"/>
                             <constraint firstItem="dxz-uU-AYz" firstAttribute="trailing" secondItem="iuq-gh-tPr" secondAttribute="trailingMargin" id="wnb-B7-MHZ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Molar Mass Calculator" id="tmw-Ym-5uR"/>
+                    <navigationItem key="navigationItem" title="Molar Mass Calculator" id="tmw-Ym-5uR">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="info" id="rJ8-PG-Vt7">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="compoundName" destination="dxz-uU-AYz" id="2hA-S2-FGd"/>
                         <outlet property="molarMassTable" destination="g0z-XZ-gaX" id="ACW-8T-spb"/>
@@ -300,7 +304,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Stoichiometry" id="ky8-vJ-OvP">
-                        <barButtonItem key="rightBarButtonItem" title="Help" id="FfD-zH-8kK">
+                        <barButtonItem key="rightBarButtonItem" title="Help" image="help" id="FfD-zH-8kK">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
                     </navigationItem>
@@ -315,7 +319,7 @@
             </objects>
             <point key="canvasLocation" x="2952.8000000000002" y="1655.6221889055473"/>
         </scene>
-        <!--Table of Elements-->
+        <!--Elements-->
         <scene sceneID="3Ti-7s-8fo">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="3hX-TH-bed" customClass="ElementsViewController" customModule="ChemCalc" customModuleProvider="target" sceneMemberID="viewController">
@@ -444,7 +448,6 @@
                                             <outlet property="massNumber2" destination="Gy4-DZ-M2f" id="IlG-eo-1us"/>
                                             <outlet property="symbol" destination="r8a-1u-kVw" id="sl2-pM-x5U"/>
                                             <outlet property="symbolBackground" destination="UDW-Mx-Gfx" id="h1c-Vv-Blr"/>
-                                            <segue destination="L1D-vR-icd" kind="show" id="pqg-Dn-n8y"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -464,7 +467,7 @@
                             <constraint firstItem="P7q-Lg-EBW" firstAttribute="bottom" secondItem="FUi-QY-HiD" secondAttribute="top" id="nPG-Wi-H8P"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Table of Elements" id="vXx-y8-XCD"/>
+                    <navigationItem key="navigationItem" title="Elements" id="TSl-rz-TNe"/>
                     <connections>
                         <outlet property="searchBar" destination="cYi-cY-TnL" id="eqr-ym-OaA"/>
                         <outlet property="table" destination="P7q-Lg-EBW" id="9OA-ns-Qsn"/>
@@ -474,10 +477,10 @@
             </objects>
             <point key="canvasLocation" x="2942" y="116"/>
         </scene>
-        <!--Element Info View Controller-->
+        <!--Element-->
         <scene sceneID="3cA-nJ-X8G">
             <objects>
-                <viewController id="L1D-vR-icd" customClass="ElementInfoViewController" customModule="ChemCalc" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ElementInfoViewController" id="L1D-vR-icd" customClass="ElementInfoViewController" customModule="ChemCalc" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yV8-fd-hFt"/>
                         <viewControllerLayoutGuide type="bottom" id="EjV-9l-dKY"/>
@@ -485,13 +488,30 @@
                     <view key="view" contentMode="scaleToFill" id="eK8-zI-gz9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ok6-Qw-aAr">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" red="0.36078431372549019" green="0.38823529411764707" blue="0.40392156862745099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <dataDetectorType key="dataDetectorTypes"/>
+                            </webView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ok6-Qw-aAr" secondAttribute="trailing" id="Jwu-SA-E3H"/>
+                            <constraint firstItem="ok6-Qw-aAr" firstAttribute="leading" secondItem="eK8-zI-gz9" secondAttribute="leading" id="SWF-RV-OYm"/>
+                            <constraint firstItem="ok6-Qw-aAr" firstAttribute="bottom" secondItem="EjV-9l-dKY" secondAttribute="top" id="WWs-OK-bl2"/>
+                            <constraint firstItem="ok6-Qw-aAr" firstAttribute="top" secondItem="yV8-fd-hFt" secondAttribute="bottom" id="ewJ-gs-TdZ"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Element" largeTitleDisplayMode="never" id="Aa9-QZ-8Si"/>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="webView" destination="ok6-Qw-aAr" id="9Os-vR-0cK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cF8-25-dbg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3942" y="116"/>
+            <point key="canvasLocation" x="3941.5" y="115.5"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="eBl-l5-06a">
@@ -626,7 +646,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Thermodynamics" id="bm6-pN-sCt">
-                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="R94-wQ-ohf">
+                        <barButtonItem key="rightBarButtonItem" image="sigma" id="R94-wQ-ohf">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
                     </navigationItem>
@@ -785,6 +805,9 @@
         <image name="element" width="25" height="25"/>
         <image name="fire" width="25" height="25"/>
         <image name="flask" width="25" height="25"/>
+        <image name="help" width="24" height="24"/>
+        <image name="info" width="24" height="24"/>
         <image name="more" width="25" height="25"/>
+        <image name="sigma" width="24" height="24"/>
     </resources>
 </document>

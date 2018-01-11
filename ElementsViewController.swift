@@ -52,7 +52,6 @@ class ElementsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         if isSearching {
             return filteredElements.count
         } else {
@@ -61,6 +60,14 @@ class ElementsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = table.cellForRow(at: indexPath) as? ElementTableViewCell
+        let selectedElement = cell?.elementName.text
+        
+        let vc = storyboard?.instantiateViewController(withIdentifier: "ElementInfoViewController") as! ElementInfoViewController
+        vc.url = URL(string: "https://www.chemicool.com/elements/" + selectedElement! + ".html")
+        vc.element = selectedElement!
+        navigationController?.pushViewController(vc, animated: true)
+        
         table.deselectRow(at: indexPath, animated: true)
     }
 
@@ -70,10 +77,13 @@ class ElementsViewController: UIViewController, UITableViewDataSource, UITableVi
 
         cell?.elementName.text = elementNames[indexPath.row]
         cell?.symbol.text = elementSymbols[indexPath.row]
+        
         cell?.atomicNumber.text = "Atomic Number (Z): " + String(indexPath.row + 1)
         cell?.atomicNumber2.text = String(indexPath.row + 1)
+        
         cell?.massNumber.text = "Molar Mass (A): " + String(atomicMasses[indexPath.row])
         cell?.massNumber2.text = String(atomicMasses[indexPath.row])
+        
         cell?.groupName.text = "Group: " + String(elementGroups[indexPath.row])
         
         // color-coding for different groups: http://uicolor.xyz/#/hex-to-ui
