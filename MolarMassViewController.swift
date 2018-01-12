@@ -12,11 +12,17 @@ import FirebaseDatabase
 class MolarMassViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
     @IBOutlet weak var compoundName: UILabel!
-    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var molarTextField: UITextField!
     @IBOutlet weak var molarMassTable: UITableView!
     var cell: MolarMassCell?
     
+    @IBOutlet weak var isEqualToLabel: UILabel!
+    @IBOutlet weak var gramsTextField: UITextField!
+    @IBOutlet weak var molesTextField: UITextField!
+        
     var input: String?
+    var gramsInput: String?
+    var molesInput: String?
     
     var dictionary: [String:Double] = [:]
     var molarMass: Double?
@@ -25,18 +31,41 @@ class MolarMassViewController: UIViewController, UITableViewDelegate, UITableVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        textField.delegate = self
+        molarTextField.delegate = self
+        gramsTextField.delegate = self
+        molesTextField.delegate = self
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == molarTextField {
+            molarTextField.text = ""
+        } else if textField == gramsTextField {
+            gramsTextField.text = ""
+        } else if textField == molesTextField {
+            molesTextField.text = ""
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        input = self.textField.text
-        textField.resignFirstResponder()
-        getMolarMass()
+        input = self.molarTextField.text
+        
+        if textField == molarTextField {
+            molarTextField.resignFirstResponder()
+            getMolarMass()
+        } else if textField == gramsTextField {
+            gramsInput = self.gramsTextField.text
+            gramsTextField.resignFirstResponder()
+            gramsToMoles()
+        } else if textField == molesTextField {
+            molesInput = self.molesTextField.text
+            molesTextField.resignFirstResponder()
+            molesToGrams()
+        }
+
         return true
     }
     
     func getMolarMass() {
-        
         let molarMassCalc = MolarMassCalculator()
         
         dictionary = molarMassCalc.createDictionary()
@@ -54,7 +83,27 @@ class MolarMassViewController: UIViewController, UITableViewDelegate, UITableVie
             }
         })
         
+        isEqualToLabel.text = "of " + input! + " is equal to"
+        
         molarMassTable.reloadData()
+    }
+    
+    // TODO: move these functions to model class
+    func gramsToMoles() {
+        if let grams = Double(gramsInput!) {
+            let amountInMoles = grams / molarMass!
+            let amountInMolesRounded = Double(round(1000 * amountInMoles) / 1000)
+            gramsTextField.text = gramsInput! + " grams"
+            molesTextField.text = String(amountInMolesRounded) + " moles"
+        }
+    }
+    
+    func molesToGrams() {
+        if let moles = Double(molesInput!) {
+            let amountInGrams = moles * molarMass!
+            gramsTextField.text = String(amountInGrams) + " grams"
+            molesTextField.text = molesInput! + " moles"
+        }
     }
     
     /* TABLE VIEW */
