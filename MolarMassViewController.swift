@@ -11,11 +11,16 @@ import FirebaseDatabase
 
 class MolarMassViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var calculatorView: UIView!
+    @IBOutlet weak var converterView: UIView!
+    
     @IBOutlet weak var compoundName: UILabel!
     @IBOutlet weak var molarTextField: UITextField!
     @IBOutlet weak var molarMassTable: UITableView!
     var cell: MolarMassCell?
     
+    @IBOutlet weak var molarTextField2: UITextField!
     @IBOutlet weak var isEqualToLabel: UILabel!
     @IBOutlet weak var gramsTextField: UITextField!
     @IBOutlet weak var molesTextField: UITextField!
@@ -34,32 +39,51 @@ class MolarMassViewController: UIViewController, UITableViewDelegate, UITableVie
         molarTextField.delegate = self
         gramsTextField.delegate = self
         molesTextField.delegate = self
+        molarTextField2.delegate = self
+        
+        segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
+
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField == molarTextField {
-            molarTextField.text = ""
-        } else if textField == gramsTextField {
-            gramsTextField.text = ""
-        } else if textField == molesTextField {
-            molesTextField.text = ""
+    @objc func segmentedControlValueChanged(segment: UISegmentedControl) {
+        if segmentedControl.selectedSegmentIndex == 0 {
+            converterView.isHidden = true
+            calculatorView.isHidden = false
+        } else if segmentedControl.selectedSegmentIndex == 1 {
+            calculatorView.isHidden = true
+            converterView.isHidden = false
         }
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.text = ""
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        input = self.molarTextField.text
-        
+    
         if textField == molarTextField {
+            input = self.molarTextField.text
             molarTextField.resignFirstResponder()
             getMolarMass()
+            molesToGrams(input: "1")
+            molarTextField2.text = input!
+            
         } else if textField == gramsTextField {
             gramsInput = self.gramsTextField.text
             gramsTextField.resignFirstResponder()
-            gramsToMoles()
+            gramsToMoles(input: gramsInput!)
+            
         } else if textField == molesTextField {
             molesInput = self.molesTextField.text
             molesTextField.resignFirstResponder()
-            molesToGrams()
+            molesToGrams(input: molesInput!)
+            
+        } else if textField == molarTextField2 {
+            input = self.molarTextField2.text
+            molarTextField2.resignFirstResponder()
+            getMolarMass()
+            molesToGrams(input: "1")
+            molarTextField.text = input!
         }
 
         return true
@@ -89,20 +113,20 @@ class MolarMassViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     // TODO: move these functions to model class
-    func gramsToMoles() {
-        if let grams = Double(gramsInput!) {
+    func gramsToMoles(input: String) {
+        if let grams = Double(input) {
             let amountInMoles = grams / molarMass!
             let amountInMolesRounded = Double(round(1000 * amountInMoles) / 1000)
-            gramsTextField.text = gramsInput! + " grams"
+            gramsTextField.text = input + " grams"
             molesTextField.text = String(amountInMolesRounded) + " moles"
         }
     }
     
-    func molesToGrams() {
-        if let moles = Double(molesInput!) {
+    func molesToGrams(input: String) {
+        if let moles = Double(input) {
             let amountInGrams = moles * molarMass!
             gramsTextField.text = String(amountInGrams) + " grams"
-            molesTextField.text = molesInput! + " moles"
+            molesTextField.text = input + " moles"
         }
     }
     
