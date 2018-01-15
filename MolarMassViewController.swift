@@ -36,10 +36,14 @@ class MolarMassViewController: UIViewController, UITableViewDelegate, UITableVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         molarTextField.delegate = self
         gramsTextField.delegate = self
         molesTextField.delegate = self
         molarTextField2.delegate = self
+        
+        converterView.isHidden = true
+        calculatorView.isHidden = false
         
         segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
 

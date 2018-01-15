@@ -14,6 +14,9 @@ class TextFormatter {
     var formulaToFormat: String?
     var formattedFormula: NSMutableAttributedString!
     
+    var configToFormat: String?
+    var formattedConfig: NSMutableAttributedString!
+    
     // fixes subscript/superscript in chemical formulas
     func fix(formula: String) -> (NSMutableAttributedString) {
         
@@ -24,6 +27,8 @@ class TextFormatter {
         formulaToFormat = formulaToFormat?.replacingOccurrences(of: "(aq)", with: "@(aq)$")
         formulaToFormat = formulaToFormat?.replacingOccurrences(of: "(s, graphite)", with: "@(s, graphite)$")
         formulaToFormat = formulaToFormat?.replacingOccurrences(of: "(s, diamond)", with: "@(s, diamond)$")
+        formulaToFormat = formulaToFormat?.replacingOccurrences(of: "(s, white)", with: "@(s, white)$")
+        formulaToFormat = formulaToFormat?.replacingOccurrences(of: "(s, red)", with: "@(s, red)$")
         
         // subscripting number of atoms
         formulaToFormat = formulaToFormat?.replacingOccurrences(of: "1", with: "@1$")
@@ -56,6 +61,52 @@ class TextFormatter {
         
         formattedFormula = formulaToFormat?.customText()
         return formattedFormula!
+    }
+    
+    func fixElectron(config: String) -> (NSMutableAttributedString) {
+        
+        // s
+        configToFormat = config.replacingOccurrences(of: "s1", with: "s{1}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "s2", with: "s{2}")
+        
+        // p
+        configToFormat = configToFormat?.replacingOccurrences(of: "p1", with: "p{1}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "p2", with: "p{2}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "p3", with: "p{3}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "p4", with: "p{4}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "p5", with: "p{5}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "p6", with: "p{6}")
+        
+        // d
+        configToFormat = configToFormat?.replacingOccurrences(of: "d1", with: "d{1}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "d2", with: "d{2}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "d3", with: "d{3}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "d4", with: "d{4}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "d5", with: "d{5}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "d6", with: "d{6}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "d7", with: "d{7}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "d8", with: "d{8}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "d9", with: "d{9}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "d10", with: "d{10}")
+        
+        // f
+        configToFormat = configToFormat?.replacingOccurrences(of: "f1", with: "f{1}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "f2", with: "f{2}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "f3", with: "f{3}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "f4", with: "f{4}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "f5", with: "f{5}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "f6", with: "f{6}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "f7", with: "f{7}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "f8", with: "f{8}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "f9", with: "f{9}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "f10", with: "f{10}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "f11", with: "f{11}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "f12", with: "f{12}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "f13", with: "f{13}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "f14", with: "f{14}")
+        
+        formattedConfig = configToFormat?.customText2()
+        return formattedConfig
     }
     
 }
@@ -157,6 +208,75 @@ extension String {
             if indexA[a] != 0 || indexB[a] != 0 {
                 for b in indexA[a]+1..<indexB[a] {
                     attString.setAttributes([NSAttributedStringKey.font:fontSuper!,NSAttributedStringKey.baselineOffset:10], range: NSRange(location:b,length:1))
+                }
+            }
+            
+            // subscript
+            if indexC[a] != 0 || indexD[a] != 0 {
+                for b in indexC[a]+1..<indexD[a] {
+                    attString.setAttributes([NSAttributedStringKey.font:fontSuper!,NSAttributedStringKey.baselineOffset:-5], range: NSRange(location:b,length:1))
+                }
+            }
+        }
+        
+        attString.mutableString.replaceOccurrences(of: "{", with: "", options: NSString.CompareOptions.caseInsensitive, range: NSRange(location: 0, length: attString.length))
+        attString.mutableString.replaceOccurrences(of: "}", with: "", options: NSString.CompareOptions.caseInsensitive, range: NSRange(location: 0, length: attString.length))
+        attString.mutableString.replaceOccurrences(of: "@", with: "", options: NSString.CompareOptions.caseInsensitive, range: NSRange(location: 0, length: attString.length))
+        attString.mutableString.replaceOccurrences(of: "$", with: "", options: NSString.CompareOptions.caseInsensitive, range: NSRange(location: 0, length: attString.length))
+        
+        return attString
+    }
+}
+
+extension String {
+    
+    func customText2() -> NSMutableAttributedString {
+        
+        let fontSuper: UIFont? = UIFont(name: "Helvetica", size: 12)
+        let font = UIFont(name: "Helvetica", size: 15)
+        
+        let attString:NSMutableAttributedString = NSMutableAttributedString(string: self, attributes: [NSAttributedStringKey.font:font!])
+        
+        var indexA = Array(repeating: 0, count: 10)
+        var indexB = Array(repeating: 0, count: 10)
+        var indexC = Array(repeating: 0, count: 10)
+        var indexD = Array(repeating: 0, count: 10)
+        
+        var x = 0
+        var z = 0
+        var y = 0
+        var w = 0
+        
+        for a in 0..<self.count{
+            let index = self.index(self.startIndex, offsetBy: a)
+            if self[index] == "{" {
+                indexA[x] = a
+                debugPrint(indexA[x])
+                x+=1
+            }
+            if self[index] == "}" {
+                indexB[z] = a
+                debugPrint(indexB[z])
+                z+=1
+            }
+            if self[index] == "@" {
+                indexC[y] = a
+                y+=1
+            }
+            if self[index] == "$" {
+                indexD[w] = a
+                w+=1
+            }
+        }
+        
+        
+        
+        for  a in 0..<10 {
+            
+            // superscript
+            if indexA[a] != 0 || indexB[a] != 0 {
+                for b in indexA[a]+1..<indexB[a] {
+                    attString.setAttributes([NSAttributedStringKey.font:fontSuper!,NSAttributedStringKey.baselineOffset:5], range: NSRange(location:b,length:1))
                 }
             }
             
