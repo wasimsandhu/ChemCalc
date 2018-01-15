@@ -29,6 +29,8 @@ class TextFormatter {
         formulaToFormat = formulaToFormat?.replacingOccurrences(of: "(s, diamond)", with: "@(s, diamond)$")
         formulaToFormat = formulaToFormat?.replacingOccurrences(of: "(s, white)", with: "@(s, white)$")
         formulaToFormat = formulaToFormat?.replacingOccurrences(of: "(s, red)", with: "@(s, red)$")
+        formulaToFormat = formulaToFormat?.replacingOccurrences(of: "(s, monoclinic)", with: "@(s, monoclinic)$")
+        formulaToFormat = formulaToFormat?.replacingOccurrences(of: "(s, rhombic)", with: "@(s, rhombic)$")
         
         // subscripting number of atoms
         formulaToFormat = formulaToFormat?.replacingOccurrences(of: "1", with: "@1$")

@@ -9,13 +9,19 @@
 import UIKit
 import FirebaseDatabase
 
-class ThermodynamicsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ThermodynamicsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var thermoTableView: UITableView!
     @IBOutlet weak var tabs: UISegmentedControl!
     var compoundData = [ThermoDataObject]()
+    var compound: ThermoDataObject!
     var tag = 0
     
+    // search bar variables
+    var filteredData = [ThermoDataObject]()
+    @IBOutlet weak var searchBar: UISearchBar!
+    var isSearching = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,6 +39,10 @@ class ThermodynamicsVC: UIViewController, UITableViewDataSource, UITableViewDele
         
         // tab selection listener
         tabs.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
+        
+        // search bar
+        searchBar.delegate = self
+        searchBar.returnKeyType = UIReturnKeyType.done
     }
     
     @objc func segmentedControlValueChanged(segment: UISegmentedControl) {
@@ -49,13 +59,23 @@ class ThermodynamicsVC: UIViewController, UITableViewDataSource, UITableViewDele
     
     /* Table View */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return compoundData.count
+        
+        if isSearching {
+            return filteredData.count
+        } else {
+            return compoundData.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = thermoTableView.dequeueReusableCell(withIdentifier: "tcell", for: indexPath) as? ThermoCell
 
-        let compound = compoundData[indexPath.row]
+        if isSearching {
+            compound = filteredData[indexPath.row]
+        } else {
+           compound = compoundData[indexPath.row]
+        }
+        
         let formatter = TextFormatter()
         let formattedCompoundName = formatter.fix(formula: compound.name!)
         
@@ -71,5 +91,20 @@ class ThermodynamicsVC: UIViewController, UITableViewDataSource, UITableViewDele
         }
         
         return cell!
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text == "" || searchBar.text == nil {
+            isSearching = false
+            thermoTableView.reloadData()
+        } else {
+            isSearching = true
+            filteredData = compoundData.filter({$0.name?.range(of: searchBar.text!) != nil})
+            thermoTableView.reloadData()
+        }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
 }
