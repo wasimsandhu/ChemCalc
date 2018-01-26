@@ -8,7 +8,67 @@
 
 import UIKit
 
-class MoreViewController: UIViewController {
+class MoreViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+        
+    @IBOutlet weak var moreTable: UITableView!
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Chemistry Reference" as String?
+        } else if section == 1 {
+            return "About ChemCalc" as String?
+        } else {
+            return "" as String?
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if section == 0 {
+            return 4
+        } else if section == 1 {
+            return 2
+        } else {
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "morecell", for: indexPath)
+        
+        if indexPath.section == 0 {
+            if indexPath.row == 0 {
+                cell.textLabel?.text = "Compound formulas"
+            } else if indexPath.row == 1 {
+                cell.textLabel?.text = "Polyatomic ions"
+            } else if indexPath.row == 2 {
+                cell.textLabel?.text = "Electron configurations"
+            } else if indexPath.row == 3 {
+                cell.textLabel?.text = "Solubility checker"
+            }
+        } else if indexPath.section == 1 {
+            if indexPath.row == 0 {
+                cell.textLabel?.text = "Report bugs and mistakes"
+            } else if indexPath.row == 1 {
+                cell.textLabel?.text = "Credits and libraries"
+            }
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if indexPath.section == 0 && indexPath.row == 0 {
+            performSegue(withIdentifier: "showCompounds", sender: indexPath)
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
