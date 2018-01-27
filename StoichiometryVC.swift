@@ -14,28 +14,28 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     @IBOutlet weak var reactantTextField1: UITextField!
     @IBOutlet weak var reactantTextField2: UITextField!
     @IBOutlet weak var productsTableView: UITableView!
-    
+
+    var equationInput: String?
     let balancer = ChemicalEquationBalancer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    /* Text Fields
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        input = self.textField.text
         
         if (textField == equationTextField) {
-            balancer.getElements(equation: input)
+            // balancer.getElements(input: equationInput)
+            textField.resignFirstResponder()
         } else if (textField == reactantTextField1) {
-            
+            reactantTextField1.resignFirstResponder()
+            reactantTextField2.becomeFirstResponder()
         } else if (textField == reactantTextField2) {
-            
+            textField.resignFirstResponder()
         }
         
-        textField.resignFirstResponder()
         return true
-    } */
+    }
     
     /* Table View */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

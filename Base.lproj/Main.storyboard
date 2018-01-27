@@ -816,9 +816,9 @@
                     <connections>
                         <outlet property="moreTable" destination="5zh-eu-nw0" id="dPf-zQ-gMO"/>
                         <segue destination="2es-ch-IoB" kind="push" identifier="showCompounds" id="6Zp-JV-36m"/>
-                        <segue destination="qP4-Hp-aYh" kind="push" id="e0h-dh-Xvf"/>
-                        <segue destination="1uY-Rh-YOW" kind="push" id="9pJ-c2-s8j"/>
-                        <segue destination="nQe-T1-w6m" kind="push" id="jE5-dd-zVx"/>
+                        <segue destination="qP4-Hp-aYh" kind="push" identifier="showPolyatomicIons" id="e0h-dh-Xvf"/>
+                        <segue destination="1uY-Rh-YOW" kind="push" identifier="showElectronConfigs" id="9pJ-c2-s8j"/>
+                        <segue destination="nQe-T1-w6m" kind="push" identifier="showSolubility" id="jE5-dd-zVx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KuB-I0-w9t" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -838,7 +838,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nYj-Xa-5iq">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="546"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" placeholder="Search for a compound" id="fRL-Ka-j2g">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -889,7 +889,7 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="nYj-Xa-5iq" secondAttribute="trailing" id="8eJ-Rv-Qlj"/>
                             <constraint firstItem="nYj-Xa-5iq" firstAttribute="leading" secondItem="Gqh-KE-h3P" secondAttribute="leading" id="9Ii-99-g0J"/>
-                            <constraint firstItem="nYj-Xa-5iq" firstAttribute="top" secondItem="JO9-Gi-k3v" secondAttribute="bottom" id="Hsn-oS-iOb"/>
+                            <constraint firstItem="nYj-Xa-5iq" firstAttribute="top" secondItem="JO9-Gi-k3v" secondAttribute="bottom" constant="8" id="Hsn-oS-iOb"/>
                             <constraint firstItem="nYj-Xa-5iq" firstAttribute="bottom" secondItem="fLK-5a-Kz8" secondAttribute="top" id="WIn-B4-CSP"/>
                         </constraints>
                     </view>
@@ -901,12 +901,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TGx-Pm-6rr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3862" y="3107"/>
+            <point key="canvasLocation" x="3861.5999999999999" y="3105.6971514242882"/>
         </scene>
         <!--Electron Configurations-->
         <scene sceneID="XTZ-ZS-3cj">
             <objects>
-                <viewController id="1uY-Rh-YOW" sceneMemberID="viewController">
+                <viewController id="1uY-Rh-YOW" customClass="ElectronConfigVC" customModule="ChemCalc" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NhK-E2-QZz"/>
                         <viewControllerLayoutGuide type="bottom" id="Rre-bW-WSe"/>
@@ -916,7 +916,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7BC-wB-sAE">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="546"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="bo0-HX-W8v">
@@ -939,7 +939,7 @@
                             <constraint firstAttribute="trailing" secondItem="7BC-wB-sAE" secondAttribute="trailing" id="L9y-Yi-ghH"/>
                             <constraint firstItem="7BC-wB-sAE" firstAttribute="leading" secondItem="EG5-Qc-IkH" secondAttribute="leading" id="m9h-x7-d8m"/>
                             <constraint firstItem="7BC-wB-sAE" firstAttribute="bottom" secondItem="Rre-bW-WSe" secondAttribute="top" id="wye-x8-TYR"/>
-                            <constraint firstItem="7BC-wB-sAE" firstAttribute="top" secondItem="NhK-E2-QZz" secondAttribute="bottom" id="yrM-UX-zaG"/>
+                            <constraint firstItem="7BC-wB-sAE" firstAttribute="top" secondItem="NhK-E2-QZz" secondAttribute="bottom" constant="8" id="yrM-UX-zaG"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Electron Configurations" id="7Fi-qG-eTZ"/>
@@ -951,7 +951,7 @@
         <!--Solubility-->
         <scene sceneID="I0X-mi-KMd">
             <objects>
-                <viewController id="nQe-T1-w6m" sceneMemberID="viewController">
+                <viewController id="nQe-T1-w6m" customClass="SolubilityVC" customModule="ChemCalc" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NqY-bh-SLw"/>
                         <viewControllerLayoutGuide type="bottom" id="GBb-wU-jbD"/>
@@ -970,7 +970,7 @@
         <!--Polyatomic Ions-->
         <scene sceneID="hZD-aL-58O">
             <objects>
-                <viewController id="qP4-Hp-aYh" sceneMemberID="viewController">
+                <viewController id="qP4-Hp-aYh" customClass="PolyatomicVC" customModule="ChemCalc" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SD0-nI-Zmq"/>
                         <viewControllerLayoutGuide type="bottom" id="SVW-tj-pAT"/>
@@ -980,7 +980,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uhz-UT-fDg">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="546"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="3YJ-8Y-pRP">
@@ -1001,7 +1001,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="uhz-UT-fDg" secondAttribute="trailing" id="3Wu-QG-Wxx"/>
-                            <constraint firstItem="uhz-UT-fDg" firstAttribute="top" secondItem="SD0-nI-Zmq" secondAttribute="bottom" id="7aw-eh-CZa"/>
+                            <constraint firstItem="uhz-UT-fDg" firstAttribute="top" secondItem="SD0-nI-Zmq" secondAttribute="bottom" constant="8" id="7aw-eh-CZa"/>
                             <constraint firstItem="uhz-UT-fDg" firstAttribute="leading" secondItem="hbK-gV-kDz" secondAttribute="leading" id="Hkf-se-tw5"/>
                             <constraint firstItem="uhz-UT-fDg" firstAttribute="bottom" secondItem="SVW-tj-pAT" secondAttribute="top" id="kDw-4m-Wez"/>
                         </constraints>
@@ -1010,7 +1010,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bxS-Iv-Aa6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4676" y="3106.5967016491754"/>
+            <point key="canvasLocation" x="4676" y="3105.6971514242882"/>
         </scene>
         <!--Molar Mass-->
         <scene sceneID="t5a-nw-H82">

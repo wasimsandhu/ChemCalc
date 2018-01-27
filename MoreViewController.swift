@@ -65,6 +65,12 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if indexPath.section == 0 && indexPath.row == 0 {
             performSegue(withIdentifier: "showCompounds", sender: indexPath)
+        } else if indexPath.section == 0 && indexPath.row == 1 {
+            performSegue(withIdentifier: "showPolyatomicIons", sender: indexPath)
+        } else if indexPath.section == 0 && indexPath.row == 2 {
+            performSegue(withIdentifier: "showElectronConfigs", sender: indexPath)
+        } else if indexPath.section == 0 && indexPath.row == 3 {
+            performSegue(withIdentifier: "showSolubility", sender: indexPath)
         }
         
         tableView.deselectRow(at: indexPath, animated: true)

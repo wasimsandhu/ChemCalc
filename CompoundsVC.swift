@@ -11,13 +11,14 @@ import FirebaseDatabase
 
 class CompoundsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
+    // future wasim: good luck figuring out this mess
     @IBOutlet weak var tableView: UITableView!
-    var compounds = [String]()
-    var formulas = [String]()
+    var compounds = [String:String]()
+    var compoundArray = [String]()
+    var formulaArray = [String]()
     
     @IBOutlet weak var searchBar: UISearchBar!
-    var filteredCompounds = [String]()
-    var filteredFormulas = [String]()
+    var filteredCompounds = [String:String]()
     var isSearching = false
     
     override func viewDidLoad() {
@@ -30,10 +31,8 @@ class CompoundsVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         rootRef.child("Compounds").observe(.childAdded, with: { (snapshot) in
             
             let formula = snapshot.key
-            self.formulas.append(formula)
-            
             if let compound = snapshot.value {
-                self.compounds.append(compound as! String)
+                self.compounds[formula] = compound as? String
             }
             
             DispatchQueue.main.async(execute: {
@@ -41,20 +40,22 @@ class CompoundsVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
             })
         })
         
+        formulaArray = Array(compounds.keys)
+        compoundArray = Array(compounds.values)
+        
         // search bar
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let compoundname = compounds[indexPath.row]
-        let formulaname = formulas[indexPath.row]
+        let compoundname = compoundArray[indexPath.row]
+        let formulaname = formulaArray[indexPath.row]
         
         let alert = UIAlertController(title: compoundname, message: formulaname, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.default))
         self.present(alert, animated: true, completion: nil)
         
-    
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
@@ -69,15 +70,35 @@ class CompoundsVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "compoundcell", for: indexPath) as? CompoundCell
         
+        if isSearching {
+            formulaArray = Array(filteredCompounds.keys)
+            compoundArray = Array(filteredCompounds.values)
+        } else {
+            formulaArray = Array(compounds.keys)
+            compoundArray = Array(compounds.values)
+        }
+        
         let formatter = TextFormatter()
-        let formattedCompoundName = formatter.fix(formula: formulas[indexPath.row])
+        let formattedCompoundName = formatter.fix(formula: formulaArray[indexPath.row])
         cell?.formulaLabel.attributedText = formattedCompoundName
         
-        cell?.nameLabel.text = compounds[indexPath.row].trunc(length: 20)
+        cell?.nameLabel.text = compoundArray[indexPath.row].trunc(length: 20)
         cell?.nameLabel.lineBreakMode = .byTruncatingTail
         cell?.nameLabel.adjustsFontSizeToFitWidth = false;
         
         return cell!
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text == "" || searchBar.text == nil {
+            isSearching = false
+            tableView.reloadData()
+        } else {
+            isSearching = true
+            filteredCompounds = compounds.filter({$0.key.range(of: searchBar.text!) != nil})
+            filteredCompounds = compounds.filter({$0.value.range(of: searchBar.text!) != nil})
+            tableView.reloadData()
+        }
     }
     
     // TODO: Search function
