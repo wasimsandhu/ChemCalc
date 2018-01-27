@@ -919,7 +919,7 @@
                                 <rect key="frame" x="0.0" y="72" width="375" height="546"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="bo0-HX-W8v">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="electroncell" id="bo0-HX-W8v">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bo0-HX-W8v" id="dLP-9q-xUv">
@@ -948,7 +948,7 @@
             </objects>
             <point key="canvasLocation" x="3861.5999999999999" y="3876.611694152924"/>
         </scene>
-        <!--Solubility-->
+        <!--Solubility Checker-->
         <scene sceneID="I0X-mi-KMd">
             <objects>
                 <viewController id="nQe-T1-w6m" customClass="SolubilityVC" customModule="ChemCalc" customModuleProvider="target" sceneMemberID="viewController">
@@ -959,13 +959,56 @@
                     <view key="view" contentMode="scaleToFill" id="rK8-9d-MGW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter an ionic compound (e.g. NaCl)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fGz-Vc-Qhj">
+                                <rect key="frame" x="16" y="122" width="343" height="40"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="gdq-nv-mxQ"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Is it soluble in water?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Pc-m1-9E1">
+                                <rect key="frame" x="16" y="84" width="343" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="eGv-eg-iXy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UPa-2p-Ovw">
+                                <rect key="frame" x="16" y="170" width="343" height="50"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="fGz-Vc-Qhj" firstAttribute="top" secondItem="4Pc-m1-9E1" secondAttribute="bottom" constant="8" symbolic="YES" id="0Xc-Nr-0gk"/>
+                            <constraint firstItem="fGz-Vc-Qhj" firstAttribute="leading" secondItem="UPa-2p-Ovw" secondAttribute="leading" id="2wB-7M-MNv"/>
+                            <constraint firstItem="fGz-Vc-Qhj" firstAttribute="trailing" secondItem="UPa-2p-Ovw" secondAttribute="trailing" id="I4y-KI-uih"/>
+                            <constraint firstItem="4Pc-m1-9E1" firstAttribute="top" secondItem="NqY-bh-SLw" secondAttribute="bottom" constant="20" id="KHr-EH-7iY"/>
+                            <constraint firstItem="4Pc-m1-9E1" firstAttribute="leading" secondItem="rK8-9d-MGW" secondAttribute="leadingMargin" id="Rbo-8h-mrD"/>
+                            <constraint firstItem="GBb-wU-jbD" firstAttribute="top" secondItem="UPa-2p-Ovw" secondAttribute="bottom" constant="398" id="ULL-LJ-DFq"/>
+                            <constraint firstItem="UPa-2p-Ovw" firstAttribute="top" secondItem="fGz-Vc-Qhj" secondAttribute="bottom" constant="8" symbolic="YES" id="W96-rG-P3m"/>
+                            <constraint firstItem="4Pc-m1-9E1" firstAttribute="trailing" secondItem="fGz-Vc-Qhj" secondAttribute="trailing" id="iQn-SR-A9t"/>
+                            <constraint firstItem="4Pc-m1-9E1" firstAttribute="trailing" secondItem="rK8-9d-MGW" secondAttribute="trailingMargin" id="og5-aL-eQz"/>
+                            <constraint firstItem="4Pc-m1-9E1" firstAttribute="leading" secondItem="fGz-Vc-Qhj" secondAttribute="leading" id="xyY-CU-hXj"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Solubility" id="Ehz-DP-XNP"/>
+                    <navigationItem key="navigationItem" title="Solubility Checker" id="Ehz-DP-XNP"/>
+                    <connections>
+                        <outlet property="textField" destination="fGz-Vc-Qhj" id="gIX-av-o11"/>
+                        <outlet property="yesNoLabel" destination="UPa-2p-Ovw" id="vVi-rK-BLJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l54-lZ-WJO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4676" y="3877"/>
+            <point key="canvasLocation" x="4676" y="3876.611694152924"/>
         </scene>
         <!--Polyatomic Ions-->
         <scene sceneID="hZD-aL-58O">
@@ -983,7 +1026,7 @@
                                 <rect key="frame" x="0.0" y="72" width="375" height="546"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="3YJ-8Y-pRP">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="polycell" id="3YJ-8Y-pRP">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3YJ-8Y-pRP" id="VaL-K6-JCG">
