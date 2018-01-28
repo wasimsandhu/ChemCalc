@@ -53,7 +53,11 @@ class TextFormatter {
             formulaToFormat = formulaToFormat?.replacingOccurrences(of: "+", with: "{+}")
         }
         
-        if formulaToFormat!.contains("@3$-") {
+        if formulaToFormat!.contains("NO3-") || formulaToFormat!.contains("HCO3-") {
+            formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@3$-", with: "@3${-}")
+        } else if formulaToFormat!.contains("NO2-") || formulaToFormat!.contains("C2H3O2-") {
+            formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@2$-", with: "@2${-}")
+        } else if formulaToFormat!.contains("@3$-") {
             formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@3$-", with: "{3-}")
         } else if formulaToFormat!.contains("@2$-") {
             formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@2$-", with: "{2-}")

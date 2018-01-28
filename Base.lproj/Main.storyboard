@@ -1023,7 +1023,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uhz-UT-fDg">
-                                <rect key="frame" x="0.0" y="72" width="375" height="546"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="polycell" id="3YJ-8Y-pRP">
@@ -1044,7 +1044,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="uhz-UT-fDg" secondAttribute="trailing" id="3Wu-QG-Wxx"/>
-                            <constraint firstItem="uhz-UT-fDg" firstAttribute="top" secondItem="SD0-nI-Zmq" secondAttribute="bottom" constant="8" id="7aw-eh-CZa"/>
+                            <constraint firstItem="uhz-UT-fDg" firstAttribute="top" secondItem="SD0-nI-Zmq" secondAttribute="bottom" id="7aw-eh-CZa"/>
                             <constraint firstItem="uhz-UT-fDg" firstAttribute="leading" secondItem="hbK-gV-kDz" secondAttribute="leading" id="Hkf-se-tw5"/>
                             <constraint firstItem="uhz-UT-fDg" firstAttribute="bottom" secondItem="SVW-tj-pAT" secondAttribute="top" id="kDw-4m-Wez"/>
                         </constraints>
