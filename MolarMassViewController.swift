@@ -11,24 +11,29 @@ import FirebaseDatabase
 
 class MolarMassViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
+    // tabs
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var calculatorView: UIView!
     @IBOutlet weak var converterView: UIView!
     
+    // calculator view elements
     @IBOutlet weak var compoundName: UILabel!
     @IBOutlet weak var molarTextField: UITextField!
     @IBOutlet weak var molarMassTable: UITableView!
     var cell: MolarMassCell?
     
+    // converter view elements
     @IBOutlet weak var molarTextField2: UITextField!
     @IBOutlet weak var isEqualToLabel: UILabel!
     @IBOutlet weak var gramsTextField: UITextField!
     @IBOutlet weak var molesTextField: UITextField!
-        
+    
+    // converter variables
     var input: String?
     var gramsInput: String?
     var molesInput: String?
     
+    // calculator variables
     var dictionary: [String:Double] = [:]
     var molarMass: Double?
     var elements = [String]()
@@ -106,8 +111,14 @@ class MolarMassViewController: UIViewController, UITableViewDelegate, UITableVie
         var handle = FIRDatabase.database().reference().child("Compounds").observe(.value, with: { (snapshot) in
             if let value = snapshot.value as? NSDictionary {
                 let compound_name = value[self.input] as? String ?? ""
-                let nameAndFormula = TextFormatter().fix(formula: compound_name + " (" + self.input! + ")")
-                self.compoundName.attributedText = nameAndFormula
+                
+                if compound_name == "" {
+                    let nameAndFormula = TextFormatter().fix(formula: self.input!)
+                    self.compoundName.attributedText = nameAndFormula
+                } else {
+                    let nameAndFormula = TextFormatter().fix(formula: compound_name + ": " + self.input!)
+                    self.compoundName.attributedText = nameAndFormula
+                }
             }
         })
         
@@ -149,19 +160,25 @@ class MolarMassViewController: UIViewController, UITableViewDelegate, UITableVie
         if (indexPath.row == 0) {
             cell?.categoryLabel?.text = "Molar Mass"
             if (molarMass != nil) {
-                cell?.valueLabel?.text =  String(describing: molarMass!)
+                cell?.valueLabel?.text =  String(describing: molarMass!) + " grams"
             } else {
                 cell?.valueLabel?.text = " "
             }
         } else {
-            let elementForCell = elements[indexPath.row - 1]
-            let numberForCell = quantities[indexPath.row - 1]
+            if molarMass != nil && dictionary[elements[indexPath.row - 1]] != nil {
+                let elementForCell = elements[indexPath.row - 1]
+                let numberForCell = quantities[indexPath.row - 1]
+                
+                let massPercent = ((dictionary[elementForCell]! * Double(numberForCell)) / molarMass!) * 100
+                let massPercentRounded = Double(round(1000 * massPercent) / 1000)
+                
+                cell?.categoryLabel?.text = elementForCell + " × " + String(numberForCell)
+                cell?.valueLabel?.text = String(describing: massPercentRounded) + "%"
+            } else {
+                cell?.categoryLabel?.text = ""
+                cell?.valueLabel?.text = ""
+            }
             
-            let massPercent = ((dictionary[elementForCell]! * Double(numberForCell)) / molarMass!) * 100
-            let massPercentRounded = Double(round(1000 * massPercent) / 1000)
-            
-            cell?.categoryLabel?.text = elementForCell + " × " + String(numberForCell)
-            cell?.valueLabel?.text = String(describing: massPercentRounded) + "%"
         }
 
         return cell!
