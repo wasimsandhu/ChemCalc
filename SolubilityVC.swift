@@ -15,6 +15,7 @@ class SolubilityVC: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.tintColor = UIColor.white
         textField.delegate = self
         textField.text = ""
     }

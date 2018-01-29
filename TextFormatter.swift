@@ -53,9 +53,9 @@ class TextFormatter {
             formulaToFormat = formulaToFormat?.replacingOccurrences(of: "+", with: "{+}")
         }
         
-        if formulaToFormat!.contains("NO3-") || formulaToFormat!.contains("HCO3-") {
+        if formulaToFormat!.contains("NO@3$-") || formulaToFormat!.contains("HCO@3$-") || formulaToFormat!.contains("ClO@3$-") {
             formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@3$-", with: "@3${-}")
-        } else if formulaToFormat!.contains("NO2-") || formulaToFormat!.contains("C2H3O2-") {
+        } else if formulaToFormat!.contains("NO@2$-") || formulaToFormat!.contains("C@2$H@3$O@2$-") || formulaToFormat!.contains("ClO@2$-") {
             formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@2$-", with: "@2${-}")
         } else if formulaToFormat!.contains("@3$-") {
             formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@3$-", with: "{3-}")
@@ -84,6 +84,7 @@ class TextFormatter {
         configToFormat = configToFormat?.replacingOccurrences(of: "p6", with: "p{6}")
         
         // d
+        configToFormat = configToFormat?.replacingOccurrences(of: "d10", with: "d{10}")
         configToFormat = configToFormat?.replacingOccurrences(of: "d1", with: "d{1}")
         configToFormat = configToFormat?.replacingOccurrences(of: "d2", with: "d{2}")
         configToFormat = configToFormat?.replacingOccurrences(of: "d3", with: "d{3}")
@@ -93,9 +94,13 @@ class TextFormatter {
         configToFormat = configToFormat?.replacingOccurrences(of: "d7", with: "d{7}")
         configToFormat = configToFormat?.replacingOccurrences(of: "d8", with: "d{8}")
         configToFormat = configToFormat?.replacingOccurrences(of: "d9", with: "d{9}")
-        configToFormat = configToFormat?.replacingOccurrences(of: "d10", with: "d{10}")
         
         // f
+        configToFormat = configToFormat?.replacingOccurrences(of: "f10", with: "f{10}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "f11", with: "f{11}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "f12", with: "f{12}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "f13", with: "f{13}")
+        configToFormat = configToFormat?.replacingOccurrences(of: "f14", with: "f{14}")
         configToFormat = configToFormat?.replacingOccurrences(of: "f1", with: "f{1}")
         configToFormat = configToFormat?.replacingOccurrences(of: "f2", with: "f{2}")
         configToFormat = configToFormat?.replacingOccurrences(of: "f3", with: "f{3}")
@@ -105,11 +110,6 @@ class TextFormatter {
         configToFormat = configToFormat?.replacingOccurrences(of: "f7", with: "f{7}")
         configToFormat = configToFormat?.replacingOccurrences(of: "f8", with: "f{8}")
         configToFormat = configToFormat?.replacingOccurrences(of: "f9", with: "f{9}")
-        configToFormat = configToFormat?.replacingOccurrences(of: "f10", with: "f{10}")
-        configToFormat = configToFormat?.replacingOccurrences(of: "f11", with: "f{11}")
-        configToFormat = configToFormat?.replacingOccurrences(of: "f12", with: "f{12}")
-        configToFormat = configToFormat?.replacingOccurrences(of: "f13", with: "f{13}")
-        configToFormat = configToFormat?.replacingOccurrences(of: "f14", with: "f{14}")
         
         formattedConfig = configToFormat?.customText2()
         return formattedConfig

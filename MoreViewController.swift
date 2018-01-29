@@ -18,7 +18,7 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "Chemistry Reference" as String?
+            return "Reference" as String?
         } else if section == 1 {
             return "About ChemCalc" as String?
         } else {
@@ -29,9 +29,9 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 0 {
-            return 4
+            return 3
         } else if section == 1 {
-            return 2
+            return 4
         } else {
             return 0
         }
@@ -42,18 +42,20 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if indexPath.section == 0 {
             if indexPath.row == 0 {
-                cell.textLabel?.text = "Compound formulas"
+                cell.textLabel?.text = "Common chemical compounds"
             } else if indexPath.row == 1 {
-                cell.textLabel?.text = "Polyatomic ions"
+                cell.textLabel?.text = "Polyatomic ions and charges"
             } else if indexPath.row == 2 {
-                cell.textLabel?.text = "Electron configurations"
-            } else if indexPath.row == 3 {
                 cell.textLabel?.text = "Solubility checker"
             }
         } else if indexPath.section == 1 {
             if indexPath.row == 0 {
-                cell.textLabel?.text = "Report bugs and mistakes"
+                cell.textLabel?.text = "About the developer"
             } else if indexPath.row == 1 {
+                cell.textLabel?.text = "Report bugs and mistakes"
+            } else if indexPath.row == 2 {
+                cell.textLabel?.text = "Send feedback"
+            } else if indexPath.row == 3 {
                 cell.textLabel?.text = "Credits and libraries"
             }
         }
@@ -68,8 +70,6 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else if indexPath.section == 0 && indexPath.row == 1 {
             performSegue(withIdentifier: "showPolyatomicIons", sender: indexPath)
         } else if indexPath.section == 0 && indexPath.row == 2 {
-            performSegue(withIdentifier: "showElectronConfigs", sender: indexPath)
-        } else if indexPath.section == 0 && indexPath.row == 3 {
             performSegue(withIdentifier: "showSolubility", sender: indexPath)
         }
         

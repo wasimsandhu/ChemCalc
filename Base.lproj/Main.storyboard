@@ -205,11 +205,7 @@
                             <constraint firstItem="rd6-b5-Irx" firstAttribute="top" secondItem="VNa-OI-8Qn" secondAttribute="bottom" constant="8" symbolic="YES" id="gvj-NN-Msp"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Molar Mass Calculator" id="tmw-Ym-5uR">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="info" id="rJ8-PG-Vt7">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Molar Mass Calculator" id="tmw-Ym-5uR"/>
                     <connections>
                         <outlet property="calculatorView" destination="PQ9-Lw-t07" id="dhX-2P-UfN"/>
                         <outlet property="compoundName" destination="xhd-OP-4VB" id="v4Z-DD-Tx1"/>
@@ -411,7 +407,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Stoichiometry" id="ky8-vJ-OvP">
-                        <barButtonItem key="rightBarButtonItem" title="Help" image="help" id="FfD-zH-8kK">
+                        <barButtonItem key="rightBarButtonItem" title="Help" image="info" id="FfD-zH-8kK">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
                     </navigationItem>
@@ -752,6 +748,9 @@
                     <navigationItem key="navigationItem" title="Thermodynamics" id="bm6-pN-sCt">
                         <barButtonItem key="rightBarButtonItem" image="sigma" id="R94-wQ-ohf">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <segue destination="dNH-2Z-dsa" kind="show" id="uDx-VI-W1f"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -763,6 +762,27 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0du-Pp-byZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2952.8000000000002" y="2369.8650674662672"/>
+        </scene>
+        <!--Enthalpy Calculator-->
+        <scene sceneID="FLM-hw-jG4">
+            <objects>
+                <viewController id="dNH-2Z-dsa" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cvo-Kb-YqQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="92c-3H-f5F"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="IU0-4d-5H7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Enthalpy Calculator" id="hhe-Ot-ad9">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="29u-sc-LIN"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yt6-TB-ucy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3822" y="2370"/>
         </scene>
         <!--More-->
         <scene sceneID="WuU-Yj-awD">
@@ -817,7 +837,6 @@
                         <outlet property="moreTable" destination="5zh-eu-nw0" id="dPf-zQ-gMO"/>
                         <segue destination="2es-ch-IoB" kind="push" identifier="showCompounds" id="6Zp-JV-36m"/>
                         <segue destination="qP4-Hp-aYh" kind="push" identifier="showPolyatomicIons" id="e0h-dh-Xvf"/>
-                        <segue destination="1uY-Rh-YOW" kind="push" identifier="showElectronConfigs" id="9pJ-c2-s8j"/>
                         <segue destination="nQe-T1-w6m" kind="push" identifier="showSolubility" id="jE5-dd-zVx"/>
                     </connections>
                 </viewController>
@@ -902,51 +921,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TGx-Pm-6rr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3861.5999999999999" y="3105.6971514242882"/>
-        </scene>
-        <!--Electron Configurations-->
-        <scene sceneID="XTZ-ZS-3cj">
-            <objects>
-                <viewController id="1uY-Rh-YOW" customClass="ElectronConfigVC" customModule="ChemCalc" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="NhK-E2-QZz"/>
-                        <viewControllerLayoutGuide type="bottom" id="Rre-bW-WSe"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="EG5-Qc-IkH">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7BC-wB-sAE">
-                                <rect key="frame" x="0.0" y="72" width="375" height="546"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="electroncell" id="bo0-HX-W8v">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bo0-HX-W8v" id="dLP-9q-xUv">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="1uY-Rh-YOW" id="jAh-xp-8NC"/>
-                                    <outlet property="delegate" destination="1uY-Rh-YOW" id="rOu-6t-2OD"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="7BC-wB-sAE" secondAttribute="trailing" id="L9y-Yi-ghH"/>
-                            <constraint firstItem="7BC-wB-sAE" firstAttribute="leading" secondItem="EG5-Qc-IkH" secondAttribute="leading" id="m9h-x7-d8m"/>
-                            <constraint firstItem="7BC-wB-sAE" firstAttribute="bottom" secondItem="Rre-bW-WSe" secondAttribute="top" id="wye-x8-TYR"/>
-                            <constraint firstItem="7BC-wB-sAE" firstAttribute="top" secondItem="NhK-E2-QZz" secondAttribute="bottom" constant="8" id="yrM-UX-zaG"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Electron Configurations" id="7Fi-qG-eTZ"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Jem-I3-WvL" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3861.5999999999999" y="3876.611694152924"/>
         </scene>
         <!--Solubility Checker-->
         <scene sceneID="I0X-mi-KMd">
@@ -1141,7 +1115,6 @@
         <image name="element" width="25" height="25"/>
         <image name="fire" width="25" height="25"/>
         <image name="flask" width="25" height="25"/>
-        <image name="help" width="24" height="24"/>
         <image name="info" width="24" height="24"/>
         <image name="more" width="25" height="25"/>
         <image name="sigma" width="24" height="24"/>

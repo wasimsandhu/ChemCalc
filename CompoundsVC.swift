@@ -82,7 +82,7 @@ class CompoundsVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         let formattedCompoundName = formatter.fix(formula: formulaArray[indexPath.row])
         cell?.formulaLabel.attributedText = formattedCompoundName
         
-        cell?.nameLabel.text = compoundArray[indexPath.row].trunc(length: 20)
+        cell?.nameLabel.text = compoundArray[indexPath.row].trunc(length: 26)
         cell?.nameLabel.lineBreakMode = .byTruncatingTail
         cell?.nameLabel.adjustsFontSizeToFitWidth = false;
         
