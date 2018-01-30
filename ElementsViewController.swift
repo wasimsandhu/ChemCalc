@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class ElementsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -45,6 +46,15 @@ class ElementsViewController: UIViewController, UITableViewDataSource, UITableVi
             elementGroupDict[b] = elementGroups[a]
         }
         
+        // Element data from: https://github.com/andrejewski/periodic-table
+        let rootRef = FIRDatabase.database().reference()
+        rootRef.child("Elements").observe(.childAdded, with: { (snapshot) in
+            if let dictionary = snapshot.value as? [String:AnyObject] {
+                let element = ElementInfoObject(dictionary: dictionary)
+                elements.append(element)
+            }
+        })
+        
     }
 
     /* TABLE VIEW */
@@ -58,11 +68,9 @@ class ElementsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = table.cellForRow(at: indexPath) as? ElementTableViewCell
-        let selectedElement = cell?.elementName.text
         
         let vc = storyboard?.instantiateViewController(withIdentifier: "ElementInfoViewController") as! ElementInfoViewController
-        vc.url = URL(string: "https://www.chemicool.com/elements/" + selectedElement! + ".html")
-        vc.element = selectedElement!
+        vc.databaseIndex = indexPath.row
         navigationController?.pushViewController(vc, animated: true)
         
         table.deselectRow(at: indexPath, animated: true)

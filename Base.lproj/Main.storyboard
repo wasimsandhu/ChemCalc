@@ -574,6 +574,7 @@
                     <navigationItem key="navigationItem" title="Elements" id="TSl-rz-TNe"/>
                     <connections>
                         <outlet property="table" destination="P7q-Lg-EBW" id="9OA-ns-Qsn"/>
+                        <segue destination="L1D-vR-icd" kind="show" id="D5f-ap-0vr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4nr-Tn-vnl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -583,7 +584,7 @@
         <!--Element-->
         <scene sceneID="3cA-nJ-X8G">
             <objects>
-                <viewController storyboardIdentifier="ElementInfoViewController" id="L1D-vR-icd" customClass="ElementInfoViewController" customModule="ChemCalc" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ElementInfoViewController" automaticallyAdjustsScrollViewInsets="NO" id="L1D-vR-icd" customClass="ElementInfoViewController" customModule="ChemCalc" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yV8-fd-hFt"/>
                         <viewControllerLayoutGuide type="bottom" id="EjV-9l-dKY"/>
@@ -592,29 +593,63 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ok6-Qw-aAr">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <color key="backgroundColor" red="0.36078431372549019" green="0.38823529411764707" blue="0.40392156862745099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <dataDetectorType key="dataDetectorTypes"/>
-                            </webView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="1xV-gX-24t">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="elementinfocell" id="ctB-Ed-5kG" customClass="ElementInfoCell" customModule="ChemCalc" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ctB-Ed-5kG" id="amV-HW-pe6">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Zw-j0-NEr">
+                                                    <rect key="frame" x="14" y="11" width="42" height="22"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TNy-Sd-PpK">
+                                                    <rect key="frame" x="319" y="11" width="42" height="22"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="TNy-Sd-PpK" firstAttribute="bottom" secondItem="amV-HW-pe6" secondAttribute="bottomMargin" id="1QA-RR-vaC"/>
+                                                <constraint firstItem="0Zw-j0-NEr" firstAttribute="top" secondItem="amV-HW-pe6" secondAttribute="topMargin" id="2IG-7e-liK"/>
+                                                <constraint firstItem="0Zw-j0-NEr" firstAttribute="leading" secondItem="amV-HW-pe6" secondAttribute="leadingMargin" constant="-1" id="2fg-hZ-lm7"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="TNy-Sd-PpK" secondAttribute="trailing" constant="-1" id="F7x-Vd-1fA"/>
+                                                <constraint firstItem="0Zw-j0-NEr" firstAttribute="bottom" secondItem="amV-HW-pe6" secondAttribute="bottomMargin" id="F9q-kg-O9Y"/>
+                                                <constraint firstItem="TNy-Sd-PpK" firstAttribute="top" secondItem="amV-HW-pe6" secondAttribute="topMargin" id="o3o-gv-EeB"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="keyLabel" destination="0Zw-j0-NEr" id="JEb-fV-ant"/>
+                                            <outlet property="valueLabel" destination="TNy-Sd-PpK" id="6b7-Pj-Mse"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="L1D-vR-icd" id="PrR-yA-yWb"/>
+                                    <outlet property="delegate" destination="L1D-vR-icd" id="xtR-8h-a5G"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="ok6-Qw-aAr" secondAttribute="trailing" id="Jwu-SA-E3H"/>
-                            <constraint firstItem="ok6-Qw-aAr" firstAttribute="leading" secondItem="eK8-zI-gz9" secondAttribute="leading" id="SWF-RV-OYm"/>
-                            <constraint firstItem="ok6-Qw-aAr" firstAttribute="bottom" secondItem="EjV-9l-dKY" secondAttribute="top" id="WWs-OK-bl2"/>
-                            <constraint firstItem="ok6-Qw-aAr" firstAttribute="top" secondItem="yV8-fd-hFt" secondAttribute="bottom" id="ewJ-gs-TdZ"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Element" largeTitleDisplayMode="never" id="Aa9-QZ-8Si"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="webView" destination="ok6-Qw-aAr" id="9Os-vR-0cK"/>
+                        <outlet property="elementInfoTableView" destination="1xV-gX-24t" id="xnt-ZM-Hhx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cF8-25-dbg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3822" y="115"/>
+            <point key="canvasLocation" x="3821.5999999999999" y="114.69265367316342"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="eBl-l5-06a">
@@ -766,7 +801,7 @@
         <!--Enthalpy Calculator-->
         <scene sceneID="FLM-hw-jG4">
             <objects>
-                <viewController id="dNH-2Z-dsa" sceneMemberID="viewController">
+                <viewController id="dNH-2Z-dsa" customClass="EnthalpyVC" customModule="ChemCalc" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cvo-Kb-YqQ"/>
                         <viewControllerLayoutGuide type="bottom" id="92c-3H-f5F"/>
