@@ -752,38 +752,36 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="elementinfocell" id="ctB-Ed-5kG" customClass="ElementInfoCell" customModule="ChemCalc" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="elementinfocell" id="pzM-LH-4cL" customClass="ElementInfoCell" customModule="ChemCalc" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ctB-Ed-5kG" id="amV-HW-pe6">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pzM-LH-4cL" id="gbg-Az-fu3">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Zw-j0-NEr">
-                                                    <rect key="frame" x="14" y="11" width="44" height="22"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Formula" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hJW-NM-5ex">
+                                                    <rect key="frame" x="294" y="10" width="66" height="22"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Compound" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q3w-dS-q0U">
+                                                    <rect key="frame" x="14" y="11" width="90" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TNy-Sd-PpK">
-                                                    <rect key="frame" x="317" y="11" width="44" height="22"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="TNy-Sd-PpK" firstAttribute="bottom" secondItem="amV-HW-pe6" secondAttribute="bottomMargin" id="1QA-RR-vaC"/>
-                                                <constraint firstItem="0Zw-j0-NEr" firstAttribute="top" secondItem="amV-HW-pe6" secondAttribute="topMargin" id="2IG-7e-liK"/>
-                                                <constraint firstItem="0Zw-j0-NEr" firstAttribute="leading" secondItem="amV-HW-pe6" secondAttribute="leadingMargin" constant="-1" id="2fg-hZ-lm7"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="TNy-Sd-PpK" secondAttribute="trailing" constant="-1" id="F7x-Vd-1fA"/>
-                                                <constraint firstItem="0Zw-j0-NEr" firstAttribute="bottom" secondItem="amV-HW-pe6" secondAttribute="bottomMargin" id="F9q-kg-O9Y"/>
-                                                <constraint firstItem="TNy-Sd-PpK" firstAttribute="top" secondItem="amV-HW-pe6" secondAttribute="topMargin" id="o3o-gv-EeB"/>
+                                                <constraint firstItem="Q3w-dS-q0U" firstAttribute="baseline" secondItem="hJW-NM-5ex" secondAttribute="baseline" id="36c-qc-WJE"/>
+                                                <constraint firstItem="Q3w-dS-q0U" firstAttribute="centerY" secondItem="gbg-Az-fu3" secondAttribute="centerY" id="85t-vC-qNc"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="hJW-NM-5ex" secondAttribute="trailing" id="DMY-xq-bPP"/>
+                                                <constraint firstItem="Q3w-dS-q0U" firstAttribute="leading" secondItem="gbg-Az-fu3" secondAttribute="leadingMargin" constant="-1" id="mS2-eZ-TFQ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="keyLabel" destination="0Zw-j0-NEr" id="JEb-fV-ant"/>
-                                            <outlet property="valueLabel" destination="TNy-Sd-PpK" id="6b7-Pj-Mse"/>
+                                            <outlet property="keyLabel" destination="Q3w-dS-q0U" id="g30-LD-vS7"/>
+                                            <outlet property="valueLabel" destination="hJW-NM-5ex" id="wms-0t-JJU"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -920,7 +918,7 @@
                                     <segment title="Entropy"/>
                                     <segment title="Spontaneity"/>
                                 </segments>
-                                <color key="tintColor" red="0.87642228600000005" green="0.094558097420000001" blue="0.1403238624" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.89653394669999997" green="0.0" blue="0.025172944669999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="tabChanged:" destination="GCE-R0-KG2" eventType="touchUpInside" id="vCV-h6-Nsw"/>
                                 </connections>
@@ -1101,7 +1099,11 @@
                             <constraint firstItem="nYj-Xa-5iq" firstAttribute="bottom" secondItem="fLK-5a-Kz8" secondAttribute="top" id="WIn-B4-CSP"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Compound Formulas" id="C8d-PR-4yg"/>
+                    <navigationItem key="navigationItem" title="Compound Formulas" id="C8d-PR-4yg">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="C6M-di-sQG">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="fRL-Ka-j2g" id="ect-Au-VJj"/>
                         <outlet property="tableView" destination="nYj-Xa-5iq" id="nag-yv-UVL"/>
@@ -1189,13 +1191,37 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="polycell" id="3YJ-8Y-pRP">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="polycell" id="7rN-V8-TAM" customClass="PolyCell" customModule="ChemCalc" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3YJ-8Y-pRP" id="VaL-K6-JCG">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7rN-V8-TAM" id="ZCR-PE-rLI">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Formula" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XCc-Jm-pra">
+                                                    <rect key="frame" x="294" y="10" width="66" height="22"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Compound" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9E4-ic-Ljq">
+                                                    <rect key="frame" x="14" y="11" width="90" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="9E4-ic-Ljq" firstAttribute="centerY" secondItem="ZCR-PE-rLI" secondAttribute="centerY" id="4R8-gn-jO3"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="XCc-Jm-pra" secondAttribute="trailing" id="6l6-xJ-IAy"/>
+                                                <constraint firstItem="9E4-ic-Ljq" firstAttribute="baseline" secondItem="XCc-Jm-pra" secondAttribute="baseline" id="auy-24-uyD"/>
+                                                <constraint firstItem="9E4-ic-Ljq" firstAttribute="leading" secondItem="ZCR-PE-rLI" secondAttribute="leadingMargin" constant="-1" id="rwQ-3h-e60"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="formulaLabel" destination="XCc-Jm-pra" id="Z4q-yG-jed"/>
+                                            <outlet property="nameLabel" destination="9E4-ic-Ljq" id="f2c-IA-mTQ"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

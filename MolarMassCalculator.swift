@@ -90,15 +90,29 @@ class MolarMassCalculator {
                                         number = Int(characters[index + 2] + characters[index + 3])
                                         if elements[element] == nil {
                                             elements[element] = number
+                                            characters[index] = ""
+                                            characters[index + 1] = ""
+                                            characters[index + 2] = ""
+                                            characters[index + 3] = ""
                                         } else {
                                             elements[element] = elements[element]! + number!
+                                            characters[index] = ""
+                                            characters[index + 1] = ""
+                                            characters[index + 2] = ""
+                                            characters[index + 3] = ""
                                         }
                                     } else {
                                         number = Int(characters[index + 2])
                                         if elements[element] == nil {
                                             elements[element] = number
+                                            characters[index] = ""
+                                            characters[index + 1] = ""
+                                            characters[index + 2] = ""
                                         } else {
                                             elements[element] = elements[element]! + number!
+                                            characters[index] = ""
+                                            characters[index + 1] = ""
+                                            characters[index + 2] = ""
                                         }
                                     }
                                     
@@ -107,16 +121,26 @@ class MolarMassCalculator {
                                     number = Int(characters[index + 2])
                                     if elements[element] == nil {
                                         elements[element] = number
+                                        characters[index] = ""
+                                        characters[index + 1] = ""
+                                        characters[index + 2] = ""
                                     } else {
                                         elements[element] = elements[element]! + number!
+                                        characters[index] = ""
+                                        characters[index + 1] = ""
+                                        characters[index + 2] = ""
                                     }
                                 }
                             } else {
                                 // if no decimal after lowercase letter, then element is one single element
                                 if elements[element] == nil {
                                     elements[element] = 1
+                                    characters[index] = ""
+                                    characters[index + 1] = ""
                                 } else {
                                     elements[element] = elements[element]! + 1
+                                    characters[index] = ""
+                                    characters[index + 1] = ""
                                 }
                             }
                         } else {
@@ -124,9 +148,11 @@ class MolarMassCalculator {
                             if elements[element] == nil {
                                 elements[element] = 1
                                 characters[index] = ""
+                                characters[index + 1] = ""
                             } else {
                                 elements[element] = elements[element]! + 1
                                 characters[index] = ""
+                                characters[index + 1] = ""
                             }
                         }
                         

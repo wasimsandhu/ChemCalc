@@ -60,7 +60,7 @@ class ElementInfoViewController: UIViewController, UITableViewDelegate, UITableV
             cell?.valueLabel.text = elementInfo.atomicMass
         } else if indexPath.row == 4 {
             cell?.keyLabel.text = "Electron Configuration"
-            cell?.valueLabel.attributedText = TextFormatter().fixElectron(config: elementInfo.electronicConfiguration!)
+            cell?.valueLabel.attributedText = TextFormatter().fixElectron(config: elementInfo.electronicConfiguration!, font: "BIG")
         } else if indexPath.row == 5 {
             cell?.keyLabel.text = "Atomic Radius"
             cell?.valueLabel.text = elementInfo.atomicRadius
@@ -68,11 +68,21 @@ class ElementInfoViewController: UIViewController, UITableViewDelegate, UITableV
             cell?.keyLabel.text = "Ion Radius"
             cell?.valueLabel.text = elementInfo.ionRadius
         } else if indexPath.row == 7 {
-            cell?.keyLabel.text = "Boiling Point"
-            cell?.valueLabel.text = elementInfo.boilingPoint! + "°C"
+            if elementInfo.boilingPoint! == "" {
+                cell?.keyLabel.text = "Boiling Point"
+                cell?.valueLabel.text = elementInfo.boilingPoint
+            } else {
+                cell?.keyLabel.text = "Boiling Point"
+                cell?.valueLabel.text = elementInfo.boilingPoint! + "°C"
+            }
         } else if indexPath.row == 8 {
-            cell?.keyLabel.text = "Melting Point"
-            cell?.valueLabel.text = elementInfo.meltingPoint! + "°C"
+            if elementInfo.meltingPoint! == "" {
+                cell?.keyLabel.text = "Melting Point"
+                cell?.valueLabel.text = elementInfo.meltingPoint
+            } else {
+                cell?.keyLabel.text = "Melting Point"
+                cell?.valueLabel.text = elementInfo.meltingPoint! + "°C"
+            }
         } else if indexPath.row == 9 {
             cell?.keyLabel.text = "Group"
             cell?.valueLabel.text = elementInfo.groupBlock
@@ -80,8 +90,13 @@ class ElementInfoViewController: UIViewController, UITableViewDelegate, UITableV
             cell?.keyLabel.text = "Standard State"
             cell?.valueLabel.text = elementInfo.standardState
         } else if indexPath.row == 11 {
-            cell?.keyLabel.text = "Density"
-            cell?.valueLabel.text = elementInfo.density! + " g/mL"
+            if elementInfo.density! == "" {
+                cell?.keyLabel.text = "Density"
+                cell?.valueLabel.text = elementInfo.density
+            } else {
+                cell?.keyLabel.text = "Density"
+                cell?.valueLabel.text = elementInfo.density! + " g/mL"
+            }
         } else if indexPath.row == 12 {
             cell?.keyLabel.text = "Bonding Type"
             cell?.valueLabel.text = elementInfo.bondingType
@@ -89,11 +104,21 @@ class ElementInfoViewController: UIViewController, UITableViewDelegate, UITableV
             cell?.keyLabel.text = "Electronegativity"
             cell?.valueLabel.text = elementInfo.electronegativity
         } else if indexPath.row == 14 {
-            cell?.keyLabel.text = "Ionization Energy"
-            cell?.valueLabel.text = elementInfo.ionizationEnergy! + " kJ"
+            if elementInfo.ionizationEnergy == "" {
+                cell?.keyLabel.text = "Ionization Energy"
+                cell?.valueLabel.text = elementInfo.ionizationEnergy
+            } else {
+                cell?.keyLabel.text = "Ionization Energy"
+                cell?.valueLabel.text = elementInfo.ionizationEnergy! + " kJ"
+            }
         } else if indexPath.row == 15 {
-            cell?.keyLabel.text = "Electron Affinity"
-            cell?.valueLabel.text = elementInfo.electronAffinity! + " kJ"
+            if elementInfo.electronAffinity! == "" {
+                cell?.keyLabel.text = "Electron Affinity"
+                cell?.valueLabel.text = elementInfo.electronAffinity
+            } else {
+                cell?.keyLabel.text = "Electron Affinity"
+                cell?.valueLabel.text = elementInfo.electronAffinity! + " kJ"
+            }
         } else if indexPath.row == 16 {
             cell?.keyLabel.text = "Oxidation States"
             cell?.valueLabel.text = elementInfo.oxidationStates

@@ -11,7 +11,8 @@ import UIKit
 class PolyatomicVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let charges = ["Charge: +1", "Charge: +2", "Charge: -1", "Charge: -2", "Charge: -3"]
-    let polyatomicIons = [["Nitrate ion: NH4+", "Hydronium ion: H3O+"], ["Mercury (I) ion: Hg22+"], ["Nitrite ion: NO2-", "Nitrate ion: NO3-", "Hydrogen sulfate ion: HSO4-", "Dihydrogen phosphate ion: H2PO4-", "Hydroxide ion: OH-", "Acetate ion: C2H3O2-", "Perchlorate ion: ClO4-", "Chlorate ion: ClO3-", "Chlorite ion: ClO2-", "Hypochlorite ion: ClO-", "Permanganate ion: MnO4-", "Cyanide ion: CN-", "Cyanate ion: CNO-", "Thiocyanate ion: SCN-", "Hydrogen carbonate ion: HCO3-"], ["Sulfate ion: SO42-", "Sulfite ion: SO32-", "Hydrogen phosphate ion: HPO42-", "Peroxide ion: O22-", "Chromate ion: CrO42-", "Dichromate ion: Cr2O72-", "Carbonate ion: CO32-", "Oxalate ion: C2O42-", "Thiosulfate ion: S2O32-"], ["Phosphate ion: PO43-", "Phosphite ion: PO33-", "Borate ion: BO33-"]]
+    let polyatomicIonNames = [["Nitrate ion", "Hydronium ion"], ["Mercury (I) ion"], ["Nitrite ion", "Nitrate ion", "Hydrogen sulfate ion", "Dihydrogen phosphate ion", "Hydroxide ion", "Acetate ion", "Perchlorate ion", "Chlorate ion", "Chlorite ion", "Hypochlorite ion", "Permanganate ion", "Cyanide ion", "Cyanate ion", "Thiocyanate ion", "Hydrogen carbonate ion"], ["Sulfate ion", "Sulfite ion", "Hydrogen phosphate ion", "Peroxide ion", "Chromate ion", "Dichromate ion", "Carbonate ion", "Oxalate ion", "Thiosulfate ion"], ["Phosphate ion", "Phosphite ion", "Borate ion"]]
+    let polyatomicIons = [["NH4+", "H3O+"], ["Hg22+"], ["NO2-", "NO3-", "HSO4-", "H2PO4-", "OH-", "C2H3O2-", "ClO4-", "ClO3-", "ClO2-", "ClO-", "MnO4-", "CN-", "CNO-", "SCN-", "HCO3-"], ["SO42-", "SO32-", "HPO42-", "O22-", "CrO42-", "Cr2O72-", "CO32-", "C2O42-", "S2O32-"], ["PO43-", "PO33-", "BO33-"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,10 +36,26 @@ class PolyatomicVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "polycell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "polycell", for: indexPath) as! PolyCell
         let formatter = TextFormatter()
         let formattedFormula = formatter.fix(formula: polyatomicIons[indexPath.section][indexPath.row])
-        cell.textLabel?.attributedText = formattedFormula
+        cell.nameLabel?.text = polyatomicIonNames[indexPath.section][indexPath.row]
+        cell.formulaLabel?.attributedText = formattedFormula
         return cell
     }
+}
+
+class PolyCell: UITableViewCell {
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var formulaLabel: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
+    
 }

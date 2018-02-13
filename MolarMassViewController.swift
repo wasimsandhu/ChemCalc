@@ -41,6 +41,7 @@ class MolarMassViewController: UIViewController, UITableViewDelegate, UITableVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboard()
         
         molarTextField.delegate = self
         gramsTextField.delegate = self
@@ -58,9 +59,11 @@ class MolarMassViewController: UIViewController, UITableViewDelegate, UITableVie
         if segmentedControl.selectedSegmentIndex == 0 {
             converterView.isHidden = true
             calculatorView.isHidden = false
+            molarTextField.becomeFirstResponder()
         } else if segmentedControl.selectedSegmentIndex == 1 {
             calculatorView.isHidden = true
             converterView.isHidden = false
+            molarTextField2.becomeFirstResponder()
         }
     }
     
@@ -122,7 +125,7 @@ class MolarMassViewController: UIViewController, UITableViewDelegate, UITableVie
             }
         })
         
-        isEqualToLabel.text = "of " + input! + " is equal to"
+        isEqualToLabel.attributedText = TextFormatter().fix(formula: "of " + input! + " is equal to")
         
         molarMassTable.reloadData()
     }

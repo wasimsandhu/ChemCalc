@@ -48,6 +48,7 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     var theoreticalYield: Double?
     
     var stoichCalc: Stoichiometry!
+    var textIsAcceptable = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,33 +92,38 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         if textField == firstReactantTextField {
+            self.firstReactantTextField.text! = (firstReactantTextField.text?.replacingOccurrences(of: " ", with: ""))!
             firstReactant = self.firstReactantTextField.text
             firstReactantTextField.resignFirstResponder()
             firstAmountTextField.becomeFirstResponder()
         } else if textField == firstAmountTextField {
+            self.firstAmountTextField.text! = (firstAmountTextField.text?.replacingOccurrences(of: " ", with: ""))!
             firstAmount = Double(self.firstAmountTextField.text!)
             self.firstAmountTextField.text! += " g"
             firstAmountTextField.resignFirstResponder()
             firstCoefficientTextField.becomeFirstResponder()
         } else if textField == firstCoefficientTextField {
+            self.firstCoefficientTextField.text! = (firstCoefficientTextField.text?.replacingOccurrences(of: " ", with: ""))!
             firstCoefficient = Int(self.firstCoefficientTextField.text!)
             firstCoefficientTextField.resignFirstResponder()
             secondReactantTextField.becomeFirstResponder()
         } else if textField == secondReactantTextField {
+            self.secondReactantTextField.text! = (secondReactantTextField.text?.replacingOccurrences(of: " ", with: ""))!
             secondReactant = self.secondReactantTextField.text
             secondReactantTextField.resignFirstResponder()
             secondAmountTextField.becomeFirstResponder()
         } else if textField == secondAmountTextField {
+            self.secondAmountTextField.text! = (secondAmountTextField.text?.replacingOccurrences(of: " ", with: ""))!
             secondAmount = Double(self.secondAmountTextField.text!)
             secondAmountTextField.resignFirstResponder()
             self.secondAmountTextField.text! += " g"
             secondCoefficientTextField.becomeFirstResponder()
         } else if textField == secondCoefficientTextField {
-            
+            self.secondCoefficientTextField.text! = (secondCoefficientTextField.text?.replacingOccurrences(of: " ", with: ""))!
             secondCoefficient = Int(self.secondCoefficientTextField.text!)
             secondCoefficientTextField.resignFirstResponder()
             
-            if textFieldIsNil() == false {
+            if textFieldIsNil() == false && textIsAcceptable {
                 limitingReactant = stoichCalc.getLimitingReactant(reactant1: firstReactant!, amount1: firstAmount!, coefficient1: firstCoefficient!, reactant2: secondReactant!, amount2: secondAmount!, coefficient2: secondCoefficient!)
                 
                 excessReactantLeft = stoichCalc.getExcessReactant()
@@ -131,10 +137,12 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             }
             
         } else if textField == productTextField {
+            self.productTextField.text! = (productTextField.text?.replacingOccurrences(of: " ", with: ""))!
             product = self.productTextField.text
             productTextField.resignFirstResponder()
             productCoefficientTextField.becomeFirstResponder()
         } else if textField == productCoefficientTextField {
+            self.productCoefficientTextField.text! = (productCoefficientTextField.text?.replacingOccurrences(of: " ", with: ""))!
             productCoefficient = Int(self.productCoefficientTextField.text!)
             productCoefficientTextField.resignFirstResponder()
             
@@ -146,11 +154,28 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         return true
     }
     
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        // Find out what the text field will be after adding the current edit
+        let text = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+        
+        if textField == firstCoefficientTextField || textField == secondCoefficientTextField || textField == productCoefficientTextField {
+            if let val = Int(text) {
+                textIsAcceptable = true
+            } else {
+                textIsAcceptable = false
+            }
+        } else if textField == firstAmountTextField || textField == secondAmountTextField {
+            
+        }
+        
+        return true
+    }
+    
     func textFieldIsNil() -> Bool {
-        if firstReactant != nil || firstReactant != "" || firstAmount != nil || firstCoefficient != nil || secondReactant != nil || secondReactant != "" || secondAmount != nil || secondCoefficient != nil {
-            return false
-        } else {
+        if firstReactant == nil || firstReactant == "" || firstAmount == nil || firstCoefficient == nil || secondReactant == nil || secondReactant == "" || secondAmount == nil || secondCoefficient == nil || theoreticalYield == nil || excessReactantLeft == nil || limitingReactant == nil {
             return true
+        } else {
+            return false
         }
     }
     

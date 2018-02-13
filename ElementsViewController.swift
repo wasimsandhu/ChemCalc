@@ -96,7 +96,7 @@ class ElementsViewController: UIViewController, UITableViewDataSource, UITableVi
         let formatter = TextFormatter()
         if (indexPath.row > 29) {
             let mutableAttributedString = NSMutableAttributedString(string: "Config: ", attributes: nil)
-            let electronConfig = formatter.fixElectron(config: electronConfigs[indexPath.row])
+            let electronConfig = formatter.fixElectron(config: electronConfigs[indexPath.row], font: "SMALL")
             
             let cellText = NSMutableAttributedString()
             cellText.append(mutableAttributedString)
@@ -106,7 +106,7 @@ class ElementsViewController: UIViewController, UITableViewDataSource, UITableVi
             
         } else {
             let mutableAttributedString = NSMutableAttributedString(string: "Electron config: ", attributes: nil)
-            let electronConfig = formatter.fixElectron(config: electronConfigs[indexPath.row])
+            let electronConfig = formatter.fixElectron(config: electronConfigs[indexPath.row], font: "SMALL")
             
             let cellText = NSMutableAttributedString()
             cellText.append(mutableAttributedString)

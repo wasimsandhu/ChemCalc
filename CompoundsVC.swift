@@ -50,9 +50,9 @@ class CompoundsVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let compoundname = compoundArray[indexPath.row]
-        let formulaname = formulaArray[indexPath.row]
+        let molarmass = MolarMassCalculator().calculate(compound: formulaArray[indexPath.row])
         
-        let alert = UIAlertController(title: compoundname, message: formulaname, preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: compoundname, message: String(molarmass) + " g/mol", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.default))
         self.present(alert, animated: true, completion: nil)
         
@@ -95,8 +95,8 @@ class CompoundsVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
             tableView.reloadData()
         } else {
             isSearching = true
-            filteredCompounds = compounds.filter({$0.key.range(of: searchBar.text!) != nil})
-            filteredCompounds = compounds.filter({$0.value.range(of: searchBar.text!) != nil})
+            filteredCompounds = compounds.filter({$0.key.lowercased().range(of: searchBar.text!) != nil})
+            filteredCompounds = compounds.filter({$0.value.lowercased().range(of: searchBar.text!) != nil})
             tableView.reloadData()
         }
     }

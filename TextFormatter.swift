@@ -42,7 +42,7 @@ class TextFormatter {
         formulaToFormat = formulaToFormat?.replacingOccurrences(of: "7", with: "@7$")
         formulaToFormat = formulaToFormat?.replacingOccurrences(of: "8", with: "@8$")
         formulaToFormat = formulaToFormat?.replacingOccurrences(of: "9", with: "@9$")
-        formulaToFormat = formulaToFormat?.replacingOccurrences(of: "10", with: "@10$")
+        formulaToFormat = formulaToFormat?.replacingOccurrences(of: "0", with: "@0$")
         
         // superscripting charges on molecules
         if formulaToFormat!.contains("@3$+") {
@@ -69,7 +69,7 @@ class TextFormatter {
         return formattedFormula!
     }
     
-    func fixElectron(config: String) -> (NSMutableAttributedString) {
+    func fixElectron(config: String, font: String) -> (NSMutableAttributedString) {
         
         // s
         configToFormat = config.replacingOccurrences(of: "s1", with: "s{1}")
@@ -111,7 +111,12 @@ class TextFormatter {
         configToFormat = configToFormat?.replacingOccurrences(of: "f8", with: "f{8}")
         configToFormat = configToFormat?.replacingOccurrences(of: "f9", with: "f{9}")
         
-        formattedConfig = configToFormat?.customText2()
+        if font == "BIG" {
+            formattedConfig = configToFormat?.customText2(font: 18, superFont: 14)
+        } else if font == "SMALL" {
+            formattedConfig = configToFormat?.customText2(font: 15, superFont: 12)
+        }
+        
         return formattedConfig
     }
     
@@ -236,10 +241,10 @@ extension String {
 
 extension String {
     
-    func customText2() -> NSMutableAttributedString {
+    func customText2(font: CGFloat, superFont: CGFloat) -> NSMutableAttributedString {
         
-        let fontSuper: UIFont? = UIFont(name: "Helvetica", size: 12)
-        let font = UIFont(name: "Helvetica", size: 15)
+        let fontSuper: UIFont? = UIFont(name: "Helvetica", size: superFont)
+        let font = UIFont(name: "Helvetica", size: font)
         
         let attString:NSMutableAttributedString = NSMutableAttributedString(string: self, attributes: [NSAttributedStringKey.font:font!])
         
