@@ -50,6 +50,9 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     var stoichCalc: Stoichiometry!
     var textIsAcceptable = true
     
+    var coefficients = [Int]()
+    var compounds = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboard()
@@ -86,10 +89,22 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     
     // text field
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.text = ""
+        if textField == balanceTextField {
+            
+        } else {
+            textField.text = ""
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField == balanceTextField {
+            let balancer = ChemicalEquationBalancer()
+            coefficients = balancer.setupMatrix(input: balanceTextField.text!)
+            compounds = balancer.getCompounds()
+            balanceTableView.reloadData()
+            balanceTextField.resignFirstResponder()
+        }
         
         if textField == firstReactantTextField {
             self.firstReactantTextField.text! = (firstReactantTextField.text?.replacingOccurrences(of: " ", with: ""))!
@@ -182,7 +197,7 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     // table view
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == balanceTableView {
-            return 4
+            return coefficients.count
         } else if tableView == stoichTableView {
             return 3
         } else {
@@ -194,7 +209,8 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         let cell = tableView.dequeueReusableCell(withIdentifier: "stoichcell") as? StoichCell
         
         if tableView == balanceTableView {
-            
+            cell?.keyLabel.text = compounds[indexPath.row]
+            cell?.valueLabel.text = String(coefficients[indexPath.row])
         } else if tableView == stoichTableView {
             if indexPath.row == 0 {
                 cell?.keyLabel.text = "Limiting Reactant"

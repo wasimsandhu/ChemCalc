@@ -237,6 +237,10 @@ class MolarMassCalculator {
         return (molarMass!)
     }
     
+    func getElementsAndQuantities() -> ([String:Int]) {
+        return elements
+    }
+    
     func getElementsInCompound() -> (Array<String>) {
         return dictElementsAsArray
     }

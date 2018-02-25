@@ -14,9 +14,10 @@ class ChemicalEquationBalancer {
     var elementsInReaction = [String]()
     var quantitiesOfElementsInCompound = [Int]()
     var augmentedMatrix = [[Int]]()
+    var coefficients = [Int]()
     
     // set up augmented matrix
-    func getElements(input: String) {
+    func setupMatrix(input: String) -> [Int] {
         
         // remove whitespaces
         let equation = input.replacingOccurrences(of: " ", with: "")
@@ -64,10 +65,90 @@ class ChemicalEquationBalancer {
             augmentedMatrix.append(row)
         }
         
-        reduceToREF(matrix: augmentedMatrix)
+        reduceToREF()
+        let compoundCoefficients = getCoefficients()
+        
+        return compoundCoefficients
     }
     
-    func reduceToREF(matrix: [[Int]]) {
+    func getCompounds() -> [String] {
+        return compounds
+    }
+    
+    func reduceToREF() {
+        var lead = 0
         
+        var rowCount = augmentedMatrix.count
+        var columnCount = augmentedMatrix[0].count
+        
+        if rowCount < columnCount {
+            if rowCount == 3 && columnCount == 4 {
+                augmentedMatrix.append([0,0,0,1])
+            } else if rowCount == 2 && columnCount == 3 {
+                augmentedMatrix.append([0,0,1])
+            }
+            
+            rowCount = augmentedMatrix.count
+            columnCount = augmentedMatrix[0].count
+        }
+        
+        /* print("Rows: " + String(rowCount))
+        print("Columns: " + String(columnCount)) */
+        
+        for r in 0..<rowCount {
+            if (columnCount <= lead) {
+                break
+            }
+            var i = r
+            while (augmentedMatrix[i][lead] == 0) {
+                i = i + 1
+                if (i == rowCount) {
+                    i = r
+                    lead = lead + 1
+                    if (columnCount == lead) {
+                        lead = lead - 1
+                        break
+                    }
+                }
+            }
+            for j in 0..<columnCount {
+                var temp = augmentedMatrix[r][j]
+                augmentedMatrix[r][j] = augmentedMatrix[i][j]
+                augmentedMatrix[i][j] = temp
+            }
+            var div = augmentedMatrix[r][lead]
+            if (div != 0) {
+                for j in 0..<columnCount {
+                    augmentedMatrix[r][j] = augmentedMatrix[r][j] / div
+                }
+            }
+            for j in 0..<rowCount {
+                if (j != r) {
+                    var sub = augmentedMatrix[j][lead]
+                    for k in 0..<columnCount {
+                        augmentedMatrix[j][k] = augmentedMatrix[j][k] - (sub * augmentedMatrix[r][k])
+                    }
+                }
+            }
+            lead = lead + 1
+        }
+    }
+    
+    func getCoefficients() -> [Int] {
+        
+        for row in augmentedMatrix {
+            
+            var coefficient = row.last
+            
+            if (coefficient! < 0) {
+                coefficient = coefficient! * -1
+            } else if coefficient == 0 {
+                coefficient = 1
+            }
+            
+            coefficients.append(coefficient!)
+        }
+        
+        return coefficients
     }
 }
