@@ -10,9 +10,12 @@ import Foundation
 
 class ChemicalEquationBalancer {
     
-    var coefficients = [Int]()
-    var dictionary: [String:Double] = [:]
+    var compounds = [String]()
+    var elementsInReaction = [String]()
+    var quantitiesOfElementsInCompound = [Int]()
+    var augmentedMatrix = [[Int]]()
     
+    // set up augmented matrix
     func getElements(input: String) {
         
         // remove whitespaces
@@ -25,25 +28,46 @@ class ChemicalEquationBalancer {
         let reactants = sides[0].components(separatedBy: "+")
         let products = sides[1].components(separatedBy: "+")
         
+        // append both to compounds array
+        for reactant in reactants { compounds.append(reactant) }
+        for product in products { compounds.append(product) }
+        
         // get quantities of elements on both sides of equation
         let molarMassCalc = MolarMassCalculator()
-        dictionary = molarMassCalc.createDictionary()
         
-        for reactant in reactants {
-            let molarMassOfReactant = molarMassCalc.calculate(compound: reactant)
-            let elementsInReactant = molarMassCalc.getElementsInCompound()
-            let quantitiesOfElementsInReactant = molarMassCalc.getNumberOfElements()
+        // get total elements and total element quantities
+        for compound in compounds {
+            molarMassCalc.calculate(compound: compound)
+            let elementsInCompound = molarMassCalc.getElementsInCompound()
+            
+            for element in elementsInCompound {
+                if !elementsInReaction.contains(element) {
+                    elementsInReaction.append(element)
+                }
+            }
         }
         
-        for product in products {
-            let molarMassOfProduct = molarMassCalc.calculate(compound: product)
-            let elementsInProduct = molarMassCalc.getElementsInCompound()
-            let quantitiesOfElementsInProduct = molarMassCalc.getNumberOfElements()
+        // setup augmented matrix
+        for element in elementsInReaction {
+            var row = [Int]()
+            
+            for compound in compounds {
+                molarMassCalc.calculate(compound: compound)
+                let elementsAndQuantities = molarMassCalc.getElementsAndQuantities()
+                if elementsAndQuantities[element] != nil {
+                    row.append(elementsAndQuantities[element]!)
+                } else {
+                    row.append(0)
+                }
+            }
+            
+            augmentedMatrix.append(row)
         }
         
+        reduceToREF(matrix: augmentedMatrix)
     }
     
-    func setupMatrices(coefficients: Int) {
+    func reduceToREF(matrix: [[Int]]) {
         
     }
 }
