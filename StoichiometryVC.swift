@@ -197,7 +197,7 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     // table view
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == balanceTableView {
-            return coefficients.count
+            return compounds.count
         } else if tableView == stoichTableView {
             return 3
         } else {
@@ -209,8 +209,8 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         let cell = tableView.dequeueReusableCell(withIdentifier: "stoichcell") as? StoichCell
         
         if tableView == balanceTableView {
-            cell?.keyLabel.text = compounds[indexPath.row]
-            cell?.valueLabel.text = String(coefficients[indexPath.row])
+            cell?.keyLabel.attributedText = TextFormatter().fix(formula: compounds[indexPath.row])
+            cell?.valueLabel.text = "Coefficient: " + String(coefficients[indexPath.row])
         } else if tableView == stoichTableView {
             if indexPath.row == 0 {
                 cell?.keyLabel.text = "Limiting Reactant"

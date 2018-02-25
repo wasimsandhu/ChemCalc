@@ -13,7 +13,7 @@ class ChemicalEquationBalancer {
     var compounds = [String]()
     var elementsInReaction = [String]()
     var quantitiesOfElementsInCompound = [Int]()
-    var augmentedMatrix = [[Int]]()
+    var augmentedMatrix = [[Double]]()
     var coefficients = [Int]()
     
     // set up augmented matrix
@@ -50,13 +50,13 @@ class ChemicalEquationBalancer {
         
         // setup augmented matrix
         for element in elementsInReaction {
-            var row = [Int]()
+            var row = [Double]()
             
             for compound in compounds {
                 molarMassCalc.calculate(compound: compound)
                 let elementsAndQuantities = molarMassCalc.getElementsAndQuantities()
                 if elementsAndQuantities[element] != nil {
-                    row.append(elementsAndQuantities[element]!)
+                    row.append(Double(elementsAndQuantities[element]!))
                 } else {
                     row.append(0)
                 }
@@ -81,20 +81,24 @@ class ChemicalEquationBalancer {
         var rowCount = augmentedMatrix.count
         var columnCount = augmentedMatrix[0].count
         
-        if rowCount < columnCount {
-            if rowCount == 3 && columnCount == 4 {
-                augmentedMatrix.append([0,0,0,1])
-            } else if rowCount == 2 && columnCount == 3 {
-                augmentedMatrix.append([0,0,1])
+        // move third column to other side of the equation
+        if columnCount == 4 {
+            var i = 0
+            for row in augmentedMatrix {
+                let fix = row[2] * -1
+                augmentedMatrix[i][2] = fix
+                i = i + 1
             }
-            
-            rowCount = augmentedMatrix.count
-            columnCount = augmentedMatrix[0].count
         }
         
-        /* print("Rows: " + String(rowCount))
-        print("Columns: " + String(columnCount)) */
+        // add implied row to matrix
+        if columnCount == 4 && rowCount == 3 {
+            augmentedMatrix.append([0,0,0,0])
+        } else if columnCount == 3 && rowCount == 2 {
+            augmentedMatrix.append([0,0,0])
+        }
         
+        // solve matrix https://rosettacode.org/wiki/Reduced_row_echelon_form#Swift
         for r in 0..<rowCount {
             if (columnCount <= lead) {
                 break
@@ -132,21 +136,91 @@ class ChemicalEquationBalancer {
             }
             lead = lead + 1
         }
+        
+        // fix negative numbers and zeroes in last column
+        var anotherIndex = 0
+        for row in augmentedMatrix {
+            var coefficient = row.last
+            
+            if (coefficient! < 0) {
+                coefficient = coefficient! * -1
+                augmentedMatrix[anotherIndex][columnCount - 1] = coefficient!
+            } else if coefficient == 0 {
+                coefficient = 1
+                augmentedMatrix[anotherIndex][columnCount - 1] = coefficient!
+            } else {
+                coefficient = row.last
+            }
+            
+            anotherIndex = anotherIndex + 1
+        }
+        
+        // TODO: fix up this bullshit LCM algorithm
+        var multiplyByTwo = false
+        var multiplyByThree = false
+        var multiplyByFour = false
+        var multiplyByFive = false
+        var multiplyBySix = false
+        var multiplyBySeven = false
+        var multiplyByEight = false
+        var multiplyByNine = false
+        var multiplyByTen = false
+        var multiply = false
+        var numberToMultiplyBy: Double!
+        
+        for row in augmentedMatrix {
+            for number in row {
+                if number == 0.5 || number == 1.5 || number == 2.5 || number == 3.5 || number == 4.5 || number == 5.5 || number == 6.5 || number == 7.5 || number == 8.5 || number == 9.5 || number == 10.5 || number == 11.5 || number == 12.5 || number == 13.5 || number == 14.5 || number == 15.5 {
+                    multiplyByTwo = true
+                    multiply = true
+                } else if number == 1.125 {
+                    multiplyByEight = true
+                    multiply = true
+                }else if number == 0.25 {
+                    multiplyByFour = true
+                    multiply = true
+                } else if number == 0.16666666666666666 {
+                    multiplyBySix = true
+                    multiply = true
+                } else if number == 1.3 {
+                    multiplyByTen = true
+                    multiply = true
+                }
+            }
+        }
+        
+        if multiply == true {
+            if multiplyByTen == true {
+                numberToMultiplyBy = 10
+            } else if multiplyByEight == true {
+                numberToMultiplyBy = 8
+            } else if multiplyByTwo == true {
+                numberToMultiplyBy = 2
+            } else if multiplyByThree == true {
+                numberToMultiplyBy = 3
+            } else if multiplyByFour == true {
+                numberToMultiplyBy = 4
+            } else if multiplyBySix == true {
+                numberToMultiplyBy = 6
+            }
+            
+            var i = 0
+            for row in augmentedMatrix {
+                var j = 0
+                for number in row {
+                    augmentedMatrix[i][j] = augmentedMatrix[i][j] * numberToMultiplyBy
+                    j = j + 1
+                }
+                i = i + 1
+            }
+        }
     }
     
     func getCoefficients() -> [Int] {
         
         for row in augmentedMatrix {
-            
-            var coefficient = row.last
-            
-            if (coefficient! < 0) {
-                coefficient = coefficient! * -1
-            } else if coefficient == 0 {
-                coefficient = 1
-            }
-            
-            coefficients.append(coefficient!)
+            let coefficient = Int(row.last!)
+            coefficients.append(coefficient)
         }
         
         return coefficients
