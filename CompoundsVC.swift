@@ -106,6 +106,46 @@ class CompoundsVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         searchBar.resignFirstResponder()
     }
     
+    @IBAction func addCompound(_ sender: Any) {
+        
+        var newCompoundName: String?
+        var newCompoundFormula: String?
+        
+        let alert = UIAlertController(title: "Add Compound", message: "Submit a request to add a compound to our database.", preferredStyle: UIAlertControllerStyle.alert)
+        
+        alert.addTextField { (textField) in
+            textField.placeholder = "Compound Name"
+            textField.font = UIFont.systemFont(ofSize: 16)
+        }
+        
+        alert.addTextField { (textField) in
+            textField.placeholder = "Compound Formula"
+            textField.font = UIFont.systemFont(ofSize: 16)
+        }
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.destructive, handler: { (_) in }))
+        
+        alert.addAction(UIAlertAction(title: "Send", style: UIAlertActionStyle.default, handler: { (action: UIAlertAction!) in
+            if let field1 = alert.textFields?[0] {
+                newCompoundName = field1.text!
+            }
+            
+            if let field2 = alert.textFields?[1] {
+                newCompoundFormula = field2.text!
+            }
+            
+            if newCompoundName != nil && newCompoundFormula != nil {
+                if newCompoundName != "" && newCompoundFormula != "" {
+                    let requestsReference = FIRDatabase.database().reference().child("Requests").child(newCompoundFormula!)
+                    let request = ["name": newCompoundName!, "formula": newCompoundFormula!]
+                    requestsReference.setValue(request)
+                }
+            }
+            
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 class CompoundCell: UITableViewCell {

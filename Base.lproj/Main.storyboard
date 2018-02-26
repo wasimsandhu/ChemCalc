@@ -1102,6 +1102,9 @@
                     <navigationItem key="navigationItem" title="Compound Formulas" id="C8d-PR-4yg">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="C6M-di-sQG">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="addCompound:" destination="2es-ch-IoB" id="G3q-fI-NmQ"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
