@@ -14,6 +14,7 @@ class ChemicalEquationBalancer {
     var elementsInReaction = [String]()
     var quantitiesOfElementsInCompound = [Int]()
     var augmentedMatrix = [[Double]]()
+    var lastColumn = [Double]()
     var coefficients = [Int]()
     
     // set up augmented matrix
@@ -154,74 +155,75 @@ class ChemicalEquationBalancer {
             
             anotherIndex = anotherIndex + 1
         }
+    }
+    
+    /* FIND LCM OF LAST COLUMN FOR EQUATION COEFFICIENTS */
+    // https://stackoverflow.com/questions/28349864/algorithm-for-lcm-of-doubles-in-swift
+    typealias Rational = (num : Int, den : Int)
+    
+    func rationalApproximationOf(x0 : Double, withPrecision eps : Double = 1.0E-6) -> Rational {
+        var x = x0
+        var a = floor(x)
+        var (h1, k1, h, k) = (1, 0, Int(a), 1)
         
-        // TODO: fix up this bullshit LCM algorithm
-        var multiplyByTwo = false
-        var multiplyByThree = false
-        var multiplyByFour = false
-        var multiplyByFive = false
-        var multiplyBySix = false
-        var multiplyBySeven = false
-        var multiplyByEight = false
-        var multiplyByNine = false
-        var multiplyByTen = false
-        var multiply = false
-        var numberToMultiplyBy: Double!
-        
-        for row in augmentedMatrix {
-            for number in row {
-                if number == 0.5 || number == 1.5 || number == 2.5 || number == 3.5 || number == 4.5 || number == 5.5 || number == 6.5 || number == 7.5 || number == 8.5 || number == 9.5 || number == 10.5 || number == 11.5 || number == 12.5 || number == 13.5 || number == 14.5 || number == 15.5 {
-                    multiplyByTwo = true
-                    multiply = true
-                } else if number == 1.125 {
-                    multiplyByEight = true
-                    multiply = true
-                }else if number == 0.25 {
-                    multiplyByFour = true
-                    multiply = true
-                } else if number == 0.16666666666666666 {
-                    multiplyBySix = true
-                    multiply = true
-                } else if number == 1.3 {
-                    multiplyByTen = true
-                    multiply = true
-                }
-            }
+        while x - a > eps * Double(k) * Double(k) {
+            x = 1.0/(x - a)
+            a = floor(x)
+            (h1, k1, h, k) = (h, k, h1 + Int(a) * h, k1 + Int(a) * k)
         }
-        
-        if multiply == true {
-            if multiplyByTen == true {
-                numberToMultiplyBy = 10
-            } else if multiplyByEight == true {
-                numberToMultiplyBy = 8
-            } else if multiplyByTwo == true {
-                numberToMultiplyBy = 2
-            } else if multiplyByThree == true {
-                numberToMultiplyBy = 3
-            } else if multiplyByFour == true {
-                numberToMultiplyBy = 4
-            } else if multiplyBySix == true {
-                numberToMultiplyBy = 6
-            }
-            
-            var i = 0
-            for row in augmentedMatrix {
-                var j = 0
-                for number in row {
-                    augmentedMatrix[i][j] = augmentedMatrix[i][j] * numberToMultiplyBy
-                    j = j + 1
-                }
-                i = i + 1
-            }
+        return (h, k)
+    }
+    
+    // GCD of two numbers:
+    func gcd(a: Int, b: Int) -> Int {
+        var a = a
+        var b = b
+        while b != 0 {
+            (a, b) = (b, a % b)
         }
+        return abs(a)
+    }
+    
+    // GCD of a vector of numbers:
+    func gcd(vector : [Int]) -> Int {
+        return vector.reduce(0) { gcd(a: $0, b: $1) }
+    }
+    
+    // LCM of two numbers:
+    func lcm(a: Int, b: Int) -> Int {
+        var b = b
+        var a = a
+        return (a / gcd(a: a, b: b)) * b
+    }
+    
+    // LCM of a vector of numbers:
+    func lcm(vector: [Int]) -> Int {
+        return vector.reduce(1) { lcm(a: $0, b: $1) }
+    }
+    
+    func simplifyRatios(numbers : [Double]) -> [Int] {
+        // Normalize the input vector to that the maximum is 1.0,
+        // and compute rational approximations of all components:
+        let maximum = (numbers.map { abs($0) } ).max()
+        let rats = numbers.map { rationalApproximationOf(x0: $0/maximum!) }
+        
+        // Multiply all rational numbers by the LCM of the denominators:
+        let commonDenominator = lcm(vector: rats.map { $0.den })
+        let numerators = rats.map { $0.num * commonDenominator / $0.den }
+        
+        // Divide the numerators by the GCD of all numerators:
+        let commonNumerator = gcd(vector: numerators)
+        return numerators.map { $0 / commonNumerator }
     }
     
     func getCoefficients() -> [Int] {
         
         for row in augmentedMatrix {
-            let coefficient = Int(row.last!)
-            coefficients.append(coefficient)
+            let coefficient = row.last!
+            lastColumn.append(coefficient)
         }
+        
+        coefficients = simplifyRatios(numbers: lastColumn)
         
         return coefficients
     }

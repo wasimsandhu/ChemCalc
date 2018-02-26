@@ -99,11 +99,18 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         if textField == balanceTextField {
-            let balancer = ChemicalEquationBalancer()
-            coefficients = balancer.setupMatrix(input: balanceTextField.text!)
-            compounds = balancer.getCompounds()
-            balanceTableView.reloadData()
-            balanceTextField.resignFirstResponder()
+            if (balanceTextField.text?.contains("+"))! && (balanceTextField.text?.contains("="))! {
+                let balancer = ChemicalEquationBalancer()
+                coefficients = balancer.setupMatrix(input: balanceTextField.text!)
+                compounds = balancer.getCompounds()
+                balanceTableView.reloadData()
+                balanceTextField.resignFirstResponder()
+            } else {
+                let alert = UIAlertController(title: "Something's wrong", message: "Please double-check that you've entered an unbalanced chemical equation using + and = symbols.", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default))
+                self.present(alert, animated: true, completion: nil)
+                balanceTextField.resignFirstResponder()
+            }
         }
         
         if textField == firstReactantTextField {
