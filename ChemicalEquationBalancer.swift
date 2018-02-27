@@ -11,6 +11,9 @@ import Foundation
 class ChemicalEquationBalancer {
     
     var compounds = [String]()
+    var reactants = [String]()
+    var products = [String]()
+    
     var elementsInReaction = [String]()
     var quantitiesOfElementsInCompound = [Int]()
     var augmentedMatrix = [[Double]]()
@@ -27,8 +30,8 @@ class ChemicalEquationBalancer {
         let sides = equation.components(separatedBy: "=")
         
         // create array of reactants and products
-        let reactants = sides[0].components(separatedBy: "+")
-        let products = sides[1].components(separatedBy: "+")
+        reactants = sides[0].components(separatedBy: "+")
+        products = sides[1].components(separatedBy: "+")
         
         // append both to compounds array
         for reactant in reactants { compounds.append(reactant) }
@@ -74,6 +77,14 @@ class ChemicalEquationBalancer {
     
     func getCompounds() -> [String] {
         return compounds
+    }
+    
+    func getReactants() -> [String] {
+        return reactants
+    }
+    
+    func getProducts() -> [String] {
+        return products
     }
     
     func reduceToREF() {

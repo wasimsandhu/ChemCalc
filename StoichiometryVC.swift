@@ -16,7 +16,6 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     @IBOutlet weak var stoichiometryView: UIView!
     
     // table views
-    @IBOutlet weak var balanceTableView: UITableView!
     @IBOutlet weak var stoichTableView: UITableView!
     
     // text fields
@@ -50,6 +49,8 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     var stoichCalc: Stoichiometry!
     var textIsAcceptable = true
     
+    @IBOutlet weak var equationType: UILabel!
+    @IBOutlet weak var balancedEquation: UILabel!
     var coefficients = [Int]()
     var compounds = [String]()
     
@@ -100,10 +101,109 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         
         if textField == balanceTextField {
             if (balanceTextField.text?.contains("+"))! && (balanceTextField.text?.contains("="))! {
+                
                 let balancer = ChemicalEquationBalancer()
                 coefficients = balancer.setupMatrix(input: balanceTextField.text!)
                 compounds = balancer.getCompounds()
-                balanceTableView.reloadData()
+                let formatter = TextFormatter()
+                
+                var completeEquation = NSMutableAttributedString()
+                var coefficient: NSMutableAttributedString!
+                let plus = NSMutableAttributedString(string: " + ", attributes: nil)
+                let equals = NSMutableAttributedString(string: " → ", attributes: nil)
+                let bold = [NSAttributedStringKey.font: UIFont(name: "Helvetica-Bold", size: 18)!]
+                
+                if balancer.getReactants().count == 2 && balancer.getProducts().count == 2 {
+                    
+                    coefficient = NSMutableAttributedString(string: String(coefficients[0]), attributes: bold)
+                    completeEquation.append(coefficient)
+                    completeEquation.append(formatter.fix(formula: compounds[0]))
+                    completeEquation.append(plus)
+                    coefficient = NSMutableAttributedString(string: String(coefficients[1]), attributes: bold)
+                    completeEquation.append(coefficient)
+                    completeEquation.append(formatter.fix(formula: compounds[1]))
+                    completeEquation.append(equals)
+                    coefficient = NSMutableAttributedString(string: String(coefficients[2]), attributes: bold)
+                    completeEquation.append(coefficient)
+                    completeEquation.append(formatter.fix(formula: compounds[2]))
+                    completeEquation.append(plus)
+                    coefficient = NSMutableAttributedString(string: String(coefficients[3]), attributes: bold)
+                    completeEquation.append(coefficient)
+                    completeEquation.append(formatter.fix(formula: compounds[3]))
+                    
+                    if compounds[2] == "CO2" && compounds[3] == "H2O" {
+                        equationType.text = "Combustion Reaction"
+                    } else if compounds[2] == "H2O" && compounds[3] == "CO2" {
+                        equationType.text = "Combustion Reaction"
+                    } else {
+                        equationType.text = "Double Replacement Reaction"
+                    }
+                    
+                } else if balancer.getReactants().count == 3 && balancer.getProducts().count == 3 {
+                    
+                    coefficient = NSMutableAttributedString(string: String(coefficients[0]), attributes: bold)
+                    completeEquation.append(coefficient)
+                    completeEquation.append(formatter.fix(formula: compounds[0]))
+                    completeEquation.append(plus)
+                    coefficient = NSMutableAttributedString(string: String(coefficients[1]), attributes: bold)
+                    completeEquation.append(coefficient)
+                    completeEquation.append(formatter.fix(formula: compounds[1]))
+                    completeEquation.append(plus)
+                    coefficient = NSMutableAttributedString(string: String(coefficients[2]), attributes: bold)
+                    completeEquation.append(coefficient)
+                    completeEquation.append(formatter.fix(formula: compounds[2]))
+                    completeEquation.append(equals)
+                    coefficient = NSMutableAttributedString(string: String(coefficients[3]), attributes: bold)
+                    completeEquation.append(coefficient)
+                    completeEquation.append(formatter.fix(formula: compounds[3]))
+                    completeEquation.append(plus)
+                    coefficient = NSMutableAttributedString(string: String(coefficients[4]), attributes: bold)
+                    completeEquation.append(coefficient)
+                    completeEquation.append(formatter.fix(formula: compounds[4]))
+                    completeEquation.append(plus)
+                    coefficient = NSMutableAttributedString(string: String(coefficients[5]), attributes: bold)
+                    completeEquation.append(coefficient)
+                    completeEquation.append(formatter.fix(formula: compounds[5]))
+                    
+                    equationType.text = "Balance A Chemical Equation"
+                    
+                } else if balancer.getReactants().count == 1 && balancer.getProducts().count == 1 {
+                    equationType.text = "Balance A Chemical Equation"
+                } else if balancer.getReactants().count == 2 && balancer.getProducts().count == 1 {
+                    
+                    coefficient = NSMutableAttributedString(string: String(coefficients[0]), attributes: bold)
+                    completeEquation.append(coefficient)
+                    completeEquation.append(formatter.fix(formula: compounds[0]))
+                    completeEquation.append(plus)
+                    coefficient = NSMutableAttributedString(string: String(coefficients[1]), attributes: bold)
+                    completeEquation.append(coefficient)
+                    completeEquation.append(formatter.fix(formula: compounds[1]))
+                    completeEquation.append(equals)
+                    coefficient = NSMutableAttributedString(string: String(coefficients[2]), attributes: bold)
+                    completeEquation.append(coefficient)
+                    completeEquation.append(formatter.fix(formula: compounds[2]))
+                    
+                    equationType.text = "Synthesis Reaction"
+                    
+                } else if balancer.getReactants().count == 1 && balancer.getProducts().count == 2 {
+                    
+                    coefficient = NSMutableAttributedString(string: String(coefficients[0]), attributes: bold)
+                    completeEquation.append(coefficient)
+                    completeEquation.append(formatter.fix(formula: compounds[0]))
+                    completeEquation.append(equals)
+                    coefficient = NSMutableAttributedString(string: String(coefficients[1]), attributes: bold)
+                    completeEquation.append(coefficient)
+                    completeEquation.append(formatter.fix(formula: compounds[1]))
+                    completeEquation.append(plus)
+                    coefficient = NSMutableAttributedString(string: String(coefficients[2]), attributes: bold)
+                    completeEquation.append(coefficient)
+                    completeEquation.append(formatter.fix(formula: compounds[2]))
+                    
+                    equationType.text = "Decomposition Reaction"
+                    
+                }
+                
+                balancedEquation.attributedText = completeEquation
                 balanceTextField.resignFirstResponder()
             } else {
                 let alert = UIAlertController(title: "Something's wrong", message: "Please double-check that you've entered an unbalanced chemical equation using + and = symbols.", preferredStyle: UIAlertControllerStyle.alert)
@@ -168,7 +268,13 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             productCoefficient = Int(self.productCoefficientTextField.text!)
             productCoefficientTextField.resignFirstResponder()
             
-            theoreticalYield = stoichCalc.getTheoreticalYield(product: product!, productCoefficient: productCoefficient!)
+            if product != nil && productCoefficient != nil && textFieldIsNil() == false && textIsAcceptable {
+                theoreticalYield = stoichCalc.getTheoreticalYield(product: product!, productCoefficient: productCoefficient!)
+            } else {
+                let alert = UIAlertController(title: "Error", message: "One or more text fields were not completed. Please check that your compound formula, reactant amount, and coefficient from the balanced chemical equation have been inputted correctly.", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default))
+                self.present(alert, animated: true, completion: nil)
+            }
             
             stoichTableView.reloadData()
         }
@@ -194,7 +300,7 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
     
     func textFieldIsNil() -> Bool {
-        if firstReactant == nil || firstReactant == "" || firstAmount == nil || firstCoefficient == nil || secondReactant == nil || secondReactant == "" || secondAmount == nil || secondCoefficient == nil || theoreticalYield == nil || excessReactantLeft == nil || limitingReactant == nil {
+        if firstReactant == nil || firstReactant == "" || firstAmount == nil || firstCoefficient == nil || secondReactant == nil || secondReactant == "" || secondAmount == nil || secondCoefficient == nil {
             return true
         } else {
             return false
@@ -203,9 +309,7 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     
     // table view
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == balanceTableView {
-            return compounds.count
-        } else if tableView == stoichTableView {
+        if tableView == stoichTableView {
             return 3
         } else {
             return 0
@@ -215,10 +319,7 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "stoichcell") as? StoichCell
         
-        if tableView == balanceTableView {
-            cell?.keyLabel.attributedText = TextFormatter().fix(formula: compounds[indexPath.row])
-            cell?.valueLabel.text = "Coefficient: " + String(coefficients[indexPath.row])
-        } else if tableView == stoichTableView {
+        if tableView == stoichTableView {
             if indexPath.row == 0 {
                 cell?.keyLabel.text = "Limiting Reactant"
                 if limitingReactant == nil {
