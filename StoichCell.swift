@@ -13,6 +13,10 @@ class StoichCell: UITableViewCell {
     @IBOutlet weak var keyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     
+    @IBOutlet weak var keyLabel2: UILabel!
+    @IBOutlet weak var valueLabel2: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
