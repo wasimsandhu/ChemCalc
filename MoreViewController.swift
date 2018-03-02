@@ -22,7 +22,7 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else if section == 1 {
             return "More Calculators" as String?
         } else if section == 2 {
-            return "About ChemCalc" as String?
+            return "App Feedback" as String?
         } else {
             return "" as String?
         }
@@ -35,7 +35,7 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else if section == 1 {
             return 2
         } else if section == 2 {
-            return 3
+            return 2
         } else {
             return 0
         }
@@ -62,8 +62,6 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
             if indexPath.row == 0 {
                 cell.textLabel?.text = "Report bugs and mistakes"
             } else if indexPath.row == 1 {
-                cell.textLabel?.text = "Send feedback"
-            } else if indexPath.row == 2 {
                 cell.textLabel?.text = "Credits and libraries"
             }
         }
@@ -79,6 +77,18 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
             performSegue(withIdentifier: "showPolyatomicIons", sender: indexPath)
         } else if indexPath.section == 0 && indexPath.row == 2 {
             performSegue(withIdentifier: "showSolubility", sender: indexPath)
+        }
+        
+        if indexPath.section == 1 && indexPath.row == 0 {
+            performSegue(withIdentifier: "showCombustion", sender: indexPath)
+        } else if indexPath.section == 1 && indexPath.row == 1 {
+            performSegue(withIdentifier: "showVapor", sender: indexPath)
+        }
+        
+        if indexPath.section == 2 && indexPath.row == 0 {
+            performSegue(withIdentifier: "showBugs", sender: indexPath)
+        } else if indexPath.section == 2 && indexPath.row == 1 {
+            performSegue(withIdentifier: "showCredits", sender: indexPath)
         }
         
         tableView.deselectRow(at: indexPath, animated: true)

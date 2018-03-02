@@ -505,11 +505,7 @@
                             <constraint firstItem="4MA-2N-FEo" firstAttribute="top" secondItem="ZSA-T4-wez" secondAttribute="bottom" constant="20" id="roc-Fl-caQ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Stoichiometry" id="ky8-vJ-OvP">
-                        <barButtonItem key="rightBarButtonItem" title="Help" image="info" id="FfD-zH-8kK">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Stoichiometry" id="ky8-vJ-OvP"/>
                     <connections>
                         <outlet property="balanceTextField" destination="GXt-S9-hoS" id="4up-dw-TUn"/>
                         <outlet property="balanceView" destination="9Af-AT-bVs" id="KQg-1p-E5x"/>
@@ -981,6 +977,10 @@
                         <segue destination="2es-ch-IoB" kind="push" identifier="showCompounds" id="6Zp-JV-36m"/>
                         <segue destination="qP4-Hp-aYh" kind="push" identifier="showPolyatomicIons" id="e0h-dh-Xvf"/>
                         <segue destination="nQe-T1-w6m" kind="push" identifier="showSolubility" id="jE5-dd-zVx"/>
+                        <segue destination="DYC-fB-ZPo" kind="push" identifier="showCredits" id="ZIY-au-Iky"/>
+                        <segue destination="w0i-aG-B6Q" kind="push" identifier="showBugs" id="maL-LP-YR4"/>
+                        <segue destination="5Oh-ph-Rh8" kind="push" identifier="showCombustion" id="kIU-Za-IQb"/>
+                        <segue destination="Kx2-xZ-W9y" kind="push" identifier="showVapor" id="r5p-la-pIq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KuB-I0-w9t" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1132,7 +1132,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l54-lZ-WJO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4676" y="3876.611694152924"/>
+            <point key="canvasLocation" x="5470" y="3106"/>
         </scene>
         <!--Polyatomic Ions-->
         <scene sceneID="hZD-aL-58O">
@@ -1283,13 +1283,178 @@
             </objects>
             <point key="canvasLocation" x="2014" y="3108"/>
         </scene>
+        <!--Credits-->
+        <scene sceneID="cbI-Oo-vRm">
+            <objects>
+                <viewController storyboardIdentifier="learnVC" id="DYC-fB-ZPo" customClass="CreditsVC" customModule="ChemCalc" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4DO-Cr-CWW"/>
+                        <viewControllerLayoutGuide type="bottom" id="Mt5-nP-Gz1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6e6-7w-eHd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Pto-Od-ASh">
+                                <rect key="frame" x="16" y="64" width="343" height="554"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <string key="text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Pto-Od-ASh" firstAttribute="centerX" secondItem="6e6-7w-eHd" secondAttribute="centerX" id="3yd-CH-DBT"/>
+                            <constraint firstItem="Pto-Od-ASh" firstAttribute="leading" secondItem="6e6-7w-eHd" secondAttribute="leadingMargin" id="BlO-sj-STp"/>
+                            <constraint firstItem="Pto-Od-ASh" firstAttribute="bottom" secondItem="Mt5-nP-Gz1" secondAttribute="top" id="HZ8-zp-G2R"/>
+                            <constraint firstItem="Pto-Od-ASh" firstAttribute="top" secondItem="4DO-Cr-CWW" secondAttribute="bottom" id="OWO-Nh-AsZ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Credits" id="rSE-Qs-jue"/>
+                    <connections>
+                        <outlet property="textView" destination="Pto-Od-ASh" id="GR9-MU-6Zi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yk6-Vl-Pja" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4676" y="3848"/>
+        </scene>
+        <!--Bug Report-->
+        <scene sceneID="Xb6-tP-DJj">
+            <objects>
+                <viewController id="w0i-aG-B6Q" customClass="BugReportVC" customModule="ChemCalc" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Csz-D8-r5Y"/>
+                        <viewControllerLayoutGuide type="bottom" id="WQO-BK-15Q"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="a9K-g2-v5e">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="onDrag" text="Please describe your issue in detail with steps that repoduce the problem, erroneous formulas, or wrong balanced equations." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Cwr-XD-9XR">
+                                <rect key="frame" x="16" y="232" width="343" height="202"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert" returnKeyType="done"/>
+                            </textView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9JF-5O-6H0">
+                                <rect key="frame" x="16" y="177" width="343" height="40"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Lv0-ap-SsU"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DfM-Xq-yr5">
+                                <rect key="frame" x="16" y="122" width="343" height="40"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="n10-eh-rIf"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200 character limit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vl2-B8-sXt">
+                                <rect key="frame" x="16" y="84" width="343" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Nmx-yM-Wbm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DSO-nJ-Z7T">
+                                <rect key="frame" x="16" y="442" width="343" height="50"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                <state key="normal" title="Submit">
+                                    <color key="titleColor" red="0.89653394669999997" green="0.0" blue="0.025172944669999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="submit:" destination="w0i-aG-B6Q" eventType="touchUpInside" id="Tuk-yx-uyY"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Cwr-XD-9XR" firstAttribute="trailing" secondItem="DSO-nJ-Z7T" secondAttribute="trailing" id="5c9-dC-clL"/>
+                            <constraint firstItem="DfM-Xq-yr5" firstAttribute="leading" secondItem="9JF-5O-6H0" secondAttribute="leading" id="BaL-Aa-l2E"/>
+                            <constraint firstItem="9JF-5O-6H0" firstAttribute="top" secondItem="DfM-Xq-yr5" secondAttribute="bottom" constant="15" id="Dh0-h5-WaV"/>
+                            <constraint firstItem="Cwr-XD-9XR" firstAttribute="leading" secondItem="DSO-nJ-Z7T" secondAttribute="leading" id="E4C-6h-XUo"/>
+                            <constraint firstItem="DfM-Xq-yr5" firstAttribute="top" secondItem="Vl2-B8-sXt" secondAttribute="bottom" constant="8" symbolic="YES" id="H9X-vo-cho"/>
+                            <constraint firstItem="Vl2-B8-sXt" firstAttribute="leading" secondItem="DfM-Xq-yr5" secondAttribute="leading" id="JRE-bf-e0R"/>
+                            <constraint firstItem="Vl2-B8-sXt" firstAttribute="top" secondItem="Csz-D8-r5Y" secondAttribute="bottom" constant="20" id="Og4-Wd-11M"/>
+                            <constraint firstItem="Vl2-B8-sXt" firstAttribute="trailing" secondItem="DfM-Xq-yr5" secondAttribute="trailing" id="SCw-E0-Saa"/>
+                            <constraint firstItem="Cwr-XD-9XR" firstAttribute="centerY" secondItem="a9K-g2-v5e" secondAttribute="centerY" id="Siq-df-BmX"/>
+                            <constraint firstItem="9JF-5O-6H0" firstAttribute="trailing" secondItem="Cwr-XD-9XR" secondAttribute="trailing" id="Y16-XQ-OkL"/>
+                            <constraint firstItem="DSO-nJ-Z7T" firstAttribute="top" secondItem="Cwr-XD-9XR" secondAttribute="bottom" constant="8" symbolic="YES" id="Ym3-s5-85s"/>
+                            <constraint firstItem="Cwr-XD-9XR" firstAttribute="top" secondItem="9JF-5O-6H0" secondAttribute="bottom" constant="15" id="Z6v-6H-p0Z"/>
+                            <constraint firstItem="Cwr-XD-9XR" firstAttribute="leading" secondItem="a9K-g2-v5e" secondAttribute="leadingMargin" id="dvW-eG-6s1"/>
+                            <constraint firstItem="WQO-BK-15Q" firstAttribute="top" secondItem="DSO-nJ-Z7T" secondAttribute="bottom" constant="126" id="kEw-r9-8cd"/>
+                            <constraint firstItem="9JF-5O-6H0" firstAttribute="leading" secondItem="Cwr-XD-9XR" secondAttribute="leading" id="mGT-Qy-ekR"/>
+                            <constraint firstItem="DfM-Xq-yr5" firstAttribute="trailing" secondItem="9JF-5O-6H0" secondAttribute="trailing" id="wcF-es-96Q"/>
+                            <constraint firstItem="Cwr-XD-9XR" firstAttribute="trailing" secondItem="a9K-g2-v5e" secondAttribute="trailingMargin" id="y2M-ek-nu5"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Bug Report" id="JOX-FB-ZRP"/>
+                    <connections>
+                        <outlet property="emailAddress" destination="9JF-5O-6H0" id="PTy-RN-vte"/>
+                        <outlet property="name" destination="DfM-Xq-yr5" id="EUp-Vd-4jK"/>
+                        <outlet property="textView" destination="Cwr-XD-9XR" id="XXC-Vz-egV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D2R-ar-zOJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3862" y="3848"/>
+        </scene>
+        <!--Combustion Analysis-->
+        <scene sceneID="nfL-NE-itn">
+            <objects>
+                <viewController id="5Oh-ph-Rh8" customClass="CombustionAnalysisVC" customModule="ChemCalc" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7PA-44-JFI"/>
+                        <viewControllerLayoutGuide type="bottom" id="1vg-l9-DYx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lYY-Y1-pQX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Combustion Analysis" id="z8F-de-if2"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="URR-Tg-AJj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3862" y="4570"/>
+        </scene>
+        <!--Vapor Pressure-->
+        <scene sceneID="zMW-HU-0Vh">
+            <objects>
+                <viewController id="Kx2-xZ-W9y" customClass="VaporPressureVC" customModule="ChemCalc" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Nry-wB-t7O"/>
+                        <viewControllerLayoutGuide type="bottom" id="qfe-OI-7BS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fOx-Gq-9mN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Vapor Pressure" id="KUM-hI-3eB"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ysq-Vz-qcO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4676" y="4569"/>
+        </scene>
     </scenes>
     <resources>
         <image name="atom" width="25" height="25"/>
         <image name="element" width="25" height="25"/>
         <image name="fire" width="25" height="25"/>
         <image name="flask" width="25" height="25"/>
-        <image name="info" width="24" height="24"/>
         <image name="more" width="25" height="25"/>
         <image name="sigma" width="24" height="24"/>
     </resources>
