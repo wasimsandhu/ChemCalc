@@ -95,8 +95,13 @@ class CompoundsVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
             tableView.reloadData()
         } else {
             isSearching = true
-            filteredCompounds = compounds.filter({$0.key.lowercased().range(of: searchBar.text!) != nil})
-            filteredCompounds = compounds.filter({$0.value.lowercased().range(of: searchBar.text!) != nil})
+            if uppercase.contains(searchBar.text![0]) {
+                filteredCompounds = compounds.filter({$0.key.range(of: searchBar.text!) != nil})
+                filteredCompounds = compounds.filter({$0.value.range(of: searchBar.text!) != nil})
+            } else if lowercase.contains(searchBar.text![0]) {
+                filteredCompounds = compounds.filter({$0.key.lowercased().range(of: searchBar.text!) != nil})
+                filteredCompounds = compounds.filter({$0.value.lowercased().range(of: searchBar.text!) != nil})
+            }
             tableView.reloadData()
         }
     }

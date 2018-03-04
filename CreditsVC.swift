@@ -26,7 +26,7 @@ class CreditsVC: UIViewController, UITextViewDelegate {
             " • Computing reduced row echelon form of a matrix: https://rosettacode.org/wiki/Reduced_row_echelon_form#Swift \n" +
             " • Find LCM of Doubles in Swift by Martin R: https://stackoverflow.com/questions/28349864/algorithm-for-lcm-of-doubles-in-swift \n" +
             " • Subscripting and superscripting text by Nicolò Candiani: https://github.com/nicolocandiani/subandsuperscripttext \n"
-            + " • String truncate extension: https://gist.github.com/budidino/8585eecd55fd4284afaaef762450f98e \n"
+            + " • Icons by Icons8: https://icons8.com/icon/new-icons/all \n"
         
         let string2 = "\nChemistry Data\n" +
             " • Periodic elements data by Chris Andrejewski: https://github.com/andrejewski/periodic-table \n" +
@@ -53,7 +53,7 @@ class CreditsVC: UIViewController, UITextViewDelegate {
         attributedString.addAttributes(italicFontAttribute, range: string.range(of: "http://periodictable.com/Properties/A/ElectronConfigurationString.an.html"))
         attributedString.addAttributes(italicFontAttribute, range: string.range(of: "https://rosettacode.org/wiki/Reduced_row_echelon_form#Swift"))
         attributedString.addAttributes(italicFontAttribute, range: string.range(of: "https://github.com/nicolocandiani/subandsuperscripttext"))
-        attributedString.addAttributes(italicFontAttribute, range: string.range(of: "https://gist.github.com/budidino/8585eecd55fd4284afaaef762450f98e"))
+        attributedString.addAttributes(italicFontAttribute, range: string.range(of: "https://icons8.com/icon/new-icons/all"))
         attributedString.addAttributes(italicFontAttribute, range: string.range(of: "Chemistry: A Molecular Approach"))
         
         

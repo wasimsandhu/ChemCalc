@@ -108,6 +108,12 @@ class ChemicalEquationBalancer {
             augmentedMatrix.append([0,0,0,0])
         } else if columnCount == 3 && rowCount == 2 {
             augmentedMatrix.append([0,0,0])
+        } else if columnCount == 2 && rowCount == 1 {
+            augmentedMatrix.append([0,0])
+        } else if columnCount == 5 && rowCount == 4 {
+            augmentedMatrix.append([0,0,0,0,0])
+        } else if columnCount == 6 && rowCount == 5 {
+            augmentedMatrix.append([0,0,0,0,0,0])
         }
         
         // solve matrix https://rosettacode.org/wiki/Reduced_row_echelon_form#Swift

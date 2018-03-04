@@ -21,29 +21,28 @@ class ElementsViewController: UIViewController, UITableViewDataSource, UITableVi
     // http://www.elementalmatter.info/number-of-neutrons.htm
     var neutrons = ["0", "2", "4", "5", "6", "6", "7", "8", "10", "10", "12", "12", "14", "14", "16", "16", "18", "22", "21", "20", "24", "26", "28", "28", "30", "30", "31", "30", "35", "35", "39", "41", "42", "45", "45", "48", "48", "50", "50", "51", "52", "54", "55", "57", "58", "60", "61", "64", "66", "69", "71", "76", "74", "77", "78", "81", "82", "82", "82", "84", "84", "88", "89", "93", "94", "97", "98", "99", "100", "103", "104", "106", "108", "110", "111", "114", "115", "117", "118", "121", "123", "125", "126", "125", "125", "136", "136", "138", "138", "142", "140", "146", "144", "150", "148", "151", "150", "153", "153", "157", "157", "157", "159", "157", "N/A", "157", "157", "161", "159", "162", "162", "165", "173", "175", "173", "176", "175", "175"]
     
-    var elementSymbolDict: [String:String] = [:]
-    var elementGroupDict: [String:Int] = [:]
-    
     @IBOutlet weak var table: UITableView!
     var cell: ElementTableViewCell?
+    
+    var elementCellInfo = [Int:[String]]()
+    var filteredElements = [Int:[String]]()
+    var searchController: UISearchController!
+    var keys = [Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.prefersLargeTitles = true
+            self.navigationController?.navigationBar.prefersLargeTitles = false
+            searchController = UISearchController(searchResultsController: nil)
+            searchController.searchResultsUpdater = self
+            searchController.obscuresBackgroundDuringPresentation = false
+            searchController.searchBar.placeholder = "Enter an element or group number"
+            navigationItem.searchController = searchController
+            navigationItem.hidesSearchBarWhenScrolling = false
+            definesPresentationContext = true
         } else {
             // Fallback on earlier versions
-        }
-        
-        // merge arrays into dictionaries
-        // https://stackoverflow.com/questions/32140969/how-can-i-merge-two-arrays-into-a-dictionary
-        for (a, b) in elementNames.enumerated() {
-            elementSymbolDict[b] = elementSymbols[a]
-        }
-        
-        for (a, b) in elementNames.enumerated() {
-            elementGroupDict[b] = elementGroups[a]
         }
         
         // Element data from: https://github.com/andrejewski/periodic-table
@@ -55,6 +54,64 @@ class ElementsViewController: UIViewController, UITableViewDataSource, UITableVi
             }
         })
         
+        // setup dictionary
+        var i = 0
+        for elementName in elementNames {
+            // 0
+            elementCellInfo[i] = [elementName]
+            i = i + 1
+        }
+        
+        i = 0
+        for symbol in elementSymbols {
+            // 1
+            elementCellInfo[i]?.append(symbol)
+            i = i + 1
+        }
+        
+        i = 0
+        for mass in atomicMasses {
+            // 2
+            elementCellInfo[i]?.append(String(mass))
+            i = i + 1
+        }
+        
+        i = 0
+        for atomicNumber in 1...118 {
+            // 3
+            elementCellInfo[i]?.append(String(atomicNumber))
+            i = i + 1
+        }
+        
+        i = 0
+        for config in electronConfigs {
+            // 4
+            elementCellInfo[i]?.append(config)
+            i = i + 1
+        }
+        
+        i = 0
+        for group in elementGroups {
+            // 5
+            elementCellInfo[i]?.append(String(group))
+            i = i + 1
+        }
+        
+        i = 0
+        for neutron in neutrons {
+            // 6
+            elementCellInfo[i]?.append(neutron)
+            i = i + 1
+        }
+    }
+    
+    func searchBarIsEmpty() -> Bool {
+        // Returns true if the text is empty or nil
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
     }
 
     /* TABLE VIEW */
@@ -63,6 +120,10 @@ class ElementsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFiltering() {
+            return filteredElements.count
+        }
+        
         return elementNames.count
     }
     
@@ -70,7 +131,11 @@ class ElementsViewController: UIViewController, UITableViewDataSource, UITableVi
         let cell = table.cellForRow(at: indexPath) as? ElementTableViewCell
         
         let vc = storyboard?.instantiateViewController(withIdentifier: "ElementInfoViewController") as! ElementInfoViewController
-        vc.databaseIndex = indexPath.row
+        if isFiltering() {
+            vc.databaseIndex = keys[indexPath.row]
+        } else {
+            vc.databaseIndex = indexPath.row
+        }
         navigationController?.pushViewController(vc, animated: true)
         
         table.deselectRow(at: indexPath, animated: true)
@@ -79,40 +144,79 @@ class ElementsViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         cell = table.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ElementTableViewCell
         cell?.selectionStyle = UITableViewCellSelectionStyle.none
-
-        // element box
-        cell?.elementName.text = elementNames[indexPath.row]
-        cell?.symbol.text = elementSymbols[indexPath.row]
-        cell?.atomicNumber2.text = String(indexPath.row + 1)
-        cell?.massNumber2.text = String(atomicMasses[indexPath.row])
         
-        // groups
-        cell?.groupName.text = "Group: " + String(elementGroups[indexPath.row])
+        keys = Array(filteredElements.keys)
         
-        // protons/neutrons
-        cell?.atomicNumber.text = "Protons/neutrons: " + String(indexPath.row + 1) + "/" + neutrons[indexPath.row]
-        
-        // electron configuration
-        let formatter = TextFormatter()
-        if (indexPath.row > 29) {
-            let mutableAttributedString = NSMutableAttributedString(string: "Config: ", attributes: nil)
-            let electronConfig = formatter.fixElectron(config: electronConfigs[indexPath.row], font: "SMALL")
+        if isFiltering() {
+            // element box
+            cell?.elementName.text = filteredElements[keys[indexPath.row]]?[0]
+            cell?.symbol.text = filteredElements[keys[indexPath.row]]?[1]
+            cell?.massNumber2.text = filteredElements[keys[indexPath.row]]?[2]
+            cell?.atomicNumber2.text = filteredElements[keys[indexPath.row]]?[3]
             
-            let cellText = NSMutableAttributedString()
-            cellText.append(mutableAttributedString)
-            cellText.append(electronConfig)
+            // groups
+            cell?.groupName.text = "Group: " + (filteredElements[keys[indexPath.row]]?[5])!
             
-            cell?.massNumber.attributedText = cellText
+            // protons/neutrons
+            cell?.atomicNumber.text = "Protons/neutrons: " + (filteredElements[keys[indexPath.row]]?[3])! + "/" + (filteredElements[keys[indexPath.row]]?[6])!
             
+            // electron configuration
+            let formatter = TextFormatter()
+            if (indexPath.row > 29) {
+                let mutableAttributedString = NSMutableAttributedString(string: "Config: ", attributes: nil)
+                let electronConfig = formatter.fixElectron(config: (filteredElements[keys[indexPath.row]]?[4])!, font: "SMALL")
+                
+                let cellText = NSMutableAttributedString()
+                cellText.append(mutableAttributedString)
+                cellText.append(electronConfig)
+                
+                cell?.massNumber.attributedText = cellText
+                
+            } else {
+                let mutableAttributedString = NSMutableAttributedString(string: "Electron config: ", attributes: nil)
+                let electronConfig = formatter.fixElectron(config: (filteredElements[keys[indexPath.row]]?[4])!, font: "SMALL")
+                
+                let cellText = NSMutableAttributedString()
+                cellText.append(mutableAttributedString)
+                cellText.append(electronConfig)
+                
+                cell?.massNumber.attributedText = cellText
+            }
         } else {
-            let mutableAttributedString = NSMutableAttributedString(string: "Electron config: ", attributes: nil)
-            let electronConfig = formatter.fixElectron(config: electronConfigs[indexPath.row], font: "SMALL")
+            // element box
+            cell?.elementName.text = elementCellInfo[indexPath.row]?[0]
+            cell?.symbol.text = elementCellInfo[indexPath.row]?[1]
+            cell?.massNumber2.text = elementCellInfo[indexPath.row]?[2]
+            cell?.atomicNumber2.text = elementCellInfo[indexPath.row]?[3]
             
-            let cellText = NSMutableAttributedString()
-            cellText.append(mutableAttributedString)
-            cellText.append(electronConfig)
+            // groups
+            cell?.groupName.text = "Group: " + (elementCellInfo[indexPath.row]?[5])!
             
-            cell?.massNumber.attributedText = cellText
+            // protons/neutrons
+            cell?.atomicNumber.text = "Protons/neutrons: " + (elementCellInfo[indexPath.row]?[3])! + "/" + (elementCellInfo[indexPath.row]?[6])!
+            
+            // electron configuration
+            let formatter = TextFormatter()
+            if (indexPath.row > 29) {
+                let mutableAttributedString = NSMutableAttributedString(string: "Config: ", attributes: nil)
+                let electronConfig = formatter.fixElectron(config: (elementCellInfo[indexPath.row]?[4])!, font: "SMALL")
+                
+                let cellText = NSMutableAttributedString()
+                cellText.append(mutableAttributedString)
+                cellText.append(electronConfig)
+                
+                cell?.massNumber.attributedText = cellText
+                
+            } else {
+                let mutableAttributedString = NSMutableAttributedString(string: "Electron config: ", attributes: nil)
+                let electronConfig = formatter.fixElectron(config: (elementCellInfo[indexPath.row]?[4])!, font: "SMALL")
+                
+                let cellText = NSMutableAttributedString()
+                cellText.append(mutableAttributedString)
+                cellText.append(electronConfig)
+                
+                cell?.massNumber.attributedText = cellText
+            }
         }
         
         
@@ -144,5 +248,36 @@ class ElementsViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         
         return cell!
+    }
+}
+
+extension ElementsViewController: UISearchResultsUpdating {
+    // MARK: - UISearchResultsUpdating Delegate
+    func updateSearchResults(for searchController: UISearchController) {
+        if searchBarIsEmpty() == false {
+            let searchText = searchController.searchBar.text!
+            if uppercase.contains(searchText[0]) {
+                // search by element name
+                filteredElements = elementCellInfo.filter({$0.value[0].range(of: searchText) != nil})
+            } else if lowercase.contains(searchText[0]) {
+                filteredElements = elementCellInfo.filter({$0.value[0].lowercased().range(of: searchText) != nil})
+            } else if decimal.contains(searchText[0]) {
+                // search by element group
+                if searchText.count == 1 {
+                    filteredElements = elementCellInfo.filter({$0.value[5].range(of: searchText) != nil})
+                    for filteredElement in filteredElements {
+                        if filteredElement.value[5].count > 1 {
+                            filteredElements[filteredElement.key] = nil
+                        }
+                    }
+                } else if searchText.count == 2 {
+                    filteredElements = elementCellInfo.filter({$0.value[5].prefix(2).range(of: searchText) != nil})
+                } else {
+                    filteredElements = elementCellInfo.filter({$0.value[5].range(of: searchText) != nil})
+                }
+            }
+        }
+        
+        table.reloadData()
     }
 }

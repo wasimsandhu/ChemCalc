@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MessageUI
 
-class MoreViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MoreViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate {
         
     @IBOutlet weak var moreTable: UITableView!
     
@@ -20,8 +21,6 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
         if section == 0 {
             return "Reference" as String?
         } else if section == 1 {
-            return "More Calculators" as String?
-        } else if section == 2 {
             return "App Feedback" as String?
         } else {
             return "" as String?
@@ -33,9 +32,7 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
         if section == 0 {
             return 3
         } else if section == 1 {
-            return 2
-        } else if section == 2 {
-            return 2
+            return 3
         } else {
             return 0
         }
@@ -54,14 +51,10 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         } else if indexPath.section == 1 {
             if indexPath.row == 0 {
-                cell.textLabel?.text = "Combustion analysis"
+                cell.textLabel?.text = "Contact the developer"
             } else if indexPath.row == 1 {
-                cell.textLabel?.text = "Solution vapor pressure"
-            }
-        } else if indexPath.section == 2 {
-            if indexPath.row == 0 {
                 cell.textLabel?.text = "Report bugs and mistakes"
-            } else if indexPath.row == 1 {
+            } else if indexPath.row == 2 {
                 cell.textLabel?.text = "Credits and libraries"
             }
         }
@@ -80,18 +73,43 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         if indexPath.section == 1 && indexPath.row == 0 {
-            performSegue(withIdentifier: "showCombustion", sender: indexPath)
+            let mailComposerVC = MFMailComposeViewController()
+            mailComposerVC.mailComposeDelegate = self
+            mailComposerVC.setToRecipients(["wasim@wasimsandhu.com"])
+            mailComposerVC.setSubject("App Feedback: ChemCalc")
+            mailComposerVC.setMessageBody("", isHTML: false)
+            presentMailComposeViewController(mailComposeViewController: mailComposerVC)
         } else if indexPath.section == 1 && indexPath.row == 1 {
-            performSegue(withIdentifier: "showVapor", sender: indexPath)
-        }
-        
-        if indexPath.section == 2 && indexPath.row == 0 {
             performSegue(withIdentifier: "showBugs", sender: indexPath)
-        } else if indexPath.section == 2 && indexPath.row == 1 {
+        } else if indexPath.section == 1 && indexPath.row == 2 {
             performSegue(withIdentifier: "showCredits", sender: indexPath)
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func presentMailComposeViewController(mailComposeViewController: MFMailComposeViewController) {
+        if MFMailComposeViewController.canSendMail() {
+            self.present(mailComposeViewController, animated: true, completion: nil)
+        } else {
+            let sendMailErrorAlert = UIAlertController.init(title: "Error", message: "Unable to send email. Please check your email settings and try again.", preferredStyle: .alert)
+            self.present(sendMailErrorAlert, animated: true, completion: nil)
+        }
+    }
+    
+    public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) { switch (result) {
+        case .cancelled:
+            self.dismiss(animated: true, completion: nil)
+        case .sent:
+            self.dismiss(animated: true, completion: nil)
+        case .failed:
+            self.dismiss(animated: true, completion: {
+                let sendMailErrorAlert = UIAlertController.init(title: "Failed", message: "Unable to send email. Please check your email settings and try again.", preferredStyle: .alert)
+                sendMailErrorAlert.addAction(UIAlertAction.init(title: "OK", style: .default, handler: nil))
+                self.present(sendMailErrorAlert, animated: true, completion: nil)
+            })
+        default: break;
+        }
     }
 
     override func viewDidLoad() {
