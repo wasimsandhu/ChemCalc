@@ -93,13 +93,43 @@ class ChemicalEquationBalancer {
         var rowCount = augmentedMatrix.count
         var columnCount = augmentedMatrix[0].count
         
-        // move third column to other side of the equation
+        // augment matrix
         if columnCount == 4 {
             var i = 0
             for row in augmentedMatrix {
                 let fix = row[2] * -1
                 augmentedMatrix[i][2] = fix
                 i = i + 1
+            }
+        } else if columnCount == 5 {
+            var z = 0
+            if reactants.count == 2 && products.count == 3 {
+                
+                for row in augmentedMatrix {
+                    if row[3] != 0.0 {
+                        var fixx = row[3] * -1
+                        augmentedMatrix[z][3] = fixx
+                    }
+                    z = z + 1
+                }
+                
+                z = 0
+                for row in augmentedMatrix {
+                    if row[2] != 0.0 {
+                        var fix = row[2] * -1
+                        augmentedMatrix[z][2] = fix
+                    }
+                    z = z + 1
+                }
+                
+            } else if reactants.count == 3 && products.count == 2 {
+                for row in augmentedMatrix {
+                    if row[3] != 0.0 {
+                        let fixx = row[3] * -1
+                        augmentedMatrix[z][3] = fixx
+                        z = z + 1
+                    }
+                }
             }
         }
         

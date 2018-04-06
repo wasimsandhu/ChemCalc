@@ -25,6 +25,8 @@ class ThermodynamicsVC: UIViewController, UITableViewDataSource, UITableViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        
         // Firebase database reference
         let rootRef = FIRDatabase.database().reference()
         rootRef.child("Thermodynamics").observe(.childAdded, with: { (snapshot) in
@@ -111,4 +113,35 @@ class ThermodynamicsVC: UIViewController, UITableViewDataSource, UITableViewDele
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
+}
+
+class ThermoCell: UITableViewCell {
+    
+    @IBOutlet weak var compoundLabel: UILabel!
+    @IBOutlet weak var deltaValueLabel: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
+    
+}
+
+class ThermoDataObject: NSObject {
+    
+    var name: String?
+    var enthalpy: String?
+    var entropy: String?
+    var spontaneity: String?
+    
+    init(dictionary: [String: AnyObject]) {
+        self.name = dictionary["name"] as? String ?? ""
+        self.enthalpy = dictionary["enthalpy"] as? String ?? ""
+        self.entropy = dictionary["entropy"] as? String ?? ""
+        self.spontaneity = dictionary["spontaneity"] as? String ?? ""
+    }
+    
 }

@@ -11,7 +11,7 @@ import UIKit
 class PolyatomicVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let charges = ["Charge: +1", "Charge: +2", "Charge: -1", "Charge: -2", "Charge: -3"]
-    let polyatomicIonNames = [["Nitrate ion", "Hydronium ion"], ["Mercury (I) ion"], ["Nitrite ion", "Nitrate ion", "Hydrogen sulfate ion", "Dihydrogen phosphate ion", "Hydroxide ion", "Acetate ion", "Perchlorate ion", "Chlorate ion", "Chlorite ion", "Hypochlorite ion", "Permanganate ion", "Cyanide ion", "Cyanate ion", "Thiocyanate ion", "Hydrogen carbonate ion"], ["Sulfate ion", "Sulfite ion", "Hydrogen phosphate ion", "Peroxide ion", "Chromate ion", "Dichromate ion", "Carbonate ion", "Oxalate ion", "Thiosulfate ion"], ["Phosphate ion", "Phosphite ion", "Borate ion"]]
+    let polyatomicIonNames = [["Ammonium ion", "Hydronium ion"], ["Mercury (I) ion"], ["Nitrite ion", "Nitrate ion", "Hydrogen sulfate ion", "Dihydrogen phosphate ion", "Hydroxide ion", "Acetate ion", "Perchlorate ion", "Chlorate ion", "Chlorite ion", "Hypochlorite ion", "Permanganate ion", "Cyanide ion", "Cyanate ion", "Thiocyanate ion", "Hydrogen carbonate ion"], ["Sulfate ion", "Sulfite ion", "Hydrogen phosphate ion", "Peroxide ion", "Chromate ion", "Dichromate ion", "Carbonate ion", "Oxalate ion", "Thiosulfate ion"], ["Phosphate ion", "Phosphite ion", "Borate ion"]]
     let polyatomicIons = [["NH4+", "H3O+"], ["Hg22+"], ["NO2-", "NO3-", "HSO4-", "H2PO4-", "OH-", "C2H3O2-", "ClO4-", "ClO3-", "ClO2-", "ClO-", "MnO4-", "CN-", "CNO-", "SCN-", "HCO3-"], ["SO42-", "SO32-", "HPO42-", "O22-", "CrO42-", "Cr2O72-", "CO32-", "C2O42-", "S2O32-"], ["PO43-", "PO33-", "BO33-"]]
     
     override func viewDidLoad() {

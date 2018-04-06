@@ -19,6 +19,8 @@ class BugReportVC: UIViewController, UITextViewDelegate, UITextFieldDelegate {
     var bugReport: String!
     var email: String!
     
+    var yeet = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboard()
@@ -41,7 +43,10 @@ class BugReportVC: UIViewController, UITextViewDelegate, UITextFieldDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        textView.text = ""
+        if yeet == false {
+            textView.text = ""
+            yeet = true
+        }
     }
 
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -56,7 +61,7 @@ class BugReportVC: UIViewController, UITextViewDelegate, UITextFieldDelegate {
         fullName = name.text
         email = emailAddress.text
         bugReport = textView.text
-        bugReport.cutText(length: 200)
+        bugReport = bugReport.cutText(length: 200)
         
         if bugReport != nil && bugReport != "" && fullName != "" && fullName != nil && email != nil && email != "" {
             let bugsReference = FIRDatabase.database().reference().child("Bugs").child(fullName)

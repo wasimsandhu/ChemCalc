@@ -23,10 +23,10 @@ class CreditsVC: UIViewController, UITextViewDelegate {
     func formattedText() -> NSAttributedString {
         
         let string1 = "\nLibraries & Code\n" +
+        " • “Beaker” app icon by Blake Thompson from the Noun Project: https://thenounproject.com/term/beaker/9563/ \n" +
             " • Computing reduced row echelon form of a matrix: https://rosettacode.org/wiki/Reduced_row_echelon_form#Swift \n" +
-            " • Find LCM of Doubles in Swift by Martin R: https://stackoverflow.com/questions/28349864/algorithm-for-lcm-of-doubles-in-swift \n" +
-            " • Subscripting and superscripting text by Nicolò Candiani: https://github.com/nicolocandiani/subandsuperscripttext \n"
-            + " • Icons by Icons8: https://icons8.com/icon/new-icons/all \n"
+            " • Find LCM of Doubles in Swift by Martin: https://stackoverflow.com/questions/28349864/algorithm-for-lcm-of-doubles-in-swift \n" +
+            " • Subscripting and superscripting text by Nicolò Candiani: https://github.com/nicolocandiani/subandsuperscripttext \n" + " • Icons by Icons8: https://icons8.com/icon/new-icons/all \n"
         
         let string2 = "\nChemistry Data\n" +
             " • Periodic elements data by Chris Andrejewski: https://github.com/andrejewski/periodic-table \n" +
@@ -35,27 +35,14 @@ class CreditsVC: UIViewController, UITextViewDelegate {
         " • Standard thermodyanmic quantities at 25°C from Chemistry: A Molecular Approach by Nivaldo J. Tro \n" +
         " • Chemical compounds and formulas database compiled by Devun Birk \n\n"
     
-        let string = (string1 + string2) as NSString
+        let string = (string1 + string2 + "Built and designed by Wasim Sandhu \n") as NSString
         
         let attributedString = NSMutableAttributedString(string: string as String, attributes: [NSAttributedStringKey.font:UIFont.systemFont(ofSize: 18.0)])
         
         let boldFontAttribute = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 24.0)]
-        let italicFontAttribute = [NSAttributedStringKey.font: UIFont.italicSystemFont(ofSize: 18.0)]
         
-        // Part of string to be bold
         attributedString.addAttributes(boldFontAttribute, range: string.range(of: "Chemistry Data"))
         attributedString.addAttributes(boldFontAttribute, range: string.range(of: "Libraries & Code"))
-        
-        // Links to be italicized
-        attributedString.addAttributes(italicFontAttribute, range: string.range(of: "https://github.com/andrejewski/periodic-table"))
-        attributedString.addAttributes(italicFontAttribute, range: string.range(of: "http://www.elementalmatter.info/number-of-neutrons.htm"))
-        attributedString.addAttributes(italicFontAttribute, range: string.range(of: "https://stackoverflow.com/questions/28349864/algorithm-for-lcm-of-doubles-in-swift"))
-        attributedString.addAttributes(italicFontAttribute, range: string.range(of: "http://periodictable.com/Properties/A/ElectronConfigurationString.an.html"))
-        attributedString.addAttributes(italicFontAttribute, range: string.range(of: "https://rosettacode.org/wiki/Reduced_row_echelon_form#Swift"))
-        attributedString.addAttributes(italicFontAttribute, range: string.range(of: "https://github.com/nicolocandiani/subandsuperscripttext"))
-        attributedString.addAttributes(italicFontAttribute, range: string.range(of: "https://icons8.com/icon/new-icons/all"))
-        attributedString.addAttributes(italicFontAttribute, range: string.range(of: "Chemistry: A Molecular Approach"))
-        
         
         return attributedString
     }

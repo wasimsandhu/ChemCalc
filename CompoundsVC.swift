@@ -106,7 +106,6 @@ class CompoundsVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         }
     }
     
-    // TODO: Search function
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
