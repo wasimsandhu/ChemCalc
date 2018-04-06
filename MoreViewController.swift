@@ -30,7 +30,7 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 0 {
-            return 3
+            return 5
         } else if section == 1 {
             return 3
         } else {
@@ -47,6 +47,10 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
             } else if indexPath.row == 1 {
                 cell.textLabel?.text = "Polyatomic ions and charges"
             } else if indexPath.row == 2 {
+                cell.textLabel?.text = "Thermodynamic data"
+            } else if indexPath.row == 3 {
+                cell.textLabel?.text = "Acid/base dissociation constants"
+            } else if indexPath.row == 4 {
                 cell.textLabel?.text = "Solubility checker"
             }
         } else if indexPath.section == 1 {
@@ -69,6 +73,10 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else if indexPath.section == 0 && indexPath.row == 1 {
             performSegue(withIdentifier: "showPolyatomicIons", sender: indexPath)
         } else if indexPath.section == 0 && indexPath.row == 2 {
+            performSegue(withIdentifier: "showThermo", sender: indexPath)
+        } else if indexPath.section == 0 && indexPath.row == 3 {
+            performSegue(withIdentifier: "showKa", sender: indexPath)
+        } else if indexPath.section == 0 && indexPath.row == 4 {
             performSegue(withIdentifier: "showSolubility", sender: indexPath)
         }
         

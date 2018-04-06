@@ -17,6 +17,18 @@ class TextFormatter {
     var configToFormat: String?
     var formattedConfig: NSMutableAttributedString!
     
+    var newLetters: String?
+    var formattedLetters: NSMutableAttributedString!
+    
+    func ka(letters: String) -> (NSMutableAttributedString) {
+        newLetters = letters.replacingOccurrences(of: "Kb", with: "K@b$")
+        newLetters = newLetters?.replacingOccurrences(of: "Ka1", with: "K@a1$")
+        newLetters = newLetters?.replacingOccurrences(of: "Ka2", with: "K@a2$")
+        newLetters = newLetters?.replacingOccurrences(of: "Ka3", with: "K@a3$")
+        formattedLetters = newLetters?.customText()
+        return formattedLetters
+    }
+    
     // fixes subscript/superscript in chemical formulas
     func fix(formula: String) -> (NSMutableAttributedString) {
         
@@ -240,7 +252,6 @@ extension String {
 }
 
 extension String {
-    
     func customText2(font: CGFloat, superFont: CGFloat) -> NSMutableAttributedString {
         
         let fontSuper: UIFont? = UIFont(name: "Helvetica", size: superFont)
@@ -312,5 +323,21 @@ extension String {
 extension String {
     func trunc(length: Int, trailing: String = "...") -> String {
         return (self.count > length) ? self.prefix(length) + trailing : self
+    }
+}
+
+extension Formatter {
+    static let scientific: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .scientific
+        formatter.positiveFormat = "0.###E+0"
+        formatter.exponentSymbol = "e"
+        return formatter
+    }()
+}
+
+extension Numeric {
+    var scientificFormatted: String {
+        return Formatter.scientific.string(for: self) ?? ""
     }
 }
