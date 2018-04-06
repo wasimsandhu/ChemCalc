@@ -37,7 +37,7 @@ class ElementsViewController: UIViewController, UITableViewDataSource, UITableVi
             searchController = UISearchController(searchResultsController: nil)
             searchController.searchResultsUpdater = self
             searchController.obscuresBackgroundDuringPresentation = false
-            searchController.searchBar.placeholder = "Enter an element or group number"
+            searchController.searchBar.placeholder = "Enter element or atomic number"
             UIBarButtonItem.appearance(whenContainedInInstancesOf:[UISearchBar.self]).tintColor = UIColor.white
             navigationItem.searchController = searchController
             navigationItem.hidesSearchBarWhenScrolling = false
@@ -263,18 +263,18 @@ extension ElementsViewController: UISearchResultsUpdating {
             } else if lowercase.contains(searchText[0]) {
                 filteredElements = elementCellInfo.filter({$0.value[0].lowercased().range(of: searchText) != nil})
             } else if decimal.contains(searchText[0]) {
-                // search by element group
+                // search by atomic number
                 if searchText.count == 1 {
-                    filteredElements = elementCellInfo.filter({$0.value[5].range(of: searchText) != nil})
+                    filteredElements = elementCellInfo.filter({$0.value[3].range(of: searchText) != nil})
                     for filteredElement in filteredElements {
-                        if filteredElement.value[5].count > 1 {
+                        if filteredElement.value[3].count > 1 {
                             filteredElements[filteredElement.key] = nil
                         }
                     }
                 } else if searchText.count == 2 {
-                    filteredElements = elementCellInfo.filter({$0.value[5].prefix(2).range(of: searchText) != nil})
+                    filteredElements = elementCellInfo.filter({$0.value[3].prefix(2).range(of: searchText) != nil})
                 } else {
-                    filteredElements = elementCellInfo.filter({$0.value[5].range(of: searchText) != nil})
+                    filteredElements = elementCellInfo.filter({$0.value[3].range(of: searchText) != nil})
                 }
             }
         }

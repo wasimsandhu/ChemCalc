@@ -71,6 +71,24 @@ class MolarMassViewController: UIViewController, UITableViewDelegate, UITableVie
         textField.text = ""
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        if textField == molarTextField {
+            input = self.molarTextField.text
+            getMolarMass()
+            molesToGrams(input: "1")
+            molarTextField2.text = input!
+            
+        }
+        
+        if textField == molarTextField2 {
+            input = self.molarTextField2.text
+            getMolarMass()
+            molesToGrams(input: "1")
+            molarTextField.text = input!
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     
         if textField == molarTextField {

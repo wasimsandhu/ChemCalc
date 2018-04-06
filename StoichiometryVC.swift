@@ -113,6 +113,10 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         }
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        getText()
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         if textField == balanceTextField {

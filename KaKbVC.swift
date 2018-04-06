@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class KaKbVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -14,10 +15,12 @@ class KaKbVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var acidInfo: DissociationConstantObject!
     var isBase = false
     var numberOfConstants: Int!
+    var compoundName: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.tintColor = UIColor.white
+        
         if acidInfo.Ka2 == "N/A" {
             numberOfConstants = 1
         } else if acidInfo.Ka2 != "N/A" && acidInfo.Ka3 == "N/A" {
@@ -26,6 +29,9 @@ class KaKbVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             numberOfConstants = 3
         }
         self.navigationItem.title = acidInfo.name!
+        
+        tableView.layoutMargins = UIEdgeInsets.zero
+        tableView.separatorInset = UIEdgeInsets.zero
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,7 +49,7 @@ class KaKbVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 } else {
                     cell.constantLabel.attributedText = TextFormatter().ka(letters: "Ka1")
                 }
-                cell.valueLabel.text = acidInfo.Ka1
+                cell.valueLabel.attributedText = TextFormatter().scientificNotation(number: acidInfo.Ka1!)
             }
             
         } else if numberOfConstants == 2 {
@@ -54,10 +60,10 @@ class KaKbVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 } else {
                     cell.constantLabel.attributedText = TextFormatter().ka(letters: "Ka1")
                 }
-                cell.valueLabel.text = acidInfo.Ka1
+                cell.valueLabel.attributedText = TextFormatter().scientificNotation(number: acidInfo.Ka1!)
             } else if indexPath.row == 1 {
                 cell.constantLabel.attributedText = TextFormatter().ka(letters: "Ka2")
-                cell.valueLabel.text = acidInfo.Ka2
+                cell.valueLabel.attributedText = TextFormatter().scientificNotation(number: acidInfo.Ka2!)
             }
             
         } else if numberOfConstants == 3 {
@@ -68,13 +74,13 @@ class KaKbVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 } else {
                     cell.constantLabel.attributedText = TextFormatter().ka(letters: "Ka1")
                 }
-                cell.valueLabel.text = acidInfo.Ka1
+                cell.valueLabel.attributedText = TextFormatter().scientificNotation(number: acidInfo.Ka1!)
             } else if indexPath.row == 1 {
                 cell.constantLabel.attributedText = TextFormatter().ka(letters: "Ka2")
-                cell.valueLabel.text = acidInfo.Ka2
+                cell.valueLabel.attributedText = TextFormatter().scientificNotation(number: acidInfo.Ka2!)
             } else if indexPath.row == 2 {
                 cell.constantLabel.attributedText = TextFormatter().ka(letters: "Ka3")
-                cell.valueLabel.text = acidInfo.Ka3
+                cell.valueLabel.attributedText = TextFormatter().scientificNotation(number: acidInfo.Ka3!)
             }
             
         }

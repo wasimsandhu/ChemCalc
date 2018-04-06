@@ -20,6 +20,9 @@ class TextFormatter {
     var newLetters: String?
     var formattedLetters: NSMutableAttributedString!
     
+    var numberBoi: String?
+    var scientificNotationBoi: NSMutableAttributedString!
+    
     func ka(letters: String) -> (NSMutableAttributedString) {
         newLetters = letters.replacingOccurrences(of: "Kb", with: "K@b$")
         newLetters = newLetters?.replacingOccurrences(of: "Ka1", with: "K@a1$")
@@ -27,6 +30,16 @@ class TextFormatter {
         newLetters = newLetters?.replacingOccurrences(of: "Ka3", with: "K@a3$")
         formattedLetters = newLetters?.customText()
         return formattedLetters
+    }
+    
+    func scientificNotation(number: String) -> (NSMutableAttributedString) {
+        numberBoi = number.replacingOccurrences(of: "*", with: " • ")
+        if (numberBoi?.contains(find: "^"))! {
+            numberBoi = numberBoi?.replacingOccurrences(of: "^", with: "{")
+            numberBoi = numberBoi! + "}"
+        }
+        scientificNotationBoi = numberBoi?.customText()
+        return scientificNotationBoi
     }
     
     // fixes subscript/superscript in chemical formulas
