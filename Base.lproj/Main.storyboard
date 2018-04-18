@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="COG-DA-vSq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="COG-DA-vSq">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -967,7 +967,7 @@
             </objects>
             <point key="canvasLocation" x="2953" y="3848"/>
         </scene>
-        <!--Heat of Reaction-->
+        <!--Standard Enthalpy of Reaction-->
         <scene sceneID="B8U-br-KJR">
             <objects>
                 <viewController id="pYa-c3-PHX" customClass="EnthalpyVC" customModule="ChemCalc" customModuleProvider="target" sceneMemberID="viewController">
@@ -979,138 +979,355 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Include all states of matter e.g. CO2(g)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uiq-6H-88s">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Include all states of matter e.g. CO2(g)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uiq-6H-88s">
                                 <rect key="frame" x="16" y="122" width="343" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="z5h-MA-M8B"/>
+                                </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="pYa-c3-PHX" id="Vsq-Tg-dTT"/>
+                                </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter the complete reaction" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5cE-AE-82y">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the complete reaction" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5cE-AE-82y">
                                 <rect key="frame" x="16" y="84" width="343" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="8YC-et-xcE"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your balanced equation goes here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGc-kh-SxI">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your balanced equation goes here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGc-kh-SxI">
                                 <rect key="frame" x="16" y="170" width="343" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Ih1-NX-ntN"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enthalpy of Reaction" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uu6-iD-O6M">
-                                <rect key="frame" x="16" y="546" width="343" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Compound" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AC6-xN-DAL">
+                                <rect key="frame" x="72" y="213" width="132" height="40"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="7yD-yf-AJq"/>
+                                    <constraint firstAttribute="width" constant="132" id="iMb-Hv-q57"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="pYa-c3-PHX" id="aCn-XK-x6c"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="#" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yfZ-Wh-ov0">
+                                <rect key="frame" x="16" y="213" width="40" height="40"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="Qw9-pd-COu"/>
+                                    <constraint firstAttribute="height" constant="40" id="dms-jz-zhe"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="pYa-c3-PHX" id="abT-gE-GjE"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="#" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zr0-Nn-pO8">
+                                <rect key="frame" x="16" y="269" width="40" height="40"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="2zu-bg-TmT"/>
+                                    <constraint firstAttribute="height" constant="40" id="fZA-jt-NgF"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="pYa-c3-PHX" id="9HZ-sC-yfL"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ΔH (kJ/mol)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0lh-IY-bxp">
+                                <rect key="frame" x="219" y="213" width="140" height="40"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="Cpc-aU-08n"/>
+                                    <constraint firstAttribute="height" constant="40" id="e3B-W5-oq7"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="pYa-c3-PHX" id="i8q-5P-mUO"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Compound" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h8z-NC-sbQ">
+                                <rect key="frame" x="72" y="269" width="132" height="40"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="DDG-lR-cSz"/>
+                                    <constraint firstAttribute="width" constant="132" id="kwM-su-skS"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="pYa-c3-PHX" id="5yq-TV-puY"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ΔH (kJ/mol)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JGF-Zh-A1d">
+                                <rect key="frame" x="219" y="269" width="140" height="40"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="8jQ-FY-Q8j"/>
+                                    <constraint firstAttribute="width" constant="140" id="F9J-rE-ie1"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="pYa-c3-PHX" id="6ag-YQ-UsP"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Compound" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="47k-wf-mkg">
+                                <rect key="frame" x="72" y="325" width="132" height="40"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="132" id="Mbz-vj-7dN"/>
+                                    <constraint firstAttribute="height" constant="40" id="y1x-NA-3aV"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="pYa-c3-PHX" id="exC-6r-Dfz"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ΔH (kJ/mol)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g88-J4-Edw">
+                                <rect key="frame" x="219" y="325" width="140" height="40"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Hce-Ks-bZh"/>
+                                    <constraint firstAttribute="width" constant="140" id="UNi-CX-wkh"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="pYa-c3-PHX" id="5gJ-Ea-pRV"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Compound" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LQD-NE-Egw">
+                                <rect key="frame" x="72" y="381" width="132" height="40"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="0KK-OL-GzG"/>
+                                    <constraint firstAttribute="width" constant="132" id="XUH-4c-hTM"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="pYa-c3-PHX" id="iAC-K2-ttk"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ΔH (kJ/mol)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8bC-pZ-zfE">
+                                <rect key="frame" x="219" y="381" width="140" height="40"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="iOW-P6-5p3"/>
+                                    <constraint firstAttribute="height" constant="40" id="prD-HR-aqc"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="pYa-c3-PHX" id="Qlz-rs-Ct9"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Compound" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RkN-pP-niz">
+                                <rect key="frame" x="72" y="437" width="132" height="40"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="132" id="IXj-70-JEb"/>
+                                    <constraint firstAttribute="height" constant="40" id="adG-aM-7hq"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="pYa-c3-PHX" id="VPN-Y3-JJp"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ΔH (kJ/mol)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B9Q-fz-ZF5">
+                                <rect key="frame" x="219" y="437" width="140" height="40"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="UCx-1C-zZp"/>
+                                    <constraint firstAttribute="width" constant="140" id="woQ-fi-p3d"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="pYa-c3-PHX" id="a3B-Gd-VZ0"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Compound" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rCR-rF-9Hg">
+                                <rect key="frame" x="72" y="493" width="132" height="40"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="132" id="IYF-bc-w2J"/>
+                                    <constraint firstAttribute="height" constant="40" id="rIf-xE-oIh"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="pYa-c3-PHX" id="aAX-Oo-690"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ΔH (kJ/mol)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HDN-We-JHP">
+                                <rect key="frame" x="219" y="493" width="140" height="40"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="MXW-gi-DRT"/>
+                                    <constraint firstAttribute="height" constant="40" id="NfD-Sg-W8D"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="pYa-c3-PHX" id="GP7-3G-qM3"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="#" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UOe-vS-SWS">
+                                <rect key="frame" x="16" y="325" width="40" height="40"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="ZKZ-e0-4n6"/>
+                                    <constraint firstAttribute="width" constant="40" id="wcv-0f-cab"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="pYa-c3-PHX" id="02K-BK-BC7"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="#" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IA6-Gb-6RL">
+                                <rect key="frame" x="16" y="381" width="40" height="40"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="dp7-3i-6kd"/>
+                                    <constraint firstAttribute="height" constant="40" id="paP-Hq-a9f"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="pYa-c3-PHX" id="myV-ib-8jE"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="#" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7nk-ps-HPR">
+                                <rect key="frame" x="16" y="437" width="40" height="40"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="02p-Gp-WhT"/>
+                                    <constraint firstAttribute="width" constant="40" id="miD-YH-5fs"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="pYa-c3-PHX" id="ZZ7-V9-qiW"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="#" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2a7-J4-n5P">
+                                <rect key="frame" x="16" y="493" width="40" height="40"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="aGD-ak-v7Z"/>
+                                    <constraint firstAttribute="width" constant="40" id="dsU-3l-biR"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="pYa-c3-PHX" id="hRE-ip-zw2"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap to edit the above fields as needed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gww-Qj-X24">
+                                <rect key="frame" x="16" y="570" width="343" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Include all states of matter e.g. CO2(g)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AC6-xN-DAL">
-                                <rect key="frame" x="16" y="213" width="164" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
-                            </textField>
-                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Include all states of matter e.g. CO2(g)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0lh-IY-bxp">
-                                <rect key="frame" x="195" y="213" width="164" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
-                            </textField>
-                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Include all states of matter e.g. CO2(g)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h8z-NC-sbQ">
-                                <rect key="frame" x="16" y="269" width="164" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
-                            </textField>
-                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Include all states of matter e.g. CO2(g)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JGF-Zh-A1d">
-                                <rect key="frame" x="195" y="269" width="164" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
-                            </textField>
-                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Include all states of matter e.g. CO2(g)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="47k-wf-mkg">
-                                <rect key="frame" x="16" y="325" width="164" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
-                            </textField>
-                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Include all states of matter e.g. CO2(g)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g88-J4-Edw">
-                                <rect key="frame" x="195" y="325" width="164" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
-                            </textField>
-                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Include all states of matter e.g. CO2(g)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LQD-NE-Egw">
-                                <rect key="frame" x="16" y="381" width="164" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
-                            </textField>
-                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Include all states of matter e.g. CO2(g)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8bC-pZ-zfE">
-                                <rect key="frame" x="195" y="381" width="164" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
-                            </textField>
-                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Include all states of matter e.g. CO2(g)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RkN-pP-niz">
-                                <rect key="frame" x="16" y="437" width="164" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
-                            </textField>
-                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Include all states of matter e.g. CO2(g)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B9Q-fz-ZF5">
-                                <rect key="frame" x="195" y="437" width="164" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
-                            </textField>
-                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Include all states of matter e.g. CO2(g)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rCR-rF-9Hg">
-                                <rect key="frame" x="16" y="493" width="164" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
-                            </textField>
-                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Include all states of matter e.g. CO2(g)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HDN-We-JHP">
-                                <rect key="frame" x="195" y="493" width="164" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="done"/>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Uiq-6H-88s" firstAttribute="trailing" secondItem="g88-J4-Edw" secondAttribute="trailing" id="06V-31-evu"/>
+                            <constraint firstItem="Uiq-6H-88s" firstAttribute="leading" secondItem="zr0-Nn-pO8" secondAttribute="leading" id="0Gg-jh-AwY"/>
+                            <constraint firstItem="5cE-AE-82y" firstAttribute="trailing" secondItem="xsN-4D-1EY" secondAttribute="trailingMargin" id="2WP-pB-v5e"/>
+                            <constraint firstItem="HDN-We-JHP" firstAttribute="top" secondItem="B9Q-fz-ZF5" secondAttribute="bottom" constant="16" id="3Gt-c9-8hc"/>
+                            <constraint firstItem="rCR-rF-9Hg" firstAttribute="top" secondItem="RkN-pP-niz" secondAttribute="bottom" constant="16" id="6Ky-rS-K2j"/>
+                            <constraint firstItem="Uiq-6H-88s" firstAttribute="trailing" secondItem="B9Q-fz-ZF5" secondAttribute="trailing" id="9Ql-or-Cox"/>
+                            <constraint firstItem="Uiq-6H-88s" firstAttribute="trailing" secondItem="EGc-kh-SxI" secondAttribute="trailing" id="9q1-ZA-X7t"/>
+                            <constraint firstItem="Uiq-6H-88s" firstAttribute="trailing" secondItem="8bC-pZ-zfE" secondAttribute="trailing" id="Dlj-Ac-gmd"/>
+                            <constraint firstItem="Uiq-6H-88s" firstAttribute="top" secondItem="5cE-AE-82y" secondAttribute="bottom" constant="8" symbolic="YES" id="ECh-oc-ayf"/>
+                            <constraint firstItem="5cE-AE-82y" firstAttribute="top" secondItem="pjL-UR-M5D" secondAttribute="bottom" constant="20" id="EIw-HO-9bh"/>
+                            <constraint firstItem="Uiq-6H-88s" firstAttribute="leading" secondItem="EGc-kh-SxI" secondAttribute="leading" id="EXP-2c-ZIa"/>
+                            <constraint firstItem="AC6-xN-DAL" firstAttribute="top" secondItem="EGc-kh-SxI" secondAttribute="bottom" constant="13" id="FTs-8c-irD"/>
+                            <constraint firstItem="Uiq-6H-88s" firstAttribute="leading" secondItem="2a7-J4-n5P" secondAttribute="leading" id="HMf-Na-fSa"/>
+                            <constraint firstItem="JGF-Zh-A1d" firstAttribute="top" secondItem="0lh-IY-bxp" secondAttribute="bottom" constant="16" id="LwV-JT-nLt"/>
+                            <constraint firstItem="8bC-pZ-zfE" firstAttribute="top" secondItem="g88-J4-Edw" secondAttribute="bottom" constant="16" id="M8O-sp-TUw"/>
+                            <constraint firstItem="47k-wf-mkg" firstAttribute="leading" secondItem="LQD-NE-Egw" secondAttribute="leading" id="MNh-Pp-Syo"/>
+                            <constraint firstItem="h8z-NC-sbQ" firstAttribute="leading" secondItem="47k-wf-mkg" secondAttribute="leading" id="OgT-00-6UV"/>
+                            <constraint firstItem="EGc-kh-SxI" firstAttribute="top" secondItem="Uiq-6H-88s" secondAttribute="bottom" constant="8" symbolic="YES" id="P0b-tH-BDc"/>
+                            <constraint firstItem="g88-J4-Edw" firstAttribute="top" secondItem="JGF-Zh-A1d" secondAttribute="bottom" constant="16" id="SdW-dp-6wl"/>
+                            <constraint firstItem="7nk-ps-HPR" firstAttribute="top" secondItem="IA6-Gb-6RL" secondAttribute="bottom" constant="16" id="Vnp-yJ-fVV"/>
+                            <constraint firstItem="5cE-AE-82y" firstAttribute="leading" secondItem="xsN-4D-1EY" secondAttribute="leadingMargin" id="Wix-Em-UwO"/>
+                            <constraint firstItem="RkN-pP-niz" firstAttribute="top" secondItem="LQD-NE-Egw" secondAttribute="bottom" constant="16" id="YEq-3o-zdr"/>
+                            <constraint firstItem="B9Q-fz-ZF5" firstAttribute="top" secondItem="8bC-pZ-zfE" secondAttribute="bottom" constant="16" id="YjP-NP-9Pa"/>
+                            <constraint firstItem="yfZ-Wh-ov0" firstAttribute="top" secondItem="EGc-kh-SxI" secondAttribute="bottom" constant="13" id="Ysq-iR-703"/>
+                            <constraint firstItem="0lh-IY-bxp" firstAttribute="leading" secondItem="AC6-xN-DAL" secondAttribute="trailing" constant="15" id="ZpD-HK-bDd"/>
+                            <constraint firstItem="AC6-xN-DAL" firstAttribute="leading" secondItem="h8z-NC-sbQ" secondAttribute="leading" id="bA3-Ws-s05"/>
+                            <constraint firstItem="UOe-vS-SWS" firstAttribute="top" secondItem="zr0-Nn-pO8" secondAttribute="bottom" constant="16" id="bha-vH-f8o"/>
+                            <constraint firstItem="Uiq-6H-88s" firstAttribute="trailing" secondItem="HDN-We-JHP" secondAttribute="trailing" id="dOi-Xf-rve"/>
+                            <constraint firstItem="Uiq-6H-88s" firstAttribute="leading" secondItem="7nk-ps-HPR" secondAttribute="leading" id="eJr-Kq-qpR"/>
+                            <constraint firstItem="Uiq-6H-88s" firstAttribute="trailing" secondItem="JGF-Zh-A1d" secondAttribute="trailing" id="fGT-m3-jT1"/>
+                            <constraint firstItem="2a7-J4-n5P" firstAttribute="top" secondItem="7nk-ps-HPR" secondAttribute="bottom" constant="16" id="fK9-iV-E8d"/>
+                            <constraint firstItem="0lh-IY-bxp" firstAttribute="top" secondItem="EGc-kh-SxI" secondAttribute="bottom" constant="13" id="gA9-ZS-u5Z"/>
+                            <constraint firstItem="RkN-pP-niz" firstAttribute="leading" secondItem="rCR-rF-9Hg" secondAttribute="leading" id="gc4-ae-JuZ"/>
+                            <constraint firstItem="Uiq-6H-88s" firstAttribute="trailing" secondItem="0lh-IY-bxp" secondAttribute="trailing" id="gyh-uQ-qAn"/>
+                            <constraint firstItem="LQD-NE-Egw" firstAttribute="top" secondItem="47k-wf-mkg" secondAttribute="bottom" constant="16" id="kUz-T4-kr6"/>
+                            <constraint firstItem="zr0-Nn-pO8" firstAttribute="top" secondItem="yfZ-Wh-ov0" secondAttribute="bottom" constant="16" id="kVB-rx-jzA"/>
+                            <constraint firstItem="Uiq-6H-88s" firstAttribute="leading" secondItem="UOe-vS-SWS" secondAttribute="leading" id="kyw-hA-VrK"/>
+                            <constraint firstItem="h8z-NC-sbQ" firstAttribute="top" secondItem="AC6-xN-DAL" secondAttribute="bottom" constant="16" id="loF-Ss-QUA"/>
+                            <constraint firstItem="5cE-AE-82y" firstAttribute="trailing" secondItem="Uiq-6H-88s" secondAttribute="trailing" id="n16-QC-U93"/>
+                            <constraint firstItem="Uiq-6H-88s" firstAttribute="leading" secondItem="yfZ-Wh-ov0" secondAttribute="leading" id="n8a-Ff-5Ty"/>
+                            <constraint firstItem="LQD-NE-Egw" firstAttribute="leading" secondItem="RkN-pP-niz" secondAttribute="leading" id="ti8-q7-iVX"/>
+                            <constraint firstItem="47k-wf-mkg" firstAttribute="top" secondItem="h8z-NC-sbQ" secondAttribute="bottom" constant="16" id="uLf-Hw-jbv"/>
+                            <constraint firstItem="5cE-AE-82y" firstAttribute="leading" secondItem="Uiq-6H-88s" secondAttribute="leading" id="xlb-6Z-Ie0"/>
+                            <constraint firstItem="Uiq-6H-88s" firstAttribute="leading" secondItem="IA6-Gb-6RL" secondAttribute="leading" id="yJP-Ya-la9"/>
+                            <constraint firstItem="IA6-Gb-6RL" firstAttribute="top" secondItem="UOe-vS-SWS" secondAttribute="bottom" constant="16" id="yzB-Ex-P7Y"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Heat of Reaction" largeTitleDisplayMode="never" id="whw-zB-PVm"/>
+                    <navigationItem key="navigationItem" title="Standard Enthalpy of Reaction" largeTitleDisplayMode="never" id="whw-zB-PVm"/>
                     <connections>
-                        <outlet property="balancedEquationText" destination="EGc-kh-SxI" id="mkU-cP-0Xw"/>
-                        <outlet property="balancedEquationTextField" destination="EGc-kh-SxI" id="DaM-24-OwU"/>
+                        <outlet property="balancedEquationText" destination="EGc-kh-SxI" id="Eco-Rd-Zia"/>
+                        <outlet property="coefficient1TextField" destination="yfZ-Wh-ov0" id="DR2-7y-DYv"/>
+                        <outlet property="coefficient2TextField" destination="zr0-Nn-pO8" id="h3j-sd-401"/>
+                        <outlet property="coefficient3TextField" destination="UOe-vS-SWS" id="xBB-Kk-ILa"/>
+                        <outlet property="coefficient4TextField" destination="IA6-Gb-6RL" id="ihk-Ct-CU3"/>
+                        <outlet property="coefficient5TextField" destination="7nk-ps-HPR" id="60K-Lm-JMq"/>
+                        <outlet property="coefficient6TextField" destination="2a7-J4-n5P" id="v4J-FM-rRV"/>
                         <outlet property="compound1TextField" destination="AC6-xN-DAL" id="Wzv-ye-13c"/>
                         <outlet property="compound2TextField" destination="h8z-NC-sbQ" id="ERo-op-bM2"/>
                         <outlet property="compound3TextField" destination="47k-wf-mkg" id="Upc-wc-UdL"/>
@@ -1123,8 +1340,9 @@
                         <outlet property="enthalpy4TextField" destination="8bC-pZ-zfE" id="JNr-M2-qlt"/>
                         <outlet property="enthalpy5TextField" destination="B9Q-fz-ZF5" id="89x-FC-Vvx"/>
                         <outlet property="enthalpy6TextField" destination="HDN-We-JHP" id="HWE-PT-wHw"/>
-                        <outlet property="enthalpyOfReaction" destination="Uu6-iD-O6M" id="fO2-II-Kd9"/>
+                        <outlet property="enthalpyLabel" destination="5cE-AE-82y" id="Lfy-fb-Ef7"/>
                         <outlet property="reactionTextField" destination="Uiq-6H-88s" id="3xF-oi-Ffl"/>
+                        <outlet property="yeeet" destination="Gww-Qj-X24" id="nbH-se-Z5J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tVL-p2-HHQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1179,7 +1397,9 @@
                             <constraint firstItem="5zh-eu-nw0" firstAttribute="leading" secondItem="DDS-YV-P4U" secondAttribute="leading" id="y15-2B-FmX"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="More" id="BNj-qU-vqx"/>
+                    <navigationItem key="navigationItem" title="More" id="BNj-qU-vqx">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="PUi-bO-epO"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="moreTable" destination="5zh-eu-nw0" id="dPf-zQ-gMO"/>
                         <segue destination="2es-ch-IoB" kind="push" identifier="showCompounds" id="6Zp-JV-36m"/>
@@ -1208,7 +1428,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nYj-Xa-5iq">
-                                <rect key="frame" x="0.0" y="72" width="375" height="546"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" placeholder="Search for a compound" id="fRL-Ka-j2g">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -1259,7 +1479,7 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="nYj-Xa-5iq" secondAttribute="trailing" id="8eJ-Rv-Qlj"/>
                             <constraint firstItem="nYj-Xa-5iq" firstAttribute="leading" secondItem="Gqh-KE-h3P" secondAttribute="leading" id="9Ii-99-g0J"/>
-                            <constraint firstItem="nYj-Xa-5iq" firstAttribute="top" secondItem="JO9-Gi-k3v" secondAttribute="bottom" constant="8" id="Hsn-oS-iOb"/>
+                            <constraint firstItem="nYj-Xa-5iq" firstAttribute="top" secondItem="JO9-Gi-k3v" secondAttribute="bottom" id="Hsn-oS-iOb"/>
                             <constraint firstItem="nYj-Xa-5iq" firstAttribute="bottom" secondItem="fLK-5a-Kz8" secondAttribute="top" id="WIn-B4-CSP"/>
                         </constraints>
                     </view>
@@ -1550,29 +1770,44 @@
                                     <textInputTraits key="textInputTraits"/>
                                 </searchBar>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="dcell" id="0Pm-zv-Urd">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="dcell" id="0Pm-zv-Urd" customClass="DissociationCell" customModule="ChemCalc" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0Pm-zv-Urd" id="Zb2-WH-YCs">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jBp-Rs-gGy">
-                                                    <rect key="frame" x="12" y="11" width="330" height="22"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Compound" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pwb-ha-DBG">
+                                                    <rect key="frame" x="14" y="11" width="145" height="22"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="22" id="Snu-6N-vbA"/>
+                                                        <constraint firstAttribute="height" constant="22" id="3mo-Ei-2bH"/>
+                                                        <constraint firstAttribute="width" constant="145" id="tSb-kz-46n"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ka" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="syV-Ep-OKi">
+                                                    <rect key="frame" x="314" y="11" width="20" height="22"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="22" id="G2S-co-Dph"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="jBp-Rs-gGy" firstAttribute="bottom" secondItem="Zb2-WH-YCs" secondAttribute="bottomMargin" id="Sj1-tT-Pyg"/>
-                                                <constraint firstItem="jBp-Rs-gGy" firstAttribute="leading" secondItem="Zb2-WH-YCs" secondAttribute="leadingMargin" constant="-3" id="ngT-MH-bLH"/>
-                                                <constraint firstAttribute="trailing" secondItem="jBp-Rs-gGy" secondAttribute="trailing" id="vAo-sf-FWD"/>
+                                                <constraint firstItem="syV-Ep-OKi" firstAttribute="centerY" secondItem="Zb2-WH-YCs" secondAttribute="centerY" id="6Nf-5m-nKd"/>
+                                                <constraint firstItem="Pwb-ha-DBG" firstAttribute="leading" secondItem="Zb2-WH-YCs" secondAttribute="leadingMargin" constant="-1" id="Rlf-JG-S5K"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="syV-Ep-OKi" secondAttribute="trailing" id="SOH-Ja-QVO"/>
+                                                <constraint firstItem="Pwb-ha-DBG" firstAttribute="bottom" secondItem="Zb2-WH-YCs" secondAttribute="bottomMargin" id="SRm-fu-0JB"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="constant" destination="syV-Ep-OKi" id="ZVQ-oR-mDi"/>
+                                            <outlet property="name" destination="Pwb-ha-DBG" id="dlv-gZ-QSc"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -1589,7 +1824,9 @@
                             <constraint firstItem="hIA-Tl-Oid" firstAttribute="bottom" secondItem="3OT-RD-cNq" secondAttribute="top" id="uWC-aX-3Og"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Dissociation Constants" id="jBy-df-bhN"/>
+                    <navigationItem key="navigationItem" title="Dissociation Constants" id="jBy-df-bhN">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="sHz-N1-9IW"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="ba3-pR-XSU" id="4Pm-5P-Uz2"/>
                         <outlet property="tableView" destination="hIA-Tl-Oid" id="23i-pR-dwe"/>
@@ -1667,9 +1904,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Compound" id="por-Xz-T8T">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="UL8-kg-Nqg"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Compound" id="por-Xz-T8T"/>
                     <connections>
                         <outlet property="tableView" destination="uG1-fB-HAK" id="kII-OY-b1J"/>
                     </connections>

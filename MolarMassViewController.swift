@@ -68,7 +68,7 @@ class MolarMassViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.text = ""
+        textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {

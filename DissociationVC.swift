@@ -44,10 +44,10 @@ class DissociationVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
+        let cell = tableView.cellForRow(at: indexPath) as! DissociationCell
         let vc = storyboard?.instantiateViewController(withIdentifier: "KaKbVC") as! KaKbVC
         
-        let compound = cell?.textLabel?.text
+        let compound = cell.name.text
         if bases.contains(compound!) { vc.isBase = true }
         if isFiltering {
             vc.acidInfo = filteredAcids[indexPath.row]
@@ -68,7 +68,7 @@ class DissociationVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "dcell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "dcell", for: indexPath) as! DissociationCell
        
         if isFiltering {
             acidName = filteredAcids[indexPath.row]
@@ -76,7 +76,9 @@ class DissociationVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             acidName = acids[indexPath.row]
         }
         
-        cell.textLabel?.attributedText = TextFormatter().fix(formula: acidName.name!)
+        cell.name.attributedText = TextFormatter().fix(formula: acidName.name!)
+        cell.constant.attributedText = TextFormatter().scientificNotation(number: acidName.Ka1!)
+
         return cell
     }
     
@@ -108,6 +110,21 @@ class DissociationConstantObject: NSObject {
         self.Ka1 = dictionary["Ka1"] as? String ?? ""
         self.Ka2 = dictionary["Ka2"] as? String ?? ""
         self.Ka3 = dictionary["Ka3"] as? String ?? ""
+    }
+    
+}
+
+class DissociationCell: UITableViewCell {
+    
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var constant: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
     }
     
 }

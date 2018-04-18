@@ -29,13 +29,18 @@ class KaKbVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             numberOfConstants = 3
         }
         self.navigationItem.title = acidInfo.name!
-        
-        tableView.layoutMargins = UIEdgeInsets.zero
-        tableView.separatorInset = UIEdgeInsets.zero
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return numberOfConstants
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if isBase {
+            return "Base Dissociation Constant"
+        } else {
+            return "Acid Dissociation Constant"
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
