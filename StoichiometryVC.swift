@@ -98,8 +98,6 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
                     stoichTableView.reloadData()
                     readyForStoich = false
                 }
-            } else {
-                firstReactantTextField.becomeFirstResponder()
             }
         }
     }
@@ -615,6 +613,14 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         }
         
         return cell!
+    }
+    
+    
+    @IBAction func loadLearnView(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "LearnViewController") as! LearnViewController
+        vc.webpage = "stoichiometry"
+        vc.barTitle = "Stoichiometry"
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }

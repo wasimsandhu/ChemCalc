@@ -30,9 +30,9 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 0 {
-            return 5
+            return 7
         } else if section == 1 {
-            return 3
+            return 2
         } else {
             return 0
         }
@@ -52,13 +52,15 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
                 cell.textLabel?.text = "Acid/base dissociation constants"
             } else if indexPath.row == 4 {
                 cell.textLabel?.text = "Solubility checker"
+            } else if indexPath.row == 5 {
+                cell.textLabel?.text = "Solubility product constants"
+            } else if indexPath.row == 6 {
+                cell.textLabel?.text = "Standard electrode potentials"
             }
         } else if indexPath.section == 1 {
             if indexPath.row == 0 {
                 cell.textLabel?.text = "Contact the developer"
             } else if indexPath.row == 1 {
-                cell.textLabel?.text = "Report bugs and mistakes"
-            } else if indexPath.row == 2 {
                 cell.textLabel?.text = "Credits and libraries"
             }
         }
@@ -78,6 +80,10 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
             performSegue(withIdentifier: "showKa", sender: indexPath)
         } else if indexPath.section == 0 && indexPath.row == 4 {
             performSegue(withIdentifier: "showSolubility", sender: indexPath)
+        } else if indexPath.section == 0 && indexPath.row == 5 {
+            performSegue(withIdentifier: "showKsp", sender: indexPath)
+        } else if indexPath.section == 0 && indexPath.row == 6 {
+            performSegue(withIdentifier: "showElectrode", sender: indexPath)
         }
         
         if indexPath.section == 1 && indexPath.row == 0 {
@@ -88,8 +94,6 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
             mailComposerVC.setMessageBody("", isHTML: false)
             presentMailComposeViewController(mailComposeViewController: mailComposerVC)
         } else if indexPath.section == 1 && indexPath.row == 1 {
-            performSegue(withIdentifier: "showBugs", sender: indexPath)
-        } else if indexPath.section == 1 && indexPath.row == 2 {
             performSegue(withIdentifier: "showCredits", sender: indexPath)
         }
         

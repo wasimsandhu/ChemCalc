@@ -64,6 +64,11 @@ class MolarMassCalculator {
             compoundAdjusted = compound
         }
         
+        compoundAdjusted = compoundAdjusted.replacingOccurrences(of: "(g)", with: "")
+        compoundAdjusted = compoundAdjusted.replacingOccurrences(of: "(s)", with: "")
+        compoundAdjusted = compoundAdjusted.replacingOccurrences(of: "(aq)", with: "")
+        compoundAdjusted = compoundAdjusted.replacingOccurrences(of: "(l)", with: "")
+        
         // get individual characters of inputted string
         var characters = compoundAdjusted.map { String($0) }
         

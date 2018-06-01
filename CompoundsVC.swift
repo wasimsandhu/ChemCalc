@@ -110,7 +110,7 @@ class CompoundsVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         searchBar.resignFirstResponder()
     }
     
-    @IBAction func addCompound(_ sender: Any) {
+/*    @IBAction func addCompound(_ sender: Any) {
         
         var newCompoundName: String?
         var newCompoundFormula: String?
@@ -149,7 +149,7 @@ class CompoundsVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         }))
         
         self.present(alert, animated: true, completion: nil)
-    }
+    } */
 }
 
 class CompoundCell: UITableViewCell {

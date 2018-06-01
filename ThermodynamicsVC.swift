@@ -69,10 +69,6 @@ class ThermodynamicsVC: UIViewController, UITableViewDataSource, UITableViewDele
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = thermoTableView.dequeueReusableCell(withIdentifier: "tcell", for: indexPath) as? ThermoCell
 
@@ -90,10 +86,10 @@ class ThermodynamicsVC: UIViewController, UITableViewDataSource, UITableViewDele
             cell?.deltaValueLabel.text = compound.enthalpy! + " kJ/mol"
         } else if (tag == 1) {
             cell?.compoundLabel.attributedText = formattedCompoundName
-            cell?.deltaValueLabel.text = compound.entropy! + " kJ/mol"
+            cell?.deltaValueLabel.text = compound.entropy! + " J/mol•K"
         } else if (tag == 2) {
             cell?.compoundLabel.attributedText = formattedCompoundName
-            cell?.deltaValueLabel.text = compound.spontaneity! + " J/mol•K"
+            cell?.deltaValueLabel.text = compound.spontaneity! + " kJ/mol"
         }
         
         return cell!
@@ -140,8 +136,8 @@ class ThermoDataObject: NSObject {
     init(dictionary: [String: AnyObject]) {
         self.name = dictionary["name"] as? String ?? ""
         self.enthalpy = dictionary["enthalpy"] as? String ?? ""
-        self.entropy = dictionary["entropy"] as? String ?? ""
-        self.spontaneity = dictionary["spontaneity"] as? String ?? ""
+        self.entropy = dictionary["spontaneity"] as? String ?? ""
+        self.spontaneity = dictionary["entropy"] as? String ?? ""
     }
     
 }

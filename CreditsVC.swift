@@ -32,7 +32,7 @@ class CreditsVC: UIViewController, UITextViewDelegate {
             " • Periodic elements data by Chris Andrejewski: https://github.com/andrejewski/periodic-table \n" +
             " • Element electron configurations: http://periodictable.com/Properties/A/ElectronConfigurationString.an.html \n" +
             " • Number of neutrons in elements: http://www.elementalmatter.info/number-of-neutrons.htm \n" +
-        " • Standard thermodyanmic quantities at 25°C from Chemistry: A Molecular Approach by Nivaldo J. Tro \n" +
+        " • Standard thermodyanmic quantities, acid/base dissociation constants, solubility product constants, and standard electrode potentials from Chemistry: A Molecular Approach by Nivaldo J. Tro \n" +
         " • Chemical compounds and formulas database compiled by Devun Birk \n\n"
     
         let string = (string1 + string2 + "Built and designed by Wasim Sandhu \n") as NSString

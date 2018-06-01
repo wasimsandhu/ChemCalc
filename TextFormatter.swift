@@ -94,6 +94,178 @@ class TextFormatter {
         return formattedFormula!
     }
     
+    // lazy late night copy + paste
+    func fixReaction(formula: String) -> (NSMutableAttributedString) {
+        
+        // subscripting states of matter
+        formulaToFormat = formula.replacingOccurrences(of: "(g)", with: "@(g)$")
+        formulaToFormat = formulaToFormat?.replacingOccurrences(of: "(l)", with: "@(l)$")
+        formulaToFormat = formulaToFormat?.replacingOccurrences(of: "(s)", with: "@(s)$")
+        formulaToFormat = formulaToFormat?.replacingOccurrences(of: "(aq)", with: "@(aq)$")
+        
+        // subscripting number of atoms
+        formulaToFormat = formulaToFormat?.replacingOccurrences(of: "1", with: "@1$")
+        formulaToFormat = formulaToFormat?.replacingOccurrences(of: "2", with: "@2$")
+        formulaToFormat = formulaToFormat?.replacingOccurrences(of: "3", with: "@3$")
+        formulaToFormat = formulaToFormat?.replacingOccurrences(of: "4", with: "@4$")
+        formulaToFormat = formulaToFormat?.replacingOccurrences(of: "5", with: "@5$")
+        formulaToFormat = formulaToFormat?.replacingOccurrences(of: "6", with: "@6$")
+        formulaToFormat = formulaToFormat?.replacingOccurrences(of: "7", with: "@7$")
+        formulaToFormat = formulaToFormat?.replacingOccurrences(of: "8", with: "@8$")
+        formulaToFormat = formulaToFormat?.replacingOccurrences(of: "9", with: "@9$")
+        formulaToFormat = formulaToFormat?.replacingOccurrences(of: "0", with: "@0$")
+        
+        for letter in uppercase {
+            if (formulaToFormat?.contains("@1$@0$" + letter))! {
+                formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@1$@0$" + letter, with: "10" + letter)
+            }
+            
+            if (formulaToFormat?.contains("@1$@1$" + letter))! {
+                formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@1$@1$" + letter, with: "11" + letter)
+            }
+            
+            if (formulaToFormat?.contains("@1$@2$" + letter))! {
+                formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@1$@2$" + letter, with: "12" + letter)
+            }
+            
+            if (formulaToFormat?.contains("@1$@3$" + letter))! {
+                formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@1$@3$" + letter, with: "13" + letter)
+            }
+            
+            if (formulaToFormat?.contains("@1$@4$" + letter))! {
+                formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@1$@4$" + letter, with: "14" + letter)
+            }
+            
+            if (formulaToFormat?.contains("@2$" + letter))! {
+                formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@2$" + letter, with: "2" + letter)
+            }
+            
+            if (formulaToFormat?.contains("@3$" + letter))! {
+                formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@3$" + letter, with: "3" + letter)
+            }
+            
+            if (formulaToFormat?.contains("@4$" + letter))! {
+                formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@4$" + letter, with: "4" + letter)
+            }
+            
+            if (formulaToFormat?.contains("@5$" + letter))! {
+                formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@5$" + letter, with: "5" + letter)
+            }
+            
+            if (formulaToFormat?.contains("@6$" + letter))! {
+                formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@6$" + letter, with: "6" + letter)
+            }
+            
+            if (formulaToFormat?.contains("@7$" + letter))! {
+                formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@7$" + letter, with: "7" + letter)
+            }
+            
+            if (formulaToFormat?.contains("@8$" + letter))! {
+                formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@8$" + letter, with: "8" + letter)
+            }
+            
+            if (formulaToFormat?.contains("@9$" + letter))! {
+                formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@9$" + letter, with: "9" + letter)
+            }
+        }
+        
+        if (formulaToFormat?.contains("@1$@0$e"))! {
+            formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@1$@0$e", with: "10e")
+        }
+        
+        if (formulaToFormat?.contains("@1$@1$e"))! {
+            formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@1$@1$e", with: "11e")
+        }
+        
+        if (formulaToFormat?.contains("@1$@2$e"))! {
+            formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@1$@2$e", with: "12e")
+        }
+        
+        if (formulaToFormat?.contains("@1$@3$e"))! {
+            formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@1$@3$e", with: "13e")
+        }
+        
+        if (formulaToFormat?.contains("@1$@4$e"))! {
+            formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@1$@4$e", with: "14e")
+        }
+        
+        if (formulaToFormat?.contains("@2$e"))! {
+            formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@2$e", with: "2e")
+        }
+        
+        if (formulaToFormat?.contains("@3$e"))! {
+            formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@3$e", with: "3e")
+        }
+        
+        if (formulaToFormat?.contains("@4$e"))! {
+            formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@4$e", with: "4e")
+        }
+        
+        if (formulaToFormat?.contains("@5$e"))! {
+            formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@5$e", with: "5e")
+        }
+        
+        if (formulaToFormat?.contains("@6$e"))! {
+            formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@6$e", with: "6e")
+        }
+        
+        if (formulaToFormat?.contains("@7$e"))! {
+            formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@7$e", with: "7e")
+        }
+        
+        if (formulaToFormat?.contains("@8$e"))! {
+            formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@8$e", with: "8e")
+        }
+        
+        if (formulaToFormat?.contains("@9$e"))! {
+            formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@9$e", with: "9e")
+        }
+        
+        // superscripting charges on molecules
+        if formulaToFormat!.contains("@3$+") {
+            formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@3$+", with: "{3+}")
+        }
+        
+        if formulaToFormat!.contains("@2$+") {
+            formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@2$+", with: "{2+}")
+        }
+        
+        if formulaToFormat!.contains("+") {
+            formulaToFormat = formulaToFormat?.replacingOccurrences(of: "+", with: "{+}")
+        }
+        
+        if formulaToFormat!.contains(")${+}") {
+            formulaToFormat = formulaToFormat?.replacingOccurrences(of: ")${+}", with: ")$ + ")
+        }
+        
+        if formulaToFormat!.contains("{+}e") {
+            formulaToFormat = formulaToFormat?.replacingOccurrences(of: "{+}e", with: " + e")
+        }
+        
+        if formulaToFormat!.contains("NO@3$-") || formulaToFormat!.contains("HCO@3$-") || formulaToFormat!.contains("ClO@3$-") {
+            formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@3$-", with: "@3${-}")
+        } else if formulaToFormat!.contains("NO@2$-") || formulaToFormat!.contains("C@2$H@3$O@2$-") || formulaToFormat!.contains("ClO@2$-") {
+            formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@2$-", with: "@2${-}")
+        }
+        
+        if formulaToFormat!.contains("@3$-") {
+            formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@3$-", with: "{3-}")
+        }
+        
+        if formulaToFormat!.contains("@2$-") {
+            formulaToFormat = formulaToFormat?.replacingOccurrences(of: "@2$-", with: "{2-}")
+        }
+        
+        if formulaToFormat!.contains("-") {
+            formulaToFormat = formulaToFormat?.replacingOccurrences(of: "-", with: "{-}")
+        }
+        
+        formulaToFormat = formulaToFormat?.replacingOccurrences(of: "=", with: " → ")
+        
+        formattedFormula = formulaToFormat?.customText()
+        return formattedFormula!
+    }
+    
     func fixElectron(config: String, font: String) -> (NSMutableAttributedString) {
         
         // s
