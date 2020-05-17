@@ -257,12 +257,12 @@ extension ElementsViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         if searchBarIsEmpty() == false {
             let searchText = searchController.searchBar.text!
-            if uppercase.contains(searchText[0]) {
+            if uppercase.contains(String(searchText[0])) {
                 // search by element name
                 filteredElements = elementCellInfo.filter({$0.value[0].range(of: searchText) != nil})
-            } else if lowercase.contains(searchText[0]) {
+            } else if lowercase.contains(String(searchText[0])) {
                 filteredElements = elementCellInfo.filter({$0.value[0].lowercased().range(of: searchText) != nil})
-            } else if decimal.contains(searchText[0]) {
+            } else if decimal.contains(String(searchText[0])) {
                 // search by atomic number
                 if searchText.count == 1 {
                     filteredElements = elementCellInfo.filter({$0.value[3].range(of: searchText) != nil})

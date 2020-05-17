@@ -70,7 +70,7 @@ class MolarMassCalculator {
         compoundAdjusted = compoundAdjusted.replacingOccurrences(of: "(l)", with: "")
         
         // get individual characters of inputted string
-        var characters = compoundAdjusted.map { String($0) }
+        var characters: Array<String>! = compoundAdjusted.map { String($0) }
         
         // evaluate characters to seperate elements and quantities
         for character in characters {
@@ -258,6 +258,45 @@ class MolarMassCalculator {
     func checkForPolyatomicIons(input: String) -> String {
         
         compoundWithoutParentheses = input
+        
+        // CH2 group
+        if input.contains("(CH2)2") {
+            elements["C"] = 2
+            elements["H"] = 4
+            compoundWithoutParentheses = compoundWithoutParentheses?.replacingOccurrences(of: "(CH2)2", with: "")
+        } else if input.contains("(CH2)3") {
+            elements["C"] = 3
+            elements["H"] = 6
+            compoundWithoutParentheses = compoundWithoutParentheses?.replacingOccurrences(of: "(CH2)3", with: "")
+        } else if input.contains("(CH2)4") {
+            elements["C"] = 4
+            elements["H"] = 8
+            compoundWithoutParentheses = compoundWithoutParentheses?.replacingOccurrences(of: "(CH2)4", with: "")
+        } else if input.contains("(CH2)5") {
+            elements["C"] = 5
+            elements["H"] = 10
+            compoundWithoutParentheses = compoundWithoutParentheses?.replacingOccurrences(of: "(CH2)5", with: "")
+        } else if input.contains("(CH2)6") {
+            elements["C"] = 6
+            elements["H"] = 12
+            compoundWithoutParentheses = compoundWithoutParentheses?.replacingOccurrences(of: "(CH2)6", with: "")
+        } else if input.contains("(CH2)7") {
+            elements["C"] = 7
+            elements["H"] = 14
+            compoundWithoutParentheses = compoundWithoutParentheses?.replacingOccurrences(of: "(CH2)7", with: "")
+        } else if input.contains("(CH2)8") {
+            elements["C"] = 8
+            elements["H"] = 16
+            compoundWithoutParentheses = compoundWithoutParentheses?.replacingOccurrences(of: "(CH2)8", with: "")
+        } else if input.contains("(CH2)9") {
+            elements["C"] = 9
+            elements["H"] = 18
+            compoundWithoutParentheses = compoundWithoutParentheses?.replacingOccurrences(of: "(CH2)9", with: "")
+        } else if input.contains("(CH2)10") {
+            elements["C"] = 10
+            elements["H"] = 20
+            compoundWithoutParentheses = compoundWithoutParentheses?.replacingOccurrences(of: "(CH2)10", with: "")
+        }
         
         // Ammonium ion
         if input.contains("(NH4)2") {

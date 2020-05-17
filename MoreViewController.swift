@@ -19,8 +19,10 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "Reference" as String?
+            return "More Calculators" as String?
         } else if section == 1 {
+            return "Reference" as String?
+        } else if section == 2 {
             return "App Feedback" as String?
         } else {
             return "" as String?
@@ -30,8 +32,10 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 0 {
-            return 7
+            return 1
         } else if section == 1 {
+            return 7
+        } else if section == 2 {
             return 2
         } else {
             return 0
@@ -42,6 +46,10 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: "morecell", for: indexPath)
         
         if indexPath.section == 0 {
+            if indexPath.row == 0 {
+                cell.textLabel?.text = "Enthalpy, Entropy, and Spontaneity"
+            }
+        } else if indexPath.section == 1 {
             if indexPath.row == 0 {
                 cell.textLabel?.text = "Compounds and formulas"
             } else if indexPath.row == 1 {
@@ -57,7 +65,7 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
             } else if indexPath.row == 6 {
                 cell.textLabel?.text = "Standard electrode potentials"
             }
-        } else if indexPath.section == 1 {
+        } else if indexPath.section == 2 {
             if indexPath.row == 0 {
                 cell.textLabel?.text = "Contact the developer"
             } else if indexPath.row == 1 {
@@ -71,29 +79,33 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.section == 0 && indexPath.row == 0 {
-            performSegue(withIdentifier: "showCompounds", sender: indexPath)
-        } else if indexPath.section == 0 && indexPath.row == 1 {
-            performSegue(withIdentifier: "showPolyatomicIons", sender: indexPath)
-        } else if indexPath.section == 0 && indexPath.row == 2 {
-            performSegue(withIdentifier: "showThermo", sender: indexPath)
-        } else if indexPath.section == 0 && indexPath.row == 3 {
-            performSegue(withIdentifier: "showKa", sender: indexPath)
-        } else if indexPath.section == 0 && indexPath.row == 4 {
-            performSegue(withIdentifier: "showSolubility", sender: indexPath)
-        } else if indexPath.section == 0 && indexPath.row == 5 {
-            performSegue(withIdentifier: "showKsp", sender: indexPath)
-        } else if indexPath.section == 0 && indexPath.row == 6 {
-            performSegue(withIdentifier: "showElectrode", sender: indexPath)
+            performSegue(withIdentifier: "showEnthalpy", sender: indexPath)
         }
         
         if indexPath.section == 1 && indexPath.row == 0 {
+            performSegue(withIdentifier: "showCompounds", sender: indexPath)
+        } else if indexPath.section == 1 && indexPath.row == 1 {
+            performSegue(withIdentifier: "showPolyatomicIons", sender: indexPath)
+        } else if indexPath.section == 1 && indexPath.row == 2 {
+            performSegue(withIdentifier: "showThermo", sender: indexPath)
+        } else if indexPath.section == 1 && indexPath.row == 3 {
+            performSegue(withIdentifier: "showKa", sender: indexPath)
+        } else if indexPath.section == 1 && indexPath.row == 4 {
+            performSegue(withIdentifier: "showSolubility", sender: indexPath)
+        } else if indexPath.section == 1 && indexPath.row == 5 {
+            performSegue(withIdentifier: "showKsp", sender: indexPath)
+        } else if indexPath.section == 1 && indexPath.row == 6 {
+            performSegue(withIdentifier: "showElectrode", sender: indexPath)
+        }
+        
+        if indexPath.section == 2 && indexPath.row == 0 {
             let mailComposerVC = MFMailComposeViewController()
             mailComposerVC.mailComposeDelegate = self
             mailComposerVC.setToRecipients(["wasim@wasimsandhu.com"])
             mailComposerVC.setSubject("App Feedback: ChemCalc")
             mailComposerVC.setMessageBody("", isHTML: false)
             presentMailComposeViewController(mailComposeViewController: mailComposerVC)
-        } else if indexPath.section == 1 && indexPath.row == 1 {
+        } else if indexPath.section == 2 && indexPath.row == 1 {
             performSegue(withIdentifier: "showCredits", sender: indexPath)
         }
         
