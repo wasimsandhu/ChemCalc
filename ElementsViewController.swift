@@ -37,11 +37,16 @@ class ElementsViewController: UIViewController, UITableViewDataSource, UITableVi
             searchController = UISearchController(searchResultsController: nil)
             searchController.searchResultsUpdater = self
             searchController.obscuresBackgroundDuringPresentation = false
-            searchController.searchBar.placeholder = "Enter element or atomic number"
+            // searchController.searchBar.placeholder =
             UIBarButtonItem.appearance(whenContainedInInstancesOf:[UISearchBar.self]).tintColor = UIColor.white
             navigationItem.searchController = searchController
             navigationItem.hidesSearchBarWhenScrolling = false
             definesPresentationContext = true
+            var searchTextField: UITextField? = searchController.searchBar.value(forKey: "searchField") as? UITextField
+                if searchTextField!.responds(to: #selector(getter: UITextField.attributedPlaceholder)) {
+                    let attributeDict = [NSAttributedStringKey.foregroundColor: UIColor.white]
+                    searchTextField!.attributedPlaceholder = NSAttributedString(string: "Enter element or atomic number", attributes: attributeDict)
+                }
         } else {
             // Fallback on earlier versions
         }
