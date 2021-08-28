@@ -8,9 +8,20 @@
 
 import Foundation
 
-class ICETableAnalysis {
+var equilibriumConstant: Double!
+var initialConcentrations = [Double]()
+var equilibriumConcentrations = [Double]()
+var equationType: String?
+
+class ICETableSolver {
     
-    func solve() {
+    func solve() -> [Double] {
+        
+        if equationType == "R1P2" {
+            
+        }
+        
+        return equilibriumConcentrations
         
     }
     

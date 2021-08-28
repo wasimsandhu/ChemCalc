@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="COG-DA-vSq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="COG-DA-vSq">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -55,13 +55,13 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pav-1F-lMY">
-                                                            <rect key="frame" x="286" y="14" width="42" height="21"/>
+                                                            <rect key="frame" x="285" y="14" width="42" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="30J-Ag-ESb">
-                                                            <rect key="frame" x="15" y="14" width="42" height="21"/>
+                                                            <rect key="frame" x="16" y="14" width="42" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -87,7 +87,7 @@
                                     </tableView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter a chemical formula (e.g. H2O)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d4C-l4-2jX">
                                         <rect key="frame" x="16" y="58" width="343" height="40"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="mdV-tS-FNE"/>
                                         </constraints>
@@ -131,7 +131,7 @@
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Moles" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VYe-Q0-CGa">
                                         <rect key="frame" x="16" y="198" width="343" height="40"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="rdm-HW-qBI"/>
                                         </constraints>
@@ -143,7 +143,7 @@
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Grams" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B3Z-5f-h3U">
                                         <rect key="frame" x="16" y="114" width="343" height="40"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="M4t-ZD-368"/>
                                         </constraints>
@@ -153,9 +153,9 @@
                                             <outlet property="delegate" destination="qig-qR-LrC" id="7DQ-wB-AQ5"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter a chemical formula (e.g. H2O)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7bs-r4-dzR">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Chemical formula (e.g. H2O)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7bs-r4-dzR">
                                         <rect key="frame" x="16" y="58" width="343" height="40"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="mP3-wz-gfV"/>
                                         </constraints>
@@ -223,7 +223,7 @@
             </objects>
             <point key="canvasLocation" x="2952.8000000000002" y="892.80359820089961"/>
         </scene>
-        <!--ICE Table Calculator-->
+        <!--ICE Table Solver-->
         <scene sceneID="Noh-zc-Vfz">
             <objects>
                 <viewController id="Yda-KY-JpF" customClass="EquillibriumViewController" customModule="ChemCalc" customModuleProvider="target" sceneMemberID="viewController">
@@ -239,7 +239,7 @@
                                 <rect key="frame" x="0.0" y="118" width="375" height="500"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find Concentrations at Equillibrium" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pog-dJ-hhh">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calculate equilibrium concentrations" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pog-dJ-hhh">
                                 <rect key="frame" x="16" y="64" width="343" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="IXr-yh-KsJ"/>
@@ -248,9 +248,9 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Include all states of matter e.g. CO2(g)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tZB-68-6CZ">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Chemical reaction (use = for equilibrium)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tZB-68-6CZ">
                                 <rect key="frame" x="16" y="102" width="343" height="40"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="s4q-c9-pS5"/>
                                 </constraints>
@@ -260,18 +260,9 @@
                                     <outlet property="delegate" destination="Yda-KY-JpF" id="edL-DT-1Uq"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your balanced equation goes here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w03-8c-e6t">
-                                <rect key="frame" x="16" y="150" width="343" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="7dD-NL-0S8"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter K for above reaction" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CRF-3N-LXD">
-                                <rect key="frame" x="16" y="188" width="343" height="40"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Equilibrium constant" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CRF-3N-LXD">
+                                <rect key="frame" x="16" y="157" width="343" height="40"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="4yT-Ky-bg5"/>
                                 </constraints>
@@ -281,25 +272,34 @@
                                     <outlet property="delegate" destination="Yda-KY-JpF" id="xI9-dw-Vaa"/>
                                 </connections>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w03-8c-e6t">
+                                <rect key="frame" x="16" y="205" width="343" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="7dD-NL-0S8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U36-7Y-k6m">
-                                <rect key="frame" x="16" y="281" width="343" height="265"/>
+                                <rect key="frame" x="16" y="268" width="343" height="285"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ice_cell" id="qdr-sJ-pOa" customClass="ICECell" customModule="ChemCalc" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="343" height="44.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qdr-sJ-pOa" id="dgA-je-3L1">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Compound" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wzD-CR-7vH">
-                                                    <rect key="frame" x="14" y="11" width="90" height="22.5"/>
+                                                    <rect key="frame" x="15" y="11" width="89" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Initial conc. (M)" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BH8-2a-FsU">
-                                                    <rect key="frame" x="172" y="5" width="156" height="34"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Initial conc." textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BH8-2a-FsU">
+                                                    <rect key="frame" x="172" y="5" width="155" height="34"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
@@ -326,49 +326,36 @@
                                     <outlet property="delegate" destination="Yda-KY-JpF" id="iVl-UJ-XqF"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter initial concentrations below" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lzM-GE-fyD">
-                                <rect key="frame" x="39" y="243" width="297" height="24"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hSa-8K-KBM">
-                                <rect key="frame" x="39" y="554" width="297" height="52"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="52" id="Ard-cF-csd"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
-                                <state key="normal" title="Solve!">
-                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hZ-Xe-4eS">
+                                <rect key="frame" x="164" y="561" width="46" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                <state key="normal" title="Solve">
+                                    <color key="titleColor" red="0.87642228600000005" green="0.094558097420000001" blue="0.1403238624" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="solveICETable:" destination="Yda-KY-JpF" eventType="touchUpInside" id="GHO-io-Ty5"/>
+                                    <action selector="solveButton:" destination="Yda-KY-JpF" eventType="touchUpInside" id="pV7-mC-6Uh"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="zse-K3-DJX" firstAttribute="top" secondItem="hSa-8K-KBM" secondAttribute="bottom" constant="12" id="2xP-K8-MZJ"/>
-                            <constraint firstItem="CRF-3N-LXD" firstAttribute="top" secondItem="w03-8c-e6t" secondAttribute="bottom" constant="8" symbolic="YES" id="69F-1F-oXd"/>
+                            <constraint firstItem="CRF-3N-LXD" firstAttribute="top" secondItem="w03-8c-e6t" secondAttribute="bottom" constant="-103" id="69F-1F-oXd"/>
+                            <constraint firstItem="zse-K3-DJX" firstAttribute="top" secondItem="U36-7Y-k6m" secondAttribute="bottom" constant="65" id="7KL-ww-l7z"/>
                             <constraint firstItem="CRF-3N-LXD" firstAttribute="leading" secondItem="U36-7Y-k6m" secondAttribute="leading" id="DHL-iB-qxU"/>
                             <constraint firstItem="pog-dJ-hhh" firstAttribute="leading" secondItem="NLE-eL-lXX" secondAttribute="leadingMargin" id="Ltv-8f-2dy"/>
                             <constraint firstItem="pog-dJ-hhh" firstAttribute="top" secondItem="IDJ-v4-UyI" secondAttribute="bottom" constant="20" id="Ps7-Tn-8UV"/>
-                            <constraint firstItem="U36-7Y-k6m" firstAttribute="top" secondItem="lzM-GE-fyD" secondAttribute="bottom" constant="14" id="PzW-9y-g8c"/>
-                            <constraint firstItem="lzM-GE-fyD" firstAttribute="trailing" secondItem="hSa-8K-KBM" secondAttribute="trailing" id="Wjj-Em-4Nz"/>
                             <constraint firstItem="Lm7-BZ-2eZ" firstAttribute="bottom" secondItem="zse-K3-DJX" secondAttribute="top" id="aOm-8a-CBN"/>
                             <constraint firstItem="tZB-68-6CZ" firstAttribute="top" secondItem="pog-dJ-hhh" secondAttribute="bottom" constant="8" symbolic="YES" id="d5Q-st-qGc"/>
                             <constraint firstItem="pog-dJ-hhh" firstAttribute="trailing" secondItem="NLE-eL-lXX" secondAttribute="trailingMargin" id="fkH-MM-bEc"/>
-                            <constraint firstItem="w03-8c-e6t" firstAttribute="top" secondItem="tZB-68-6CZ" secondAttribute="bottom" constant="8" symbolic="YES" id="h29-Mb-Rya"/>
-                            <constraint firstItem="CRF-3N-LXD" firstAttribute="centerX" secondItem="lzM-GE-fyD" secondAttribute="centerX" id="ioY-o8-zrN"/>
+                            <constraint firstItem="w03-8c-e6t" firstAttribute="top" secondItem="tZB-68-6CZ" secondAttribute="bottom" constant="63" id="h29-Mb-Rya"/>
+                            <constraint firstItem="U36-7Y-k6m" firstAttribute="top" secondItem="w03-8c-e6t" secondAttribute="bottom" constant="8" symbolic="YES" id="jd3-Xf-wuV"/>
                             <constraint firstItem="w03-8c-e6t" firstAttribute="leading" secondItem="CRF-3N-LXD" secondAttribute="leading" id="nhC-eg-A6T"/>
-                            <constraint firstItem="hSa-8K-KBM" firstAttribute="top" secondItem="U36-7Y-k6m" secondAttribute="bottom" constant="8" symbolic="YES" id="qHE-kg-Lmi"/>
                             <constraint firstItem="w03-8c-e6t" firstAttribute="trailing" secondItem="CRF-3N-LXD" secondAttribute="trailing" id="qYg-V9-8ud"/>
                             <constraint firstItem="pog-dJ-hhh" firstAttribute="trailing" secondItem="tZB-68-6CZ" secondAttribute="trailing" id="ria-x4-rCE"/>
-                            <constraint firstItem="lzM-GE-fyD" firstAttribute="leading" secondItem="hSa-8K-KBM" secondAttribute="leading" id="t3f-pG-dXg"/>
                             <constraint firstItem="pog-dJ-hhh" firstAttribute="leading" secondItem="tZB-68-6CZ" secondAttribute="leading" id="xTe-XE-hUB"/>
                             <constraint firstItem="CRF-3N-LXD" firstAttribute="trailing" secondItem="U36-7Y-k6m" secondAttribute="trailing" id="z2D-w5-hLK"/>
                             <constraint firstItem="tZB-68-6CZ" firstAttribute="trailing" secondItem="w03-8c-e6t" secondAttribute="trailing" id="z7o-2n-w3L"/>
-                            <constraint firstItem="lzM-GE-fyD" firstAttribute="top" secondItem="CRF-3N-LXD" secondAttribute="bottom" constant="15" id="zBB-kj-afk"/>
                             <constraint firstItem="tZB-68-6CZ" firstAttribute="leading" secondItem="w03-8c-e6t" secondAttribute="leading" id="zXf-Je-Aqt"/>
                         </constraints>
                         <variation key="default">
@@ -377,7 +364,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="ICE Table Calculator" id="VW6-WH-Buv">
+                    <navigationItem key="navigationItem" title="ICE Table Solver" id="VW6-WH-Buv">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="info" id="C91-hk-l0g">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
@@ -427,7 +414,7 @@
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Reactant 1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AoJ-3T-Uxu" userLabel="Chemical formula of 1st reactant">
                                         <rect key="frame" x="17" y="48" width="150" height="40"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="tPG-RA-jh8"/>
                                         </constraints>
@@ -439,7 +426,7 @@
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Amount (g)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Gw-fI-9GN" userLabel="Chemical formula of 1st reactant">
                                         <rect key="frame" x="175" y="48" width="121" height="40"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="121" id="Co1-1K-8iC"/>
                                             <constraint firstAttribute="height" constant="40" id="lPY-cH-0Rb"/>
@@ -452,7 +439,7 @@
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Amount (g)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zfq-wd-7n8" userLabel="Chemical formula of 1st reactant">
                                         <rect key="frame" x="175" y="96" width="121" height="40"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="32H-hY-lx8"/>
                                             <constraint firstAttribute="width" constant="121" id="OK0-8e-f59"/>
@@ -465,7 +452,7 @@
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="#" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pse-lG-rnx">
                                         <rect key="frame" x="304" y="48" width="54" height="40"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Cfs-Ml-eTT"/>
                                             <constraint firstAttribute="width" constant="54" id="h20-7C-l5b"/>
@@ -478,7 +465,7 @@
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Reactant 2" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NMk-ft-j2A" userLabel="Chemical formula of 2nd reactant">
                                         <rect key="frame" x="17" y="96" width="150" height="40"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="f3g-Yr-be0"/>
                                         </constraints>
@@ -490,7 +477,7 @@
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="#" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nEu-xz-7kc">
                                         <rect key="frame" x="304" y="96" width="54" height="40"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="54" id="bIF-cM-3uW"/>
                                             <constraint firstAttribute="height" constant="40" id="eqf-LI-0OP"/>
@@ -503,7 +490,7 @@
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Product chemical formula" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LGg-3l-WqM" userLabel="Chemical formula of product">
                                         <rect key="frame" x="17" y="144" width="279" height="40"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="r6H-oh-WeG"/>
                                             <constraint firstAttribute="width" constant="279" id="x8S-xU-hC7"/>
@@ -516,7 +503,7 @@
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="#" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="za7-Nd-pnZ">
                                         <rect key="frame" x="304" y="144" width="54" height="40"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="54" id="CVH-Ly-kBs"/>
                                             <constraint firstAttribute="height" constant="40" id="lnZ-co-nWq"/>
@@ -536,13 +523,13 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Compound" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="73s-ej-Mr3">
-                                                            <rect key="frame" x="13" y="10.5" width="90" height="22"/>
+                                                            <rect key="frame" x="14" y="10.5" width="89" height="22"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coefficient" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YkU-2L-hJ4">
-                                                            <rect key="frame" x="240" y="10.5" width="89" height="22"/>
+                                                            <rect key="frame" x="240" y="10.5" width="88" height="22"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -567,7 +554,7 @@
                                             <outlet property="delegate" destination="8wO-yv-7Lk" id="i8N-fz-oGC"/>
                                         </connections>
                                     </tableView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aY0-dZ-g2G">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aY0-dZ-g2G">
                                         <rect key="frame" x="17" y="459" width="341" height="50"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                         <state key="normal" title="Clear All Input">
@@ -630,7 +617,7 @@
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="C6H12O6 + O2 = CO2 + H2O" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GXt-S9-hoS">
                                         <rect key="frame" x="16" y="58" width="343" height="40"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="0Te-Z2-Ob6"/>
                                         </constraints>
@@ -661,13 +648,13 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Molar Mass" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XNK-aG-hUz">
-                                                            <rect key="frame" x="236" y="11" width="93" height="22"/>
+                                                            <rect key="frame" x="235" y="11" width="93" height="22"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Compound" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R7y-01-Vlm">
-                                                            <rect key="frame" x="13" y="11" width="90" height="22"/>
+                                                            <rect key="frame" x="14" y="11" width="89" height="22"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -800,11 +787,11 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="115"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gy2-b8-KId" id="zzW-GI-AHd">
-                                            <rect key="frame" x="0.0" y="0.0" width="349" height="115"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="348" height="115"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UDW-Mx-Gfx">
-                                                    <rect key="frame" x="23" y="12" width="91" height="91"/>
+                                                    <rect key="frame" x="24" y="12" width="91" height="91"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Uuu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8a-1u-kVw">
                                                             <rect key="frame" x="7" y="4" width="77" height="83"/>
@@ -842,7 +829,7 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protons/neutrons:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R3q-4I-dUD">
-                                                    <rect key="frame" x="132" y="61" width="207" height="18"/>
+                                                    <rect key="frame" x="133" y="61" width="205" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="6Sc-zD-ECo"/>
                                                     </constraints>
@@ -851,7 +838,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Electron config:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Rm-4Q-t9b">
-                                                    <rect key="frame" x="132" y="81" width="207" height="18"/>
+                                                    <rect key="frame" x="133" y="81" width="205" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="1Du-X0-bKZ"/>
                                                     </constraints>
@@ -860,13 +847,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Element Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="df0-0K-a4b">
-                                                    <rect key="frame" x="132" y="15" width="240" height="21"/>
+                                                    <rect key="frame" x="133" y="15" width="238" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group (column):" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Un-Qd-qXp">
-                                                    <rect key="frame" x="132" y="41" width="207" height="18"/>
+                                                    <rect key="frame" x="133" y="41" width="205" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="Fsn-0F-hLN"/>
                                                     </constraints>
@@ -953,7 +940,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="1xV-gX-24t">
                                 <rect key="frame" x="0.0" y="44" width="375" height="623"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="elementinfocell" id="pzM-LH-4cL" customClass="ElementInfoCell" customModule="ChemCalc" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="43.5"/>
@@ -963,13 +950,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Formula" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hJW-NM-5ex">
-                                                    <rect key="frame" x="294" y="10.5" width="66" height="22"/>
+                                                    <rect key="frame" x="293" y="10.5" width="66" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Compound" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q3w-dS-q0U">
-                                                    <rect key="frame" x="14" y="11.5" width="90" height="21"/>
+                                                    <rect key="frame" x="15" y="11.5" width="89" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1089,13 +1076,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Compound" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iZu-nw-lJR">
-                                                    <rect key="frame" x="15" y="11.5" width="90" height="21"/>
+                                                    <rect key="frame" x="16" y="11.5" width="89" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jic-b8-kfI">
-                                                    <rect key="frame" x="316" y="11.5" width="45" height="21"/>
+                                                    <rect key="frame" x="315" y="11.5" width="45" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -1168,7 +1155,7 @@
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Include all states of matter e.g. CO2(g)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uiq-6H-88s">
                                 <rect key="frame" x="16" y="102" width="343" height="40"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="z5h-MA-M8B"/>
                                 </constraints>
@@ -1198,7 +1185,7 @@
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Compound" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AC6-xN-DAL">
                                 <rect key="frame" x="72" y="193" width="132" height="40"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="7yD-yf-AJq"/>
                                     <constraint firstAttribute="width" constant="132" id="iMb-Hv-q57"/>
@@ -1211,7 +1198,7 @@
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="#" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yfZ-Wh-ov0">
                                 <rect key="frame" x="16" y="193" width="40" height="40"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="Qw9-pd-COu"/>
                                     <constraint firstAttribute="height" constant="40" id="dms-jz-zhe"/>
@@ -1224,7 +1211,7 @@
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="#" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zr0-Nn-pO8">
                                 <rect key="frame" x="16" y="249" width="40" height="40"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="2zu-bg-TmT"/>
                                     <constraint firstAttribute="height" constant="40" id="fZA-jt-NgF"/>
@@ -1237,7 +1224,7 @@
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ΔH (kJ/mol)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0lh-IY-bxp">
                                 <rect key="frame" x="219" y="193" width="140" height="40"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="140" id="Cpc-aU-08n"/>
                                     <constraint firstAttribute="height" constant="40" id="e3B-W5-oq7"/>
@@ -1250,7 +1237,7 @@
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Compound" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h8z-NC-sbQ">
                                 <rect key="frame" x="72" y="249" width="132" height="40"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="DDG-lR-cSz"/>
                                     <constraint firstAttribute="width" constant="132" id="kwM-su-skS"/>
@@ -1263,7 +1250,7 @@
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ΔH (kJ/mol)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JGF-Zh-A1d">
                                 <rect key="frame" x="219" y="249" width="140" height="40"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="8jQ-FY-Q8j"/>
                                     <constraint firstAttribute="width" constant="140" id="F9J-rE-ie1"/>
@@ -1276,7 +1263,7 @@
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Compound" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="47k-wf-mkg">
                                 <rect key="frame" x="72" y="305" width="132" height="40"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="132" id="Mbz-vj-7dN"/>
                                     <constraint firstAttribute="height" constant="40" id="y1x-NA-3aV"/>
@@ -1289,7 +1276,7 @@
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ΔH (kJ/mol)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g88-J4-Edw">
                                 <rect key="frame" x="219" y="305" width="140" height="40"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Hce-Ks-bZh"/>
                                     <constraint firstAttribute="width" constant="140" id="UNi-CX-wkh"/>
@@ -1302,7 +1289,7 @@
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Compound" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LQD-NE-Egw">
                                 <rect key="frame" x="72" y="361" width="132" height="40"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="0KK-OL-GzG"/>
                                     <constraint firstAttribute="width" constant="132" id="XUH-4c-hTM"/>
@@ -1315,7 +1302,7 @@
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ΔH (kJ/mol)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8bC-pZ-zfE">
                                 <rect key="frame" x="219" y="361" width="140" height="40"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="140" id="iOW-P6-5p3"/>
                                     <constraint firstAttribute="height" constant="40" id="prD-HR-aqc"/>
@@ -1328,7 +1315,7 @@
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Compound" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RkN-pP-niz">
                                 <rect key="frame" x="72" y="417" width="132" height="40"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="132" id="IXj-70-JEb"/>
                                     <constraint firstAttribute="height" constant="40" id="adG-aM-7hq"/>
@@ -1341,7 +1328,7 @@
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ΔH (kJ/mol)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B9Q-fz-ZF5">
                                 <rect key="frame" x="219" y="417" width="140" height="40"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="UCx-1C-zZp"/>
                                     <constraint firstAttribute="width" constant="140" id="woQ-fi-p3d"/>
@@ -1354,7 +1341,7 @@
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Compound" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rCR-rF-9Hg">
                                 <rect key="frame" x="72" y="473" width="132" height="40"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="132" id="IYF-bc-w2J"/>
                                     <constraint firstAttribute="height" constant="40" id="rIf-xE-oIh"/>
@@ -1367,7 +1354,7 @@
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ΔH (kJ/mol)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HDN-We-JHP">
                                 <rect key="frame" x="219" y="473" width="140" height="40"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="140" id="MXW-gi-DRT"/>
                                     <constraint firstAttribute="height" constant="40" id="NfD-Sg-W8D"/>
@@ -1380,7 +1367,7 @@
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="#" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UOe-vS-SWS">
                                 <rect key="frame" x="16" y="305" width="40" height="40"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="ZKZ-e0-4n6"/>
                                     <constraint firstAttribute="width" constant="40" id="wcv-0f-cab"/>
@@ -1393,7 +1380,7 @@
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="#" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IA6-Gb-6RL">
                                 <rect key="frame" x="16" y="361" width="40" height="40"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="dp7-3i-6kd"/>
                                     <constraint firstAttribute="height" constant="40" id="paP-Hq-a9f"/>
@@ -1406,7 +1393,7 @@
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="#" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7nk-ps-HPR">
                                 <rect key="frame" x="16" y="417" width="40" height="40"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="02p-Gp-WhT"/>
                                     <constraint firstAttribute="width" constant="40" id="miD-YH-5fs"/>
@@ -1419,7 +1406,7 @@
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="#" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2a7-J4-n5P">
                                 <rect key="frame" x="16" y="473" width="40" height="40"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="aGD-ak-v7Z"/>
                                     <constraint firstAttribute="width" constant="40" id="dsU-3l-biR"/>
@@ -1531,17 +1518,17 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="5zh-eu-nw0">
                                 <rect key="frame" x="0.0" y="44" width="375" height="574"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="morecell" textLabel="qiP-4P-5Gh" style="IBUITableViewCellStyleDefault" id="UMA-zT-DcL">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UMA-zT-DcL" id="cY0-Qx-pg5">
-                                            <rect key="frame" x="0.0" y="0.0" width="349" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="348" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Report Bug/Issue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qiP-4P-5Gh">
-                                                    <rect key="frame" x="15" y="0.0" width="326" height="43.5"/>
+                                                    <rect key="frame" x="16" y="0.0" width="324" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1614,13 +1601,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Formula" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ey6-5s-es3">
-                                                    <rect key="frame" x="294" y="10.5" width="66" height="22"/>
+                                                    <rect key="frame" x="293" y="10.5" width="66" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Compound" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hsa-4d-6cy">
-                                                    <rect key="frame" x="14" y="11.5" width="90" height="21"/>
+                                                    <rect key="frame" x="15" y="11.5" width="89" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1677,7 +1664,7 @@
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter an ionic compound (e.g. NaCl)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fGz-Vc-Qhj">
                                 <rect key="frame" x="16" y="102" width="343" height="40"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="gdq-nv-mxQ"/>
                                 </constraints>
@@ -1756,7 +1743,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reaction" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVL-n1-odw">
-                                                    <rect key="frame" x="12" y="-0.5" width="64" height="51"/>
+                                                    <rect key="frame" x="13" y="-0.5" width="64" height="51"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="51" id="YKP-KF-iI3"/>
                                                     </constraints>
@@ -1765,7 +1752,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Potential" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JVn-gO-yOG">
-                                                    <rect key="frame" x="290" y="0.0" width="71" height="50"/>
+                                                    <rect key="frame" x="289" y="0.0" width="71" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="0Rz-mQ-xFS"/>
                                                     </constraints>
@@ -1844,7 +1831,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Compound" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="brN-Lq-NSW">
-                                                    <rect key="frame" x="14" y="0.0" width="91" height="44.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="91" height="44.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="ZxF-1a-ya8"/>
                                                         <constraint firstAttribute="width" constant="91" id="xdg-Ct-e0Q"/>
@@ -1854,7 +1841,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ksp" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ImD-ba-5iF">
-                                                    <rect key="frame" x="231" y="0.0" width="130" height="44.5"/>
+                                                    <rect key="frame" x="230" y="0.0" width="130" height="44.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="Xwh-Gd-wL0"/>
                                                         <constraint firstAttribute="width" constant="130" id="hWO-dN-UjI"/>
@@ -1928,13 +1915,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Formula" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XCc-Jm-pra">
-                                                    <rect key="frame" x="294" y="10.5" width="66" height="22"/>
+                                                    <rect key="frame" x="293" y="10.5" width="66" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Compound" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9E4-ic-Ljq">
-                                                    <rect key="frame" x="14" y="11.5" width="90" height="21"/>
+                                                    <rect key="frame" x="15" y="11.5" width="89" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -2116,11 +2103,11 @@
                                         <rect key="frame" x="0.0" y="72" width="375" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0Pm-zv-Urd" id="Zb2-WH-YCs">
-                                            <rect key="frame" x="0.0" y="0.0" width="349" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="348" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Compound" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pwb-ha-DBG">
-                                                    <rect key="frame" x="14" y="10.5" width="145" height="22"/>
+                                                    <rect key="frame" x="15" y="10.5" width="145" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="22" id="3mo-Ei-2bH"/>
                                                         <constraint firstAttribute="width" constant="145" id="tSb-kz-46n"/>
@@ -2130,7 +2117,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ka" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="syV-Ep-OKi">
-                                                    <rect key="frame" x="321" y="11" width="20" height="22"/>
+                                                    <rect key="frame" x="320" y="11" width="20" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="22" id="G2S-co-Dph"/>
                                                     </constraints>
@@ -2194,7 +2181,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="uG1-fB-HAK">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="kacell" id="svI-hF-Slr" customClass="KaCell" customModule="ChemCalc" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
@@ -2204,7 +2191,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ka" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wJe-aZ-6ey">
-                                                    <rect key="frame" x="14" y="10.5" width="21" height="23"/>
+                                                    <rect key="frame" x="15" y="10.5" width="21" height="23"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="23" id="OeI-5K-sE2"/>
                                                     </constraints>
@@ -2213,7 +2200,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Constant" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ysl-UE-pkg">
-                                                    <rect key="frame" x="-284" y="11" width="270" height="22.5"/>
+                                                    <rect key="frame" x="90" y="11" width="270" height="22.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="22" id="BO9-Ta-wm5"/>
                                                         <constraint firstAttribute="width" constant="270" id="JSw-bE-snh"/>
@@ -2263,5 +2250,8 @@
         <image name="flask" width="25" height="25"/>
         <image name="info" width="25" height="25"/>
         <image name="more" width="25" height="25"/>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>
