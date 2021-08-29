@@ -21,16 +21,30 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
     var coefficients = [Int]()
     var compounds = [String]()
     var concentrations = [Double]()
+    var equationType: String?
+    var equilibriumConstant: Double?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboard()
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == kaTextField {
+            if self.kaTextField.text != nil {
+                equilibriumConstant = Double(self.kaTextField.text!)
+            }
+            kaTextField.resignFirstResponder()
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == equationTextField {
             balanceEquation()
         } else if textField == kaTextField {
+            if self.kaTextField.text != nil {
+                equilibriumConstant = Double(self.kaTextField.text!)
+            }
             kaTextField.resignFirstResponder()
         }
         return true
@@ -40,7 +54,6 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
         if (equationTextField.text?.contains("+"))! && (equationTextField.text?.contains("="))! {
             
             let balancer = ChemicalEquationBalancer()
-            let iceTableSolver = ICETableSolver()
             coefficients = balancer.setupMatrix(input: equationTextField.text!)
             compounds = balancer.getCompounds()
             let formatter = TextFormatter()
@@ -148,7 +161,7 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
                 coefficient = NSMutableAttributedString(string: String(coefficients[2]), attributes: bold)
                 completeEquation.append(coefficient)
                 completeEquation.append(formatter.fix(formula: compounds[2]))
-                
+                                
                 balancedEquationTextView.attributedText = completeEquation
                 
             } else if balancer.getReactants().count == 2 && balancer.getProducts().count == 3 {
@@ -225,15 +238,18 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
         
         for compound in compounds {
             
-            var index = compounds.index(of: compound)
+            let index = compounds.index(of: compound)
             
             if compound.contains(find: "(s)") {
                 compounds.remove(at: index!)
+                coefficients.remove(at: index!)
             }
             
             if compound.contains(find: "(l)") {
                 compounds.remove(at: index!)
+                coefficients.remove(at: index!)
             }
+            
         }
         
         return compounds.count
@@ -258,7 +274,13 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
     }
         
     @IBAction func solveButton(_ sender: Any) {
-        concentrations = iceTableSolver.solve()
+        let iceTableSolver = ICETableSolver()
+        if (equationType != nil && equilibriumConstant != nil) {
+            concentrations = iceTableSolver.solve(type: equationType!, k: equilibriumConstant!, compounds: compounds, coefficients: coefficients)
+            print(concentrations)
+        } else {
+            // Error message
+        }
     }
     
 }
@@ -268,7 +290,6 @@ class ICECell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var formulaLabel: UILabel!
     @IBOutlet weak var concTextField: UITextField!
     var initialConcentration: Double?
-    var iceTableSolver: ICETableSolver!
     var iceCellIndex: Int?
     
     override func awakeFromNib() {
@@ -288,7 +309,6 @@ class ICECell: UITableViewCell, UITextFieldDelegate {
                 initialConcentration = Double(self.concTextField.text!)
                 if indexIsValid {
                     initialConcentrations[iceCellIndex ?? 0] = initialConcentration ?? 0
-                    print(initialConcentrations)
                 } else {
                     initialConcentrations.insert(initialConcentration!, at: iceCellIndex!)
                 }
