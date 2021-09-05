@@ -24,6 +24,8 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
     var equationType: String?
     var equilibriumConstant: Double?
     
+    var solidOrLiquidPresent = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboard()
@@ -237,19 +239,13 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         for compound in compounds {
-            
             let index = compounds.index(of: compound)
             
-            if compound.contains(find: "(s)") {
+            if compound.contains(find: "(s)") || compound.contains(find: "(l)") {
                 compounds.remove(at: index!)
                 coefficients.remove(at: index!)
+                equationType = equationType! + " SL" + String(index! + 1)
             }
-            
-            if compound.contains(find: "(l)") {
-                compounds.remove(at: index!)
-                coefficients.remove(at: index!)
-            }
-            
         }
         
         return compounds.count
@@ -276,8 +272,22 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
     @IBAction func solveButton(_ sender: Any) {
         let iceTableSolver = ICETableSolver()
         if (equationType != nil && equilibriumConstant != nil) {
-            concentrations = iceTableSolver.solve(type: equationType!, k: equilibriumConstant!, compounds: compounds, coefficients: coefficients)
+            concentrations = iceTableSolver.solve(type: equationType!, K: equilibriumConstant!, compounds: compounds, coefficients: coefficients)
+
+            var concentrationsText = ""
+            
+            for concentration in concentrations {
+                let index = concentrations.index(of: concentration)
+                concentrationsText += "\n" + compounds[index!] + ": " + String(concentration) + " M\n"
+            }
+            
             print(concentrations)
+            print(concentrationsText)
+            
+            let alert = UIAlertController(title: "Equilibrium Concentrations", message: concentrationsText, preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Nice", style: UIAlertActionStyle.default))
+            self.present(alert, animated: true, completion: nil)
+            
         } else {
             // Error message
         }
