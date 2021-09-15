@@ -8,6 +8,9 @@
 
 import UIKit
 
+var yesScroll = false
+var iceIndex: Int?
+
 class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var table: UITableView!
@@ -29,10 +32,36 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboard()
+        
+        // Scroll tableview with text field input
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    // MARK: Keyboard Notifications
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if yesScroll {
+            if let keyboardHeight = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
+                table.contentInset = UIEdgeInsetsMake(0, 0, CGFloat(220.0), 0)
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        yesScroll = false
+        UIView.animate(withDuration: 0.2, animations: {
+            self.table.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        })
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == kaTextField {
+        if textField == equationTextField {
+            balanceEquation()
+        } else if textField == kaTextField {
             if self.kaTextField.text != nil {
                 equilibriumConstant = Double(self.kaTextField.text!)
             }
@@ -276,14 +305,15 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
 
             var concentrationsText = ""
             
-            for concentration in concentrations {
-                let index = concentrations.index(of: concentration)
-                concentrationsText += "\n" + compounds[index!] + ": " + String(concentration) + " M\n"
+            for compound in compounds {
+                let index = compounds.index(of: compound)
+                concentrationsText += "\n" + compound + ": " + String(concentrations[index!]) + " M\n"
             }
             
             print(concentrations)
             print(concentrationsText)
             
+            // Show results
             let alert = UIAlertController(title: "Equilibrium Concentrations", message: concentrationsText, preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Nice", style: UIAlertActionStyle.default))
             self.present(alert, animated: true, completion: nil)
@@ -311,6 +341,13 @@ class ICECell: UITableViewCell, UITextFieldDelegate {
         super.setSelected(selected, animated: animated)
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if iceCellIndex! >= 1 {
+            yesScroll = true
+            iceIndex = iceCellIndex
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let indexIsValid = initialConcentrations.indices.contains(iceCellIndex!)
         
@@ -319,10 +356,11 @@ class ICECell: UITableViewCell, UITextFieldDelegate {
                 initialConcentration = Double(self.concTextField.text!)
                 if indexIsValid {
                     initialConcentrations[iceCellIndex ?? 0] = initialConcentration ?? 0
-                } else {
+                } else if !indexIsValid {
                     initialConcentrations.insert(initialConcentration!, at: iceCellIndex!)
                 }
             }
+            concTextField.resignFirstResponder()
         }
         return true
     }
@@ -335,11 +373,11 @@ class ICECell: UITableViewCell, UITextFieldDelegate {
                 initialConcentration = Double(self.concTextField.text!)
                 if indexIsValid {
                     initialConcentrations[iceCellIndex ?? 0] = initialConcentration ?? 0
-                    print(initialConcentrations)
-                } else {
+                } else if !indexIsValid {
                     initialConcentrations.insert(initialConcentration!, at: iceCellIndex!)
                 }
             }
+            concTextField.resignFirstResponder()
         }
     }
     
