@@ -82,7 +82,7 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
     }
     
     func balanceEquation() {
-        if (equationTextField.text?.contains("+"))! && (equationTextField.text?.contains("="))! {
+        if equationTextField.text != nil && equationTextField.text!.contains("=") {
             
             let balancer = ChemicalEquationBalancer()
             coefficients = balancer.setupMatrix(input: equationTextField.text!)
@@ -158,6 +158,8 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
                 coefficient = NSMutableAttributedString(string: String(coefficients[1]), attributes: bold)
                 completeEquation.append(coefficient)
                 completeEquation.append(formatter.fix(formula: compounds[1]))
+                
+                balancedEquationTextView.attributedText = completeEquation
                 
             } else if balancer.getReactants().count == 2 && balancer.getProducts().count == 1 {
                 
@@ -248,8 +250,8 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
                 balancedEquationTextView.attributedText = completeEquation
                 
             } else {
-                let alert = UIAlertController(title: "Something's wrong", message: "Please double-check that you've entered an unbalanced chemical equation using + and = symbols, including states of matter.", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default))
+                let alert = UIAlertController(title: "Whoops!", message: "Looks like this equation is not supported yet. Sorry!", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Dang okay", style: UIAlertActionStyle.default))
                 self.present(alert, animated: true, completion: nil)
                 equationTextField.resignFirstResponder()
             }

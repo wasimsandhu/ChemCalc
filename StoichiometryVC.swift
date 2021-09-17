@@ -89,9 +89,9 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         } else if tabs.selectedSegmentIndex == 1 {
             balanceView.isHidden = true
             stoichiometryView.isHidden = false
-            
+                        
             if readyForStoich == true {
-                if textFieldIsNil() == false && textIsAcceptable {
+                if textFieldIsNil() == false && textIsAcceptable && compounds.count != 2 {
                     limitingReactant = stoichCalc.getLimitingReactant(reactant1: firstReactant!, amount1: firstAmount!, coefficient1: firstCoefficient!, reactant2: secondReactant!, amount2: secondAmount!, coefficient2: secondCoefficient!)
                     excessReactantLeft = stoichCalc.getExcessReactant()
                     theoreticalYield = nil
@@ -126,7 +126,7 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             getText()
             firstReactantTextField.resignFirstResponder()
             
-            if textFieldIsNil() == false && textIsAcceptable {
+            if textFieldIsNil() == false && textIsAcceptable && compounds.count != 2 {
                 limitingReactant = stoichCalc.getLimitingReactant(reactant1: firstReactant!, amount1: firstAmount!, coefficient1: firstCoefficient!, reactant2: secondReactant!, amount2: secondAmount!, coefficient2: secondCoefficient!)
                 excessReactantLeft = stoichCalc.getExcessReactant()
                 
@@ -149,7 +149,7 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             self.firstAmountTextField.text! += " g"
             firstAmountTextField.resignFirstResponder()
             
-            if textFieldIsNil() == false && textIsAcceptable {
+            if textFieldIsNil() == false && textIsAcceptable && compounds.count != 2 {
                 limitingReactant = stoichCalc.getLimitingReactant(reactant1: firstReactant!, amount1: firstAmount!, coefficient1: firstCoefficient!, reactant2: secondReactant!, amount2: secondAmount!, coefficient2: secondCoefficient!)
                 excessReactantLeft = stoichCalc.getExcessReactant()
                 
@@ -170,7 +170,7 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             getText()
             firstCoefficientTextField.resignFirstResponder()
 
-            if textFieldIsNil() == false && textIsAcceptable {
+            if textFieldIsNil() == false && textIsAcceptable && compounds.count != 2 {
                 limitingReactant = stoichCalc.getLimitingReactant(reactant1: firstReactant!, amount1: firstAmount!, coefficient1: firstCoefficient!, reactant2: secondReactant!, amount2: secondAmount!, coefficient2: secondCoefficient!)
                 excessReactantLeft = stoichCalc.getExcessReactant()
                 
@@ -191,7 +191,7 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             getText()
             secondReactantTextField.resignFirstResponder()
             
-            if textFieldIsNil() == false && textIsAcceptable {
+            if textFieldIsNil() == false && textIsAcceptable && compounds.count != 2 {
                 limitingReactant = stoichCalc.getLimitingReactant(reactant1: firstReactant!, amount1: firstAmount!, coefficient1: firstCoefficient!, reactant2: secondReactant!, amount2: secondAmount!, coefficient2: secondCoefficient!)
                 excessReactantLeft = stoichCalc.getExcessReactant()
                 
@@ -214,7 +214,7 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             secondAmountTextField.resignFirstResponder()
             self.secondAmountTextField.text! += " g"
             
-            if textFieldIsNil() == false && textIsAcceptable {
+            if textFieldIsNil() == false && textIsAcceptable && compounds.count != 2 {
                 limitingReactant = stoichCalc.getLimitingReactant(reactant1: firstReactant!, amount1: firstAmount!, coefficient1: firstCoefficient!, reactant2: secondReactant!, amount2: secondAmount!, coefficient2: secondCoefficient!)
                 excessReactantLeft = stoichCalc.getExcessReactant()
                 
@@ -235,7 +235,7 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             getText()
             secondCoefficientTextField.resignFirstResponder()
             
-            if textFieldIsNil() == false && textIsAcceptable {
+            if textFieldIsNil() == false && textIsAcceptable && compounds.count != 2 {
                 limitingReactant = stoichCalc.getLimitingReactant(reactant1: firstReactant!, amount1: firstAmount!, coefficient1: firstCoefficient!, reactant2: secondReactant!, amount2: secondAmount!, coefficient2: secondCoefficient!)
                 
                 excessReactantLeft = stoichCalc.getExcessReactant()
@@ -359,7 +359,7 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
     
     func balanceEquation() {
-        if (balanceTextField.text?.contains("+"))! && (balanceTextField.text?.contains("="))! {
+        if balanceTextField.text != nil && balanceTextField.text!.contains("=") {
             
             let balancer = ChemicalEquationBalancer()
             coefficients = balancer.setupMatrix(input: balanceTextField.text!)
@@ -558,7 +558,7 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
                 balancedEquation.attributedText = completeEquation
                 
             } else {
-                let alert = UIAlertController(title: "Something's wrong", message: "Please double-check that you've entered an unbalanced chemical equation using + and = symbols.", preferredStyle: UIAlertControllerStyle.alert)
+                let alert = UIAlertController(title: "Whoops!", message: "Looks like this equation is not supported yet. Sorry!", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default))
                 self.present(alert, animated: true, completion: nil)
                 balanceTextField.resignFirstResponder()

@@ -30,8 +30,13 @@ class ChemicalEquationBalancer {
         let sides = equation.components(separatedBy: "=")
         
         // create array of reactants and products
-        reactants = sides[0].components(separatedBy: "+")
-        products = sides[1].components(separatedBy: "+")
+        if equation.contains(find: "+") {
+            reactants = sides[0].components(separatedBy: "+")
+            products = sides[1].components(separatedBy: "+")
+        } else {
+            reactants.append(sides[0])
+            products.append(sides[1])
+        }
 
         // append both to compounds array
         for reactant in reactants { compounds.append(reactant) }
