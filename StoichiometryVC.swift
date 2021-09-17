@@ -394,7 +394,7 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
                     equationType.text = "Combustion Reaction"
                 } else if compounds[2] == "H2O" && compounds[3] == "CO2" {
                     equationType.text = "Combustion Reaction"
-                } else if balancer.getReactants().count == balancer.getProducts().count {
+                } else if compounds[1] == compounds[3] || compounds[0] == compounds[2] || compounds[0] == compounds[3] || compounds[1] == compounds[2] {
                     equationType.text = "Double Replacement Reaction"
                 } else {
                     equationType.text = "Balance Chemical Equations"
@@ -432,7 +432,18 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
                 balancedEquation.attributedText = completeEquation
                 
             } else if balancer.getReactants().count == 1 && balancer.getProducts().count == 1 {
+                
+                coefficient = NSMutableAttributedString(string: String(coefficients[0]), attributes: bold)
+                completeEquation.append(coefficient)
+                completeEquation.append(formatter.fix(formula: compounds[0]))
+                completeEquation.append(equals)
+                coefficient = NSMutableAttributedString(string: String(coefficients[1]), attributes: bold)
+                completeEquation.append(coefficient)
+                completeEquation.append(formatter.fix(formula: compounds[1]))
+                
                 equationType.text = "Balance Chemical Equations"
+                balancedEquation.attributedText = completeEquation
+                
             } else if balancer.getReactants().count == 2 && balancer.getProducts().count == 1 {
                 
                 coefficient = NSMutableAttributedString(string: String(coefficients[0]), attributes: bold)

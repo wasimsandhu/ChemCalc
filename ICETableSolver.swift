@@ -43,6 +43,16 @@ class ICETableSolver {
         } else {
             actualType = type
         }
+        
+        if type == "R1P1" {
+            if coefficients[0] == 2 {
+                actualType == "R1P1 2A"
+            } else if coefficients[1] == 2 {
+                actualType == "R1P1 2B"
+            }
+        } else {
+            actualType = type
+        }
                 
         /// Equation Type: A + B = C
         if actualType == "R2P1" {
@@ -52,7 +62,7 @@ class ICETableSolver {
             productC = initialConcentrations[2]
             
             // Calculate reaction quotient
-            if reactantA != 0.0 && reactantB != 0.0 && productC != 0.0 {
+            if reactantA != 0.0 && reactantB != 0.0 {
                 let numerator = productC
                 let denominator = reactantA * reactantB
                 Q = numerator! / denominator
@@ -106,6 +116,57 @@ class ICETableSolver {
             }
         }
         
+        /// Equation Type: A = C + D
+        if actualType == "R1P2" {
+            
+            reactantA = initialConcentrations[0]
+            productC = initialConcentrations[1]
+            productD = initialConcentrations[2]
+            
+            // Calculate reaction quotient
+            if reactantA != 0.0 {
+                let numerator = productC * productD
+                Q = numerator / reactantA
+            } else {
+                Q = K
+            }
+            
+            if Q < K {
+                // x^2 + (C+D+K)x + CD-KA = 0
+
+                a = 1
+                
+                b = productC + productD + K
+                
+                let csum1 = productC * productD
+                let csum2 = K * reactantA
+                c = csum1 - csum2
+                
+                x = solveQuadraticEquation(a: a, b: b, c: c)
+
+                equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
+                equilibriumConcentrations.append(Double(productC + x).rounded(toPlaces: decimalPlaces))
+                equilibriumConcentrations.append(Double(productD + x).rounded(toPlaces: decimalPlaces))
+                
+            } else if Q > K {
+                // x^2 + (-C-D-K)x + CD-KA = 0
+
+                a = 1
+                
+                b = -productC - productD - K
+                
+                let csum1 = productC * productD
+                let csum2 = K * reactantA
+                c = csum1 - csum2
+                
+                x = solveQuadraticEquation(a: a, b: b, c: c)
+
+                equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
+                equilibriumConcentrations.append(Double(productC - x).rounded(toPlaces: decimalPlaces))
+                equilibriumConcentrations.append(Double(productD - x).rounded(toPlaces: decimalPlaces))
+            }
+        }
+        
         /// Equation Type: A = B
         if actualType == "R1P1" {
             
@@ -113,7 +174,7 @@ class ICETableSolver {
             productB = initialConcentrations[1]
             
             // Calculate reaction quotient
-            if reactantA != 0.0 && productB != 0.0 {
+            if reactantA != 0.0 {
                 Q = reactantB / reactantA
             } else {
                 Q = K
@@ -153,6 +214,44 @@ class ICETableSolver {
                 x = num / den
                 
                 equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
+                equilibriumConcentrations.append(Double(productB + x).rounded(toPlaces: decimalPlaces))
+            }
+        }
+        
+        /// Equation Type: 2A = B
+        if actualType == "R1P1 2A" {
+            
+            reactantA = initialConcentrations[0]
+            productB = initialConcentrations[1]
+            
+            // Calculate reaction quotient
+            if reactantA != 0.0 {
+                Q = productB / reactantA
+            } else {
+                Q = K
+            }
+            
+            if Q > K {
+                // x^2(4K) + x(4KA+1) + KA^2-B = 0
+                
+                a = 4*K
+                b = 4*K*reactantA + 1
+                let csum1 = K*reactantA*reactantA
+                c = csum1 - productB
+                x = solveQuadraticEquation(a: a, b: b, c: c)
+
+                equilibriumConcentrations.append(Double(reactantA + 2*x).rounded(toPlaces: decimalPlaces))
+                equilibriumConcentrations.append(Double(productB - x).rounded(toPlaces: decimalPlaces))
+                
+            } else if Q < K {
+                // x^2(4K) + x(-4KA-1) + KA^2-B = 0
+                
+                a = 4*K
+                b = -4*K*reactantA - 1
+                let csum1 = K*reactantA*reactantA
+                c = csum1 - productB
+                
+                equilibriumConcentrations.append(Double(reactantA - 2*x).rounded(toPlaces: decimalPlaces))
                 equilibriumConcentrations.append(Double(productB + x).rounded(toPlaces: decimalPlaces))
             }
         }

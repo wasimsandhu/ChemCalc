@@ -32,7 +32,7 @@ class ChemicalEquationBalancer {
         // create array of reactants and products
         reactants = sides[0].components(separatedBy: "+")
         products = sides[1].components(separatedBy: "+")
-        
+
         // append both to compounds array
         for reactant in reactants { compounds.append(reactant) }
         for product in products { compounds.append(product) }
@@ -144,6 +144,8 @@ class ChemicalEquationBalancer {
             augmentedMatrix.append([0,0,0,0,0])
         } else if columnCount == 6 && rowCount == 5 {
             augmentedMatrix.append([0,0,0,0,0,0])
+        } else if columnCount == 1 && rowCount == 1 {
+            augmentedMatrix.append([0])
         }
         
         // solve matrix https://rosettacode.org/wiki/Reduced_row_echelon_form#Swift
