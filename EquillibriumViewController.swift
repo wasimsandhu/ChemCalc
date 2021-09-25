@@ -18,7 +18,6 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
     @IBOutlet weak var kaTextField: UITextField!
     @IBOutlet weak var balancedEquationTextView: UILabel!
     
-    var iceTableSolver: ICETableSolver!
     var stoichCalc: Stoichiometry!
     
     var coefficients = [Int]()
@@ -26,9 +25,7 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
     var concentrations = [Double]()
     var equationType: String?
     var equilibriumConstant: Double?
-    
-    var solidOrLiquidPresent = false
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboard()
@@ -301,27 +298,53 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
     }
         
     @IBAction func solveButton(_ sender: Any) {
-        let iceTableSolver = ICETableSolver()
-        if (equationType != nil && equilibriumConstant != nil) {
-            concentrations = iceTableSolver.solve(type: equationType!, K: equilibriumConstant!, compounds: compounds, coefficients: coefficients)
-
-            var concentrationsText = ""
+         
+        if (equationType != nil && equilibriumConstant != nil && initialConcentrations.count == compounds.count) {
             
-            for compound in compounds {
-                let index = compounds.index(of: compound)
-                concentrationsText += "\n" + compound + ": " + String(concentrations[index!]) + " M\n"
+            concentrations = ICETableSolver().solve(type: equationType!, K: equilibriumConstant!, compounds: compounds, coefficients: coefficients)
+            
+            // Check if any reactants have an initial concentration of 0
+            if !zeroInDenominator {
+                
+                if !reactionQuotientEqualsK {
+                                    
+                    var concentrationsText = ""
+                    
+                    for compound in compounds {
+                        let index = compounds.index(of: compound)
+                        concentrationsText += "\n" + compound + ": " + String(concentrations[index!]) + " M\n"
+                    }
+                    
+                    // Show results
+                    let alert = UIAlertController(title: "Equilibrium Concentrations", message: concentrationsText, preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Nice", style: UIAlertActionStyle.default))
+                    self.present(alert, animated: true, completion: nil)
+                    
+                } else {
+                                    
+                    var concentrationsText = ""
+                    
+                    for compound in compounds {
+                        let index = compounds.index(of: compound)
+                        concentrationsText += "\n" + compound + ": " + String(initialConcentrations[index!]) + " M\n"
+                    }
+                    
+                    // Show results
+                    let alert = UIAlertController(title: "Already at Equilibrium", message: concentrationsText, preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Nice", style: UIAlertActionStyle.default))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            
+            } else {
+                let alert = UIAlertController(title: "Invalid Initial Concentration", message: "It looks like one or more reactants has an initial concentration of zero, resulting in an undefined value.", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default))
+                self.present(alert, animated: true, completion: nil)
             }
-            
-            print(concentrations)
-            print(concentrationsText)
-            
-            // Show results
-            let alert = UIAlertController(title: "Equilibrium Concentrations", message: concentrationsText, preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Nice", style: UIAlertActionStyle.default))
-            self.present(alert, animated: true, completion: nil)
-            
         } else {
             // Error message
+            let alert = UIAlertController(title: "Something's wrong", message: "Please double-check that you've entered in the chemical equation, equilibrium constant, and ALL initial concentrations.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -354,14 +377,24 @@ class ICECell: UITableViewCell, UITextFieldDelegate {
         let indexIsValid = initialConcentrations.indices.contains(iceCellIndex!)
         
         if textField == concTextField {
+            
             if (self.concTextField.text != nil && iceCellIndex != nil) {
-                initialConcentration = Double(self.concTextField.text!)
+                
+                // Prevents crash upon invalid concentration entry
+                if self.concTextField.text! == " " || self.concTextField.text! == "" {
+                    initialConcentration = 0.0
+                } else {
+                    initialConcentration = Double(self.concTextField.text!)
+                }
+                
+                // Checks to see if array already has a spot for value or not
                 if indexIsValid {
                     initialConcentrations[iceCellIndex ?? 0] = initialConcentration ?? 0
                 } else if !indexIsValid {
                     initialConcentrations.insert(initialConcentration!, at: iceCellIndex!)
                 }
             }
+            
             concTextField.resignFirstResponder()
         }
         return true
@@ -371,14 +404,24 @@ class ICECell: UITableViewCell, UITextFieldDelegate {
         let indexIsValid = initialConcentrations.indices.contains(iceCellIndex!)
         
         if textField == concTextField {
+            
             if (self.concTextField.text != nil && iceCellIndex != nil) {
-                initialConcentration = Double(self.concTextField.text!)
+                
+                // Prevents crash upon invalid concentration entry
+                if self.concTextField.text! == " " || self.concTextField.text! == "" {
+                    initialConcentration = 0.0
+                } else {
+                    initialConcentration = Double(self.concTextField.text!)
+                }
+                
+                // Checks to see if array already has a spot for value or not
                 if indexIsValid {
                     initialConcentrations[iceCellIndex ?? 0] = initialConcentration ?? 0
                 } else if !indexIsValid {
                     initialConcentrations.insert(initialConcentration!, at: iceCellIndex!)
                 }
             }
+            
             concTextField.resignFirstResponder()
         }
     }
