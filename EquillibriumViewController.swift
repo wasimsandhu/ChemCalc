@@ -298,10 +298,12 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
     }
         
     @IBAction func solveButton(_ sender: Any) {
-         
+        
+        let iceTableSolver = ICETableSolver()
+        
         if (equationType != nil && equilibriumConstant != nil && initialConcentrations.count == compounds.count) {
             
-            concentrations = ICETableSolver().solve(type: equationType!, K: equilibriumConstant!, compounds: compounds, coefficients: coefficients)
+            concentrations = iceTableSolver.solve(type: equationType!, K: equilibriumConstant!, compounds: compounds, coefficients: coefficients)
             
             // Check if any reactants have an initial concentration of 0
             if !zeroInDenominator {
@@ -310,8 +312,8 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
                                     
                     var concentrationsText = ""
                     
-                    for compound in compounds {
-                        let index = compounds.index(of: compound)
+                    for compound in iceTableSolver.localCompounds {
+                        let index = iceTableSolver.localCompounds.index(of: compound)
                         concentrationsText += "\n" + compound + ": " + String(concentrations[index!]) + " M\n"
                     }
                     
@@ -324,19 +326,19 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
                                     
                     var concentrationsText = ""
                     
-                    for compound in compounds {
-                        let index = compounds.index(of: compound)
+                    for compound in iceTableSolver.localCompounds {
+                        let index = iceTableSolver.localCompounds.index(of: compound)
                         concentrationsText += "\n" + compound + ": " + String(initialConcentrations[index!]) + " M\n"
                     }
                     
                     // Show results
-                    let alert = UIAlertController(title: "Already at Equilibrium", message: concentrationsText, preferredStyle: UIAlertControllerStyle.alert)
+                    let alert = UIAlertController(title: "Already at equilibrium", message: concentrationsText, preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "Nice", style: UIAlertActionStyle.default))
                     self.present(alert, animated: true, completion: nil)
                 }
             
             } else {
-                let alert = UIAlertController(title: "Invalid Initial Concentration", message: "It looks like one or more reactants has an initial concentration of zero, resulting in an undefined value.", preferredStyle: UIAlertControllerStyle.alert)
+                let alert = UIAlertController(title: "Invalid initial concentration(s)", message: "It looks like one or more reactants has an initial concentration of zero, resulting in an undefined value.", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default))
                 self.present(alert, animated: true, completion: nil)
             }

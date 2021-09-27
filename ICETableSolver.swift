@@ -20,6 +20,7 @@ class ICETableSolver {
     var c: Double!
     var x: Double!
     var Q: Double!
+    var kRef: Double!
     
     var decimalPlaces = 4
     
@@ -33,11 +34,20 @@ class ICETableSolver {
     var productC: Double!
     var productD: Double!
     
+    var localCoefficients = [Int]()
+    var localCompounds = [String]()
+    
     func solve(type: String, K: Double, compounds: [String], coefficients: [Int]) -> [Double] {
         
+        // Resets solver variables
         zeroInDenominator = false
         reactionQuotientEqualsK = false
         equilibriumConcentrations.removeAll()
+        
+        // Some class-level variables (because I'm lazy :P)
+        kRef = K
+        localCoefficients = coefficients
+        localCompounds = compounds
         
         // Simplify equation types
         if type == "R2P2 SL1" || type == "R2P2 SL2" {
@@ -48,11 +58,19 @@ class ICETableSolver {
             actualType = type
         }
         
+        // Reroute to proper calculation based on coefficients
         if type == "R1P1" {
             if coefficients[0] == 2 {
-                actualType = "R1P1 2A"
+                actualType = "R1P1 2A"  // 2A = B
             } else if coefficients[1] == 2 {
-                actualType = "R1P1 2B"
+                actualType = "R1P1 2B"  // A = 2B
+            }
+        } else if type == "R2P2" {
+            if coefficients[0] == 2 && coefficients[2] == 2 ||
+                coefficients[1] == 2 && coefficients[2] == 2 ||
+                coefficients[1] == 2 && coefficients[3] == 2 ||
+                coefficients[0] == 2 && coefficients[3] == 2 {
+                    actualType = "R2P2 A2B=C2D"    // A + 2B = C + 2D
             }
         } else {
             actualType = type
@@ -343,59 +361,142 @@ class ICETableSolver {
                 let numerator = productC * productD
                 let denominator = reactantA * reactantB
                 Q = numerator / denominator
-            } else if Q == K {
-                reactionQuotientEqualsK = true
             } else {
                 zeroInDenominator = true
             }
             
-            if Q < K {
-                
-                // x^2(1-K) + x(C+D+KA+KB) + CD-KAB = 0
-                a = 1 - K
-                
-                let bsum1 = productC + productD
-                let bsum2 = K*reactantA + K*reactantB
-                b = bsum1 + bsum2
-                
-                let csum1 = productC * productD
-                let csum2 = K * reactantA * reactantB
-                c = csum1 - csum2
-                
-                x = solveQuadraticEquation(a: a, b: b, c: c)
-                
-                equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
-                equilibriumConcentrations.append(Double(reactantB - x).rounded(toPlaces: decimalPlaces))
-                equilibriumConcentrations.append(Double(productC + x).rounded(toPlaces: decimalPlaces))
-                equilibriumConcentrations.append(Double(productD + x).rounded(toPlaces: decimalPlaces))
-                
-            } else if Q > K {
-                
-                // x^2(1-K) + x(-C-D-KA-KB) + CD-KAB = 0
-                a = 1 - K
-                
-                let bsum1 = -productC - productD
-                let bsum2 = K*reactantA
-                let bsum3 = K*reactantB
-                b = bsum1 - bsum2 - bsum3
-                
-                let csum1 = productC * productD
-                let csum2 = K * reactantA * reactantB
-                c = csum1 - csum2
-                
-                x = solveQuadraticEquation(a: a, b: b, c: c)
-                
-                equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
-                equilibriumConcentrations.append(Double(reactantB + x).rounded(toPlaces: decimalPlaces))
-                equilibriumConcentrations.append(Double(productC - x).rounded(toPlaces: decimalPlaces))
-                equilibriumConcentrations.append(Double(productD - x).rounded(toPlaces: decimalPlaces))
-                
-            } else if Q == K {
-                reactionQuotientEqualsK = true
+            if !zeroInDenominator {
+                if Q < K {
+                    
+                    // x^2(1-K) + x(C+D+KA+KB) + CD-KAB = 0
+                    a = 1 - K
+                    
+                    let bsum1 = productC + productD
+                    let bsum2 = K*reactantA + K*reactantB
+                    b = bsum1 + bsum2
+                    
+                    let csum1 = productC * productD
+                    let csum2 = K * reactantA * reactantB
+                    c = csum1 - csum2
+                    
+                    x = solveQuadraticEquation(a: a, b: b, c: c)
+                    
+                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD + x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q > K {
+                    
+                    // x^2(1-K) + x(-C-D-KA-KB) + CD-KAB = 0
+                    a = 1 - K
+                    
+                    let bsum1 = -productC - productD
+                    let bsum2 = K*reactantA
+                    let bsum3 = K*reactantB
+                    b = bsum1 - bsum2 - bsum3
+                    
+                    let csum1 = productC * productD
+                    let csum2 = K * reactantA * reactantB
+                    c = csum1 - csum2
+                    
+                    x = solveQuadraticEquation(a: a, b: b, c: c)
+                    
+                    equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD - x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q == K {
+                    reactionQuotientEqualsK = true
+                }
             }
-            
         }
         
+        /// Equation Type: A + 2B = C + 2D
+        if actualType == "R2P2 A2B=C2D" {
+            
+            // Rearranging to put coefficients in correct place
+            if coefficients[0] == 2 {
+                localCoefficients.rearrange(from: 0, to: 1)
+                localCompounds.rearrange(from: 0, to: 1)
+                initialConcentrations.rearrange(from: 0, to: 1)
+            }
+            
+            if coefficients[2] == 2 {
+                localCoefficients.rearrange(from: 2, to: 3)
+                localCompounds.rearrange(from: 2, to: 3)
+                initialConcentrations.rearrange(from: 2, to: 3)
+            }
+            
+            reactantA = initialConcentrations[0]
+            reactantB = initialConcentrations[1]
+            productC = initialConcentrations[2]
+            productD = initialConcentrations[3]
+            
+            // Calculate reaction quotient
+            if reactantA != 0.0 && reactantB != 0.0 {
+                let numerator = productC * productD * productD
+                let denominator = reactantA * reactantB * reactantB
+                Q = numerator / denominator
+            } else {
+                zeroInDenominator = true
+            }
+            
+            if !zeroInDenominator {
+                if Q < K {
+                    
+                    // AKB^2 - 4ABKx + 4AKx^2 - KxB^2 + 4BKx^2 - 4Kx^3 - CD^2 - xD^2 - 4CDx - 4x^2D - 4x^2C - 4x^3
+                    let xValuesToTry: [Double] = [0, 1, 3, 5, 7, 10]
+                    
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus2BEqualsCPlus2D_QLessThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            x = answer
+                        } else {
+                            // Error message
+                            x = 0
+                        }
+                    }
+                    
+                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB - 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD + 2*x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q > K {
+                    
+                    // AKB^2 + 4ABKx + 4AKx^2 + KxB^2 + 4BKx^2 + 4Kx^3 - CD^2 + xD^2 + 4CDx - 4x^2D - 4x^2C + 4x^3
+                    let xValuesToTry: [Double] = [0, 1, 3, 5, 7, 10]
+                    
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus2BEqualsCPlus2D_QGreaterThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            x = answer
+                        } else {
+                            // Error message
+                            x = 0
+                        }
+                    }
+                    
+                    equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB + 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD - 2*x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q == K {
+                    reactionQuotientEqualsK = true
+                }
+            }
+        }
         
         return equilibriumConcentrations
     }
@@ -426,14 +527,107 @@ class ICETableSolver {
         
         return x
     }
+        
+    // Reaction Type A + 2B = C + 2D – if Q < K
+    func fAPlus2BEqualsCPlus2D_QLessThanK(_ X: Double) -> Double {
+        
+        // AKB^2 - 4ABKx + 4AKx^2 - KxB^2 + 4BKx^2 - 4Kx^3 - CD^2 - xD^2 - 4CDx - 4x^2D - 4x^2C - 4x^3
+        let term1 = reactantA * kRef * reactantB * reactantB
+        let term2 = 4 * reactantA * reactantB * kRef * X
+        let term3 = 4 * reactantA * kRef * pow(X, 2)
+        let term4 = kRef * X * reactantB * reactantB
+        let term5 = 4 * reactantB * kRef * pow(X, 2)
+        let term6 = 4 * kRef * pow(X, 3)
+        let term7 = productC * productD * productD
+        let term8 = X * productD * productD
+        let term9 = 4 * productC * productD * X
+        let term10 = 4 * pow(X, 2) * productD
+        let term11 = 4 * pow(X, 2) * productC
+        let term12 = 4 * pow(X, 3)
+        
+        return term1 - term2 + term3 - term4 + term5 - term6 - term7 - term8 - term9 - term10 - term11 - term12
+    }
     
+    // Reaction Type A + 2B = C + 2D – if Q > K
+    func fAPlus2BEqualsCPlus2D_QGreaterThanK(_ X: Double) -> Double {
+        
+        // AKB^2 + 4ABKx + 4AKx^2 + KxB^2 + 4BKx^2 + 4Kx^3 - CD^2 + xD^2 + 4CDx - 4x^2D - 4x^2C + 4x^3
+        let term1 = reactantA * kRef * reactantB * reactantB
+        let term2 = 4 * reactantA * reactantB * kRef * X
+        let term3 = 4 * reactantA * kRef * pow(X, 2)
+        let term4 = kRef * X * reactantB * reactantB
+        let term5 = 4 * reactantB * kRef * pow(X, 2)
+        let term6 = 4 * kRef * pow(X, 3)
+        let term7 = productC * productD * productD
+        let term8 = X * productD * productD
+        let term9 = 4 * productC * productD * X
+        let term10 = 4 * pow(X, 2) * productD
+        let term11 = 4 * pow(X, 2) * productC
+        let term12 = 4 * pow(X, 3)
+        
+        return term1 + term2 + term3 + term4 + term5 + term6 - term7 + term8 + term9 - term10 - term11 + term12
+    }
 }
 
+// Newton-Raphson by jamesharrop https://github.com/jamesharrop/newton-raphson
+// A Swift implementation of the Newton-Raphson method for finding the roots of a mathematical function.
+
+class NewtonRaphson {
+    let functionToFindRootsOf: (Double)->Double
+    let derivativeOfTheFunction: (Double) -> Double
+    let initialGuessForX: Double
+    let tolerance: Double
+    let maxIterations: Int
+    
+    // Init if the derivative of the function is provided
+    init(functionToFindRootsOf: @escaping (Double)->Double, derivativeOfTheFunction: @escaping (Double) -> Double, initialGuessForX: Double, tolerance: Double, maxIterations: Int) {
+        self.functionToFindRootsOf = functionToFindRootsOf
+        self.derivativeOfTheFunction = derivativeOfTheFunction
+        self.initialGuessForX = initialGuessForX
+        self.tolerance = tolerance
+        self.maxIterations = maxIterations
+    }
+    
+    // Init if the derivative of the function is not provided - we will approximate the derivative instead
+    init(functionToFindRootsOf: @escaping (Double)->Double, initialGuessForX: Double, tolerance: Double, maxIterations: Int) {
+        self.functionToFindRootsOf = functionToFindRootsOf
+        self.derivativeOfTheFunction = {
+            (x:Double) in
+            return (functionToFindRootsOf(x+tolerance/5) - functionToFindRootsOf(x-tolerance/5)) / (2*(tolerance/5)) }
+        self.initialGuessForX = initialGuessForX
+        self.tolerance = tolerance
+        self.maxIterations = maxIterations
+    }
+    
+    func solve() -> Double? {
+        // If maxIterations is exceeded before a solution within the tolerance is found, then returns nil
+        var x = self.initialGuessForX
+        for iteration in 1...maxIterations {
+            let y = self.functionToFindRootsOf(x)
+            let dy = self.derivativeOfTheFunction(x)
+            let nextX = x - y / dy
+            if (abs(x - nextX) < self.tolerance) {
+                print("Solution reached in ", iteration, "iterations")
+                return nextX
+            }
+            x = nextX
+        }
+        return nil
+    }
+}
+
+// Rounds the double to decimal places value
 extension Double {
-    /// Rounds the double to decimal places value
     func rounded(toPlaces places:Int) -> Double {
         let divisor = pow(10.0, Double(places))
         return (self * divisor).rounded() / divisor
     }
 }
 
+// Array rearrangement
+extension RangeReplaceableCollection where Indices: Equatable {
+    mutating func rearrange(from: Index, to: Index) {
+        precondition(from != to && indices.contains(from) && indices.contains(to), "invalid indices")
+        insert(remove(at: from), at: to)
+    }
+}
