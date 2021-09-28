@@ -310,13 +310,13 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
                 
                 if !reactionQuotientEqualsK {
                                     
-                    var concentrationsText = ""
+                    var concentrationsText = "\nQ = " + String(iceTableSolver.Q.rounded(toPlaces: 4)) + "\n"
                     
                     for compound in iceTableSolver.localCompounds {
                         let index = iceTableSolver.localCompounds.index(of: compound)
                         concentrationsText += "\n" + compound + ": " + String(concentrations[index!]) + " M\n"
                     }
-                    
+                                        
                     // Show results
                     let alert = UIAlertController(title: "Equilibrium Concentrations", message: concentrationsText, preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "Nice", style: UIAlertActionStyle.default))
@@ -324,8 +324,8 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
                     
                 } else {
                                     
-                    var concentrationsText = ""
-                    
+                    var concentrationsText = "\nQ = K = " + String(iceTableSolver.Q.rounded(toPlaces: 4)) + "\n"
+
                     for compound in iceTableSolver.localCompounds {
                         let index = iceTableSolver.localCompounds.index(of: compound)
                         concentrationsText += "\n" + compound + ": " + String(initialConcentrations[index!]) + " M\n"

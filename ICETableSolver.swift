@@ -61,16 +61,24 @@ class ICETableSolver {
         // Reroute to proper calculation based on coefficients
         if type == "R1P1" {
             if coefficients[0] == 2 {
-                actualType = "R1P1 2A"  // 2A = B
+                // 2A = B
+                actualType = "R1P1 2A"
             } else if coefficients[1] == 2 {
-                actualType = "R1P1 2B"  // A = 2B
+                // A = 2B
+                actualType = "R1P1 2B"
             }
         } else if type == "R2P2" {
             if coefficients[0] == 2 && coefficients[2] == 2 ||
                 coefficients[1] == 2 && coefficients[2] == 2 ||
                 coefficients[1] == 2 && coefficients[3] == 2 ||
                 coefficients[0] == 2 && coefficients[3] == 2 {
-                    actualType = "R2P2 A2B=C2D"    // A + 2B = C + 2D
+                    // A + 2B = C + 2D
+                    actualType = "R2P2 A2B=C2D"
+            }
+        } else if type == "R2P1" {
+            if coefficients[0] == 2 || coefficients[1] == 2 {
+                // A + 2B = C
+                actualType = "R2P1 A2B=C"
             }
         } else {
             actualType = type
@@ -498,6 +506,82 @@ class ICETableSolver {
             }
         }
         
+        /// Equation Type: A + 2B = C
+        if actualType == "R2P1 A2B=C" {
+            
+            // Rearranging to put coefficients in correct place
+            if coefficients[0] == 2 {
+                localCoefficients.rearrange(from: 0, to: 1)
+                localCompounds.rearrange(from: 0, to: 1)
+                initialConcentrations.rearrange(from: 0, to: 1)
+            }
+            
+            reactantA = initialConcentrations[0]
+            reactantB = initialConcentrations[1]
+            productC = initialConcentrations[2]
+            
+            // Calculate reaction quotient
+            if reactantA != 0.0 && reactantB != 0.0 {
+                let numerator = productC
+                let denominator = reactantA * reactantB * reactantB
+                Q = numerator! / denominator
+            } else {
+                zeroInDenominator = true
+            }
+            
+            if !zeroInDenominator {
+                if Q > K {
+                    
+                    // AB^2K + 4ABKx + 4AKx^2 + B^2Kx + 4BKx^2 + 4Kx^3 - C + x
+                    let xValuesToTry: [Double] = [0, 1, 3, 5, 7, 10]
+                    
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus2BEqualsC_QGreaterThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            x = answer
+                        } else {
+                            // Error message
+                            x = 0
+                        }
+                    }
+                    
+                    equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB + 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC - x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q < K {
+                    
+                    // AB^2K - 4ABKx + 4AKx^2 - B^2Kx + 4BKx^2 - 4Kx^3 - C - x
+                    let xValuesToTry: [Double] = [0, 1, 3, 5, 7, 10]
+                    
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus2BEqualsC_QLessThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            x = answer
+                        } else {
+                            // Error message
+                            x = 0
+                        }
+                    }
+                    
+                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB - 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC + x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q == K {
+                    reactionQuotientEqualsK = true
+                }
+            }
+        }
+        
         return equilibriumConcentrations
     }
     
@@ -528,7 +612,7 @@ class ICETableSolver {
         return x
     }
         
-    // Reaction Type A + 2B = C + 2D – if Q < K
+    // Polynomial for reaction type A + 2B = C + 2D
     func fAPlus2BEqualsCPlus2D_QLessThanK(_ X: Double) -> Double {
         
         // AKB^2 - 4ABKx + 4AKx^2 - KxB^2 + 4BKx^2 - 4Kx^3 - CD^2 - xD^2 - 4CDx - 4x^2D - 4x^2C - 4x^3
@@ -548,7 +632,6 @@ class ICETableSolver {
         return term1 - term2 + term3 - term4 + term5 - term6 - term7 - term8 - term9 - term10 - term11 - term12
     }
     
-    // Reaction Type A + 2B = C + 2D – if Q > K
     func fAPlus2BEqualsCPlus2D_QGreaterThanK(_ X: Double) -> Double {
         
         // AKB^2 + 4ABKx + 4AKx^2 + KxB^2 + 4BKx^2 + 4Kx^3 - CD^2 + xD^2 + 4CDx - 4x^2D - 4x^2C + 4x^3
@@ -566,6 +649,36 @@ class ICETableSolver {
         let term12 = 4 * pow(X, 3)
         
         return term1 + term2 + term3 + term4 + term5 + term6 - term7 + term8 + term9 - term10 - term11 + term12
+    }
+    
+    // Polynomial for reaction type A + 2B = C
+    func fAPlus2BEqualsC_QGreaterThanK(_ X: Double) -> Double {
+        
+        // AB^2K + 4ABKx + 4AKx^2 + B^2Kx + 4BKx^2 + 4Kx^3 - C + x
+        let term1 = reactantA * reactantB * reactantB * kRef
+        let term2 = 4 * reactantA * reactantB * kRef * X
+        let term3 = 4 * reactantA * kRef * pow(X, 2)
+        let term4 = reactantB * reactantB * kRef * X
+        let term5 = 4 * reactantB * kRef * pow(X, 2)
+        let term6 = 4 * kRef * pow(X, 3)
+        let term7 = -productC + X
+        
+        return term1 + term2 + term3 + term4 + term5 + term6 + term7
+    }
+    
+    func fAPlus2BEqualsC_QLessThanK(_ X: Double) -> Double {
+        
+        // AB^2K - 4ABKx + 4AKx^2 - B^2Kx + 4BKx^2 - 4Kx^3 - C - x
+        let term1 = reactantA * reactantB * reactantB * kRef
+        let term2 = 4 * reactantA * reactantB * kRef * X
+        let term3 = 4 * reactantA * kRef * pow(X, 2)
+        let term4 = reactantB * reactantB * kRef * X
+        let term5 = 4 * reactantB * kRef * pow(X, 2)
+        let term6 = 4 * kRef * pow(X, 3)
+        let term7 = -productC - X
+        
+        return term1 - term2 + term3 - term4 + term5 - term6 + term7
+
     }
 }
 
