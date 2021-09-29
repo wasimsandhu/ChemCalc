@@ -310,11 +310,11 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
                 
                 if !reactionQuotientEqualsK {
                                     
-                    var concentrationsText = "\nQ = " + String(iceTableSolver.Q.rounded(toPlaces: 4)) + "\n"
+                    var concentrationsText = "\nQ = " + String(iceTableSolver.Q.rounded(toPlaces: 4)) + "\n\nx = " + String(iceTableSolver.x.rounded(toPlaces: 4)) + "\n"
                     
                     for compound in iceTableSolver.localCompounds {
                         let index = iceTableSolver.localCompounds.index(of: compound)
-                        concentrationsText += "\n" + compound + ": " + String(concentrations[index!]) + " M\n"
+                        concentrationsText += "\n[" + compound + "] = " + String(concentrations[index!]) + " M\n"
                     }
                                         
                     // Show results
@@ -324,11 +324,11 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
                     
                 } else {
                                     
-                    var concentrationsText = "\nQ = K = " + String(iceTableSolver.Q.rounded(toPlaces: 4)) + "\n"
+                    var concentrationsText = "\nQ = K = " + String(iceTableSolver.Q.rounded(toPlaces: 4)) + "\n\nx = " + String(iceTableSolver.x.rounded(toPlaces: 4)) + "\n"
 
                     for compound in iceTableSolver.localCompounds {
                         let index = iceTableSolver.localCompounds.index(of: compound)
-                        concentrationsText += "\n" + compound + ": " + String(initialConcentrations[index!]) + " M\n"
+                        concentrationsText += "\n[" + compound + "] = " + String(initialConcentrations[index!]) + " M\n"
                     }
                     
                     // Show results
