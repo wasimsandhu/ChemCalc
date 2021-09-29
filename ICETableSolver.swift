@@ -78,17 +78,24 @@ class ICETableSolver {
                 coefficients[1] == 2 && coefficients[3] == 2 ||
                 coefficients[0] == 2 && coefficients[3] == 2 {
                     // A + 2B = C + 2D
-                    actualType = "R2P2 A2B=C2D"
+                    actualType = "R2P2 A+2B=C+2D"
             } else {
                 actualType = type
             }
         } else if type == "R2P1" {
             if coefficients[0] == 2 && coefficients[2] == 1 || coefficients[1] == 2 && coefficients[2] == 1 {
                 // A + 2B = C
-                actualType = "R2P1 A2B=C"
+                actualType = "R2P1 A2+B=C"
             } else if coefficients[0] == 2 && coefficients[2] == 2 || coefficients[1] == 2 && coefficients[2] == 2 {
                 // A + 2B = 2C
-                actualType = "R2P1 A2B=2C"
+                actualType = "R2P1 A2+B=2C"
+            } else {
+                actualType = type
+            }
+        } else if type == "R1P2" {
+            if coefficients[0] == 2 && coefficients[1] == 2 || coefficients[0] == 2 && coefficients[2] == 2 {
+                // 2A = 2C + D
+                actualType = "R1P2 2A=2C+D"
             } else {
                 actualType = type
             }
@@ -162,7 +169,7 @@ class ICETableSolver {
         }
         
         /// Equation Type: A + 2B = C
-        if actualType == "R2P1 A2B=C" {
+        if actualType == "R2P1 A2+B=C" {
             
             // Rearranging to put coefficients in correct place
             if coefficients[0] == 2 {
@@ -236,7 +243,7 @@ class ICETableSolver {
         }
         
         /// Equation Type: A + 2B = 2C
-        if actualType == "R2P1 A2B=2C" {
+        if actualType == "R2P1 A2+B=2C" {
             
             // Rearranging to put coefficients in correct place
             if coefficients[0] == 2 {
@@ -360,6 +367,76 @@ class ICETableSolver {
                     equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
                     equilibriumConcentrations.append(Double(productC - x).rounded(toPlaces: decimalPlaces))
                     equilibriumConcentrations.append(Double(productD - x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q == K {
+                    reactionQuotientEqualsK = true
+                }
+            }
+        }
+        
+        /// Equation Type: 2A = 2C + D
+        if actualType == "R1P2 2A=2C+D" {
+            
+            // Rearranging to put coefficients in correct place
+            if coefficients[2] == 2 {
+                localCoefficients.rearrange(from: 2, to: 1)
+                localCompounds.rearrange(from: 2, to: 1)
+                initialConcentrations.rearrange(from: 2, to: 1)
+            }
+            
+            reactantA = initialConcentrations[0]
+            productC = initialConcentrations[1]
+            productD = initialConcentrations[2]
+            
+            // Calculate reaction quotient
+            if reactantA != 0.0 {
+                let numerator = productC * productC * productD
+                let denominator = reactantA * reactantA
+                Q = numerator / denominator
+            } else {
+                zeroInDenominator = true
+            }
+            
+            if !zeroInDenominator {
+                if Q > K {
+                                        
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: f2AEquals2CPlusD_QGreaterThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            x = answer
+                        } else {
+                            // Error message
+                            x = 0
+                        }
+                    }
+                    
+                    equilibriumConcentrations.append(Double(reactantA + 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC - 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD - x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q < K {
+                                        
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: f2AEquals2CPlusD_QLessThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            x = answer
+                        } else {
+                            // Error message
+                            x = 0
+                        }
+                    }
+                    
+                    equilibriumConcentrations.append(Double(reactantA - 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC + 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD + x).rounded(toPlaces: decimalPlaces))
                     
                 } else if Q == K {
                     reactionQuotientEqualsK = true
@@ -580,7 +657,7 @@ class ICETableSolver {
         }
         
         /// Equation Type: A + 2B = C + 2D
-        if actualType == "R2P2 A2B=C2D" {
+        if actualType == "R2P2 A+2B=C+2D" {
             
             // Rearranging to put coefficients in correct place
             if coefficients[0] == 2 {
@@ -771,27 +848,8 @@ class ICETableSolver {
         let term7 = productC * productC
         let term8 = 4 * productC * X
         let term9 = 4 * pow(X, 2)
-                
-        print(term1)
-        print(term2)
-        print(term3)
-        print(term4)
-        print(term5)
-        print(term6)
-        print(term7)
-        print(term8)
-        print(term9)
-        print(term1 + term2)
-        print(term2 + term3)
-        print(term3 + term4)
-        print(term4 + term5)
-        print(term5 + term6)
-        print(term6 - term7)
-        print(term7 + term8)
-        print(term8 - term9)
 
         let total = term1 + term2 + term3 + term4 + term5 + term6 - term7 + term8 - term9
-        print(total)
         return total
     }
     
@@ -808,26 +866,41 @@ class ICETableSolver {
         let term8 = 4 * productC * X
         let term9 = 4 * pow(X, 2)
         
-        print(term1)
-        print(term2)
-        print(term3)
-        print(term4)
-        print(term5)
-        print(term6)
-        print(term7)
-        print(term8)
-        print(term9)
-        print(term1 - term2)
-        print(term2 + term3)
-        print(term3 - term4)
-        print(term4 + term5)
-        print(term5 - term6)
-        print(term6 - term7)
-        print(term7 - term8)
-        print(term8 - term9)
-        
         let total = term1 - term2 + term3 - term4 + term5 - term6 - term7 - term8 - term9
-        print(total)
+        return total
+    }
+    
+    func f2AEquals2CPlusD_QGreaterThanK(_ X: Double) -> Double {
+        
+        // KA^{2} + 4AKx + 4Kx^{2} - C^{2}D + xC^{2} + 4CDx - 4Cx^{2} - 4x^{2}D + 4x^{3}
+        let term1 = kRef * reactantA * reactantA
+        let term2 = 4 * reactantA * kRef * X
+        let term3 = 4 * kRef * pow(X, 2)
+        let term4 = productC * productC * productD
+        let term5 = X * productC * productC
+        let term6 = 4 * productC * productD * X
+        let term7 = 4 * productC * pow(X, 2)
+        let term8 = 4 * pow(X, 2) * productD
+        let term9 = 4 * pow(X, 3)
+        
+        let total = term1 + term2 + term3 - term4 + term5 + term6 - term7 - term8 + term9
+        return total
+    }
+    
+    func f2AEquals2CPlusD_QLessThanK(_ X: Double) -> Double {
+        
+        // KA^{2} - 4AKx + 4Kx^{2} - C^{2}D - xC^{2} - 4CDx - 4Cx^{2} - 4x^{2}D - 4x^{3}
+        let term1 = kRef * reactantA * reactantA
+        let term2 = 4 * reactantA * kRef * X
+        let term3 = 4 * kRef * pow(X, 2)
+        let term4 = productC * productC * productD
+        let term5 = X * productC * productC
+        let term6 = 4 * productC * productD * X
+        let term7 = 4 * productC * pow(X, 2)
+        let term8 = 4 * pow(X, 2) * productD
+        let term9 = 4 * pow(X, 3)
+        
+        let total = term1 - term2 + term3 - term4 - term5 - term6 - term7 - term8 - term9
         return total
     }
 }
