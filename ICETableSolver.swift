@@ -36,7 +36,7 @@ class ICETableSolver {
     
     var localCoefficients = [Int]()
     var localCompounds = [String]()
-    let xValuesToTry: [Double] = [0, 1, 3, 5, 7, 10]
+    let xValuesToTry: [Double] = [-10, -7, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 7, 10]
     
     func solve(type: String, K: Double, compounds: [String], coefficients: [Int]) -> [Double] {
         
@@ -92,6 +92,10 @@ class ICETableSolver {
             } else if coefficients[0] == 1 && coefficients[1] == 1 && coefficients[2] == 2 {
                 // A + B = 2C
                 actualType = "R2P1 A+B=2C"
+            } else if coefficients[0] == 1 && coefficients[1] == 3 && coefficients[2] == 2 ||
+                        coefficients[0] == 3 && coefficients[1] == 1 && coefficients[2] == 2 {
+                // A + 3B = 2C
+                actualType = "R2P1 A+3B=2C"
             } else {
                 actualType = type
             }
@@ -803,6 +807,99 @@ class ICETableSolver {
             }
         }
         
+        /// Ammonia Synthesis: A + 3B = 2C
+        if actualType == "R2P1 A+3B=2C" {
+            
+            // Rearranging to put coefficients in correct place
+            if coefficients[0] == 3 {
+                localCoefficients.rearrange(from: 0, to: 1)
+                localCompounds.rearrange(from: 0, to: 1)
+                initialConcentrations.rearrange(from: 0, to: 1)
+            }
+            
+            reactantA = initialConcentrations[0]
+            reactantB = initialConcentrations[1]
+            productC = initialConcentrations[2]
+            
+            // Calculate reaction quotient
+            if reactantA != 0.0 && reactantB != 0.0 {
+                let numerator = productC * productC
+                let denominator = reactantA * reactantB * reactantB * reactantB
+                Q = numerator / denominator
+            } else {
+                zeroInDenominator = true
+            }
+            
+            if !zeroInDenominator {
+                
+                var allXValues = [Double]()
+                                
+                if Q > K {
+                                        
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus3BEquals2C_QGreaterThanK,
+                                                   derivativeOfTheFunction: dfAPlus3BEquals2C_QGreaterThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    for xValue in allXValues {
+                        let index = allXValues.index(of: xValue)
+                        if xValue < 0 {
+                            allXValues.insert(abs(xValue), at: index!)
+                        }
+                    }
+                    
+                    x = allXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB + 3*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC - 2*x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q < K {
+                    
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus3BEquals2C_QLessThanK,
+                                                   derivativeOfTheFunction: dfAPlus3BEquals2C_QLessThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    for xValue in allXValues {
+                        let index = allXValues.index(of: xValue)
+                        if xValue < 0 {
+                            allXValues.insert(abs(xValue), at: index!)
+                        }
+                    }
+                    
+                    x = allXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB - 3*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC + 2*x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q == K {
+                    reactionQuotientEqualsK = true
+                }
+            }
+        }
+        
         return equilibriumConcentrations
     }
     
@@ -999,6 +1096,91 @@ class ICETableSolver {
         let total = term1 - term2 - term3 + term4 - term5 - term6 - term7
         return total
     }
+    
+    // Polynomial functions and derivatives for equation type A + 3B = 2C
+    func fAPlus3BEquals2C_QGreaterThanK(_ X: Double) -> Double {
+        
+        let reactantBSquared = reactantB * reactantB
+        let reactantBCubed = reactantB * reactantB * reactantB
+        
+        let term1 = reactantA * reactantBCubed * kRef
+        let term2 = 9 * reactantA * reactantBSquared * kRef * X
+        let term3 = 27 * reactantA * reactantB * kRef * pow(X, 2)
+        let term4 = 27 * reactantA * kRef * pow(X, 3)
+        let term5 = reactantB * reactantB * reactantB * kRef * X
+        let term6 = 9 * reactantB * reactantB * kRef * pow(X, 2)
+        let term7 = 27 * reactantB * kRef * pow(X, 3)
+        let term8 = 27 * kRef * pow(X, 4)
+        let term9 = productC * productC
+        let term10 = 4 * productC * X
+        let term11 = 4 * pow(X, 2)
+        
+        // AB^{3}K + 9AB^{2}Kx + 27ABKx^{2} + 27AKx^{3} + B^{3}Kx + 9B^{2}Kx^{2} + 27BKx^{3} + 27Kx^{4} - C^{2} + 4Cx - 4x^{2}
+        let total = term1 + term2 + term3 + term4 + term5 + term6 + term7 + term8 - term9 + term10 - term11
+        return total
+    }
+    
+    func fAPlus3BEquals2C_QLessThanK(_ X: Double) -> Double {
+        
+        let reactantBSquared = reactantB * reactantB
+        let reactantBCubed = reactantB * reactantB * reactantB
+        
+        let term1 = reactantA * reactantBCubed * kRef
+        let term2 = 9 * reactantA * reactantBSquared * kRef * X
+        let term3 = 27 * reactantA * reactantB * kRef * pow(X, 2)
+        let term4 = 27 * reactantA * kRef * pow(X, 3)
+        let term5 = reactantBCubed * kRef * X
+        let term6 = 9 * reactantBSquared * kRef * pow(X, 2)
+        let term7 = 27 * reactantB * kRef * pow(X, 3)
+        let term8 = 27 * kRef * pow(X, 4)
+        let term9 = productC * productC
+        let term10 = 4 * productC * X
+        let term11 = 4 * pow(X, 2)
+        
+        // AB^{3}K - 9AB^{2}Kx + 27ABKx^{2} - 27AKx^{3} - B^{3}Kx + 9B^{2}Kx^{2} - 27BKx^{3} + 27Kx^{4} - C^{2} - 4Cx - 4x^{2}
+        let total = term1 - term2 + term3 - term4 - term5 + term6 - term7 + term8 - term9 - term10 - term11
+        return total
+    }
+    
+    func dfAPlus3BEquals2C_QGreaterThanK(_ X: Double) -> Double {
+        
+        let reactantBSquared = reactantB * reactantB
+        let reactantBCubed = reactantB * reactantB * reactantB
+        
+        let term1 = 108 * kRef * pow(X, 3)
+        let term2 = 81 * reactantB * kRef * pow(X, 2)
+        let term3 = 81 * reactantA * kRef * pow(X, 2)
+        let term4 = 18 * reactantBSquared * kRef * X
+        let term5 = 54 * reactantA * reactantB * kRef * X
+        let term6 = 8 * X
+        let term7 = reactantBCubed * kRef
+        let term8 = 9 * reactantA * reactantBSquared * kRef
+        let term9 = 4 * productC
+        
+        // 108Kx^{3} + 81BKx^{2} + 81AKx^{2} + 18B^{2}Kx + 54ABKx - 8x + B^{3}K + 9AB^{2}K + 4C
+        let total = term1 + term2 + term3 + term4 + term5 - term6 + term7 + term8 + term9
+        return total
+    }
+    
+    func dfAPlus3BEquals2C_QLessThanK(_ X: Double) -> Double {
+        let reactantBSquared = reactantB * reactantB
+        let reactantBCubed = reactantB * reactantB * reactantB
+        
+        let term1 = 108 * kRef * pow(X, 3)
+        let term2 = 81 * reactantB * kRef * pow(X, 2)
+        let term3 = 81 * reactantA * kRef * pow(X, 2)
+        let term4 = 18 * reactantBSquared * kRef * X
+        let term5 = 54 * reactantA * reactantB * kRef * X
+        let term6 = 8 * X
+        let term7 = reactantBCubed * kRef
+        let term8 = 9 * reactantA * reactantBSquared * kRef
+        let term9 = 4 * productC
+        
+        // 108Kx^{3} - 81BKx^{2} - 81AKx^{2} + 18B^{2}Kx + 54ABKx - 8x - B^{3}K - 9AB^{2}K - 4C
+        let total = term1 - term2 - term3 + term4 + term5 - term6 - term7 - term8 - term9
+        return total
+    }
+    
 }
 
 // Newton-Raphson by jamesharrop https://github.com/jamesharrop/newton-raphson
@@ -1039,7 +1221,8 @@ class NewtonRaphson {
             let dy = self.derivativeOfTheFunction(x)
             let nextX = x - y / dy
             if (abs(x - nextX) < self.tolerance) {
-                // print("Solution reached in ", iteration, "iterations")
+                print("Solution reached in ", iteration, "iterations")
+                print(nextX)
                 return nextX
             }
             x = nextX
