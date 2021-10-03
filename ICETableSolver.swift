@@ -851,14 +851,13 @@ class ICETableSolver {
                         }
                     }
                     
+                    var absoluteValueOfXValues = [Double]()
+                    
                     for xValue in allXValues {
-                        let index = allXValues.index(of: xValue)
-                        if xValue < 0 {
-                            allXValues.insert(abs(xValue), at: index!)
-                        }
+                        absoluteValueOfXValues.append(abs(xValue))
                     }
                     
-                    x = allXValues.min()
+                    x = absoluteValueOfXValues.min()
                     
                     equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
                     equilibriumConcentrations.append(Double(reactantB + 3*x).rounded(toPlaces: decimalPlaces))
@@ -881,14 +880,13 @@ class ICETableSolver {
                         }
                     }
                     
+                    var absoluteValueOfXValues = [Double]()
+                    
                     for xValue in allXValues {
-                        let index = allXValues.index(of: xValue)
-                        if xValue < 0 {
-                            allXValues.insert(abs(xValue), at: index!)
-                        }
+                        absoluteValueOfXValues.append(abs(xValue))
                     }
                     
-                    x = allXValues.min()
+                    x = absoluteValueOfXValues.min()
                     
                     equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
                     equilibriumConcentrations.append(Double(reactantB - 3*x).rounded(toPlaces: decimalPlaces))
