@@ -36,6 +36,7 @@ class ICETableSolver {
     
     var localCoefficients = [Int]()
     var localCompounds = [String]()
+    var localConcentrations = [Double]()
     let xValuesToTry: [Double] = [-10, -7, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 7, 10]
     
     func solve(type: String, K: Double, compounds: [String], coefficients: [Int]) -> [Double] {
@@ -45,12 +46,14 @@ class ICETableSolver {
         reactionQuotientEqualsK = false
         localCompounds.removeAll()
         localCoefficients.removeAll()
+        localConcentrations.removeAll()
         equilibriumConcentrations.removeAll()
         
         // Some class-level variables (because I'm lazy :P)
         kRef = K
         localCoefficients = coefficients
         localCompounds = compounds
+        localConcentrations = initialConcentrations
         
         // TODO: Fix this, logic is flawed
         if type == "R2P2 SL1" || type == "R2P2 SL2" {
@@ -86,23 +89,34 @@ class ICETableSolver {
             if coefficients[0] == 2 && coefficients[2] == 1 || coefficients[1] == 2 && coefficients[2] == 1 {
                 // A + 2B = C
                 actualType = "R2P1 A2+B=C"
+                
             } else if coefficients[0] == 2 && coefficients[2] == 2 || coefficients[1] == 2 && coefficients[2] == 2 {
                 // A + 2B = 2C
                 actualType = "R2P1 A+2B=2C"
+                
             } else if coefficients[0] == 1 && coefficients[1] == 1 && coefficients[2] == 2 {
                 // A + B = 2C
                 actualType = "R2P1 A+B=2C"
+                
             } else if coefficients[0] == 1 && coefficients[1] == 3 && coefficients[2] == 2 ||
                         coefficients[0] == 3 && coefficients[1] == 1 && coefficients[2] == 2 {
                 // A + 3B = 2C
                 actualType = "R2P1 A+3B=2C"
+                
             } else {
                 actualType = type
             }
         } else if type == "R1P2" {
-            if coefficients[0] == 2 && coefficients[1] == 2 || coefficients[0] == 2 && coefficients[2] == 2 {
+            if coefficients[0] == 2 && coefficients[1] == 2 && coefficients[2] == 1 ||
+                coefficients[0] == 2 && coefficients[1] == 1 && coefficients[2] == 2 {
                 // 2A = 2C + D
                 actualType = "R1P2 2A=2C+D"
+                
+            } else if coefficients[0] == 2 && coefficients[1] == 3 && coefficients[2] == 1 ||
+                        coefficients[0] == 2 && coefficients[1] == 1 && coefficients[2] == 3 {
+                // 2A = 3B + C
+                actualType = "R1P2 2A=3B+C"
+                
             } else {
                 actualType = type
             }
@@ -111,9 +125,9 @@ class ICETableSolver {
         /// Equation Type: A + B = C
         if actualType == "R2P1" {
             
-            reactantA = initialConcentrations[0]
-            reactantB = initialConcentrations[1]
-            productC = initialConcentrations[2]
+            reactantA = localConcentrations[0]
+            reactantB = localConcentrations[1]
+            productC = localConcentrations[2]
             
             // Calculate reaction quotient
             if reactantA != 0.0 && reactantB != 0.0 {
@@ -182,12 +196,12 @@ class ICETableSolver {
             if coefficients[0] == 2 {
                 localCoefficients.rearrange(from: 0, to: 1)
                 localCompounds.rearrange(from: 0, to: 1)
-                initialConcentrations.rearrange(from: 0, to: 1)
+                localConcentrations.rearrange(from: 0, to: 1)
             }
             
-            reactantA = initialConcentrations[0]
-            reactantB = initialConcentrations[1]
-            productC = initialConcentrations[2]
+            reactantA = localConcentrations[0]
+            reactantB = localConcentrations[1]
+            productC = localConcentrations[2]
             
             // Calculate reaction quotient
             if reactantA != 0.0 && reactantB != 0.0 {
@@ -256,12 +270,12 @@ class ICETableSolver {
             if coefficients[0] == 2 {
                 localCoefficients.rearrange(from: 0, to: 1)
                 localCompounds.rearrange(from: 0, to: 1)
-                initialConcentrations.rearrange(from: 0, to: 1)
+                localConcentrations.rearrange(from: 0, to: 1)
             }
             
-            reactantA = initialConcentrations[0]
-            reactantB = initialConcentrations[1]
-            productC = initialConcentrations[2]
+            reactantA = localConcentrations[0]
+            reactantB = localConcentrations[1]
+            productC = localConcentrations[2]
             
             // Calculate reaction quotient
             if reactantA != 0.0 && reactantB != 0.0 {
@@ -326,9 +340,9 @@ class ICETableSolver {
         /// Equation Type: A + B = 2C
         if actualType == "R2P1 A+B=2C" {
             
-            reactantA = initialConcentrations[0]
-            reactantB = initialConcentrations[1]
-            productC = initialConcentrations[2]
+            reactantA = localConcentrations[0]
+            reactantB = localConcentrations[1]
+            productC = localConcentrations[2]
             
             // Calculate reaction quotient
             if reactantA != 0.0 && reactantB != 0.0 {
@@ -389,9 +403,9 @@ class ICETableSolver {
         /// Equation Type: A = C + D
         if actualType == "R1P2" {
             
-            reactantA = initialConcentrations[0]
-            productC = initialConcentrations[1]
-            productD = initialConcentrations[2]
+            reactantA = localConcentrations[0]
+            productC = localConcentrations[1]
+            productD = localConcentrations[2]
             
             // Calculate reaction quotient
             if reactantA != 0.0 {
@@ -451,12 +465,12 @@ class ICETableSolver {
             if coefficients[2] == 2 {
                 localCoefficients.rearrange(from: 2, to: 1)
                 localCompounds.rearrange(from: 2, to: 1)
-                initialConcentrations.rearrange(from: 2, to: 1)
+                localConcentrations.rearrange(from: 2, to: 1)
             }
             
-            reactantA = initialConcentrations[0]
-            productC = initialConcentrations[1]
-            productD = initialConcentrations[2]
+            reactantA = localConcentrations[0]
+            productC = localConcentrations[1]
+            productD = localConcentrations[2]
             
             // Calculate reaction quotient
             if reactantA != 0.0 {
@@ -517,8 +531,8 @@ class ICETableSolver {
         /// Equation Type: A = B
         if actualType == "R1P1" {
             
-            reactantA = initialConcentrations[0]
-            productB = initialConcentrations[1]
+            reactantA = localConcentrations[0]
+            productB = localConcentrations[1]
             
             // Calculate reaction quotient
             if reactantA != 0.0 {
@@ -573,8 +587,8 @@ class ICETableSolver {
         /// Equation Type: 2A = B
         if actualType == "R1P1 2A" {
             
-            reactantA = initialConcentrations[0]
-            productB = initialConcentrations[1]
+            reactantA = localConcentrations[0]
+            productB = localConcentrations[1]
             
             // Calculate reaction quotient
             if reactantA != 0.0 {
@@ -618,8 +632,8 @@ class ICETableSolver {
         /// Equation Type: A = 2B
         if actualType == "R1P1 2B" {
             
-            reactantA = initialConcentrations[0]
-            productB = initialConcentrations[1]
+            reactantA = localConcentrations[0]
+            productB = localConcentrations[1]
             
             // Calculate reaction quotient
             if reactantA != 0.0 {
@@ -664,10 +678,10 @@ class ICETableSolver {
         /// Equation Type: A + B = C + D
         if actualType == "R2P2" {
             
-            reactantA = initialConcentrations[0]
-            reactantB = initialConcentrations[1]
-            productC = initialConcentrations[2]
-            productD = initialConcentrations[3]
+            reactantA = localConcentrations[0]
+            reactantB = localConcentrations[1]
+            productC = localConcentrations[2]
+            productD = localConcentrations[3]
             
             // Calculate reaction quotient
             if reactantA != 0.0 && reactantB != 0.0 {
@@ -733,19 +747,19 @@ class ICETableSolver {
             if coefficients[0] == 2 {
                 localCoefficients.rearrange(from: 0, to: 1)
                 localCompounds.rearrange(from: 0, to: 1)
-                initialConcentrations.rearrange(from: 0, to: 1)
+                localConcentrations.rearrange(from: 0, to: 1)
             }
             
             if coefficients[2] == 2 {
                 localCoefficients.rearrange(from: 2, to: 3)
                 localCompounds.rearrange(from: 2, to: 3)
-                initialConcentrations.rearrange(from: 2, to: 3)
+                localConcentrations.rearrange(from: 2, to: 3)
             }
             
-            reactantA = initialConcentrations[0]
-            reactantB = initialConcentrations[1]
-            productC = initialConcentrations[2]
-            productD = initialConcentrations[3]
+            reactantA = localConcentrations[0]
+            reactantB = localConcentrations[1]
+            productC = localConcentrations[2]
+            productD = localConcentrations[3]
             
             // Calculate reaction quotient
             if reactantA != 0.0 && reactantB != 0.0 {
@@ -814,12 +828,12 @@ class ICETableSolver {
             if coefficients[0] == 3 {
                 localCoefficients.rearrange(from: 0, to: 1)
                 localCompounds.rearrange(from: 0, to: 1)
-                initialConcentrations.rearrange(from: 0, to: 1)
+                localConcentrations.rearrange(from: 0, to: 1)
             }
             
-            reactantA = initialConcentrations[0]
-            reactantB = initialConcentrations[1]
-            productC = initialConcentrations[2]
+            reactantA = localConcentrations[0]
+            reactantB = localConcentrations[1]
+            productC = localConcentrations[2]
             
             // Calculate reaction quotient
             if reactantA != 0.0 && reactantB != 0.0 {
@@ -897,9 +911,99 @@ class ICETableSolver {
                 }
             }
         }
-        
-        return equilibriumConcentrations
-    }
+    
+        /// Ammonia Decomposition: 2A = 3B + C
+        if actualType == "R1P2 2A=3B+C" {
+            
+            // Rearranging to put coefficients in correct place
+            if coefficients[2] == 3 {
+                localCoefficients.rearrange(from: 2, to: 1)
+                localCompounds.rearrange(from: 2, to: 1)
+                localConcentrations.rearrange(from: 2, to: 1)
+            }
+            
+            reactantA = localConcentrations[0]
+            productB = localConcentrations[1]
+            productC = localConcentrations[2]
+            
+            // Calculate reaction quotient
+            if reactantA != 0.0 {
+                let productBCubed = productB * productB * productB
+                let numerator = productBCubed * productC
+                let denominator = reactantA * reactantA
+                Q = numerator / denominator
+            } else {
+                zeroInDenominator = true
+            }
+            
+            if !zeroInDenominator {
+                
+                var allXValues = [Double]()
+                                
+                if Q > K {
+                                        
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: f2AEquals3BPlusC_QGreaterThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA + 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productB - 3*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC - x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q < K {
+                    
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: f2AEquals3BPlusC_QLessThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA - 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productB + 3*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC + x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q == K {
+                    reactionQuotientEqualsK = true
+                }
+            }
+        }
+    
+    return equilibriumConcentrations
+}
     
     func solveQuadraticEquation(a: Double, b: Double, c: Double) -> Double {
         
@@ -1176,6 +1280,52 @@ class ICETableSolver {
         
         // 108Kx^{3} - 81BKx^{2} - 81AKx^{2} + 18B^{2}Kx + 54ABKx - 8x - B^{3}K - 9AB^{2}K - 4C
         let total = term1 - term2 - term3 + term4 + term5 - term6 - term7 - term8 - term9
+        return total
+    }
+    
+    func f2AEquals3BPlusC_QGreaterThanK(_ X: Double) -> Double {
+        
+        let productBSquared = productB * productB
+        let productBCubed = productB * productB * productB
+        
+        let term1 = kRef * reactantA * reactantA
+        let term2 = 4 * reactantA * kRef * X
+        let term3 = 4 * kRef * pow(X, 2)
+        let term4 = productBCubed * productC
+        let term5 = X * productBCubed
+        let term6 = 9 * X * productBSquared * productC
+        let term7 = 9 * pow(X, 2) * productBSquared
+        let term8 = 27 * productB * pow(X, 2) * productC
+        let term9 = 27 * productB * pow(X, 3)
+        let term10 = 27 * pow(X, 3) * productC
+        let term11 = 27 * pow(X, 4)
+        
+        // KA^{2} + 4AKx + 4Kx^{2} - B^{3}C + xB^{3} + 9xB^{2}C - 9x^{2}B^{2} - 27Bx^{2}C + 27Bx^{3} + 27x^{3}C - 27x^{4}
+        let total = term1 + term2 + term3 - term4 + term5 + term6 - term7 - term8 + term9 + term10 - term11
+        
+        return total
+    }
+    
+    func f2AEquals3BPlusC_QLessThanK(_ X: Double) -> Double {
+        
+        let productBSquared = productB * productB
+        let productBCubed = productB * productB * productB
+        
+        let term1 = kRef * reactantA * reactantA
+        let term2 = 4 * reactantA * kRef * X
+        let term3 = 4 * kRef * pow(X, 2)
+        let term4 = productBCubed * productC
+        let term5 = X * productBCubed
+        let term6 = 9 * X * productBSquared * productC
+        let term7 = 9 * pow(X, 2) * productBSquared
+        let term8 = 27 * productB * pow(X, 2) * productC
+        let term9 = 27 * productB * pow(X, 3)
+        let term10 = 27 * pow(X, 3) * productC
+        let term11 = 27 * pow(X, 4)
+        
+        // KA^{2} - 4AKx + 4Kx^{2} - B^{3}C - xB^{3} - 9xB^{2}C - 9x^{2}B^{2} - 27Bx^{2}C - 27Bx^{3} - 27x^{3}C - 27x^{4}
+        let total = term1 - term2 + term3 - term4 - term5 - term6 - term7 - term8 - term9 - term10 - term11
+        
         return total
     }
     
