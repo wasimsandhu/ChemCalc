@@ -29,7 +29,9 @@ class ICETableSolver {
     var reactantA: Double!
     var reactantB: Double!
     var reactantC: Double!
+    var reactantD: Double!
     
+    var productA: Double!
     var productB: Double!
     var productC: Double!
     var productD: Double!
@@ -66,12 +68,18 @@ class ICETableSolver {
         
         // Reroute to proper calculation based on coefficients
         if type == "R1P1" {
-            if coefficients[0] == 2 {
+            if coefficients[0] == 2 && coefficients[1] == 1 {
                 // 2A = B
                 actualType = "R1P1 2A"
-            } else if coefficients[1] == 2 {
+            } else if coefficients[0] == 1 && coefficients[1] == 2 {
                 // A = 2B
                 actualType = "R1P1 2B"
+            } else if coefficients[0] == 1 && coefficients[1] == 3 {
+                // A = 3B
+                actualType = "R1P1 A=3B"
+            } else if coefficients[0] == 3 && coefficients[1] == 1 {
+                // 3B = A
+                actualType = "R1P1 3B=A"
             } else {
                 actualType = type
             }
@@ -120,6 +128,308 @@ class ICETableSolver {
             } else {
                 actualType = type
             }
+        }
+        
+        /// Equation Type: A = B
+        if actualType == "R1P1" {
+            
+            reactantA = localConcentrations[0]
+            productB = localConcentrations[1]
+            
+            // Calculate reaction quotient
+            if reactantA != 0.0 {
+                Q = reactantB / reactantA
+            } else {
+                zeroInDenominator = true
+            }
+            
+            if !zeroInDenominator {
+                if productB == 0.0 {
+                    // Reactant A is nonzero: x = KA / (K + 1)
+                    let num = K * reactantA
+                    let den = K + 1
+                    x = num / den
+                    
+                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if reactantA == 0.0 {
+                    // Reactant B is nonzero: x = B / (K + 1)
+                    let num = productB
+                    let den = K + 1
+                    x = num! / den
+                    
+                    equilibriumConcentrations.append(Double(x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productB - x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q > K {
+                    // Q > K: x = (B - KA) / (K + 1)
+                    let num = productB - (K * reactantA)
+                    let den = K + 1
+                    x = num / den
+                    
+                    equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productB - x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q < K {
+                    // Q < K: x = (KA - B) / (K + 1)
+                    let num = (K * reactantA) - productB
+                    let den = K + 1
+                    x = num / den
+                    
+                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productB + x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q == K {
+                    reactionQuotientEqualsK = true
+                }
+            }
+        }
+        
+        /// Equation Type: 2A = B
+        if actualType == "R1P1 2A" {
+            
+            reactantA = localConcentrations[0]
+            productB = localConcentrations[1]
+            
+            // Calculate reaction quotient
+            if reactantA != 0.0 {
+                let reactantASquared = reactantA * reactantA
+                Q = productB / reactantASquared
+            } else {
+                zeroInDenominator = true
+            }
+            
+            if !zeroInDenominator {
+                if Q > K {
+                    // x^2(4K) + x(4KA+1) + KA^2-B = 0
+                    
+                    a = 4*K
+                    b = 4*K*reactantA + 1
+                    let csum1 = K*reactantA*reactantA
+                    c = csum1 - productB
+                    x = solveQuadraticEquation(a: a, b: b, c: c)
+
+                    equilibriumConcentrations.append(Double(reactantA + 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productB - x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q < K {
+                    // x^2(4K) + x(-4KA-1) + KA^2-B = 0
+                    
+                    a = 4*K
+                    b = -4*K*reactantA - 1
+                    let csum1 = K*reactantA*reactantA
+                    c = csum1 - productB
+                    x = solveQuadraticEquation(a: a, b: b, c: c)
+                    
+                    equilibriumConcentrations.append(Double(reactantA - 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productB + x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q == K {
+                    reactionQuotientEqualsK = true
+                }
+            }
+        }
+        
+        /// Equation Type: A = 2B
+        if actualType == "R1P1 2B" {
+            
+            reactantA = localConcentrations[0]
+            productB = localConcentrations[1]
+            
+            // Calculate reaction quotient
+            if reactantA != 0.0 {
+                let productBSquared = productB * productB
+                Q = productBSquared / reactantA
+            } else {
+                zeroInDenominator = true
+            }
+            
+            if !zeroInDenominator {
+                if Q > K {
+                    // 4x^2 + x(-4B-K) + B^2-KA = 0
+                    
+                    a = 4
+                    b = -4*productB - K
+                    let bSquared = productB * productB
+                    c = bSquared - K*reactantA
+                    x = solveQuadraticEquation(a: a, b: b, c: c)
+
+                    equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productB - 2*x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q < K {
+                    // 4x^2 + x(4B+K) + B^2-KA = 0
+
+                    a = 4
+                    b = 4*productB + K
+                    let bSquared = productB * productB
+                    c = bSquared - K*reactantA
+                    x = solveQuadraticEquation(a: a, b: b, c: c)
+                    
+                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productB + 2*x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q == K {
+                    reactionQuotientEqualsK = true
+                }
+            }
+        }
+        
+        /// Equation Type: A = 3B
+        if actualType == "R1P1 A=3B" {
+            
+            reactantA = localConcentrations[0]
+            productB = localConcentrations[1]
+            
+            // Calculate reaction quotient
+            if reactantA != 0.0 {
+                let productBCubed = productB * productB * productB
+                Q = productBCubed / reactantA
+            } else {
+                zeroInDenominator = true
+            }
+            
+            if !zeroInDenominator {
+                var allXValues = [Double]()
+                                
+                if Q > K {
+                                        
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAEquals3B_QGreaterThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productB - 3*x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q < K {
+                    
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAEquals3B_QLessThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productB + 3*x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q == K {
+                    reactionQuotientEqualsK = true
+                }
+            }
+            
+        }
+        
+        /// Equation Type: 3B = A
+        if actualType == "R1P1 3B=A" {
+            
+            reactantB = localConcentrations[0]
+            productA = localConcentrations[1]
+            
+            // Calculate reaction quotient
+            if reactantA != 0.0 {
+                let reactantBCubed = reactantB * reactantB * reactantB
+                Q = productA / reactantBCubed
+            } else {
+                zeroInDenominator = true
+            }
+            
+            if !zeroInDenominator {
+                var allXValues = [Double]()
+                                
+                if Q > K {
+                                        
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: f3BEqualsA_QGreaterThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantB + 3*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productA - x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q < K {
+                    
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: f3BEqualsA_QLessThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantB - 3*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productA + x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q == K {
+                    reactionQuotientEqualsK = true
+                }
+            }
+            
         }
                 
         /// Equation Type: A + B = C
@@ -526,153 +836,6 @@ class ICETableSolver {
                     reactionQuotientEqualsK = true
                 }
             }
-        }
-        
-        /// Equation Type: A = B
-        if actualType == "R1P1" {
-            
-            reactantA = localConcentrations[0]
-            productB = localConcentrations[1]
-            
-            // Calculate reaction quotient
-            if reactantA != 0.0 {
-                Q = reactantB / reactantA
-            } else {
-                zeroInDenominator = true
-            }
-            
-            if !zeroInDenominator {
-                if productB == 0.0 {
-                    // Reactant A is nonzero: x = KA / (K + 1)
-                    let num = K * reactantA
-                    let den = K + 1
-                    x = num / den
-                    
-                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(x).rounded(toPlaces: decimalPlaces))
-                    
-                } else if reactantA == 0.0 {
-                    // Reactant B is nonzero: x = B / (K + 1)
-                    let num = productB
-                    let den = K + 1
-                    x = num! / den
-                    
-                    equilibriumConcentrations.append(Double(x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(productB - x).rounded(toPlaces: decimalPlaces))
-                    
-                } else if Q > K {
-                    // Q > K: x = (B - KA) / (K + 1)
-                    let num = productB - (K * reactantA)
-                    let den = K + 1
-                    x = num / den
-                    
-                    equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(productB - x).rounded(toPlaces: decimalPlaces))
-                    
-                } else if Q < K {
-                    // Q < K: x = (KA - B) / (K + 1)
-                    let num = (K * reactantA) - productB
-                    let den = K + 1
-                    x = num / den
-                    
-                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(productB + x).rounded(toPlaces: decimalPlaces))
-                    
-                } else if Q == K {
-                    reactionQuotientEqualsK = true
-                }
-            }
-        }
-        
-        /// Equation Type: 2A = B
-        if actualType == "R1P1 2A" {
-            
-            reactantA = localConcentrations[0]
-            productB = localConcentrations[1]
-            
-            // Calculate reaction quotient
-            if reactantA != 0.0 {
-                let reactantASquared = reactantA * reactantA
-                Q = productB / reactantASquared
-            } else {
-                zeroInDenominator = true
-            }
-            
-            if !zeroInDenominator {
-                if Q > K {
-                    // x^2(4K) + x(4KA+1) + KA^2-B = 0
-                    
-                    a = 4*K
-                    b = 4*K*reactantA + 1
-                    let csum1 = K*reactantA*reactantA
-                    c = csum1 - productB
-                    x = solveQuadraticEquation(a: a, b: b, c: c)
-
-                    equilibriumConcentrations.append(Double(reactantA + 2*x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(productB - x).rounded(toPlaces: decimalPlaces))
-                    
-                } else if Q < K {
-                    // x^2(4K) + x(-4KA-1) + KA^2-B = 0
-                    
-                    a = 4*K
-                    b = -4*K*reactantA - 1
-                    let csum1 = K*reactantA*reactantA
-                    c = csum1 - productB
-                    x = solveQuadraticEquation(a: a, b: b, c: c)
-                    
-                    equilibriumConcentrations.append(Double(reactantA - 2*x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(productB + x).rounded(toPlaces: decimalPlaces))
-                    
-                } else if Q == K {
-                    reactionQuotientEqualsK = true
-                }
-            }
-        }
-        
-        /// Equation Type: A = 2B
-        if actualType == "R1P1 2B" {
-            
-            reactantA = localConcentrations[0]
-            productB = localConcentrations[1]
-            
-            // Calculate reaction quotient
-            if reactantA != 0.0 {
-                let productBSquared = productB * productB
-                Q = productBSquared / reactantA
-            } else {
-                zeroInDenominator = true
-            }
-            
-            if !zeroInDenominator {
-                if Q > K {
-                    // 4x^2 + x(-4B-K) + B^2-KA = 0
-                    
-                    a = 4
-                    b = -4*productB - K
-                    let bSquared = productB * productB
-                    c = bSquared - K*reactantA
-                    x = solveQuadraticEquation(a: a, b: b, c: c)
-
-                    equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(productB - 2*x).rounded(toPlaces: decimalPlaces))
-                    
-                } else if Q < K {
-                    // 4x^2 + x(4B+K) + B^2-KA = 0
-
-                    a = 4
-                    b = 4*productB + K
-                    let bSquared = productB * productB
-                    c = bSquared - K*reactantA
-                    x = solveQuadraticEquation(a: a, b: b, c: c)
-                    
-                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(productB + 2*x).rounded(toPlaces: decimalPlaces))
-                    
-                } else if Q == K {
-                    reactionQuotientEqualsK = true
-                }
-            }
-            
         }
         
         /// Equation Type: A + B = C + D
@@ -1326,6 +1489,74 @@ class ICETableSolver {
         // KA^{2} - 4AKx + 4Kx^{2} - B^{3}C - xB^{3} - 9xB^{2}C - 9x^{2}B^{2} - 27Bx^{2}C - 27Bx^{3} - 27x^{3}C - 27x^{4}
         let total = term1 - term2 + term3 - term4 - term5 - term6 - term7 - term8 - term9 - term10 - term11
         
+        return total
+    }
+    
+    func fAEquals3B_QGreaterThanK(_ X: Double) -> Double {
+        
+        let productBSquared = productB * productB
+        let productBCubed = productB * productB * productB
+        
+        let term1 = kRef * reactantA
+        let term2 = kRef * X
+        let term3 = productBCubed
+        let term4 = 9 * X * productBSquared
+        let term5 = 27 * pow(X, 2) * productB
+        let term6 = 27 * pow(X, 3)
+        
+        // KA + Kx - B^{3} + 9xB^{2} - 27x^{2}B + 27x^{3}
+        let total = term1 + term2 - term3 + term4 - term5 + term6
+        return total
+    }
+    
+    func fAEquals3B_QLessThanK(_ X: Double) -> Double {
+
+        let productBSquared = productB * productB
+        let productBCubed = productB * productB * productB
+        
+        let term1 = kRef * reactantA
+        let term2 = kRef * X
+        let term3 = productBCubed
+        let term4 = 9 * X * productBSquared
+        let term5 = 27 * pow(X, 2) * productB
+        let term6 = 27 * pow(X, 3)
+        
+        // KA - Kx - B^{3} - 9xB^{2} - 27x^{2}B - 27x^{3}
+        let total = term1 - term2 - term3 - term4 - term5 - term6
+        return total
+    }
+    
+    func f3BEqualsA_QGreaterThanK(_ X: Double) -> Double {
+        
+        let reactantBSquared = reactantB * reactantB
+        let reactantBCubed = reactantB * reactantB * reactantB
+        
+        let term1 = kRef * reactantBCubed
+        let term2 = 9 * kRef * reactantBSquared * X
+        let term3 = 27 * kRef * reactantB * pow(X, 2)
+        let term4 = 27 * kRef * pow(X, 3)
+        let term5 = productA
+        let term6 = X
+        
+        // KB^{3} + 9KB^{2}x + 27KBx^{2} + 27Kx^{3} - A + x
+        let total = term1 + term2 + term3 + term4 - term5! + term6
+        return total
+    }
+    
+    func f3BEqualsA_QLessThanK(_ X: Double) -> Double {
+        
+        let reactantBSquared = reactantB * reactantB
+        let reactantBCubed = reactantB * reactantB * reactantB
+        
+        let term1 = kRef * reactantBCubed
+        let term2 = 9 * kRef * reactantBSquared * X
+        let term3 = 27 * kRef * reactantB * pow(X, 2)
+        let term4 = 27 * kRef * pow(X, 3)
+        let term5 = productA
+        let term6 = X
+        
+        // KB^{3} - 9KB^{2}x + 27KBx^{2} - 27Kx^{3} - A - x
+        let total = term1 - term2 + term3 - term4 - term5! - term6
         return total
     }
     
