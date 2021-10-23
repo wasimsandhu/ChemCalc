@@ -68,93 +68,114 @@ class ICETableSolver {
         
         // Reroute to proper calculation based on coefficients
         if type == "R1P1" {
-            if coefficients[0] == 2 && coefficients[1] == 1 {
+            if coefficients == [2, 1] {
                 // 2A = B
                 actualType = "R1P1 2A"
                 
-            } else if coefficients[0] == 1 && coefficients[1] == 2 {
+            } else if coefficients == [1, 2] {
                 // A = 2B
                 actualType = "R1P1 2B"
                 
-            } else if coefficients[0] == 1 && coefficients[1] == 3 {
+            } else if coefficients == [1, 3] {
                 // A = 3B
                 actualType = "R1P1 A=3B"
                 
-            } else if coefficients[0] == 3 && coefficients[1] == 1 {
+            } else if coefficients == [3, 1] {
                 // 3B = A
                 actualType = "R1P1 3B=A"
                 
             } else {
                 actualType = type
             }
+            
         } else if type == "R2P2" {
-            if coefficients[0] == 2 && coefficients[2] == 2 ||
-                coefficients[1] == 2 && coefficients[2] == 2 ||
-                coefficients[1] == 2 && coefficients[3] == 2 ||
-                coefficients[0] == 2 && coefficients[3] == 2 {
-                    // A + 2B = C + 2D
-                    actualType = "R2P2 A+2B=C+2D"
+            if coefficients == [1, 2, 1, 2] || coefficients == [2, 1, 1, 2] || coefficients == [2, 1, 2, 1] || coefficients == [1, 2, 2, 1] {
+                // A + 2B = C + 2D
+                actualType = "R2P2 A+2B=C+2D"
+                
+            } else if coefficients == [1, 3, 1, 3] || coefficients == [3, 1, 1, 3] || coefficients == [3, 1, 3, 1] || coefficients == [1, 3, 3, 1] {
+                // A + 3B = C + 3D
+                actualType = "R2P2 A+3B=C+3D"
+                
+            } else if coefficients == [1, 3, 1, 1] || coefficients == [3, 1, 1, 1] {
+                // A + 3B = C + D
+                actualType = "R2P2 A+3B=C+D"
+                
+            } else if coefficients == [1, 2, 1, 1] || coefficients == [2, 1, 1, 1] {
+                // A + 2B = C + D
+                actualType = "R2P2 A+2B=C+D"
+                
+            } else if coefficients == [1, 1, 2, 1] || coefficients == [1, 1, 1, 2] {
+                // A + B = 2C + D
+                actualType = "R2P2 A+B=2C+D"
+                
+            } else if coefficients == [1, 1, 3, 1] || coefficients == [1, 1, 1, 3] {
+                // A + B = 3C + D
+                actualType = "R2P2 A+B=3C+D"
+                
+            } else if coefficients == [1, 2, 2, 2] || coefficients == [2, 1, 2, 2] {
+                // A + 2B = 2C + 2D
+                actualType = "R2P2 A+2B=2C+2D"
+                
+            } else if coefficients == [2, 2, 2, 1] || coefficients == [2, 2, 1, 2] {
+                // 2A + 2B = 2C + D
+                actualType = "R2P2 2A+2B=2C+D"
+                
             } else {
                 actualType = type
             }
+            
         } else if type == "R2P1" {
-            if coefficients[0] == 2 && coefficients[2] == 1 || coefficients[1] == 2 && coefficients[2] == 1 {
+            if coefficients == [1, 2, 1] || coefficients == [2, 1, 1] {
                 // A + 2B = C
-                actualType = "R2P1 A2+B=C"
+                actualType = "R2P1 A+2B=C"
                 
-            } else if coefficients[0] == 2 && coefficients[2] == 2 || coefficients[1] == 2 && coefficients[2] == 2 {
+            } else if coefficients == [1, 2, 2] || coefficients == [2, 1, 2] {
                 // A + 2B = 2C
                 actualType = "R2P1 A+2B=2C"
                 
-            } else if coefficients[0] == 1 && coefficients[1] == 1 && coefficients[2] == 2 {
+            } else if coefficients == [1, 1, 2] {
                 // A + B = 2C
                 actualType = "R2P1 A+B=2C"
                 
-            } else if coefficients[0] == 1 && coefficients[1] == 3 && coefficients[2] == 2 ||
-                        coefficients[0] == 3 && coefficients[1] == 1 && coefficients[2] == 2 {
+            } else if coefficients == [1, 3, 2] || coefficients == [3, 1, 2] {
                 // A + 3B = 2C
                 actualType = "R2P1 A+3B=2C"
                 
-            } else if coefficients[0] == 1 && coefficients[1] == 3 && coefficients[2] == 1 ||
-                        coefficients[0] == 3 && coefficients[1] == 1 && coefficients[2] == 1 {
+            } else if coefficients == [1, 3, 1] || coefficients == [3, 1, 1] {
                 // A + 3B = C
                 actualType = "R2P1 A+3B=C"
                 
-            } else if coefficients[0] == 1 && coefficients[1] == 4 && coefficients[2] == 1 ||
-                        coefficients[0] == 4 && coefficients[1] == 1 && coefficients[2] == 1 {
+            } else if coefficients == [1, 4, 1] || coefficients == [4, 1, 1] {
                 // A + 4B = C
                 actualType = "R2P1 A+4B=C"
                 
             } else {
                 actualType = type
             }
+            
         } else if type == "R1P2" {
-            if coefficients[0] == 2 && coefficients[1] == 2 && coefficients[2] == 1 ||
-                coefficients[0] == 2 && coefficients[1] == 1 && coefficients[2] == 2 {
+            if coefficients == [2, 2, 1] || coefficients == [2, 1, 2] {
                 // 2A = 2C + D
                 actualType = "R1P2 2A=2C+D"
                 
-            } else if coefficients[0] == 2 && coefficients[1] == 3 && coefficients[2] == 1 ||
-                        coefficients[0] == 2 && coefficients[1] == 1 && coefficients[2] == 3 {
+            } else if coefficients == [2, 3, 1] || coefficients == [2, 1, 3] {
                 // 2A = 3B + C
                 actualType = "R1P2 2A=3B+C"
                 
-            } else if coefficients[0] == 1 && coefficients[1] == 3 && coefficients[2] == 1 ||
-                        coefficients[0] == 1 && coefficients[1] == 1 && coefficients[2] == 3 {
+            } else if coefficients == [1, 3, 1] || coefficients == [1, 1, 3] {
                 // A = 3B + C
                 actualType = "R1P2 A=3B+C"
                 
-            } else if coefficients[0] == 1 && coefficients[1] == 4 && coefficients[2] == 1 ||
-                        coefficients[0] == 1 && coefficients[1] == 1 && coefficients[2] == 4 {
+            } else if coefficients == [1, 4, 1] || coefficients == [1, 1, 4] {
                 // A = 4B + C
                 actualType = "R1P2 A=4B+C"
                 
-            } else if coefficients[0] == 2 && coefficients[1] == 1 && coefficients[2] == 1 {
+            } else if coefficients == [2, 1, 1] {
                 // 2A = C + D
                 actualType = "R1P2 2A=C+D"
                 
-            } else if coefficients[0] == 1 && coefficients[1] == 2 && coefficients[2] == 1 ||
-                        coefficients[0] == 1 && coefficients[1] == 1 && coefficients[2] == 2 {
+            } else if coefficients == [1, 2, 1] || coefficients == [1, 1, 2] {
                 // A = 2C + D
                 actualType = "R1P2 A=2C+D"
                 
@@ -533,7 +554,7 @@ class ICETableSolver {
         }
         
         /// Equation Type: A + 2B = C
-        if actualType == "R2P1 A2+B=C" {
+        if actualType == "R2P1 A+2B=C" {
             
             // Rearranging to put coefficients in correct place
             if coefficients[0] == 2 {
@@ -791,6 +812,277 @@ class ICETableSolver {
                     
                     equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
                     equilibriumConcentrations.append(Double(reactantB - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC + 2*x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q == K {
+                    reactionQuotientEqualsK = true
+                }
+            }
+        }
+        
+        /// Equation Type: A + 3B = C
+        if actualType == "R2P1 A+3B=C" {
+            
+            // Rearranging to put coefficients in correct place
+            if coefficients[0] == 3 {
+                localCoefficients.rearrange(from: 0, to: 1)
+                localCompounds.rearrange(from: 0, to: 1)
+                localConcentrations.rearrange(from: 0, to: 1)
+            }
+            
+            reactantA = localConcentrations[0]
+            reactantB = localConcentrations[1]
+            productC = localConcentrations[2]
+            
+            // Calculate reaction quotient
+            if reactantA != 0.0 && reactantB != 0.0 {
+                let reactantBCubed = reactantB * reactantB * reactantB
+                let numerator = productC
+                let denominator = reactantA * reactantBCubed
+                Q = numerator! / denominator
+            } else {
+                zeroInDenominator = true
+            }
+            
+            if !zeroInDenominator {
+                
+                var allXValues = [Double]()
+                                
+                if Q > K {
+                                        
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus3BEqualsC_QGreaterThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB + 3*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC - x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q < K {
+                    
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus3BEqualsC_QLessThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB - 3*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC + x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q == K {
+                    reactionQuotientEqualsK = true
+                }
+            }
+        }
+        
+        /// Equation Type: A + 4B = C
+        if actualType == "R2P1 A+4B=C" {
+            
+            // Rearranging to put coefficients in correct place
+            if coefficients[0] == 4 {
+                localCoefficients.rearrange(from: 0, to: 1)
+                localCompounds.rearrange(from: 0, to: 1)
+                localConcentrations.rearrange(from: 0, to: 1)
+            }
+            
+            reactantA = localConcentrations[0]
+            reactantB = localConcentrations[1]
+            productC = localConcentrations[2]
+            
+            // Calculate reaction quotient
+            if reactantA != 0.0 && reactantB != 0.0 {
+                let reactantBQuadrupled = reactantB * reactantB * reactantB * reactantB
+                let numerator = productC
+                let denominator = reactantA * reactantBQuadrupled
+                Q = numerator! / denominator
+            } else {
+                zeroInDenominator = true
+            }
+            
+            if !zeroInDenominator {
+                
+                var allXValues = [Double]()
+                                
+                if Q > K {
+                                        
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus4BEqualsC_QGreaterThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB + 4*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC - x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q < K {
+                    
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus4BEqualsC_QLessThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB - 4*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC + x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q == K {
+                    reactionQuotientEqualsK = true
+                }
+            }
+        }
+        
+        /// Ammonia Synthesis: A + 3B = 2C
+        if actualType == "R2P1 A+3B=2C" {
+            
+            // Rearranging to put coefficients in correct place
+            if coefficients[0] == 3 {
+                localCoefficients.rearrange(from: 0, to: 1)
+                localCompounds.rearrange(from: 0, to: 1)
+                localConcentrations.rearrange(from: 0, to: 1)
+            }
+            
+            reactantA = localConcentrations[0]
+            reactantB = localConcentrations[1]
+            productC = localConcentrations[2]
+            
+            // Calculate reaction quotient
+            if reactantA != 0.0 && reactantB != 0.0 {
+                let numerator = productC * productC
+                let denominator = reactantA * reactantB * reactantB * reactantB
+                Q = numerator / denominator
+            } else {
+                zeroInDenominator = true
+            }
+            
+            if !zeroInDenominator {
+                
+                var allXValues = [Double]()
+                                
+                if Q > K {
+                                        
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus3BEquals2C_QGreaterThanK,
+                                                   derivativeOfTheFunction: dfAPlus3BEquals2C_QGreaterThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB + 3*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC - 2*x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q < K {
+                    
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus3BEquals2C_QLessThanK,
+                                                   derivativeOfTheFunction: dfAPlus3BEquals2C_QLessThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB - 3*x).rounded(toPlaces: decimalPlaces))
                     equilibriumConcentrations.append(Double(productC + 2*x).rounded(toPlaces: decimalPlaces))
                     
                 } else if Q == K {
@@ -1117,531 +1409,6 @@ class ICETableSolver {
             }
         }
         
-        /// Equation Type: A + B = C + D
-        if actualType == "R2P2" {
-            
-            reactantA = localConcentrations[0]
-            reactantB = localConcentrations[1]
-            productC = localConcentrations[2]
-            productD = localConcentrations[3]
-            
-            // Calculate reaction quotient
-            if reactantA != 0.0 && reactantB != 0.0 {
-                let numerator = productC * productD
-                let denominator = reactantA * reactantB
-                Q = numerator / denominator
-            } else {
-                zeroInDenominator = true
-            }
-            
-            if !zeroInDenominator {
-                if Q < K {
-                    
-                    // x^2(1-K) + x(C+D+KA+KB) + CD-KAB = 0
-                    a = 1 - K
-                    
-                    let bsum1 = productC + productD
-                    let bsum2 = K*reactantA + K*reactantB
-                    b = bsum1 + bsum2
-                    
-                    let csum1 = productC * productD
-                    let csum2 = K * reactantA * reactantB
-                    c = csum1 - csum2
-                    
-                    x = solveQuadraticEquation(a: a, b: b, c: c)
-                    
-                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(reactantB - x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(productC + x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(productD + x).rounded(toPlaces: decimalPlaces))
-                    
-                } else if Q > K {
-                    
-                    // x^2(1-K) + x(-C-D-KA-KB) + CD-KAB = 0
-                    a = 1 - K
-                    
-                    let bsum1 = -productC - productD
-                    let bsum2 = K*reactantA
-                    let bsum3 = K*reactantB
-                    b = bsum1 - bsum2 - bsum3
-                    
-                    let csum1 = productC * productD
-                    let csum2 = K * reactantA * reactantB
-                    c = csum1 - csum2
-                    
-                    x = solveQuadraticEquation(a: a, b: b, c: c)
-                    
-                    equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(reactantB + x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(productC - x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(productD - x).rounded(toPlaces: decimalPlaces))
-                    
-                } else if Q == K {
-                    reactionQuotientEqualsK = true
-                }
-            }
-        }
-        
-        /// Equation Type: A + 2B = C + 2D
-        if actualType == "R2P2 A+2B=C+2D" {
-            
-            // Rearranging to put coefficients in correct place
-            if coefficients[0] == 2 {
-                localCoefficients.rearrange(from: 0, to: 1)
-                localCompounds.rearrange(from: 0, to: 1)
-                localConcentrations.rearrange(from: 0, to: 1)
-            }
-            
-            if coefficients[2] == 2 {
-                localCoefficients.rearrange(from: 2, to: 3)
-                localCompounds.rearrange(from: 2, to: 3)
-                localConcentrations.rearrange(from: 2, to: 3)
-            }
-            
-            reactantA = localConcentrations[0]
-            reactantB = localConcentrations[1]
-            productC = localConcentrations[2]
-            productD = localConcentrations[3]
-            
-            // Calculate reaction quotient
-            if reactantA != 0.0 && reactantB != 0.0 {
-                let numerator = productC * productD * productD
-                let denominator = reactantA * reactantB * reactantB
-                Q = numerator / denominator
-            } else {
-                zeroInDenominator = true
-            }
-            
-            if !zeroInDenominator {
-                
-                var allXValues = [Double]()
-                
-                if Q < K {
-                    
-                    // AKB^2 - 4ABKx + 4AKx^2 - KxB^2 + 4BKx^2 - 4Kx^3 - CD^2 - xD^2 - 4CDx - 4x^2D - 4x^2C - 4x^3
-                    for X in xValuesToTry {
-                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus2BEqualsCPlus2D_QLessThanK,
-                                                   initialGuessForX: X,
-                                                   tolerance: 0.00005,
-                                                   maxIterations: 100)
-                        
-                        if let answer = newton.solve() {
-                            allXValues.append(answer)
-                        } else {
-                            // Error message
-                            allXValues.append(0)
-                        }
-                    }
-                    
-                    var absoluteValueOfXValues = [Double]()
-                    
-                    for xValue in allXValues {
-                        absoluteValueOfXValues.append(abs(xValue))
-                    }
-                    
-                    x = absoluteValueOfXValues.min()
-                    
-                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(reactantB - 2*x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(productC + x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(productD + 2*x).rounded(toPlaces: decimalPlaces))
-                    
-                } else if Q > K {
-                    
-                    // AKB^2 + 4ABKx + 4AKx^2 + KxB^2 + 4BKx^2 + 4Kx^3 - CD^2 + xD^2 + 4CDx - 4x^2D - 4x^2C + 4x^3
-                    for X in xValuesToTry {
-                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus2BEqualsCPlus2D_QGreaterThanK,
-                                                   initialGuessForX: X,
-                                                   tolerance: 0.00005,
-                                                   maxIterations: 100)
-                        
-                        if let answer = newton.solve() {
-                            allXValues.append(answer)
-                        } else {
-                            // Error message
-                            allXValues.append(0)
-                        }
-                    }
-                    
-                    var absoluteValueOfXValues = [Double]()
-                    
-                    for xValue in allXValues {
-                        absoluteValueOfXValues.append(abs(xValue))
-                    }
-                    
-                    x = absoluteValueOfXValues.min()
-                    
-                    equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(reactantB + 2*x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(productC - x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(productD - 2*x).rounded(toPlaces: decimalPlaces))
-                    
-                } else if Q == K {
-                    reactionQuotientEqualsK = true
-                }
-            }
-        }
-        
-        /// Ammonia Synthesis: A + 3B = 2C
-        if actualType == "R2P1 A+3B=2C" {
-            
-            // Rearranging to put coefficients in correct place
-            if coefficients[0] == 3 {
-                localCoefficients.rearrange(from: 0, to: 1)
-                localCompounds.rearrange(from: 0, to: 1)
-                localConcentrations.rearrange(from: 0, to: 1)
-            }
-            
-            reactantA = localConcentrations[0]
-            reactantB = localConcentrations[1]
-            productC = localConcentrations[2]
-            
-            // Calculate reaction quotient
-            if reactantA != 0.0 && reactantB != 0.0 {
-                let numerator = productC * productC
-                let denominator = reactantA * reactantB * reactantB * reactantB
-                Q = numerator / denominator
-            } else {
-                zeroInDenominator = true
-            }
-            
-            if !zeroInDenominator {
-                
-                var allXValues = [Double]()
-                                
-                if Q > K {
-                                        
-                    for X in xValuesToTry {
-                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus3BEquals2C_QGreaterThanK,
-                                                   derivativeOfTheFunction: dfAPlus3BEquals2C_QGreaterThanK,
-                                                   initialGuessForX: X,
-                                                   tolerance: 0.00005,
-                                                   maxIterations: 100)
-                        
-                        if let answer = newton.solve() {
-                            allXValues.append(answer)
-                        } else {
-                            // Error message
-                            allXValues.append(0)
-                        }
-                    }
-                    
-                    var absoluteValueOfXValues = [Double]()
-                    
-                    for xValue in allXValues {
-                        absoluteValueOfXValues.append(abs(xValue))
-                    }
-                    
-                    x = absoluteValueOfXValues.min()
-                    
-                    equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(reactantB + 3*x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(productC - 2*x).rounded(toPlaces: decimalPlaces))
-                    
-                } else if Q < K {
-                    
-                    for X in xValuesToTry {
-                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus3BEquals2C_QLessThanK,
-                                                   derivativeOfTheFunction: dfAPlus3BEquals2C_QLessThanK,
-                                                   initialGuessForX: X,
-                                                   tolerance: 0.00005,
-                                                   maxIterations: 100)
-                        
-                        if let answer = newton.solve() {
-                            allXValues.append(answer)
-                        } else {
-                            // Error message
-                            allXValues.append(0)
-                        }
-                    }
-                    
-                    var absoluteValueOfXValues = [Double]()
-                    
-                    for xValue in allXValues {
-                        absoluteValueOfXValues.append(abs(xValue))
-                    }
-                    
-                    x = absoluteValueOfXValues.min()
-                    
-                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(reactantB - 3*x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(productC + 2*x).rounded(toPlaces: decimalPlaces))
-                    
-                } else if Q == K {
-                    reactionQuotientEqualsK = true
-                }
-            }
-        }
-    
-        /// Ammonia Decomposition: 2A = 3B + C
-        if actualType == "R1P2 2A=3B+C" {
-            
-            // Rearranging to put coefficients in correct place
-            if coefficients[2] == 3 {
-                localCoefficients.rearrange(from: 2, to: 1)
-                localCompounds.rearrange(from: 2, to: 1)
-                localConcentrations.rearrange(from: 2, to: 1)
-            }
-            
-            reactantA = localConcentrations[0]
-            productB = localConcentrations[1]
-            productC = localConcentrations[2]
-            
-            // Calculate reaction quotient
-            if reactantA != 0.0 {
-                let productBCubed = productB * productB * productB
-                let numerator = productBCubed * productC
-                let denominator = reactantA * reactantA
-                Q = numerator / denominator
-            } else {
-                zeroInDenominator = true
-            }
-            
-            if !zeroInDenominator {
-                
-                var allXValues = [Double]()
-                                
-                if Q > K {
-                                        
-                    for X in xValuesToTry {
-                        let newton = NewtonRaphson(functionToFindRootsOf: f2AEquals3BPlusC_QGreaterThanK,
-                                                   initialGuessForX: X,
-                                                   tolerance: 0.00005,
-                                                   maxIterations: 100)
-                        
-                        if let answer = newton.solve() {
-                            allXValues.append(answer)
-                        } else {
-                            // Error message
-                            allXValues.append(0)
-                        }
-                    }
-                    
-                    var absoluteValueOfXValues = [Double]()
-                    
-                    for xValue in allXValues {
-                        absoluteValueOfXValues.append(abs(xValue))
-                    }
-                    
-                    x = absoluteValueOfXValues.min()
-                    
-                    equilibriumConcentrations.append(Double(reactantA + 2*x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(productB - 3*x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(productC - x).rounded(toPlaces: decimalPlaces))
-                    
-                } else if Q < K {
-                    
-                    for X in xValuesToTry {
-                        let newton = NewtonRaphson(functionToFindRootsOf: f2AEquals3BPlusC_QLessThanK,
-                                                   initialGuessForX: X,
-                                                   tolerance: 0.00005,
-                                                   maxIterations: 100)
-                        
-                        if let answer = newton.solve() {
-                            allXValues.append(answer)
-                        } else {
-                            // Error message
-                            allXValues.append(0)
-                        }
-                    }
-                    
-                    var absoluteValueOfXValues = [Double]()
-                    
-                    for xValue in allXValues {
-                        absoluteValueOfXValues.append(abs(xValue))
-                    }
-                    
-                    x = absoluteValueOfXValues.min()
-                    
-                    equilibriumConcentrations.append(Double(reactantA - 2*x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(productB + 3*x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(productC + x).rounded(toPlaces: decimalPlaces))
-                    
-                } else if Q == K {
-                    reactionQuotientEqualsK = true
-                }
-            }
-        }
-        
-        /// Equation Type: A + 3B = C
-        if actualType == "R2P1 A+3B=C" {
-            
-            // Rearranging to put coefficients in correct place
-            if coefficients[0] == 3 {
-                localCoefficients.rearrange(from: 0, to: 1)
-                localCompounds.rearrange(from: 0, to: 1)
-                localConcentrations.rearrange(from: 0, to: 1)
-            }
-            
-            reactantA = localConcentrations[0]
-            reactantB = localConcentrations[1]
-            productC = localConcentrations[2]
-            
-            // Calculate reaction quotient
-            if reactantA != 0.0 && reactantB != 0.0 {
-                let reactantBCubed = reactantB * reactantB * reactantB
-                let numerator = productC
-                let denominator = reactantA * reactantBCubed
-                Q = numerator! / denominator
-            } else {
-                zeroInDenominator = true
-            }
-            
-            if !zeroInDenominator {
-                
-                var allXValues = [Double]()
-                                
-                if Q > K {
-                                        
-                    for X in xValuesToTry {
-                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus3BEqualsC_QGreaterThanK,
-                                                   initialGuessForX: X,
-                                                   tolerance: 0.00005,
-                                                   maxIterations: 100)
-                        
-                        if let answer = newton.solve() {
-                            allXValues.append(answer)
-                        } else {
-                            // Error message
-                            allXValues.append(0)
-                        }
-                    }
-                    
-                    var absoluteValueOfXValues = [Double]()
-                    
-                    for xValue in allXValues {
-                        absoluteValueOfXValues.append(abs(xValue))
-                    }
-                    
-                    x = absoluteValueOfXValues.min()
-                    
-                    equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(reactantB + 3*x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(productC - x).rounded(toPlaces: decimalPlaces))
-                    
-                } else if Q < K {
-                    
-                    for X in xValuesToTry {
-                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus3BEqualsC_QLessThanK,
-                                                   initialGuessForX: X,
-                                                   tolerance: 0.00005,
-                                                   maxIterations: 100)
-                        
-                        if let answer = newton.solve() {
-                            allXValues.append(answer)
-                        } else {
-                            // Error message
-                            allXValues.append(0)
-                        }
-                    }
-                    
-                    var absoluteValueOfXValues = [Double]()
-                    
-                    for xValue in allXValues {
-                        absoluteValueOfXValues.append(abs(xValue))
-                    }
-                    
-                    x = absoluteValueOfXValues.min()
-                    
-                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(reactantB - 3*x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(productC + x).rounded(toPlaces: decimalPlaces))
-                    
-                } else if Q == K {
-                    reactionQuotientEqualsK = true
-                }
-            }
-        }
-        
-        if actualType == "R2P1 A+4B=C" {
-            
-            // Rearranging to put coefficients in correct place
-            if coefficients[0] == 4 {
-                localCoefficients.rearrange(from: 0, to: 1)
-                localCompounds.rearrange(from: 0, to: 1)
-                localConcentrations.rearrange(from: 0, to: 1)
-            }
-            
-            reactantA = localConcentrations[0]
-            reactantB = localConcentrations[1]
-            productC = localConcentrations[2]
-            
-            // Calculate reaction quotient
-            if reactantA != 0.0 && reactantB != 0.0 {
-                let reactantBQuadrupled = reactantB * reactantB * reactantB * reactantB
-                let numerator = productC
-                let denominator = reactantA * reactantBQuadrupled
-                Q = numerator! / denominator
-            } else {
-                zeroInDenominator = true
-            }
-            
-            if !zeroInDenominator {
-                
-                var allXValues = [Double]()
-                                
-                if Q > K {
-                                        
-                    for X in xValuesToTry {
-                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus4BEqualsC_QGreaterThanK,
-                                                   initialGuessForX: X,
-                                                   tolerance: 0.00005,
-                                                   maxIterations: 100)
-                        
-                        if let answer = newton.solve() {
-                            allXValues.append(answer)
-                        } else {
-                            // Error message
-                            allXValues.append(0)
-                        }
-                    }
-                    
-                    var absoluteValueOfXValues = [Double]()
-                    
-                    for xValue in allXValues {
-                        absoluteValueOfXValues.append(abs(xValue))
-                    }
-                    
-                    x = absoluteValueOfXValues.min()
-                    
-                    equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(reactantB + 4*x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(productC - x).rounded(toPlaces: decimalPlaces))
-                    
-                } else if Q < K {
-                    
-                    for X in xValuesToTry {
-                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus4BEqualsC_QLessThanK,
-                                                   initialGuessForX: X,
-                                                   tolerance: 0.00005,
-                                                   maxIterations: 100)
-                        
-                        if let answer = newton.solve() {
-                            allXValues.append(answer)
-                        } else {
-                            // Error message
-                            allXValues.append(0)
-                        }
-                    }
-                    
-                    var absoluteValueOfXValues = [Double]()
-                    
-                    for xValue in allXValues {
-                        absoluteValueOfXValues.append(abs(xValue))
-                    }
-                    
-                    x = absoluteValueOfXValues.min()
-                    
-                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(reactantB - 4*x).rounded(toPlaces: decimalPlaces))
-                    equilibriumConcentrations.append(Double(productC + x).rounded(toPlaces: decimalPlaces))
-                    
-                } else if Q == K {
-                    reactionQuotientEqualsK = true
-                }
-            }
-        }
-    
         /// Ammonia Decomposition: 2A = 3B + C
         if actualType == "R1P2 2A=3B+C" {
             
@@ -1822,6 +1589,7 @@ class ICETableSolver {
             }
         }
         
+        /// Equation Type: A = 4B + C
         if actualType == "R1P2 A=4B+C" {
             
             // Rearranging to put coefficients in correct place
@@ -1904,6 +1672,842 @@ class ICETableSolver {
                     equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
                     equilibriumConcentrations.append(Double(productB + 4*x).rounded(toPlaces: decimalPlaces))
                     equilibriumConcentrations.append(Double(productC + x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q == K {
+                    reactionQuotientEqualsK = true
+                }
+            }
+        }
+        
+        /// Equation Type: A + B = C + D
+        if actualType == "R2P2" {
+            
+            reactantA = localConcentrations[0]
+            reactantB = localConcentrations[1]
+            productC = localConcentrations[2]
+            productD = localConcentrations[3]
+            
+            // Calculate reaction quotient
+            if reactantA != 0.0 && reactantB != 0.0 {
+                let numerator = productC * productD
+                let denominator = reactantA * reactantB
+                Q = numerator / denominator
+            } else {
+                zeroInDenominator = true
+            }
+            
+            if !zeroInDenominator {
+                if Q < K {
+                    
+                    // x^2(1-K) + x(C+D+KA+KB) + CD-KAB = 0
+                    a = 1 - K
+                    
+                    let bsum1 = productC + productD
+                    let bsum2 = K*reactantA + K*reactantB
+                    b = bsum1 + bsum2
+                    
+                    let csum1 = productC * productD
+                    let csum2 = K * reactantA * reactantB
+                    c = csum1 - csum2
+                    
+                    x = solveQuadraticEquation(a: a, b: b, c: c)
+                    
+                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD + x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q > K {
+                    
+                    // x^2(1-K) + x(-C-D-KA-KB) + CD-KAB = 0
+                    a = 1 - K
+                    
+                    let bsum1 = -productC - productD
+                    let bsum2 = K*reactantA
+                    let bsum3 = K*reactantB
+                    b = bsum1 - bsum2 - bsum3
+                    
+                    let csum1 = productC * productD
+                    let csum2 = K * reactantA * reactantB
+                    c = csum1 - csum2
+                    
+                    x = solveQuadraticEquation(a: a, b: b, c: c)
+                    
+                    equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD - x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q == K {
+                    reactionQuotientEqualsK = true
+                }
+            }
+        }
+        
+        /// Equation Type: A + 2B = C + 2D
+        if actualType == "R2P2 A+2B=C+2D" {
+            
+            // Rearranging to put coefficients in correct place
+            if coefficients[0] == 2 {
+                localCoefficients.rearrange(from: 0, to: 1)
+                localCompounds.rearrange(from: 0, to: 1)
+                localConcentrations.rearrange(from: 0, to: 1)
+            }
+            
+            if coefficients[2] == 2 {
+                localCoefficients.rearrange(from: 2, to: 3)
+                localCompounds.rearrange(from: 2, to: 3)
+                localConcentrations.rearrange(from: 2, to: 3)
+            }
+            
+            reactantA = localConcentrations[0]
+            reactantB = localConcentrations[1]
+            productC = localConcentrations[2]
+            productD = localConcentrations[3]
+            
+            // Calculate reaction quotient
+            if reactantA != 0.0 && reactantB != 0.0 {
+                let numerator = productC * productD * productD
+                let denominator = reactantA * reactantB * reactantB
+                Q = numerator / denominator
+            } else {
+                zeroInDenominator = true
+            }
+            
+            if !zeroInDenominator {
+                
+                var allXValues = [Double]()
+                
+                if Q < K {
+                    
+                    // AKB^2 - 4ABKx + 4AKx^2 - KxB^2 + 4BKx^2 - 4Kx^3 - CD^2 - xD^2 - 4CDx - 4x^2D - 4x^2C - 4x^3
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus2BEqualsCPlus2D_QLessThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB - 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD + 2*x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q > K {
+                    
+                    // AKB^2 + 4ABKx + 4AKx^2 + KxB^2 + 4BKx^2 + 4Kx^3 - CD^2 + xD^2 + 4CDx - 4x^2D - 4x^2C + 4x^3
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus2BEqualsCPlus2D_QGreaterThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB + 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD - 2*x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q == K {
+                    reactionQuotientEqualsK = true
+                }
+            }
+        }
+        
+        /// Equation Type: A + 3B = C + 3D
+        if actualType == "R2P2 A+3B=C+3D" {
+            
+            // Rearranging to put coefficients in correct place
+            if coefficients[0] == 3 {
+                localCoefficients.rearrange(from: 0, to: 1)
+                localCompounds.rearrange(from: 0, to: 1)
+                localConcentrations.rearrange(from: 0, to: 1)
+            }
+            
+            if coefficients[2] == 3 {
+                localCoefficients.rearrange(from: 2, to: 3)
+                localCompounds.rearrange(from: 2, to: 3)
+                localConcentrations.rearrange(from: 2, to: 3)
+            }
+            
+            reactantA = localConcentrations[0]
+            reactantB = localConcentrations[1]
+            productC = localConcentrations[2]
+            productD = localConcentrations[3]
+            
+            // Calculate reaction quotient
+            if reactantA != 0.0 && reactantB != 0.0 {
+                
+                let reactantBCubed = reactantB * reactantB * reactantB
+                let productDCubed = productD * productD * productD
+                
+                let numerator = productC * productDCubed
+                let denominator = reactantA * reactantBCubed
+                Q = numerator / denominator
+                
+            } else {
+                zeroInDenominator = true
+            }
+            
+            if !zeroInDenominator {
+                
+                var allXValues = [Double]()
+                
+                if Q > K {
+                    
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus3BEqualsCPlus3D_QGreaterThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB + 3*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD - 3*x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q < K {
+                    
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus3BEqualsCPlus3D_QLessThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB - 3*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD + 3*x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q == K {
+                    reactionQuotientEqualsK = true
+                }
+            }
+        }
+        
+        /// Equation Type: A + 2B = C + D
+        if actualType == "R2P2 A+2B=C+D" {
+            
+            // Rearranging to put coefficients in correct place
+            if coefficients[0] == 2 {
+                localCoefficients.rearrange(from: 0, to: 1)
+                localCompounds.rearrange(from: 0, to: 1)
+                localConcentrations.rearrange(from: 0, to: 1)
+            }
+            
+            reactantA = localConcentrations[0]
+            reactantB = localConcentrations[1]
+            productC = localConcentrations[2]
+            productD = localConcentrations[3]
+            
+            // Calculate reaction quotient
+            if reactantA != 0.0 && reactantB != 0.0 {
+                let reactantBSquared = reactantB * reactantB
+                let numerator = productC * productD
+                let denominator = reactantA * reactantBSquared
+                Q = numerator / denominator
+            } else {
+                zeroInDenominator = true
+            }
+            
+            if !zeroInDenominator {
+                
+                var allXValues = [Double]()
+                
+                if Q > K {
+                    
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus2BEqualsCPlusD_QGreaterThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB + 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD - x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q < K {
+                    
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus2BEqualsCPlusD_QLessThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB - 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD + x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q == K {
+                    reactionQuotientEqualsK = true
+                }
+            }
+        }
+        
+        /// Equation Type: A + 3B = C + D
+        if actualType == "R2P2 A+3B=C+D" {
+            
+            // Rearranging to put coefficients in correct place
+            if coefficients[0] == 3 {
+                localCoefficients.rearrange(from: 0, to: 1)
+                localCompounds.rearrange(from: 0, to: 1)
+                localConcentrations.rearrange(from: 0, to: 1)
+            }
+            
+            reactantA = localConcentrations[0]
+            reactantB = localConcentrations[1]
+            productC = localConcentrations[2]
+            productD = localConcentrations[3]
+            
+            // Calculate reaction quotient
+            if reactantA != 0.0 && reactantB != 0.0 {
+                let reactantBCubed = reactantB * reactantB * reactantB
+                let numerator = productC * productD
+                let denominator = reactantA * reactantBCubed
+                Q = numerator / denominator
+            } else {
+                zeroInDenominator = true
+            }
+            
+            if !zeroInDenominator {
+                
+                var allXValues = [Double]()
+                
+                if Q > K {
+                    
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus3BEqualsCPlusD_QGreaterThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB + 3*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD - x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q < K {
+                    
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus3BEqualsCPlusD_QLessThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB - 3*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD + x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q == K {
+                    reactionQuotientEqualsK = true
+                }
+            }
+        }
+        
+        /// Equation Type: A + B = 2C + D
+        if actualType == "R2P2 A+B=2C+D" {
+            
+            // Rearranging to put coefficients in correct place
+            if coefficients[3] == 2 {
+                localCoefficients.rearrange(from: 3, to: 2)
+                localCompounds.rearrange(from: 3, to: 2)
+                localConcentrations.rearrange(from: 3, to: 2)
+            }
+            
+            reactantA = localConcentrations[0]
+            reactantB = localConcentrations[1]
+            productC = localConcentrations[2]
+            productD = localConcentrations[3]
+            
+            // Calculate reaction quotient
+            if reactantA != 0.0 && reactantB != 0.0 {
+                let productCSquared = productC * productC
+                let numerator = productCSquared * productD
+                let denominator = reactantA * reactantB
+                Q = numerator / denominator
+            } else {
+                zeroInDenominator = true
+            }
+            
+            if !zeroInDenominator {
+                
+                var allXValues = [Double]()
+                
+                if Q > K {
+                    
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlusBEquals2CPlusD_QGreaterThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC - 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD - x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q < K {
+                    
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlusBEquals2CPlusD_QLessThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC + 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD + x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q == K {
+                    reactionQuotientEqualsK = true
+                }
+            }
+        }
+        
+        /// Equation Type: A + B = 3C + D
+        if actualType == "R2P2 A+B=3C+D" {
+            
+            // Rearranging to put coefficients in correct place
+            if coefficients[3] == 3 {
+                localCoefficients.rearrange(from: 3, to: 2)
+                localCompounds.rearrange(from: 3, to: 2)
+                localConcentrations.rearrange(from: 3, to: 2)
+            }
+            
+            reactantA = localConcentrations[0]
+            reactantB = localConcentrations[1]
+            productC = localConcentrations[2]
+            productD = localConcentrations[3]
+            
+            // Calculate reaction quotient
+            if reactantA != 0.0 && reactantB != 0.0 {
+                let productCCubed = productC * productC * productC
+                let numerator = productCCubed * productD
+                let denominator = reactantA * reactantB
+                Q = numerator / denominator
+            } else {
+                zeroInDenominator = true
+            }
+            
+            if !zeroInDenominator {
+                
+                var allXValues = [Double]()
+                
+                if Q > K {
+                    
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlusBEquals3CPlusD_QGreaterThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC - 3*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD - x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q < K {
+                    
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlusBEquals3CPlusD_QLessThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC + 3*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD + x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q == K {
+                    reactionQuotientEqualsK = true
+                }
+            }
+        }
+        
+        /// Equation Type: A + 2B = 2C + 2D
+        if actualType == "R2P2 A+2B=2C+2D" {
+            
+            // Rearranging to put coefficients in correct place
+            if coefficients[0] == 2 {
+                localCoefficients.rearrange(from: 0, to: 1)
+                localCompounds.rearrange(from: 0, to: 1)
+                localConcentrations.rearrange(from: 0, to: 1)
+            }
+            
+            reactantA = localConcentrations[0]
+            reactantB = localConcentrations[1]
+            productC = localConcentrations[2]
+            productD = localConcentrations[3]
+            
+            // Calculate reaction quotient
+            if reactantA != 0.0 && reactantB != 0.0 {
+                
+                let reactantBSquared = reactantB * reactantB
+                let productCSquared = productC * productC
+                let productDSquared = productD * productD
+                
+                let numerator = productCSquared * productDSquared
+                let denominator = reactantA * reactantBSquared
+                Q = numerator / denominator
+                
+            } else {
+                zeroInDenominator = true
+            }
+            
+            if !zeroInDenominator {
+                
+                var allXValues = [Double]()
+                
+                if Q > K {
+                    
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus2BEquals2CPlus2D_QGreaterThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB + 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC - 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD - 2*x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q < K {
+                    
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus2BEquals2CPlus2D_QLessThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB - 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC + 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD + 2*x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q == K {
+                    reactionQuotientEqualsK = true
+                }
+            }
+        }
+        
+        /// Equation Type: 2A + 2B = 2C + D
+        if actualType == "R2P2 2A+2B=2C+D" {
+            
+            // Rearranging to put coefficients in correct place
+            if coefficients[3] == 2 {
+                localCoefficients.rearrange(from: 3, to: 2)
+                localCompounds.rearrange(from: 3, to: 2)
+                localConcentrations.rearrange(from: 3, to: 2)
+            }
+            
+            reactantA = localConcentrations[0]
+            reactantB = localConcentrations[1]
+            productC = localConcentrations[2]
+            productD = localConcentrations[3]
+            
+            // Calculate reaction quotient
+            if reactantA != 0.0 && reactantB != 0.0 {
+                
+                let reactantASquared = reactantA * reactantA
+                let reactantBSquared = reactantB * reactantB
+                let productCSquared = productC * productC
+                
+                let numerator = productCSquared * productD
+                let denominator = reactantASquared * reactantBSquared
+                Q = numerator / denominator
+                
+            } else {
+                zeroInDenominator = true
+            }
+            
+            if !zeroInDenominator {
+                
+                var allXValues = [Double]()
+                
+                if Q > K {
+                    
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: f2APlus2BEquals2CPlusD_QGreaterThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA + 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB + 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC - 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD - x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q < K {
+                    
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: f2APlus2BEquals2CPlusD_QLessThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA - 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(reactantB - 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC + 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD + x).rounded(toPlaces: decimalPlaces))
                     
                 } else if Q == K {
                     reactionQuotientEqualsK = true
@@ -2544,6 +3148,354 @@ class ICETableSolver {
         // AK - Kx - C^{2}D - xC^{2} - 4CDx - 4Cx^{2} - 4x^{2}D - 4x^{3}
         let total = term1 - term2 - term3 - term4 - term5 - term6 - term7 - term8
         return total
+    }
+    
+    func fAPlus3BEqualsCPlus3D_QGreaterThanK(_ X: Double) -> Double {
+        
+        let reactantBCubed = reactantB * reactantB * reactantB
+        let reactantBSquared = reactantB * reactantB
+        let productDCubed = productD * productD * productD
+        let productDSquared = productD * productD
+        
+        let term1 = reactantA * kRef * reactantBCubed
+        let term2 = 9 * reactantA * kRef * X * reactantBSquared
+        let term3 = 27 * reactantA * reactantB * kRef * pow(X, 2)
+        let term4 = 27 * reactantA * kRef * pow(X, 3)
+        let term5 = kRef * X * reactantBCubed
+        let term6 = 9 * kRef * pow(X, 2) * reactantBSquared
+        let term7 = 27 * reactantB * kRef * pow(X, 3)
+        let term8 = 27 * kRef * pow(X, 4)
+        let term9 = productC * productDCubed
+        let term10 = X * productDCubed
+        let term11 = 9 * productC * X * productDSquared
+        let term12 = 9 * pow(X, 2) * productDSquared
+        let term13 = 27 * pow(X, 2) * productC * productD
+        let term14 = 27 * pow(X, 3) * productD
+        let term15 = 27 * pow(X, 3) * productC
+        let term16 = 27 * pow(X, 4)
+        
+        // AKB^{3} + 9AKxB^{2} + 27ABKx^{2} + 27AKx^{3} + KxB^{3} + 9Kx^{2}B^{2} + 27BKx^{3} + 27Kx^{4} - CD^{3} + xD^{3} + 9CxD^{2} - 9x^{2}D^{2} - 27x^{2}CD + 27x^{3}D + 27x^{3}C - 27x^{4}
+        let total1 = term1 + term2 + term3 + term4 + term5 + term6 + term7 + term8 - term9 + term10
+        let total2 = term11 - term12 - term13 + term14 + term15 + term16
+        return total1 + total2
+    }
+    
+    func fAPlus3BEqualsCPlus3D_QLessThanK(_ X: Double) -> Double {
+        
+        let reactantBCubed = reactantB * reactantB * reactantB
+        let reactantBSquared = reactantB * reactantB
+        let productDCubed = productD * productD * productD
+        let productDSquared = productD * productD
+        
+        let term1 = reactantA * kRef * reactantBCubed
+        let term2 = 9 * reactantA * kRef * X * reactantBSquared
+        let term3 = 27 * reactantA * reactantB * kRef * pow(X, 2)
+        let term4 = 27 * reactantA * kRef * pow(X, 3)
+        let term5 = kRef * X * reactantBCubed
+        let term6 = 9 * kRef * pow(X, 2) * reactantBSquared
+        let term7 = 27 * reactantB * kRef * pow(X, 3)
+        let term8 = 27 * kRef * pow(X, 4)
+        let term9 = productC * productDCubed
+        let term10 = X * productDCubed
+        let term11 = 9 * productC * X * productDSquared
+        let term12 = 9 * pow(X, 2) * productDSquared
+        let term13 = 27 * pow(X, 2) * productC * productD
+        let term14 = 27 * pow(X, 3) * productD
+        let term15 = 27 * pow(X, 3) * productC
+        let term16 = 27 * pow(X, 4)
+
+        // AKB^{3} - 9AKxB^{2} + 27ABKx^{2} - 27AKx^{3} - KxB^{3} + 9Kx^{2}B^{2} - 27BKx^{3} + 27Kx^{4} - CD^{3} - xD^{3} - 9CxD^{2} - 9x^{2}D^{2} - 27x^{2}CD - 27x^{3}D - 27x^{3}C - 27x^{4}
+        let total1 = term1 - term2 + term3 - term4 - term5 + term6 - term7 + term8 - term9 - term10
+        let total2 = -term11 - term12 - term13 - term14 - term15 - term16
+        return total1 + total2
+    }
+    
+    func fAPlus3BEqualsCPlusD_QGreaterThanK(_ X: Double) -> Double {
+
+        let reactantBCubed = reactantB * reactantB * reactantB
+        let reactantBSquared = reactantB * reactantB
+        
+        let term1 = reactantA * kRef * reactantBCubed
+        let term2 = 9 * reactantA * kRef * reactantBSquared
+        let term3 = 27 * reactantA * reactantB * kRef * pow(X, 2)
+        let term4 = 27 * reactantA * kRef * pow(X, 3)
+        let term5 = kRef * X * reactantBCubed
+        let term6 = 9 * kRef * pow(X, 2) * reactantBSquared
+        let term7 = 27 * reactantB * kRef * pow(X, 3)
+        let term8 = 27 * kRef * pow(X, 4)
+        let term9 = productC * productD
+        let term10 = productC * X
+        let term11 = productD * X
+        let term12 = pow(X, 2)
+        
+        // AKB^{3} + 9AKxB^{2} + 27ABKx^{2} + 27AKx^{3} + KxB^{3} + 9Kx^{2}B^{2} + 27BKx^{3} + 27Kx^{4} - CD + Cx + Dx - x^{2}
+        let total1 = term1 + term2 + term3 + term4 + term5 + term6 + term7 + term8 - term9
+        let total2 = term10 + term11 - term12
+        return total1 + total2
+    }
+    
+    func fAPlus3BEqualsCPlusD_QLessThanK(_ X: Double) -> Double {
+        
+        let reactantBCubed = reactantB * reactantB * reactantB
+        let reactantBSquared = reactantB * reactantB
+        
+        let term1 = reactantA * kRef * reactantBCubed
+        let term2 = 9 * reactantA * kRef * reactantBSquared
+        let term3 = 27 * reactantA * reactantB * kRef * pow(X, 2)
+        let term4 = 27 * reactantA * kRef * pow(X, 3)
+        let term5 = kRef * X * reactantBCubed
+        let term6 = 9 * kRef * pow(X, 2) * reactantBSquared
+        let term7 = 27 * reactantB * kRef * pow(X, 3)
+        let term8 = 27 * kRef * pow(X, 4)
+        let term9 = productC * productD
+        let term10 = productC * X
+        let term11 = productD * X
+        let term12 = pow(X, 2)
+
+        // AKB^{3} - 9AKxB^{2} + 27ABKx^{2} - 27AKx^{3} - KxB^{3} + 9Kx^{2}B^{2} - 27BKx^{3} + 27Kx^{4} - CD - Cx - Dx - x^{2}
+        let total1 = term1 - term2 + term3 - term4 - term5 + term6 - term7
+        let total2 = term8 - term9 - term10 - term11 - term12
+        return total1 + total2
+    }
+    
+    func fAPlus2BEqualsCPlusD_QGreaterThanK(_ X: Double) -> Double {
+
+        let reactantBSquared = reactantB * reactantB
+        
+        let term1 = reactantA * kRef * reactantBSquared
+        let term2 = 4 * reactantA * reactantB * kRef * X
+        let term3 = 4 * reactantA * kRef * pow(X, 2)
+        let term4 = kRef * X * reactantBSquared
+        let term5 = 4 * reactantB * kRef * pow(X, 2)
+        let term6 = 4 * kRef * pow(X, 3)
+        let term7 = productC * productD
+        let term8 = productC * X
+        let term9 = productD * X
+        let term10 = pow(X, 2)
+        
+        // AKB^{2} + 4ABKx + 4AKx^{2} + KxB^{2} + 4BKx^{2} + 4Kx^{3} - CD + Cx + Dx - x^{2}
+        let total = term1 + term2 + term3 + term4 + term5 + term6 - term7 + term8 + term9 - term10
+        return total
+    }
+    
+    func fAPlus2BEqualsCPlusD_QLessThanK(_ X: Double) -> Double {
+
+        let reactantBSquared = reactantB * reactantB
+        
+        let term1 = reactantA * kRef * reactantBSquared
+        let term2 = 4 * reactantA * reactantB * kRef * X
+        let term3 = 4 * reactantA * kRef * pow(X, 2)
+        let term4 = kRef * X * reactantBSquared
+        let term5 = 4 * reactantB * kRef * pow(X, 2)
+        let term6 = 4 * kRef * pow(X, 3)
+        let term7 = productC * productD
+        let term8 = productC * X
+        let term9 = productD * X
+        let term10 = pow(X, 2)
+        
+        // AKB^{2} - 4ABKx + 4AKx^{2} - KxB^{2} + 4BKx^{2} - 4Kx^{3} - CD - Cx - Dx - x^{2}
+        let total = term1 - term2 + term3 - term4 + term5 - term6 - term7 - term8 - term9 - term10
+        return total
+    }
+    
+    func fAPlusBEquals2CPlusD_QGreaterThanK(_ X: Double) -> Double {
+
+        let productCSquared = productC * productC
+        
+        let term1 = reactantA * reactantB * kRef
+        let term2 = reactantA * kRef * X
+        let term3 = reactantB * kRef * X
+        let term4 = kRef * pow(X, 2)
+        let term5 = productCSquared * productD
+        let term6 = X * productCSquared
+        let term7 = 4 * productC * productD * X
+        let term8 = 4 * pow(X, 2) * productC
+        let term9 = 4 * pow(X, 2) * productD
+        let term10 = 4 * pow(X, 3)
+        
+        // ABK + AKx + BKx + Kx^{2} - C^{2}D + xC^{2} + 4CDx - 4x^{2}C - 4x^{2}D + 4x^{3}
+        let total = term1 + term2 + term3 + term4 - term5 + term6 + term7 - term8 - term9 + term10
+        return total
+    }
+    
+    func fAPlusBEquals2CPlusD_QLessThanK(_ X: Double) -> Double {
+
+        let productCSquared = productC * productC
+        
+        let term1 = reactantA * reactantB * kRef
+        let term2 = reactantA * kRef * X
+        let term3 = reactantB * kRef * X
+        let term4 = kRef * pow(X, 2)
+        let term5 = productCSquared * productD
+        let term6 = X * productCSquared
+        let term7 = 4 * productC * productD * X
+        let term8 = 4 * pow(X, 2) * productC
+        let term9 = 4 * pow(X, 2) * productD
+        let term10 = 4 * pow(X, 3)
+        
+        // ABK - AKx - BKx + Kx^{2} - C^{2}D - xC^{2} - 4CDx - 4x^{2}C - 4x^{2}D - 4x^{3}
+        let total = term1 - term2 - term3 + term4 - term5 - term6 - term7 - term8 - term9 - term10
+        return total
+    }
+    
+    func fAPlusBEquals3CPlusD_QGreaterThanK(_ X: Double) -> Double {
+
+        let productCCubed = productC * productC * productC
+        let productCSquared = productC * productC
+        
+        let term1 = reactantA * reactantB * kRef
+        let term2 = reactantA * kRef * X
+        let term3 = reactantB * kRef * X
+        let term4 = kRef * pow(X, 2)
+        let term5 = productCCubed * productD
+        let term6 = X * productCCubed
+        let term7 = 9 * X * productCSquared * productD
+        let term8 = 9 * pow(X, 2) * productCSquared
+        let term9 = 27 * pow(X, 2) * productC * productD
+        let term10 = 27 * pow(X, 3) * productC
+        let term11 = 27 * pow(X, 3) * productD
+        let term12 = 27 * pow(X, 4)
+        
+        // ABK + AKx + BKx + Kx^{2} - C^{3}D + xC^{3} + 9xC^{2}D - 9x^{2}C^{2} - 27x^{2}CD + 27x^{3}C + 27x^{3}D - 27x^{4}
+        let total1 = term1 + term2 + term3 + term4 - term5 + term6 + term7 - term8 - term9
+        let total2 = term10 + term11 - term12
+        return total1 + total2
+    }
+    
+    func fAPlusBEquals3CPlusD_QLessThanK(_ X: Double) -> Double {
+        
+        let productCCubed = productC * productC * productC
+        let productCSquared = productC * productC
+        
+        let term1 = reactantA * reactantB * kRef
+        let term2 = reactantA * kRef * X
+        let term3 = reactantB * kRef * X
+        let term4 = kRef * pow(X, 2)
+        let term5 = productCCubed * productD
+        let term6 = X * productCCubed
+        let term7 = 9 * X * productCSquared * productD
+        let term8 = 9 * pow(X, 2) * productCSquared
+        let term9 = 27 * pow(X, 2) * productC * productD
+        let term10 = 27 * pow(X, 3) * productC
+        let term11 = 27 * pow(X, 3) * productD
+        let term12 = 27 * pow(X, 4)
+
+        // ABK - AKx - BKx + Kx^{2} - C^{3}D - xC^{3} - 9xC^{2}D - 9x^{2}C^{2} - 27x^{2}CD - 27x^{3}C - 27x^{3}D - 27x^{4}
+        let total1 = term1 - term2 - term3
+        let total2 = term4 - term5 - term6 - term7 - term8 - term9 - term10 - term11 - term12
+        return total1 + total2
+    }
+    
+    func fAPlus2BEquals2CPlus2D_QGreaterThanK(_ X: Double) -> Double {
+        
+        let reactantBSquared = reactantB * reactantB
+        let productCSquared = productC * productC
+        let productDSquared = productD * productD
+        
+        let term1 = reactantA * kRef * reactantBSquared
+        let term2 = 4 * reactantA * reactantB * kRef * X
+        let term3 = 4 * reactantA * kRef * pow(X, 2)
+        let term4 = kRef * X * reactantBSquared
+        let term5 = 4 * reactantB * kRef * pow(X, 2)
+        let term6 = 4 * kRef * pow(X, 3)
+        let term7 = productDSquared * productCSquared
+        let term8 = 4 * productC * X * productDSquared
+        let term9 = 4 * productDSquared * pow(X, 2)
+        let term10 = 4 * productD * X * productCSquared
+        let term11 = 16 * pow(X, 2) * productC * productD
+        let term12 = 16 * pow(X, 3) * productD
+        let term13 = 4 * pow(X, 2) * productCSquared
+        let term14 = 16 * pow(X, 3) * productC
+        let term15 = 16 * pow(X, 4)
+        
+        // AKB^{2} + 4ABKx + 4AKx^{2} + KxB^{2} + 4BKx^{2} + 4Kx^{3} - D^{2}C^{2} + 4CxD^{2} - 4D^{2}x^{2} + 4DxC^{2} - 16x^{2}CD + 16x^{3}D - 4x^{2}C^{2} + 16x^{3}C - 16x^{4}
+        let total1 = term1 + term2 + term3 + term4 + term5 + term6 - term7 + term8 - term9
+        let total2 = term10 - term11 + term12 - term13 + term14 - term15
+        return total1 + total2
+    }
+    
+    func fAPlus2BEquals2CPlus2D_QLessThanK(_ X: Double) -> Double {
+        
+        let reactantBSquared = reactantB * reactantB
+        let productCSquared = productC * productC
+        let productDSquared = productD * productD
+        
+        let term1 = reactantA * kRef * reactantBSquared
+        let term2 = 4 * reactantA * reactantB * kRef * X
+        let term3 = 4 * reactantA * kRef * pow(X, 2)
+        let term4 = kRef * X * reactantBSquared
+        let term5 = 4 * reactantB * kRef * pow(X, 2)
+        let term6 = 4 * kRef * pow(X, 3)
+        let term7 = productDSquared * productCSquared
+        let term8 = 4 * productC * X * productDSquared
+        let term9 = 4 * productDSquared * pow(X, 2)
+        let term10 = 4 * productD * X * productCSquared
+        let term11 = 16 * pow(X, 2) * productC * productD
+        let term12 = 16 * pow(X, 3) * productD
+        let term13 = 4 * pow(X, 2) * productCSquared
+        let term14 = 16 * pow(X, 3) * productC
+        let term15 = 16 * pow(X, 4)
+        
+        // AKB^{2} - 4ABKx + 4AKx^{2} - KxB^{2} + 4BKx^{2} - 4Kx^{3} - D^{2}C^{2} - 4CxD^{2} - 4D^{2}x^{2} - 4DxC^{2} - 16x^{2}CD - 16x^{3}D - 4x^{2}C^{2} - 16x^{3}C - 16x^{4}
+        let total1 = term1 - term2 + term3 - term4 + term5 - term6 - term7 - term8
+        let total2 = -term9 - term10 - term11 - term12 - term13 - term14 - term15
+        return total1 + total2
+    }
+    
+    func f2APlus2BEquals2CPlusD_QGreaterThanK(_ X: Double) -> Double {
+        
+        let reactantASquared = reactantA * reactantA
+        let reactantBSquared = reactantB * reactantB
+        let productCSquared = productC * productC
+        
+        let term1 = kRef * reactantBSquared * reactantASquared
+        let term2 = 4 * reactantA * kRef * X * reactantBSquared
+        let term3 = 4 * kRef * reactantBSquared * pow(X, 2)
+        let term4 = 4 * reactantB * kRef * reactantASquared * X
+        let term5 = 16 * reactantA * reactantB * kRef * pow(X, 2)
+        let term6 = 16 * reactantB * kRef * pow(X, 3)
+        let term7 = 4 * kRef * pow(X, 2) * reactantASquared
+        let term8 = 16 * reactantA * kRef * pow(X, 3)
+        let term9 = 16 * kRef * pow(X, 4)
+        let term10 = productCSquared * productD
+        let term11 = X * productCSquared
+        let term12 = 4 * productC * productD * X
+        let term13 = 4 * pow(X, 2) * productC
+        let term14 = 4 * pow(X, 2) * productD
+        let term15 = 4 * pow(X, 3)
+        
+        // KB^{2}A^{2} + 4AKxB^{2} + 4KB^{2}x^{2} + 4BKA^{2}x + 16ABKx^{2} + 16BKx^{3} + 4Kx^{2}A^{2} + 16AKx^{3} + 16Kx^{4} - C^{2}D + xC^{2} + 4CDx - 4x^{2}C - 4x^{2}D + 4x^{3}
+        let total1 = term1 + term2 + term3 + term4 + term5 + term6 + term7 + term8 + term9 - term10
+        let total2 = term11 + term12 - term13 - term14 + term15
+        return total1 + total2
+    }
+    
+    func f2APlus2BEquals2CPlusD_QLessThanK(_ X: Double) -> Double {
+
+        let reactantASquared = reactantA * reactantA
+        let reactantBSquared = reactantB * reactantB
+        let productCSquared = productC * productC
+        
+        let term1 = kRef * reactantBSquared * reactantASquared
+        let term2 = 4 * reactantA * kRef * X * reactantBSquared
+        let term3 = 4 * kRef * reactantBSquared * pow(X, 2)
+        let term4 = 4 * reactantB * kRef * reactantASquared * X
+        let term5 = 16 * reactantA * reactantB * kRef * pow(X, 2)
+        let term6 = 16 * reactantB * kRef * pow(X, 3)
+        let term7 = 4 * kRef * pow(X, 2) * reactantASquared
+        let term8 = 16 * reactantA * kRef * pow(X, 3)
+        let term9 = 16 * kRef * pow(X, 4)
+        let term10 = productCSquared * productD
+        let term11 = X * productCSquared
+        let term12 = 4 * productC * productD * X
+        let term13 = 4 * pow(X, 2) * productC
+        let term14 = 4 * pow(X, 2) * productD
+        let term15 = 4 * pow(X, 3)
+        
+        // KB^{2}A^{2} - 4AKxB^{2} + 4KB^{2}x^{2} - 4BKA^{2}x + 16ABKx^{2} - 16BKx^{3} + 4Kx^{2}A^{2} - 16AKx^{3} + 16Kx^{4} - C^{2}D - xC^{2} - 4CDx - 4x^{2}C - 4x^{2}D - 4x^{3}
+        let total1 = term1 - term2 + term3 - term4 + term5 - term6 + term7 - term8
+        let total2 = term9 - term10 - term11 - term12 - term13 - term14 - term15
+        return total1 + total2
     }
 }
 
