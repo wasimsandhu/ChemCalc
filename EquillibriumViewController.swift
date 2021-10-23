@@ -278,6 +278,8 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
                 coefficients.remove(at: index!)
                 equationType = equationType! + " SL" + String(index! + 1)
             }
+            
+            initialConcentrations.append(0.0)
         }
         
         return compounds.count
@@ -297,6 +299,7 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
         
         // Initial concentrations
         cell?.iceCellIndex = indexPath.row
+        cell?.concTextField.text = ""
         
         return cell!
     }
@@ -305,7 +308,7 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
         
         let iceTableSolver = ICETableSolver()
         
-        if (equationType != nil && equilibriumConstant != nil && initialConcentrations.count == compounds.count) {
+        if (equationType != nil && equilibriumConstant != nil) {
             
             concentrations = iceTableSolver.solve(type: equationType!, K: equilibriumConstant!, compounds: compounds, coefficients: coefficients)
             
@@ -380,11 +383,12 @@ class ICECell: UITableViewCell, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        let indexIsValid = initialConcentrations.indices.contains(iceCellIndex!)
         
         if textField == concTextField {
-            
+                        
             if (self.concTextField.text != nil && iceCellIndex != nil) {
+                
+                let indexIsValid = initialConcentrations.indices.contains(iceCellIndex!)
                 
                 // Prevents crash upon invalid concentration entry
                 if self.concTextField.text! == " " || self.concTextField.text! == "" {
@@ -407,11 +411,12 @@ class ICECell: UITableViewCell, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        let indexIsValid = initialConcentrations.indices.contains(iceCellIndex!)
         
         if textField == concTextField {
-            
+                        
             if (self.concTextField.text != nil && iceCellIndex != nil) {
+                
+                let indexIsValid = initialConcentrations.indices.contains(iceCellIndex!)
                 
                 // Prevents crash upon invalid concentration entry
                 if self.concTextField.text! == " " || self.concTextField.text! == "" {

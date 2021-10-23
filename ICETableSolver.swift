@@ -101,7 +101,7 @@ class ICETableSolver {
                 // A + 3B = C + D
                 actualType = "R2P2 A+3B=C+D"
 
-            } else if coefficients == [1, 2, 1, 1, 1] || coefficients == [2, 1, 1, 1, 1] {
+            } else if coefficients == [1, 2, 1, 1] || coefficients == [2, 1, 1, 1] {
                 // A + 2B = C + D
                 actualType = "R2P2 A+2B=C+D"
 
@@ -3216,7 +3216,7 @@ class ICETableSolver {
         let reactantBSquared = reactantB * reactantB
         
         let term1 = reactantA * kRef * reactantBCubed
-        let term2 = 9 * reactantA * kRef * reactantBSquared
+        let term2 = 9 * reactantA * kRef * X * reactantBSquared
         let term3 = 27 * reactantA * reactantB * kRef * pow(X, 2)
         let term4 = 27 * reactantA * kRef * pow(X, 3)
         let term5 = kRef * X * reactantBCubed
@@ -3240,7 +3240,7 @@ class ICETableSolver {
         let reactantBSquared = reactantB * reactantB
         
         let term1 = reactantA * kRef * reactantBCubed
-        let term2 = 9 * reactantA * kRef * reactantBSquared
+        let term2 = 9 * reactantA * kRef * X * reactantBSquared
         let term3 = 27 * reactantA * reactantB * kRef * pow(X, 2)
         let term4 = 27 * reactantA * kRef * pow(X, 3)
         let term5 = kRef * X * reactantBCubed
