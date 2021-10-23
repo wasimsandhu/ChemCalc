@@ -122,7 +122,7 @@ class ICETableSolver {
                 
             } else if coefficients[0] == 1 && coefficients[1] == 4 && coefficients[2] == 1 ||
                         coefficients[0] == 4 && coefficients[1] == 1 && coefficients[2] == 1 {
-                // A + 3B = C
+                // A + 4B = C
                 actualType = "R2P1 A+4B=C"
                 
             } else {
@@ -148,6 +148,15 @@ class ICETableSolver {
                         coefficients[0] == 1 && coefficients[1] == 1 && coefficients[2] == 4 {
                 // A = 4B + C
                 actualType = "R1P2 A=4B+C"
+                
+            } else if coefficients[0] == 2 && coefficients[1] == 1 && coefficients[2] == 1 {
+                // 2A = C + D
+                actualType = "R1P2 2A=C+D"
+                
+            } else if coefficients[0] == 1 && coefficients[1] == 2 && coefficients[2] == 1 ||
+                        coefficients[0] == 1 && coefficients[1] == 1 && coefficients[2] == 2 {
+                // A = 2C + D
+                actualType = "R1P2 A=2C+D"
                 
             } else {
                 actualType = type
@@ -550,7 +559,6 @@ class ICETableSolver {
                 if Q > K {
                     
                     // AB^2K + 4ABKx + 4AKx^2 + B^2Kx + 4BKx^2 + 4Kx^3 - C + x
-                    
                     for X in xValuesToTry {
                         let newton = NewtonRaphson(functionToFindRootsOf: fAPlus2BEqualsC_QGreaterThanK,
                                                    initialGuessForX: X,
@@ -558,12 +566,20 @@ class ICETableSolver {
                                                    maxIterations: 100)
                         
                         if let answer = newton.solve() {
-                            x = answer
+                            allXValues.append(answer)
                         } else {
                             // Error message
-                            x = 0
+                            allXValues.append(0)
                         }
                     }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
                     
                     equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
                     equilibriumConcentrations.append(Double(reactantB + 2*x).rounded(toPlaces: decimalPlaces))
@@ -580,12 +596,20 @@ class ICETableSolver {
                                                    maxIterations: 100)
                         
                         if let answer = newton.solve() {
-                            x = answer
+                            allXValues.append(answer)
                         } else {
                             // Error message
-                            x = 0
+                            allXValues.append(0)
                         }
                     }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
                     
                     equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
                     equilibriumConcentrations.append(Double(reactantB - 2*x).rounded(toPlaces: decimalPlaces))
@@ -632,12 +656,20 @@ class ICETableSolver {
                                                    maxIterations: 100)
                         
                         if let answer = newton.solve() {
-                            x = answer
+                            allXValues.append(answer)
                         } else {
                             // Error message
-                            x = 0
+                            allXValues.append(0)
                         }
                     }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
                     
                     equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
                     equilibriumConcentrations.append(Double(reactantB + 2*x).rounded(toPlaces: decimalPlaces))
@@ -648,18 +680,26 @@ class ICETableSolver {
                     // AB^{2}K - 4ABKx + 4AKx^{2} - B^{2}Kx + 4BKx^{2} - 4Kx^{3} - C^{2} - 4Cx - 4x^{2}
                     
                     for X in xValuesToTry {
-                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus2BEquals2C_QLessThanK,
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAPlus2BEqualsC_QLessThanK,
                                                    initialGuessForX: X,
                                                    tolerance: 0.00005,
                                                    maxIterations: 100)
                         
                         if let answer = newton.solve() {
-                            x = answer
+                            allXValues.append(answer)
                         } else {
                             // Error message
-                            x = 0
+                            allXValues.append(0)
                         }
                     }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
                     
                     equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
                     equilibriumConcentrations.append(Double(reactantB - 2*x).rounded(toPlaces: decimalPlaces))
@@ -697,12 +737,20 @@ class ICETableSolver {
                                                    maxIterations: 100)
                         
                         if let answer = newton.solve() {
-                            x = answer
+                            allXValues.append(answer)
                         } else {
                             // Error message
-                            x = 0
+                            allXValues.append(0)
                         }
                     }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
                     
                     equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
                     equilibriumConcentrations.append(Double(reactantB + x).rounded(toPlaces: decimalPlaces))
@@ -717,12 +765,20 @@ class ICETableSolver {
                                                    maxIterations: 100)
                         
                         if let answer = newton.solve() {
-                            x = answer
+                            allXValues.append(answer)
                         } else {
                             // Error message
-                            x = 0
+                            allXValues.append(0)
                         }
                     }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
                     
                     equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
                     equilibriumConcentrations.append(Double(reactantB - x).rounded(toPlaces: decimalPlaces))
@@ -792,6 +848,171 @@ class ICETableSolver {
             }
         }
         
+        /// Equation Type: 2A = C + D
+        if actualType == "R1P2 2A=C+D" {
+            
+            reactantA = localConcentrations[0]
+            productC = localConcentrations[1]
+            productD = localConcentrations[2]
+            
+            // Calculate reaction quotient
+            if reactantA != 0.0 {
+                let numerator = productC * productD
+                let denominator = reactantA * reactantA
+                Q = numerator / denominator
+            } else {
+                zeroInDenominator = true
+            }
+            
+            if !zeroInDenominator {
+                if Q > K {
+                                        
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: f2AEqualsCPlusD_QGreaterThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA + 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD - x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q < K {
+                                        
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: f2AEqualsCPlusD_QLessThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA - 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD + x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q == K {
+                    reactionQuotientEqualsK = true
+                }
+            }
+        }
+        
+        /// Equation Type: A = 2C + D
+        if actualType == "R1P2 A=2C+D" {
+            
+            // Rearranging to put coefficients in correct place
+            if coefficients[2] == 2 {
+                localCoefficients.rearrange(from: 2, to: 1)
+                localCompounds.rearrange(from: 2, to: 1)
+                localConcentrations.rearrange(from: 2, to: 1)
+            }
+            
+            reactantA = localConcentrations[0]
+            productC = localConcentrations[1]
+            productD = localConcentrations[2]
+            
+            // Calculate reaction quotient
+            if reactantA != 0.0 {
+                let numerator = productC * productC * productD
+                let denominator = reactantA
+                Q = numerator / denominator!
+            } else {
+                zeroInDenominator = true
+            }
+            
+            if !zeroInDenominator {
+                if Q > K {
+                                        
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAEquals2CPlusD_QGreaterThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC - 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD - x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q < K {
+                                        
+                    for X in xValuesToTry {
+                        let newton = NewtonRaphson(functionToFindRootsOf: fAEquals2CPlusD_QLessThanK,
+                                                   initialGuessForX: X,
+                                                   tolerance: 0.00005,
+                                                   maxIterations: 100)
+                        
+                        if let answer = newton.solve() {
+                            allXValues.append(answer)
+                        } else {
+                            // Error message
+                            allXValues.append(0)
+                        }
+                    }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
+                    
+                    equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productC + 2*x).rounded(toPlaces: decimalPlaces))
+                    equilibriumConcentrations.append(Double(productD + x).rounded(toPlaces: decimalPlaces))
+                    
+                } else if Q == K {
+                    reactionQuotientEqualsK = true
+                }
+            }
+        }
+        
         /// Equation Type: 2A = 2C + D
         if actualType == "R1P2 2A=2C+D" {
             
@@ -825,12 +1046,20 @@ class ICETableSolver {
                                                    maxIterations: 100)
                         
                         if let answer = newton.solve() {
-                            x = answer
+                            allXValues.append(answer)
                         } else {
                             // Error message
-                            x = 0
+                            allXValues.append(0)
                         }
                     }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
                     
                     equilibriumConcentrations.append(Double(reactantA + 2*x).rounded(toPlaces: decimalPlaces))
                     equilibriumConcentrations.append(Double(productC - 2*x).rounded(toPlaces: decimalPlaces))
@@ -845,12 +1074,20 @@ class ICETableSolver {
                                                    maxIterations: 100)
                         
                         if let answer = newton.solve() {
-                            x = answer
+                            allXValues.append(answer)
                         } else {
                             // Error message
-                            x = 0
+                            allXValues.append(0)
                         }
                     }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
                     
                     equilibriumConcentrations.append(Double(reactantA - 2*x).rounded(toPlaces: decimalPlaces))
                     equilibriumConcentrations.append(Double(productC + 2*x).rounded(toPlaces: decimalPlaces))
@@ -968,12 +1205,20 @@ class ICETableSolver {
                                                    maxIterations: 100)
                         
                         if let answer = newton.solve() {
-                            x = answer
+                            allXValues.append(answer)
                         } else {
                             // Error message
-                            x = 0
+                            allXValues.append(0)
                         }
                     }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
                     
                     equilibriumConcentrations.append(Double(reactantA - x).rounded(toPlaces: decimalPlaces))
                     equilibriumConcentrations.append(Double(reactantB - 2*x).rounded(toPlaces: decimalPlaces))
@@ -990,12 +1235,20 @@ class ICETableSolver {
                                                    maxIterations: 100)
                         
                         if let answer = newton.solve() {
-                            x = answer
+                            allXValues.append(answer)
                         } else {
                             // Error message
-                            x = 0
+                            allXValues.append(0)
                         }
                     }
+                    
+                    var absoluteValueOfXValues = [Double]()
+                    
+                    for xValue in allXValues {
+                        absoluteValueOfXValues.append(abs(xValue))
+                    }
+                    
+                    x = absoluteValueOfXValues.min()
                     
                     equilibriumConcentrations.append(Double(reactantA + x).rounded(toPlaces: decimalPlaces))
                     equilibriumConcentrations.append(Double(reactantB + 2*x).rounded(toPlaces: decimalPlaces))
@@ -2207,6 +2460,68 @@ class ICETableSolver {
         
         // AK - Kx - B^{4}C - 16xB^{3}C - 96B^{2}x^{2}C - 256Bx^{3}C - 256x^{4}C - xB^{4} - 16x^{2}B^{3} - 96x^{3}B^{2} - 256Bx^{4} - 256x^{5}
         let total = term1 - term2 - term3 - term4 - term5 - term6 - term7 - term8 - term9 - term10 - term11 - term12
+        return total
+    }
+    
+    func f2AEqualsCPlusD_QGreaterThanK(_ X: Double) -> Double {
+        
+        let term1 = kRef * reactantA * reactantA
+        let term2 = 4 * reactantA * kRef * X
+        let term3 = 4 * kRef * pow(X, 2)
+        let term4 = productC * productD
+        let term5 = productC * X
+        let term6 = productD * X
+        let term7 = pow(X, 2)
+        
+        // KA^{2} + 4AKx + 4Kx^{2} - CD + Cx + Dx - x^{2}
+        let total = term1 + term2 + term3 - term4 + term5 + term6 - term7
+        return total
+    }
+    
+    func f2AEqualsCPlusD_QLessThanK(_ X: Double) -> Double {
+        
+        let term1 = kRef * reactantA * reactantA
+        let term2 = 4 * reactantA * kRef * X
+        let term3 = 4 * kRef * pow(X, 2)
+        let term4 = productC * productD
+        let term5 = productC * X
+        let term6 = productD * X
+        let term7 = pow(X, 2)
+        
+        // KA^{2} - 4AKx + 4Kx^{2} - CD - Cx - Dx - x^{2}
+        let total = term1 - term2 + term3 - term4 - term5 - term6 - term7
+        return total
+    }
+    
+    func fAEquals2CPlusD_QGreaterThanK(_ X: Double) -> Double {
+        
+        let term1 = reactantA * kRef
+        let term2 = kRef * X
+        let term3 = productC * productC * productD
+        let term4 = X * productC * productC
+        let term5 = 4 * productC * productD * X
+        let term6 = 4 * productC * pow(X, 2)
+        let term7 = 4 * pow(X, 2) * productD
+        let term8 = 4 * pow(X, 3)
+        
+        // AK + Kx - C^{2}D + xC^{2} + 4CDx - 4Cx^{2} - 4x^{2}D + 4x^{3}
+        let total = term1 + term2 - term3 + term4 + term5 - term6 - term7 + term8
+        return total
+    }
+    
+    func fAEquals2CPlusD_QLessThanK(_ X: Double) -> Double {
+        
+        let term1 = reactantA * kRef
+        let term2 = kRef * X
+        let term3 = productC * productC * productD
+        let term4 = X * productC * productC
+        let term5 = 4 * productC * productD * X
+        let term6 = 4 * productC * pow(X, 2)
+        let term7 = 4 * pow(X, 2) * productD
+        let term8 = 4 * pow(X, 3)
+        
+        // AK - Kx - C^{2}D - xC^{2} - 4CDx - 4Cx^{2} - 4x^{2}D - 4x^{3}
+        let total = term1 - term2 - term3 - term4 - term5 - term6 - term7 - term8
         return total
     }
 }
