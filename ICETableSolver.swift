@@ -556,6 +556,9 @@ class ICETableSolver {
             }
             
             if !zeroInDenominator {
+                
+                var allXValues = [Double]()
+                
                 if Q > K {
                     
                     // AB^2K + 4ABKx + 4AKx^2 + B^2Kx + 4BKx^2 + 4Kx^3 - C + x
@@ -645,6 +648,9 @@ class ICETableSolver {
             }
             
             if !zeroInDenominator {
+                
+                var allXValues = [Double]()
+                
                 if Q > K {
                     
                     // AB^{2}K + 4ABKx + 4AKx^{2} + B^{2}Kx + 4BKx^{2} + 4Kx^{3} - C^{2} + 4Cx - 4x^{2}
@@ -728,6 +734,9 @@ class ICETableSolver {
             }
             
             if !zeroInDenominator {
+                
+                var allXValues = [Double]()
+
                 if Q > K {
                                     
                     for X in xValuesToTry {
@@ -865,6 +874,9 @@ class ICETableSolver {
             }
             
             if !zeroInDenominator {
+                
+                var allXValues = [Double]()
+                
                 if Q > K {
                                         
                     for X in xValuesToTry {
@@ -951,6 +963,9 @@ class ICETableSolver {
             }
             
             if !zeroInDenominator {
+                
+                var allXValues = [Double]()
+                
                 if Q > K {
                                         
                     for X in xValuesToTry {
@@ -1037,6 +1052,9 @@ class ICETableSolver {
             }
             
             if !zeroInDenominator {
+                
+                var allXValues = [Double]()
+                
                 if Q > K {
                                         
                     for X in xValuesToTry {
@@ -1195,6 +1213,9 @@ class ICETableSolver {
             }
             
             if !zeroInDenominator {
+                
+                var allXValues = [Double]()
+                
                 if Q < K {
                     
                     // AKB^2 - 4ABKx + 4AKx^2 - KxB^2 + 4BKx^2 - 4Kx^3 - CD^2 - xD^2 - 4CDx - 4x^2D - 4x^2C - 4x^3

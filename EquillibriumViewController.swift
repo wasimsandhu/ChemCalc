@@ -79,6 +79,10 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
     }
     
     func balanceEquation() {
+        
+        initialConcentrations.removeAll()
+        kaTextField.text = ""
+        
         if equationTextField.text != nil && equationTextField.text!.contains("=") {
             
             let balancer = ChemicalEquationBalancer()
@@ -265,7 +269,7 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+                
         for compound in compounds {
             let index = compounds.index(of: compound)
             
