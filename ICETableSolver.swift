@@ -89,35 +89,35 @@ class ICETableSolver {
             }
             
         } else if type == "R2P2" {
-            if coefficients == [1, 2, 1, 2] || coefficients == [2, 1, 1, 2] || coefficients == [2, 1, 2, 1] || coefficients == [1, 2, 2, 1] {
+            if coefficients == [1, 2, 1, 2, 2] || coefficients == [2, 1, 1, 2, 2] || coefficients == [2, 1, 2, 1, 1] || coefficients == [1, 2, 2, 1, 1] {
                 // A + 2B = C + 2D
                 actualType = "R2P2 A+2B=C+2D"
-                
-            } else if coefficients == [1, 3, 1, 3] || coefficients == [3, 1, 1, 3] || coefficients == [3, 1, 3, 1] || coefficients == [1, 3, 3, 1] {
+
+            } else if coefficients == [1, 3, 1, 3, 3] || coefficients == [3, 1, 1, 3, 3] || coefficients == [3, 1, 3, 1, 1] || coefficients == [1, 3, 3, 1, 1] {
                 // A + 3B = C + 3D
                 actualType = "R2P2 A+3B=C+3D"
-                
-            } else if coefficients == [1, 3, 1, 1] || coefficients == [3, 1, 1, 1] {
+
+            } else if coefficients == [1, 3, 1, 1, 1] || coefficients == [3, 1, 1, 1, 1] {
                 // A + 3B = C + D
                 actualType = "R2P2 A+3B=C+D"
-                
-            } else if coefficients == [1, 2, 1, 1] || coefficients == [2, 1, 1, 1] {
+
+            } else if coefficients == [1, 2, 1, 1, 1] || coefficients == [2, 1, 1, 1, 1] {
                 // A + 2B = C + D
                 actualType = "R2P2 A+2B=C+D"
-                
-            } else if coefficients == [1, 1, 2, 1] || coefficients == [1, 1, 1, 2] {
+
+            } else if coefficients == [1, 1, 2, 1, 1] || coefficients == [1, 1, 1, 2, 2] {
                 // A + B = 2C + D
                 actualType = "R2P2 A+B=2C+D"
-                
-            } else if coefficients == [1, 1, 3, 1] || coefficients == [1, 1, 1, 3] {
+
+            } else if coefficients == [1, 1, 3, 1, 1] || coefficients == [1, 1, 1, 3, 3] {
                 // A + B = 3C + D
                 actualType = "R2P2 A+B=3C+D"
-                
-            } else if coefficients == [1, 2, 2, 2] || coefficients == [2, 1, 2, 2] {
+
+            } else if coefficients == [1, 2, 2, 2, 2] || coefficients == [2, 1, 2, 2, 2] {
                 // A + 2B = 2C + 2D
                 actualType = "R2P2 A+2B=2C+2D"
-                
-            } else if coefficients == [2, 2, 2, 1] || coefficients == [2, 2, 1, 2] {
+
+            } else if coefficients == [2, 2, 2, 1, 1] || coefficients == [2, 2, 1, 2, 2] {
                 // 2A + 2B = 2C + D
                 actualType = "R2P2 2A+2B=2C+D"
                 
