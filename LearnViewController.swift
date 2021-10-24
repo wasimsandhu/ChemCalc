@@ -7,38 +7,24 @@
 //
 
 import UIKit
+import WebKit
 
-class LearnViewController: UIViewController, UIWebViewDelegate {
-
-    var webView: UIWebView!
-    var webpage: String!
-    var barTitle: String!
+class LearnViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
+    
+    @IBOutlet weak var webKitView: WKWebView!
+    var fileName: String!
+    var pageTitle: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationItem.title = pageTitle
         self.navigationController?.navigationBar.tintColor = UIColor.white
-        self.navigationItem.title = barTitle
+        
+        webKitView.uiDelegate = self
+        webKitView.navigationDelegate = self
 
-        // Load web view
-        webView = UIWebView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-        self.view.addSubview(webView)
-        webView.delegate = self
-        loadWebView(page: webpage)
-    }
-    
-    func loadWebView(page: String) {
-        let myProjectBundle: Bundle = Bundle.main
-        let filePath: String = myProjectBundle.path(forResource: page, ofType: "html")!
-        let myURL = URL(string: filePath)
-        let urlRequest: URLRequest = URLRequest(url: myURL!)
-        webView.loadRequest(urlRequest)
-    }
-    
-    func webViewDidStartLoad(_ webView: UIWebView) {
-
-    }
-    
-    func webViewDidFinishLoad(_ webView: UIWebView) {
-
+        let url = URL(string: "http://wasimsandhu.com/chemcalc/" + fileName + ".html")
+        webKitView.load(URLRequest(url: url!))
     }
 }

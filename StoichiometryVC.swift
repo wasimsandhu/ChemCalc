@@ -247,8 +247,8 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
                 
                 stoichTableView.reloadData()
             } else {
-                let alert = UIAlertController(title: "Error", message: "One or more text fields were not completed. Please check that your compound formula, reactant amount, and coefficient from the balanced chemical equation have been inputted correctly.", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default))
+                let alert = UIAlertController(title: "Error", message: "One or more text fields were not completed. Please check that your compound formula, reactant amount, and coefficient from the balanced chemical equation have been inputted correctly.", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default))
                 self.present(alert, animated: true, completion: nil)
             }
             
@@ -271,8 +271,8 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             if product != nil && productCoefficient != nil && textFieldIsNil() == false && textIsAcceptable {
                 theoreticalYield = stoichCalc.getTheoreticalYield(product: product!, productCoefficient: productCoefficient!)
             } else {
-                let alert = UIAlertController(title: "Error", message: "One or more text fields were not completed. Please check that your compound formula, reactant amount, and coefficient from the balanced chemical equation have been inputted correctly.", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default))
+                let alert = UIAlertController(title: "Error", message: "One or more text fields were not completed. Please check that your compound formula, reactant amount, and coefficient from the balanced chemical equation have been inputted correctly.", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default))
                 self.present(alert, animated: true, completion: nil)
             }
             
@@ -370,7 +370,7 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             var coefficient: NSMutableAttributedString!
             let plus = NSMutableAttributedString(string: " + ", attributes: nil)
             let equals = NSMutableAttributedString(string: " → ", attributes: nil)
-            let bold = [NSAttributedStringKey.font: UIFont(name: "Helvetica-Bold", size: 18)!]
+            let bold = [NSAttributedString.Key.font: UIFont(name: "Helvetica-Bold", size: 18)!]
             
             if balancer.getReactants().count == 2 && balancer.getProducts().count == 2 {
                 
@@ -558,8 +558,8 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
                 balancedEquation.attributedText = completeEquation
                 
             } else {
-                let alert = UIAlertController(title: "Whoops!", message: "Looks like this equation is not supported yet. Sorry!", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default))
+                let alert = UIAlertController(title: "Whoops!", message: "Looks like this equation is not supported yet. Sorry!", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default))
                 self.present(alert, animated: true, completion: nil)
                 balanceTextField.resignFirstResponder()
             }
@@ -568,8 +568,8 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             balanceTableView.reloadData()
             getReadyForStoich()
         } else {
-            let alert = UIAlertController(title: "Something's wrong", message: "Please double-check that you've entered an unbalanced chemical equation using + and = symbols.", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default))
+            let alert = UIAlertController(title: "Something's wrong", message: "Please double-check that you've entered an unbalanced chemical equation using + and = symbols.", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default))
             self.present(alert, animated: true, completion: nil)
             balanceTextField.resignFirstResponder()
         }
@@ -614,7 +614,7 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             }
         } else if tableView == balanceTableView {
             var yeet = NSMutableAttributedString()
-            let bold = [NSAttributedStringKey.font: UIFont(name: "Helvetica-Bold", size: 18)!]
+            let bold = [NSAttributedString.Key.font: UIFont(name: "Helvetica-Bold", size: 18)!]
             let comp = TextFormatter().fix(formula: compounds[indexPath.row])
             let coff = NSMutableAttributedString(string: String(coefficients[indexPath.row]), attributes: bold)
             yeet.append(coff)
@@ -629,8 +629,8 @@ class StoichiometryVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     
     @IBAction func loadLearnView(_ sender: Any) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "LearnViewController") as! LearnViewController
-        vc.webpage = "stoichiometry"
-        vc.barTitle = "Stoichiometry"
+        vc.pageTitle = "Stoichiometry"
+        vc.fileName = "stoichiometry"
         navigationController?.pushViewController(vc, animated: true)
     }
     

@@ -363,6 +363,7 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
     
     @IBAction func loadLearnView(_ sender: Any) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "LearnViewController") as! LearnViewController
+        vc.pageTitle = "Equilibrium"
         vc.fileName = "icetables"
         navigationController?.pushViewController(vc, animated: true)
     }

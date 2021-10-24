@@ -207,8 +207,8 @@ class MolarMassViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBAction func loadLearnView(_ sender: Any) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "LearnViewController") as! LearnViewController
-        vc.webpage = "molarmass"
-        vc.barTitle = "Molar Mass"
+        vc.pageTitle = "Molar Mass"
+        vc.fileName = "molarmass"
         navigationController?.pushViewController(vc, animated: true)
     }
 }
