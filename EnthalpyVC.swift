@@ -95,7 +95,7 @@ class EnthalpyVC: UIViewController, UITextFieldDelegate {
             var coefficient: NSMutableAttributedString!
             let plus = NSMutableAttributedString(string: " + ", attributes: nil)
             let equals = NSMutableAttributedString(string: " → ", attributes: nil)
-            let bold = [NSAttributedStringKey.font: UIFont(name: "Helvetica-Bold", size: 18)!]
+            let bold = [NSAttributedString.Key.font: UIFont(name: "Helvetica-Bold", size: 18)!]
             
             reactants = balancer.getReactants().count
             products = balancer.getProducts().count
@@ -259,14 +259,14 @@ class EnthalpyVC: UIViewController, UITextFieldDelegate {
                 balancedEquationText.attributedText = completeEquation
                 
             } else {
-                let alert = UIAlertController(title: "Something's wrong", message: "Please double-check that you've entered an unbalanced chemical equation using + and = symbols.", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default))
+                let alert = UIAlertController(title: "Something's wrong", message: "Please double-check that you've entered an unbalanced chemical equation using + and = symbols.", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default))
                 self.present(alert, animated: true, completion: nil)
                 reactionTextField.resignFirstResponder()
             }
         } else {
-            let alert = UIAlertController(title: "Something's wrong", message: "Please double-check that you've entered an unbalanced chemical equation using + and = symbols.", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default))
+            let alert = UIAlertController(title: "Something's wrong", message: "Please double-check that you've entered an unbalanced chemical equation using + and = symbols.", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default))
             self.present(alert, animated: true, completion: nil)
             reactionTextField.resignFirstResponder()
         }

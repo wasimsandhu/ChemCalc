@@ -31,8 +31,11 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
         self.hideKeyboard()
         
         // Scroll tableview with text field input
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)),
+            name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(notification:)),
+            name: UIResponder.keyboardDidShowNotification, object: nil)
+
     }
     
     deinit {
@@ -42,8 +45,8 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
     // MARK: Keyboard Notifications
     @objc func keyboardWillShow(notification: NSNotification) {
         if yesScroll {
-            if let keyboardHeight = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
-                table.contentInset = UIEdgeInsetsMake(0, 0, CGFloat(220.0), 0)
+            if let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
+                table.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: CGFloat(220.0), right: 0)
             }
         }
     }
@@ -51,7 +54,7 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
     @objc func keyboardWillHide(notification: NSNotification) {
         yesScroll = false
         UIView.animate(withDuration: 0.2, animations: {
-            self.table.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+            self.table.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         })
     }
     
@@ -94,7 +97,7 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
             var coefficient: NSMutableAttributedString!
             let plus = NSMutableAttributedString(string: " + ", attributes: nil)
             let equals = NSMutableAttributedString(string: " → ", attributes: nil)
-            let bold = [NSAttributedStringKey.font: UIFont(name: "Helvetica-Bold", size: 18)!]
+            let bold = [NSAttributedString.Key.font: UIFont(name: "Helvetica-Bold", size: 18)!]
             
             if balancer.getReactants().count == 2 && balancer.getProducts().count == 2 {
                 
@@ -251,16 +254,16 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
                 balancedEquationTextView.attributedText = completeEquation
                 
             } else {
-                let alert = UIAlertController(title: "Whoops!", message: "Looks like this equation is not supported yet. Sorry!", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "Dang okay", style: UIAlertActionStyle.default))
+                let alert = UIAlertController(title: "Whoops!", message: "Looks like this equation is not supported yet. Sorry!", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Dang okay", style: UIAlertAction.Style.default))
                 self.present(alert, animated: true, completion: nil)
                 equationTextField.resignFirstResponder()
             }
             
             equationTextField.resignFirstResponder()
         } else {
-            let alert = UIAlertController(title: "Something's wrong", message: "Please double-check that you've entered an unbalanced chemical equation using + and = symbols, including states of matter.", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default))
+            let alert = UIAlertController(title: "Something's wrong", message: "Please double-check that you've entered an unbalanced chemical equation using + and = symbols, including states of matter.", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default))
             self.present(alert, animated: true, completion: nil)
             equationTextField.resignFirstResponder()
         }
@@ -271,7 +274,7 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
                 
         for compound in compounds {
-            let index = compounds.index(of: compound)
+            let index = compounds.firstIndex(of: compound)
             
             if compound.contains(find: "(s)") || compound.contains(find: "(l)") {
                 compounds.remove(at: index!)
@@ -290,7 +293,7 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
         
         // Add formulas to table
         var yeet = NSMutableAttributedString()
-        let bold = [NSAttributedStringKey.font: UIFont(name: "Helvetica-Bold", size: 18)!]
+        let bold = [NSAttributedString.Key.font: UIFont(name: "Helvetica-Bold", size: 18)!]
         let comp = TextFormatter().fix(formula: compounds[indexPath.row])
         let coff = NSMutableAttributedString(string: String(coefficients[indexPath.row]), attributes: bold)
         yeet.append(coff)
@@ -320,13 +323,13 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
                     var concentrationsText = "\nQ = " + String(iceTableSolver.Q.rounded(toPlaces: 4)) + "\n\nx = " + String(iceTableSolver.x.rounded(toPlaces: 4)) + "\n"
                     
                     for compound in iceTableSolver.localCompounds {
-                        let index = iceTableSolver.localCompounds.index(of: compound)
+                        let index = iceTableSolver.localCompounds.firstIndex(of: compound)
                         concentrationsText += "\n[" + compound + "] = " + String(concentrations[index!]) + " M\n"
                     }
                                         
                     // Show results
-                    let alert = UIAlertController(title: "Equilibrium Concentrations", message: concentrationsText, preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "Nice", style: UIAlertActionStyle.default))
+                    let alert = UIAlertController(title: "Equilibrium Concentrations", message: concentrationsText, preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "Nice", style: UIAlertAction.Style.default))
                     self.present(alert, animated: true, completion: nil)
                     
                 } else {
@@ -334,27 +337,34 @@ class EquillibriumViewController: UIViewController, UITextFieldDelegate, UITable
                     var concentrationsText = "\nQ = K = " + String(iceTableSolver.Q.rounded(toPlaces: 4)) + "\n\nx = " + String(iceTableSolver.x.rounded(toPlaces: 4)) + "\n"
 
                     for compound in iceTableSolver.localCompounds {
-                        let index = iceTableSolver.localCompounds.index(of: compound)
+                        let index = iceTableSolver.localCompounds.firstIndex(of: compound)
                         concentrationsText += "\n[" + compound + "] = " + String(initialConcentrations[index!]) + " M\n"
                     }
                     
                     // Show results
-                    let alert = UIAlertController(title: "Already at equilibrium", message: concentrationsText, preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "Nice", style: UIAlertActionStyle.default))
+                    let alert = UIAlertController(title: "Already at equilibrium", message: concentrationsText, preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "Nice", style: UIAlertAction.Style.default))
                     self.present(alert, animated: true, completion: nil)
                 }
             
             } else {
-                let alert = UIAlertController(title: "Invalid initial concentration(s)", message: "It looks like one or more reactants has an initial concentration of zero, resulting in an undefined value.", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default))
+                let alert = UIAlertController(title: "Invalid initial concentration(s)", message: "It looks like one or more reactants has an initial concentration of zero, resulting in an undefined value.", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default))
                 self.present(alert, animated: true, completion: nil)
             }
         } else {
             // Error message
-            let alert = UIAlertController(title: "Something's wrong", message: "Please double-check that you've entered in the chemical equation, equilibrium constant, and ALL initial concentrations.", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default))
+            let alert = UIAlertController(title: "Something's wrong", message: "Please double-check that you've entered in the chemical equation, equilibrium constant, and ALL initial concentrations.", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default))
             self.present(alert, animated: true, completion: nil)
         }
+    }
+    
+    
+    @IBAction func loadLearnView(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "LearnViewController") as! LearnViewController
+        vc.fileName = "icetables"
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }

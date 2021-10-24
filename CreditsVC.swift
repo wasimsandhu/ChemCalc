@@ -37,9 +37,9 @@ class CreditsVC: UIViewController, UITextViewDelegate {
     
         let string = (string1 + string2 + "Built and designed by Wasim Sandhu \n") as NSString
         
-        let attributedString = NSMutableAttributedString(string: string as String, attributes: [NSAttributedStringKey.font:UIFont.systemFont(ofSize: 18.0)])
+        let attributedString = NSMutableAttributedString(string: string as String, attributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 18.0)])
         
-        let boldFontAttribute = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 24.0)]
+        let boldFontAttribute = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 24.0)]
         
         attributedString.addAttributes(boldFontAttribute, range: string.range(of: "Chemistry Data"))
         attributedString.addAttributes(boldFontAttribute, range: string.range(of: "Libraries & Code"))

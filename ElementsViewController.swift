@@ -44,7 +44,7 @@ class ElementsViewController: UIViewController, UITableViewDataSource, UITableVi
             definesPresentationContext = true
             var searchTextField: UITextField? = searchController.searchBar.value(forKey: "searchField") as? UITextField
                 if searchTextField!.responds(to: #selector(getter: UITextField.attributedPlaceholder)) {
-                    let attributeDict = [NSAttributedStringKey.foregroundColor: UIColor.white]
+                    let attributeDict = [NSAttributedString.Key.foregroundColor: UIColor.white]
                     searchTextField!.attributedPlaceholder = NSAttributedString(string: "Enter element or atomic number", attributes: attributeDict)
                 }
         } else {
@@ -149,7 +149,7 @@ class ElementsViewController: UIViewController, UITableViewDataSource, UITableVi
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         cell = table.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ElementTableViewCell
-        cell?.selectionStyle = UITableViewCellSelectionStyle.none
+        cell?.selectionStyle = UITableViewCell.SelectionStyle.none
         
         keys = Array(filteredElements.keys)
         

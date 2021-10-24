@@ -414,7 +414,7 @@ extension String {
         let fontSuper: UIFont? = UIFont(name: "Helvetica", size: 14)
         let font = UIFont(name: "Helvetica", size: 18)
         
-        let attString:NSMutableAttributedString = NSMutableAttributedString(string: self, attributes: [NSAttributedStringKey.font:font!])
+        let attString:NSMutableAttributedString = NSMutableAttributedString(string: self, attributes: [NSAttributedString.Key.font:font!])
         
         var indexA = Array(repeating: 0, count: 10)
         var indexB = Array(repeating: 0, count: 10)
@@ -455,14 +455,14 @@ extension String {
             // superscript
             if indexA[a] != 0 || indexB[a] != 0 {
                 for b in indexA[a]+1..<indexB[a] {
-                    attString.setAttributes([NSAttributedStringKey.font:fontSuper!,NSAttributedStringKey.baselineOffset:10], range: NSRange(location:b,length:1))
+                    attString.setAttributes([NSAttributedString.Key.font:fontSuper!,NSAttributedString.Key.baselineOffset:10], range: NSRange(location:b,length:1))
                 }
             }
             
             // subscript
             if indexC[a] != 0 || indexD[a] != 0 {
                 for b in indexC[a]+1..<indexD[a] {
-                    attString.setAttributes([NSAttributedStringKey.font:fontSuper!,NSAttributedStringKey.baselineOffset:-5], range: NSRange(location:b,length:1))
+                    attString.setAttributes([NSAttributedString.Key.font:fontSuper!,NSAttributedString.Key.baselineOffset:-5], range: NSRange(location:b,length:1))
                 }
             }
         }
@@ -482,7 +482,7 @@ extension String {
         let fontSuper: UIFont? = UIFont(name: "Helvetica", size: superFont)
         let font = UIFont(name: "Helvetica", size: font)
         
-        let attString:NSMutableAttributedString = NSMutableAttributedString(string: self, attributes: [NSAttributedStringKey.font:font!])
+        let attString:NSMutableAttributedString = NSMutableAttributedString(string: self, attributes: [NSAttributedString.Key.font:font!])
         
         var indexA = Array(repeating: 0, count: 10)
         var indexB = Array(repeating: 0, count: 10)
@@ -523,14 +523,14 @@ extension String {
             // superscript
             if indexA[a] != 0 || indexB[a] != 0 {
                 for b in indexA[a]+1..<indexB[a] {
-                    attString.setAttributes([NSAttributedStringKey.font:fontSuper!,NSAttributedStringKey.baselineOffset:5], range: NSRange(location:b,length:1))
+                    attString.setAttributes([NSAttributedString.Key.font:fontSuper!,NSAttributedString.Key.baselineOffset:5], range: NSRange(location:b,length:1))
                 }
             }
             
             // subscript
             if indexC[a] != 0 || indexD[a] != 0 {
                 for b in indexC[a]+1..<indexD[a] {
-                    attString.setAttributes([NSAttributedStringKey.font:fontSuper!,NSAttributedStringKey.baselineOffset:-5], range: NSRange(location:b,length:1))
+                    attString.setAttributes([NSAttributedString.Key.font:fontSuper!,NSAttributedString.Key.baselineOffset:-5], range: NSRange(location:b,length:1))
                 }
             }
         }
@@ -552,7 +552,7 @@ extension String {
         let fontSuper: UIFont? = UIFont(name: "HelveticaNeue-Medium", size: 16)
         let font = UIFont(name: "HelveticaNeue-Medium", size: 20)
         
-        let attString:NSMutableAttributedString = NSMutableAttributedString(string: self, attributes: [NSAttributedStringKey.font:font!])
+        let attString:NSMutableAttributedString = NSMutableAttributedString(string: self, attributes: [NSAttributedString.Key.font:font!])
         
         var indexA = Array(repeating: 0, count: 10)
         var indexB = Array(repeating: 0, count: 10)
@@ -593,14 +593,14 @@ extension String {
             // superscript
             if indexA[a] != 0 || indexB[a] != 0 {
                 for b in indexA[a]+1..<indexB[a] {
-                    attString.setAttributes([NSAttributedStringKey.font:fontSuper!,NSAttributedStringKey.baselineOffset:10], range: NSRange(location:b,length:1))
+                    attString.setAttributes([NSAttributedString.Key.font:fontSuper!,NSAttributedString.Key.baselineOffset:10], range: NSRange(location:b,length:1))
                 }
             }
             
             // subscript
             if indexC[a] != 0 || indexD[a] != 0 {
                 for b in indexC[a]+1..<indexD[a] {
-                    attString.setAttributes([NSAttributedStringKey.font:fontSuper!,NSAttributedStringKey.baselineOffset:-5], range: NSRange(location:b,length:1))
+                    attString.setAttributes([NSAttributedString.Key.font:fontSuper!,NSAttributedString.Key.baselineOffset:-5], range: NSRange(location:b,length:1))
                 }
             }
         }

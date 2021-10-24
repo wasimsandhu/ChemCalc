@@ -52,8 +52,8 @@ class CompoundsVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         let compoundname = compoundArray[indexPath.row]
         let molarmass = MolarMassCalculator().calculate(compound: formulaArray[indexPath.row])
         
-        let alert = UIAlertController(title: compoundname, message: String(molarmass) + " g/mol", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.default))
+        let alert = UIAlertController(title: compoundname, message: String(molarmass) + " g/mol", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Done", style: UIAlertAction.Style.default))
         self.present(alert, animated: true, completion: nil)
         
         tableView.deselectRow(at: indexPath, animated: true)
