@@ -48,6 +48,8 @@ class EnthalpyVC: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         self.hideKeyboard()
         yeeet.isHidden = true
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        
         // Firebase database reference
         let rootRef = FIRDatabase.database().reference()
         rootRef.child("Thermodynamics").observe(.childAdded, with: { (snapshot) in

@@ -326,9 +326,11 @@
                                     <outlet property="delegate" destination="Yda-KY-JpF" id="iVl-UJ-XqF"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hZ-Xe-4eS">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hZ-Xe-4eS">
                                 <rect key="frame" x="164" y="561" width="46" height="49"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="v26-jb-UPP"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <state key="normal" title="Solve">
                                     <color key="titleColor" red="0.87642228600000005" green="0.094558097420000001" blue="0.1403238624" alpha="1" colorSpace="calibratedRGB"/>
@@ -345,8 +347,11 @@
                             <constraint firstItem="CRF-3N-LXD" firstAttribute="leading" secondItem="U36-7Y-k6m" secondAttribute="leading" id="DHL-iB-qxU"/>
                             <constraint firstItem="pog-dJ-hhh" firstAttribute="leading" secondItem="NLE-eL-lXX" secondAttribute="leadingMargin" id="Ltv-8f-2dy"/>
                             <constraint firstItem="pog-dJ-hhh" firstAttribute="top" secondItem="IDJ-v4-UyI" secondAttribute="bottom" constant="20" id="Ps7-Tn-8UV"/>
+                            <constraint firstItem="zse-K3-DJX" firstAttribute="top" secondItem="3hZ-Xe-4eS" secondAttribute="bottom" constant="8" symbolic="YES" id="Q2k-Oe-954"/>
+                            <constraint firstItem="3hZ-Xe-4eS" firstAttribute="centerX" secondItem="U36-7Y-k6m" secondAttribute="centerX" id="W1i-9L-7CK"/>
                             <constraint firstItem="Lm7-BZ-2eZ" firstAttribute="bottom" secondItem="zse-K3-DJX" secondAttribute="top" id="aOm-8a-CBN"/>
                             <constraint firstItem="tZB-68-6CZ" firstAttribute="top" secondItem="pog-dJ-hhh" secondAttribute="bottom" constant="8" symbolic="YES" id="d5Q-st-qGc"/>
+                            <constraint firstItem="3hZ-Xe-4eS" firstAttribute="top" secondItem="U36-7Y-k6m" secondAttribute="bottom" constant="8" symbolic="YES" id="f30-Qo-BGE"/>
                             <constraint firstItem="pog-dJ-hhh" firstAttribute="trailing" secondItem="NLE-eL-lXX" secondAttribute="trailingMargin" id="fkH-MM-bEc"/>
                             <constraint firstItem="w03-8c-e6t" firstAttribute="top" secondItem="tZB-68-6CZ" secondAttribute="bottom" constant="63" id="h29-Mb-Rya"/>
                             <constraint firstItem="U36-7Y-k6m" firstAttribute="top" secondItem="w03-8c-e6t" secondAttribute="bottom" constant="8" symbolic="YES" id="jd3-Xf-wuV"/>
@@ -764,9 +769,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7gl-ne-BxZ">
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7gl-ne-BxZ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -775,6 +779,12 @@
                             </wkWebView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="7gl-ne-BxZ" firstAttribute="bottom" secondItem="nVp-0T-uAS" secondAttribute="top" id="2uz-w5-QwD"/>
+                            <constraint firstItem="7gl-ne-BxZ" firstAttribute="top" secondItem="0dP-0V-EKP" secondAttribute="bottom" id="Zgm-m9-Cbt"/>
+                            <constraint firstItem="7gl-ne-BxZ" firstAttribute="leading" secondItem="hIq-ha-Nt8" secondAttribute="leading" id="rcj-B1-W9z"/>
+                            <constraint firstAttribute="trailing" secondItem="7gl-ne-BxZ" secondAttribute="trailing" id="wsP-AF-LKm"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="webKitView" destination="7gl-ne-BxZ" id="17d-V8-Nqe"/>
@@ -1434,9 +1444,8 @@
                                     <outlet property="delegate" destination="pYa-c3-PHX" id="hRE-ip-zw2"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap to edit the above fields as needed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gww-Qj-X24">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to edit the above fields as needed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gww-Qj-X24">
                                 <rect key="frame" x="16" y="570" width="343" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1451,12 +1460,15 @@
                             <constraint firstItem="rCR-rF-9Hg" firstAttribute="top" secondItem="RkN-pP-niz" secondAttribute="bottom" constant="16" id="6Ky-rS-K2j"/>
                             <constraint firstItem="Uiq-6H-88s" firstAttribute="trailing" secondItem="B9Q-fz-ZF5" secondAttribute="trailing" id="9Ql-or-Cox"/>
                             <constraint firstItem="Uiq-6H-88s" firstAttribute="trailing" secondItem="EGc-kh-SxI" secondAttribute="trailing" id="9q1-ZA-X7t"/>
+                            <constraint firstItem="l23-K0-3Z2" firstAttribute="top" secondItem="Gww-Qj-X24" secondAttribute="bottom" constant="8" symbolic="YES" id="Age-Ws-V3o"/>
                             <constraint firstItem="Uiq-6H-88s" firstAttribute="trailing" secondItem="8bC-pZ-zfE" secondAttribute="trailing" id="Dlj-Ac-gmd"/>
                             <constraint firstItem="Uiq-6H-88s" firstAttribute="top" secondItem="5cE-AE-82y" secondAttribute="bottom" constant="8" symbolic="YES" id="ECh-oc-ayf"/>
                             <constraint firstItem="5cE-AE-82y" firstAttribute="top" secondItem="pjL-UR-M5D" secondAttribute="bottom" constant="20" id="EIw-HO-9bh"/>
+                            <constraint firstItem="Gww-Qj-X24" firstAttribute="top" secondItem="rCR-rF-9Hg" secondAttribute="bottom" constant="57" id="EJJ-g0-Bbq"/>
                             <constraint firstItem="Uiq-6H-88s" firstAttribute="leading" secondItem="EGc-kh-SxI" secondAttribute="leading" id="EXP-2c-ZIa"/>
                             <constraint firstItem="AC6-xN-DAL" firstAttribute="top" secondItem="EGc-kh-SxI" secondAttribute="bottom" constant="13" id="FTs-8c-irD"/>
                             <constraint firstItem="Uiq-6H-88s" firstAttribute="leading" secondItem="2a7-J4-n5P" secondAttribute="leading" id="HMf-Na-fSa"/>
+                            <constraint firstItem="Gww-Qj-X24" firstAttribute="leading" secondItem="2a7-J4-n5P" secondAttribute="leading" id="JRz-PH-qXs"/>
                             <constraint firstItem="JGF-Zh-A1d" firstAttribute="top" secondItem="0lh-IY-bxp" secondAttribute="bottom" constant="16" id="LwV-JT-nLt"/>
                             <constraint firstItem="8bC-pZ-zfE" firstAttribute="top" secondItem="g88-J4-Edw" secondAttribute="bottom" constant="16" id="M8O-sp-TUw"/>
                             <constraint firstItem="47k-wf-mkg" firstAttribute="leading" secondItem="LQD-NE-Egw" secondAttribute="leading" id="MNh-Pp-Syo"/>
@@ -1486,6 +1498,7 @@
                             <constraint firstItem="Uiq-6H-88s" firstAttribute="leading" secondItem="yfZ-Wh-ov0" secondAttribute="leading" id="n8a-Ff-5Ty"/>
                             <constraint firstItem="LQD-NE-Egw" firstAttribute="leading" secondItem="RkN-pP-niz" secondAttribute="leading" id="ti8-q7-iVX"/>
                             <constraint firstItem="47k-wf-mkg" firstAttribute="top" secondItem="h8z-NC-sbQ" secondAttribute="bottom" constant="16" id="uLf-Hw-jbv"/>
+                            <constraint firstItem="Gww-Qj-X24" firstAttribute="trailing" secondItem="HDN-We-JHP" secondAttribute="trailing" id="v1D-yh-bF6"/>
                             <constraint firstItem="5cE-AE-82y" firstAttribute="leading" secondItem="Uiq-6H-88s" secondAttribute="leading" id="xlb-6Z-Ie0"/>
                             <constraint firstItem="Uiq-6H-88s" firstAttribute="leading" secondItem="IA6-Gb-6RL" secondAttribute="leading" id="yJP-Ya-la9"/>
                             <constraint firstItem="IA6-Gb-6RL" firstAttribute="top" secondItem="UOe-vS-SWS" secondAttribute="bottom" constant="16" id="yzB-Ex-P7Y"/>

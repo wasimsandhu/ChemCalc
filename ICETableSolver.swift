@@ -117,7 +117,7 @@ class ICETableSolver {
                 // A + 2B = 2C + 2D
                 actualType = "R2P2 A+2B=2C+2D"
 
-            } else if coefficients == [2, 2, 2, 1, 1] || coefficients == [2, 2, 1, 2, 2] {
+            } else if coefficients == [2, 2, 2, 1] || coefficients == [2, 2, 1, 2] {
                 // 2A + 2B = 2C + D
                 actualType = "R2P2 2A+2B=2C+D"
                 
@@ -3537,8 +3537,8 @@ class NewtonRaphson {
             let dy = self.derivativeOfTheFunction(x)
             let nextX = x - y / dy
             if (abs(x - nextX) < self.tolerance) {
-                print("Solution reached in ", iteration, "iterations")
-                print(nextX)
+                // print("Solution reached in ", iteration, "iterations")
+                // print(nextX)
                 return nextX
             }
             x = nextX
